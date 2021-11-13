@@ -64,7 +64,7 @@
                     <button class="middle2-buttons" v-if="clickside"  @click="userpatch()"   type="button" >Confirm changes</button>
                 </div>
             </div>
-<!--END MID 2 -->    
+<!--END MID 2 -->     
 <!--MID 3 -->
             <div id="middle3">
                 <div class="middle3-1">
