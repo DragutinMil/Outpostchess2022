@@ -1,0 +1,556 @@
+<template>
+   <div class="profile">
+      <SideBar />
+       <div  v-bind:class="{'right-profile':isActive,'side-appear':clickside1}">
+          <div></div>
+          <div id="right-middle">
+            <div style="padding-bottom:40px">
+            <Searchpart />
+            </div>
+            <div id="input-filter">
+              <input type="search" name="" class="intelegent-filter" placeholder="INTELEGENT FILTER">
+              <div v-bind:class="{'second-part':isActive,'second-part2':clickside1}" @click="clickside()"  > 
+                <div style="display:flex;"  ><p id="category-text"  >Category</p>  <img   id="img-category" src="../assets/linije.png" alt=""></div>  
+              </div>
+            </div>
+ <!--DECLARATION-->           
+            <div class="search">
+              <div  class="search-header">No.</div>
+              <div class="search-header">Name&Surname</div>
+              <div class="search-header">Country</div>
+              <div class="search-header">City</div>
+              <div class="search-header">Age</div>
+              <div class="search-header">Gender</div>
+              <div class="search-header">Rating </div>
+              <div class="search-header">Interested in</div>
+              <div class="search-header">Title</div>
+            </div>
+<!--SEARCH RESULTS -->
+            <div  v-if="searchresults" >
+              <div class="search" v-for="(usersrc,index) in usersearchreact" :key="usersrc.user_uuid">
+                <div class="search-res">{{index + 1}}</div>
+                <div class="search-res start " >
+                  <div class="initials">{{usersrc.inicijali}}</div>
+                  <div>{{usersrc.name_first}} {{usersrc.name_last}}</div>
+                </div>
+                <div class="search-res">{{usersrc.federation}}</div>
+                <div class="search-res">{{usersrc.city}}</div>
+                <div class="search-res">{{usersrc.godine}}</div>
+                <div class="search-res">{{usersrc.sex}}</div>
+                <div class="search-res">{{usersrc.rating_standard}}</div>
+                <div class="search-res">
+                  <div   class="search-res3">
+                    <div class="inetrestedin" v-if="usersrc.open2new_eng_club==true">Club</div>
+                    <div class="inetrestedin" v-if="usersrc.open2new_eng_tournament==true">Tournament</div>
+                    <div class="inetrestedin" v-if="usersrc.open2new_eng_event==true">Event</div>
+                  </div>
+                </div>
+                <div class="search-res2">
+                  <div v-for="titles in usersrc.titule" :key="titles" style="padding:6px">
+                    <div v-for="use in user.titule_details" :key="use.user_uuid" >
+                      <div  v-if="titles==use.titula_uuid" >
+                          {{use.titula_short_name}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div >
+<!--ALL USERS -->
+            <div v-else>
+              <div class="search" v-for="(alluser,index) in usersearch" :key="alluser.user_uuid">
+                <div class="search-res">{{index + 1}}</div>
+                <div class="search-res start " >
+                  <div class="initials">{{alluser.inicijali}}</div>
+                  <div >{{alluser.name_first}} {{alluser.name_last}}</div>
+                </div>
+                <div class="search-res">{{alluser.federation}}</div>
+                <div class="search-res">{{alluser.city}}</div>
+                <div class="search-res">{{alluser.godine}}</div>
+                <div class="search-res">{{alluser.sex}}</div>
+                <div class="search-res">{{alluser.rating_standard}}</div>
+
+                <div   class="search-res3">
+                  <div class="inetrestedin" v-if="alluser.open2new_eng_club==true">Club</div>
+                  <div class="inetrestedin" v-if="alluser.open2new_eng_tournament==true">Tournament</div>
+                  <div class="inetrestedin" v-if="alluser.open2new_eng_event==true">Event</div>
+                </div>
+                <div class="search-res2">
+                  <div v-for="titles in alluser.titule" :key="titles"  style="padding:6px" >
+                    <div  v-for="use in user.titule_details" :key="use.user_uuid" >
+                      <div  v-if="titles==use.titula_uuid" >
+                          {{use.titula_short_name}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div >
+            </div>
+          </div>
+          <div></div>
+<!-- SIDE BAR -->         
+          <div v-if="clickside1" id="side-bar">
+            <div  class="side-bar-filter">FILTER:</div>
+                <hr>
+                <div @click="clickage=!clickage" v-bind:class="{'side-bar-filter':isActive,'side-bar-filterclick':clickage}" >Age</div>
+                <div v-if="clickage" class="clicksearch flex-center">
+                   <p >From:</p> <input v-model="agefrom"  class="sideinput"  type="number" name="" id="">to: <input v-model="ageto" class="sideinput" type="number" name="" id="">
+                </div>
+                <div @click="clickcountry=!clickcountry" v-bind:class="{'side-bar-filter':isActive,'side-bar-filterclick':clickcountry}">Country</div>
+                <div v-if="clickcountry" class="clicksearch flex-center">
+                    <select v-model="country"    id="select-css">     
+                        <option disabled value="">Select</option>                           
+                        <option  
+                        v-for="fla in flags" :key="fla.code3"  :value="fla.code3"
+                        >{{fla.name}}
+                        </option>
+                    </select>
+                </div>
+                <div @click="clickrating=!clickrating" v-bind:class="{'side-bar-filter':isActive,'side-bar-filterclick':clickrating}">Rating</div>
+                <div v-if="clickrating" class="clicksearch flex-center">
+                   <p >From:</p> 
+                   <input  v-model="ratingfrom" class="sideinput"  type="number" name="" id="">
+                   to: 
+                   <input v-model="ratingto" class="sideinput" type="number" name="" id="">
+                </div>
+                <div @click="clickgender=!clickgender" v-bind:class="{'side-bar-filter':isActive,'side-bar-filterclick':clickgender}" >Gender</div>
+                <div v-if="clickgender" class="clicksearch flex-center">
+                    <div class="flex-center"> 
+                      <input  type="radio" checked="sexon" name="gender"  class="radiobutton" value="Male" v-model="sexon" ><p style="margin:0">Male</p>
+                      <input type="radio"  checked="sexon"  name="gender"   class="radiobutton"  value="Female" v-model="sexon"  ><p style="margin:0">Female</p> 
+                    </div> 
+                </div>
+                <div @click="clicktitle=!clicktitle" v-bind:class="{'side-bar-filter':isActive,'side-bar-filterclick':clicktitle}">Title</div>
+                <div v-if="clicktitle" class="clicksearch flex-center">
+                  <div class="custom-select" style="width:200px;">
+                    <select v-model="titleselected" class="select-text">
+                          <option class="select-text-in" value="0">Select title:</option>
+                          <option value="fc514fea-1ec5-11ec-a733-0d4e300cf032">National arbiter</option>
+                          <option value="FA">Fide arbiter</option>
+                          <option value="IA">International arbiter</option>
+                          <option value="FIO">Fide Int. organizer</option>
+                          <option value="WCM">Candidat master W</option>
+                          <option value="CM">Candidat master </option>
+                          <option value="WFM">Fide master W</option>
+                          <option value="FM">Fide master </option>
+                          <option value="WIM">International master W</option>
+                          <option value="IM">International master</option>
+                          <option value="GM">Grandmaster </option>
+                          <option value="WGM">Grandmaster W</option>
+                          <option value="FST">1.1. FIDE Senior Trainer</option>
+                          <option value="FT">1.2. FIDE Trainer</option>
+                          <option value="FI">1.3. FIDE Instructor</option>
+                          <option value="NI">1.4. National Instructor</option>
+                          <option value="DI">1.5. Developmental Instructor</option>
+                    </select>
+                  </div>
+                </div>
+                <div @click="clicktown=!clicktown" v-bind:class="{'side-bar-filter':isActive,'side-bar-filterclick':clicktown}" >Town</div>
+                <div v-if="clicktown" class="clicksearch flex-center">
+                  <input v-model="searchtown"  class="sideinput"  type="text" name="" id="">
+                </div>
+                <div @click="clickinterested=!clickinterested" v-bind:class="{'side-bar-filter':isActive,'side-bar-filterclick':clickinterested}">Interested in</div>
+                <div v-if="clickinterested" class="clicksearch flex-center">
+                  <div class="flex-center"> 
+                     <input  type="checkbox"   class="radiobutton"  v-model="interestedclub" ><p style="margin:0">Club</p>
+                     <input type="checkbox"    class="radiobutton"   v-model="interestedtour"  ><p style="margin:0">Tournamenr</p> 
+                     <input type="checkbox"    class="radiobutton"   v-model="interestedevent"  ><p style="margin:0">Event</p> 
+                  </div> 
+                </div>
+                <div class="flex center">
+                    <button class="middle2-buttons" @click="confirmsearch"   type="button">Search</button>
+                </div>
+            </div>
+<!--END SIDE BAR -->      
+      </div>   
+    </div>
+</template>
+
+<script>
+
+
+import SideBar from '../components/SideBar.vue'
+import Searchpart from '../components/Searchpart.vue'
+export default {
+  name: 'Intsearch',
+  components: {
+    SideBar,
+    Searchpart
+  },
+  data () {
+      return {
+         isActive: true,
+         clickside1:false,
+         flags:[],
+         alluser:'',
+         usersearch:'',
+         usersearchreact:'',
+         clickage:false,
+         clickcountry:false,
+         clickrating:false,
+         clickgender:false,
+         clicktown:false,
+         clickinterested:false,
+         clicktitle:false,
+         searchtown:'',
+         compto:'',
+         titleselected:'',
+         agefrom:'',
+         ageto:'',
+         ratingfrom:'',
+         ratingto:'',
+         city:'',
+         sex:'',
+         open2new_eng_club:'',
+         open2new_eng_tournament:'',
+         open2new_eng_event:'',
+         country:'',
+         sexon:'',
+         interested:'',
+         interestedclub:'',
+         interestedtour:'',
+         interestedevent:'',
+         searchresults:false,
+         user:{titule_details:{ titula_uuid:'',
+                                titula_short_name:'',
+              open2new_eng_club:Boolean
+                                             }},
+         use:[{titule_details:{ titula_uuid:'',
+                                titula_short_name:''               
+                                             }}],
+        interestedin:""                                     
+      }
+},
+mounted(){
+  
+  fetch('https://app.outpostchess.com/api/v2/users_search', {
+  method:'GET',
+  headers: {
+    'Content-Type': 'application/json',
+    "authorization":`Bearer ${localStorage.getItem('token')}`
+  }
+}, 
+fetch('https://app.outpostchess.com/api/v2/countries', {
+            method:'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                "authorization":`Bearer ${localStorage.getItem('token')}`
+            }
+            })
+            .then(response => response.json())
+            .then(data => this.flags=data)
+            
+)
+.then(response => response.json())
+.then(data => this.usersearch=data)
+//.then(data => console.log(data)),
+ fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+  method:'GET',
+  headers: {
+    'Content-Type': 'application/json',
+    "authorization":`Bearer ${localStorage.getItem('token')}`
+  }
+},        
+)
+.then(response => response.json())
+.then(data => this.user=data)
+.then(data => console.log('podaci',data))
+
+},
+
+
+methods:{
+  confirmsearch:function(){
+    this.searchresults=true;
+    fetch('https://app.outpostchess.com/api/v2/users_search', {
+        method:'POST',
+        headers: {'Content-Type': 'application/json',
+        "Authorization":`Bearer ${localStorage.getItem('token')}`},
+        body: JSON.stringify( { 
+        years_min:this.agefrom,
+        years_max:this.ageto,
+        rating_standard_min:this.ratingfrom,
+        rating_standard_max:this.ratingto,
+        city:this.searchtown,
+        sex:this.sexon,
+        open2new_eng_club:this.interestedclub,
+        open2new_eng_tournament:this.interestedtour,
+        open2new_eng_event:this.interestedevent,
+        titule:this.titleselected,
+        federation:this.country,
+ } )
+})
+  .then(response => response.json())
+  .then(data => this.usersearchreact=data)
+  .then(data => console.log(data));
+  },
+  clickside:function(){
+     this.clickside1=!this.clickside1
+     if(this.clickside1==false){
+         this.clickage==false,
+         this.clickcountry=false,
+         this.clickrating=false,
+         this.clickgender=false,
+         this.clicktown=false,
+         this.clickinterested=false,
+         this.clicktitle=false
+   }
+  },
+  
+},
+
+}
+</script>
+
+
+<style scoped>
+hr{
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
+  margin:40px 0 40px 0;
+}
+.profile{
+    display:grid;
+    grid-template-columns: 259px auto;
+    width: 100%;
+}  
+
+
+.right-profile{
+    
+    display:grid;
+    grid-template-columns: 8% 84% 8% 0%;
+    background-color: #1B1C1D;
+} 
+
+.side-appear{
+  display:grid;
+  grid-template-columns: 1% 78% 1% 20%;
+  transition-timing-function: ease-in;
+  transition: 1.5s;
+}
+.intelegent-filter{
+      
+      border: 0.5px solid rgba(111, 115, 129, 0.5);
+      box-sizing: border-box;
+      border-radius: 26px 0 0 26px;
+      background-color:#1B1C1D ;
+      display:flex;
+      height: 48px;
+      background-image: url(../assets/search_24px.png);
+      background-repeat:no-repeat;
+      background-position-x: 22px;
+      background-position-y: 14px;
+      padding-left:60px;
+      font-size: 14px;
+      color:#6F7381;
+      cursor:pointer;
+      width:85%;
+    }   
+    #input-filter{
+      display:flex;
+      margin-bottom:20px;
+    }
+    .second-part{
+       display:flex;
+      justify-content: center;
+      align-items: center;
+     
+      border: 0.5px solid rgba(111, 115, 129, 0.5);
+      height: 48px;
+      padding-left:20px;
+      border-radius: 0 26px 26px 0;
+      width:15%; 
+      color:#6F7381;
+      cursor:pointer;
+    }
+    .second-part2{
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      border: 0.5px solid rgba(111, 115, 129, 0.5);
+      height: 48px;
+      padding-left:20px;
+      border-radius: 0 26px 26px 0;
+      width:15%; 
+      color:#FFFFFF;
+      cursor:pointer;
+      background-color: #C8A07D;
+    }
+     #second-part:hover{
+       opacity: 0.7;
+     }
+    #img-category{
+      height: 15px;
+      padding:0 0 0 15px; 
+      margin:auto;
+     
+    }
+    #category-text{
+      margin:auto;
+    }
+    
+    .search{
+      display:grid;
+      grid-template-columns:8% 26% 8% 8% 8% 8% 8% 12% 14% ;
+      background-color:#202122;
+      height: 52px;
+      margin:20px 0 20px 0;
+      color:#FFFFFF;
+      align-items: center;
+
+    }
+    .search-res{
+      background-color:#202122;
+      margin:auto
+    }
+    .search-res2{
+       display:flex;
+       width: 100%;
+       margin:auto;
+       align-items: center;
+       justify-content: center;
+       font-size: 12px;
+    }
+    .start{
+       display:flex;
+       width:100%;
+       align-items: center;
+       
+    }
+    .initials{
+    border:1px ; 
+    margin: 0 10% 0 10%;
+    background-color: rgba(255, 255, 255, 0.7);
+    width:35px;
+    height: 35px;
+    border-radius: 50%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    }
+    .search-res3{
+      display:block;
+    }
+   .inetrestedin{
+      font-size:12px;
+      color:rgba(17, 198, 209, 1)
+   }
+
+    .search-header{
+      font-size: 14px;
+      background-color:#202122;
+    }
+
+/*SEARCH BAR */
+
+#side-bar{
+  height: 100%;
+  width: 100%;
+  background-color:#202122;
+  color:#6F7381;
+  font-weight: 500;
+  text-align: left;
+  padding:40px 0 40px 0;
+}
+ 
+.side-bar-filter{
+  padding:15px 20px 15px 20px;
+}
+.side-bar-filter:hover{
+  color:#FFFFFF;
+  cursor: pointer;
+}
+.clicksearch{
+  height:20px;
+  display:flex;
+  color:#FFFFFF;
+ 
+}
+.sideinput{
+    color:#FFFFFF;
+    width: 70px;
+    padding:0 6px 0 6px;
+    border-bottom:0.5px solid #FFFFFF;
+}
+.clicksearch>p{
+  padding-right:10px;
+  margin:0;
+  
+}
+.side-bar-filterclick{
+  color:#FFFFFF;
+}
+
+/*SELECT*/
+
+.custom-select {
+  position: relative;
+  background-color: #202122;
+  color:#FFFFFF;
+  border:none
+}
+.select-text{
+  color:#C8A07D;
+}
+
+#select-css{
+    color:#FFFFFF;
+    background-color: #202122;
+    width:75px;
+    border-radius: 3px;
+    margin-left:25px;
+    outline:0px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/*BUTTON*/
+.middle2-buttons{
+  border: 0.5px solid #5C5E64;
+  box-sizing: border-box; 
+  background-color:#202122 ;
+  color:#FFFFFF;
+  font-size: 14px;
+  width: 130px;
+  height: 46px;
+  margin-right: 15px;;
+  margin-top:50px;
+  margin-left:15px;
+}
+.middle2-buttons:hover{
+    opacity: 0.7;
+}
+
+/*RADIO BUTTONS */
+.radiobutton{
+    margin:auto  15px auto 10px ;
+    
+}
+
+
+
+
+@media only screen and (max-width: 1500px) and (min-width: 500px) {
+
+.profile{
+    display:grid;
+    grid-template-columns: 200px auto;
+    font-size:14px;
+}  
+
+.right-profile{
+   background-color:  #171819;
+   display:grid;
+    grid-template-columns: 4% 92% 4%;
+    background-color: #1B1C1D;
+}
+.side-appear{
+  display:grid;
+  grid-template-columns: 2% 80% 2% 16%;
+  transition-timing-function: ease-in;
+  transition: 1.5s;
+}
+
+}
+</style>
