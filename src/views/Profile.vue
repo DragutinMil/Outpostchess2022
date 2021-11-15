@@ -12,7 +12,7 @@
                     <div v-if="clickside">
                         <input  type="file" id="photoupload" @change="onFileSelected" style="display:none">  
                        
-                        <label for="photoupload" class="file-input"> <img src="../assets/profilepic.png" for="photoupload" class="photo-input" alt=""></label> 
+                        <label for="photoupload" class="file-input"> </label> 
                         <p style="color:#C8A07D">{{photoinfo}}</p>
                     </div>
                 <!--    <input  v-if="clickside" type="file"  id="fileUpload" @change={up} /> -->
@@ -120,7 +120,7 @@
                     <div style="margin-left:35px" v-if="this.user.rola.indexOf('ARBITER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor4}" @click="rolecol4()" >Arbiter</div>
                     <div style="margin-left:35px" v-if="this.user.rola.indexOf('TRAINER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor5}" @click="rolecol5()" >Trainer</div>
                     <div style="margin-left:35px" v-if="this.user.rola.indexOf('OTHER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor6}" @click="rolecol6()" >Other</div>
-                    <div style="display:flex" v-if="clickside">
+                   <!-- <div style="display:flex" v-if="clickside">
                         <select v-model="selectedrole" id="select-css"  >
                             <option disabled value="">Add/Remove</option>
                             <option value="player">Player</option>
@@ -132,7 +132,7 @@
                         </select>
                         <div @click="addrole()" class="add-remove">+</div> 
                         <div @click="removerole()" class="add-remove">-</div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 <!--END MIDDLE 4 -->
@@ -197,7 +197,7 @@
                     <div class="middle5-right-grid" style="height:170px;">
                         <div class="mid5-padd" style="padding:0 0 0 10px">
                             <p class="middle5-text" style="margin-bottom:10px">Open to new engagements</p>
-                            <div v-if="clickside" id="check-engagements">
+                           <!-- <div v-if="clickside" id="check-engagements">
                                 <div class="grid-check ">
                                     <div>
                                         <v-app class="vuetify-switch">     
@@ -246,19 +246,19 @@
                                         <p >Events</p>
                                     </div>
                                 </div>
-                            </div>  
-                            <div v-else>
-                                <div  class="engage-grid stikl" :class="{stikl1:this.user.open2new_eng_club===false}">
+                            </div>   -->
+                            <div>
+                                <div  class="engage-grid stikl" :class="{stikl1:this.user.open2new_eng_club===false || this.engageclub===false}">
                                     <p class="gold2" >Club  </p>
-                                    <img  class="engage-stikl"  src="../assets/stikla.png" alt="" >
+                                    <img  class="engage-stikl" @click="clubinterested"  src="../assets/stikla.png" alt="" >
                                 </div>
-                                <div class="engage-grid stikl2" :class="{stikl1:this.user.open2new_eng_tournament===false}"> 
+                                <div class="engage-grid stikl" :class="{stikl1:this.user.open2new_eng_tournament===false ||  this.engagetournament===false}" > 
                                     <p class="gold2">Tournaments</p>
-                                    <img class="engage-stikl " src="../assets/stikla.png" alt="" >
+                                    <img class="engage-stikl " @click="tourinterested" src="../assets/stikla.png" alt="" >
                                 </div> 
-                                <div class="engage-grid stikl" :class="{stikl1:this.user.open2new_eng_event===false}"> 
+                                <div class="engage-grid stikl" :class="{stikl1:this.user.open2new_eng_event===false ||  this.engageevent===false}"> 
                                     <p class="gold2">Events</p>
-                                    <img class="engage-stikl"  src="../assets/stikla.png" alt="" >
+                                    <img class="engage-stikl" @click="eventinterested"  src="../assets/stikla.png" alt="" >
                                 </div>
                             </div>
                         </div>
@@ -287,7 +287,7 @@
                                                 >
                                                     <template v-slot:prepend>
                                                     <v-text-field
-                                                      
+                                                        
                                                         :value="rangeclub[0]"
                                                         class="mt-0 pt-0"
                                                         hide-details
@@ -360,7 +360,7 @@
                                 <v-container class="switch-container"   >
                                     <v-switch 
                                     @change="lookpla"
-                                    v-model="switch4"
+                                    v-model="switchclublookplay"
                                     color="#C8A07D"
                                     ></v-switch>
                                 </v-container>  
@@ -527,9 +527,9 @@ export default {
          curevent:"",
          town:"",
          fideid:"",
-         engageclub:'',
-         engageevent:'',
-         engagetournament:'',
+         engageclub:function(){return this.user.open2new_eng_club},
+         engageevent:function(){return this.user.open2new_eng_event},
+         engagetournament:function(){return this.user.open2new_eng_tournament},
          curclubname1:'',
          curleagueclub1:'',
          curplayclub1:'',
@@ -556,21 +556,24 @@ export default {
          switch2:'',
          min: 0,
          max: 3000,
-          user:{rola:[],
+         user:{rola:[],
                federation_details:{},
                rola_array:[],
                comp_per_game_from:'',
                comp_per_game_to:'',
                profile:[],
                cv:{},
-               club_looking_for_new_player:''
+               open2new_eng_club:'',
+               open2new_eng_event:'',
+               open2new_eng_tournament:'' ,
+               club_looking_for_new_player:'' 
          },
-         rangeclub: [66 , 356],
+         rangeclub:[30,350],
          sexon:'',
          picked:'',
          pickedorg:'',
          switch3:'',
-         switch4:'',
+         switchclublookplay:function(){return this.user.club_looking_for_new_player},
          switch5:'',
          switch6:'',
          photoinfo:'',
@@ -620,37 +623,93 @@ updated() {
 
 },
 
-
 //--------------METHODS----------------------//
 
 
 methods:{
     
     lookpla:function(){
-       
        fetch('https://app.outpostchess.com/api/v2/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify( { 
-              club_looking_for_new_player:this.switch4
+              club_looking_for_new_player:this.switchclublookplay
                 
             })
         },
                )   
             .then(response => response.json())
             .then(data => console.log(data))
+            
             },
    
-
+   
  //   selectedRole: function(titule){
   //    this.selectedTitel = titule;
   //  },
+   clubinterested:function(){
+       this.engageclub=!this.engageclub;
+       this.user.open2new_eng_club=!this.open2new_eng_club;
+         fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+            method:'PATCH',
+            headers: {'Content-Type': 'application/json',
+            "Authorization":`Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify( { 
+              open2new_eng_club:this.engageclub
+              } )
+})
+        .then(response => response.json())
+            .then(data => console.log(data)) 
+           
+      },
+   eventinterested:function(){
+       this.engageevent=!this.engageevent;
+       this.user.open2new_eng_event=!this.open2new_eng_event;
+         fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+            method:'PATCH',
+            headers: {'Content-Type': 'application/json',
+            "Authorization":`Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify( { 
+              open2new_eng_event:this.engageevent,
+              } )
+})
+        .then(response => response.json())
+            .then(data => console.log(data)) 
+           
+      },
+   tourinterested:function(){
+       this.engagetournament=!this.engagetournament;
+       this.user.open2new_eng_tournament=!this.open2new_eng_tournament;
+         fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+            method:'PATCH',
+            headers: {'Content-Type': 'application/json',
+            "Authorization":`Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify( { 
+              open2new_eng_tournament:this.engagetournament 
+             
+              } )
+})
+        .then(response => response.json())
+            .then(data => console.log(data)) 
+           
+      },
+
+
+
+       
+       
+   
    cvdairycal1: function(){
       this.clickActive1=true;
       this.clickActive2=false;
       this.clickActive3=false;
+      console.log(this.user.club_looking_for_new_player)
+            console.log(this.switchclublookplay)
     } ,
      cvdairycal2: function(){
       this.clickActive1=false;
@@ -760,9 +819,6 @@ userpatch:function(){
               current_clubs:this.curclub,
               current_playing:this.curplay,
               current_leagues:this.curleague,  
-              open2new_eng_club:this.engageclub, 
-              open2new_eng_tournament:this.engagetournament, 
-              open2new_eng_event:this.engageevent, 
               city:this.town,
               federation:this.selected,
               comp_per_game_from:this.rangeclub[0],
@@ -829,7 +885,7 @@ userpatch:function(){
                )   
             .then(response => response.json())
             .then(data => console.log(data)) 
-          //  .then(this.$router.go());
+            .then(this.$router.go());
             },
     onFileSelected:function(event){
      this.selectedFile=event.target.files[0]
@@ -989,6 +1045,21 @@ hr{
    width: 35px;
    font-size:14px;
 
+}
+.file-input::before {
+  content: 'Upload Photo';
+  display: inline-block;
+  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  color:#FFFFFF;
+  margin-top:30px;
 }
 
 #middle2-1{

@@ -71,8 +71,8 @@
               <div id="butt1">
                  <button  type="button" @click="agreelogin" class="text-join " style=" border: 1px solid #C8A07D;">Agree & Join</button> 
               </div>
-              <p id="text-or">or</p>
-              <button type="button" onclick="alert('Kasnije!')"   class="text-join "  style="border: 1px solid #E8E8E8;"> <div id="google-cor1"> <div id="google-cor"> <img src="../assets/Group.svg" id="" alt="google"></div ><p id="joingoogle">Join with Google</p> </div></button>
+            <!--  <p id="text-or">or</p>
+              <button type="button" onclick="alert('Kasnije!')"   class="text-join "  style="border: 1px solid #E8E8E8;"> <div id="google-cor1"> <div id="google-cor"> <img src="../assets/Group.svg" id="" alt="google"></div ><p id="joingoogle">Join with Google</p> </div></button> -->
           </div>
           <div id="policy" > <p class="home-p">Already on Outpost?</p> &nbsp;   <router-link  to="/login" class="home-p blue">Sign in</router-link>  </div>
       </div>
@@ -156,17 +156,20 @@ export default {
           fetch('https://app.outpostchess.com/api/v2/signup', {
           method:'POST',
           headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify( { email: this.emailogin, password: this.pass1, 
+          body: JSON.stringify( 
+            { email: this.emailogin, password: this.pass1,
+            rola:{ 
           PLAYER:this.player,
           ORGANIZER:this.organizer, 
           ARBITER:this.arbiter, 
           CLUBADMIN:this.admin, 
           OTHER:this.other,
-          trainer:this.trainer} )
+          TRAINER:this.trainer}
+            })
           })
             .then(response => response.json())
             .then(data => console.log(data));
-                this.$router.push('/thnks');
+              this.$router.push('/thnks');
               } 
           } ,
   },
@@ -181,6 +184,8 @@ a{
 hr{
   border: 1px solid rgba(125, 120, 115, 0.2);
   width:70%;
+  margin:20px auto;
+  
 }
   .home{
     display: grid;
@@ -393,7 +398,8 @@ hr{
      color:#F2358D;
      text-align: left;
      font-size: 12px;
-     padding-left:7.5%;
+     margin-top:15px;
+     padding-left:4.5%;
      
    }
    #reqpass3{

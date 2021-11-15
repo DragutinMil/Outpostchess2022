@@ -2,8 +2,8 @@
   <div class="calendar">
       <div class="container flex-center">
             
-             <img id="calendarpic" src="@/assets/sooncalendar.jpg" alt="">
-  
+             <img id="calendarpic" src="@/assets/calendar.svg" alt="">
+             <p class="rotate">Comming soon</p>
       </div>
    
   </div>
@@ -27,11 +27,25 @@
        padding:30px
     }
     #calendarpic{
-      width:90%
-     
-      
+      width:100%;
+      opacity: 0.6;
+    }
+    #calendarpic:hover{
+      opacity: 0.3;
     }
     .calendar{
       margin:auto
     }
+    .rotate {
+    transform: rotate(-45deg);
+    font-size:26px;
+    font-weight: 600;
+    letter-spacing: 15px;
+    position:relative;
+    bottom:300px;
+    opacity: 0.8;
+    color:#FFFFFF;
+    }
+
+ 
 </style>

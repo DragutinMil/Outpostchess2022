@@ -124,24 +124,7 @@
                 <div v-if="clicktitle" class="clicksearch flex-center">
                   <div class="custom-select" style="width:200px;">
                     <select v-model="titleselected" class="select-text">
-                          <option class="select-text-in" value="0">Select title:</option>
-                          <option value="fc514fea-1ec5-11ec-a733-0d4e300cf032">National arbiter</option>
-                          <option value="FA">Fide arbiter</option>
-                          <option value="IA">International arbiter</option>
-                          <option value="FIO">Fide Int. organizer</option>
-                          <option value="WCM">Candidat master W</option>
-                          <option value="CM">Candidat master </option>
-                          <option value="WFM">Fide master W</option>
-                          <option value="FM">Fide master </option>
-                          <option value="WIM">International master W</option>
-                          <option value="IM">International master</option>
-                          <option value="GM">Grandmaster </option>
-                          <option value="WGM">Grandmaster W</option>
-                          <option value="FST">1.1. FIDE Senior Trainer</option>
-                          <option value="FT">1.2. FIDE Trainer</option>
-                          <option value="FI">1.3. FIDE Instructor</option>
-                          <option value="NI">1.4. National Instructor</option>
-                          <option value="DI">1.5. Developmental Instructor</option>
+                      <option v-for="choosedtitle in titule" :key="choosedtitle.titula_uuid" :value="choosedtitle.titula_uuid">{{choosedtitle.titula_full_name}}</option>
                     </select>
                   </div>
                 </div>
@@ -152,10 +135,10 @@
                 <div @click="clickinterested=!clickinterested" v-bind:class="{'side-bar-filter':isActive,'side-bar-filterclick':clickinterested}">Interested in</div>
                 <div v-if="clickinterested" class="clicksearch flex-center">
                   <div class="flex-center"> 
-                     <input  type="checkbox"   class="radiobutton"  v-model="interestedclub" ><p style="margin:0">Club</p>
-                     <input type="checkbox"    class="radiobutton"   v-model="interestedtour"  ><p style="margin:0">Tournamenr</p> 
-                     <input type="checkbox"    class="radiobutton"   v-model="interestedevent"  ><p style="margin:0">Event</p> 
-                  </div> 
+                     <input  type="checkbox"   class="radiobutton"  v-model='interestedclub' ><p style="margin:0">Club</p>
+                <!--     <input type="checkbox"    class="radiobutton"   v-model='interestedtour'  ><p style="margin:0">Tournamenr</p> 
+                     <input type="checkbox"    class="radiobutton"   v-model='interestedevent'  ><p style="margin:0">Event</p> 
+             -->     </div> 
                 </div>
                 <div class="flex center">
                     <button class="middle2-buttons" @click="confirmsearch"   type="button">Search</button>
@@ -185,25 +168,21 @@ export default {
          alluser:'',
          usersearch:'',
          usersearchreact:'',
-         clickage:false,
-         clickcountry:false,
-         clickrating:false,
-         clickgender:false,
-         clicktown:false,
-         clickinterested:false,
-         clicktitle:false,
+         clickage:'',
+         clickcountry:'',
+         clickrating:'',
+         clickgender:'',
+         clicktown:'',
+         clickinterested:'',
+         clicktitle:'',
          searchtown:'',
-         compto:'',
-         titleselected:'',
+         titleselected: '',
          agefrom:'',
          ageto:'',
          ratingfrom:'',
          ratingto:'',
          city:'',
          sex:'',
-         open2new_eng_club:'',
-         open2new_eng_tournament:'',
-         open2new_eng_event:'',
          country:'',
          sexon:'',
          interested:'',
@@ -218,10 +197,21 @@ export default {
          use:[{titule_details:{ titula_uuid:'',
                                 titula_short_name:''               
                                              }}],
-        interestedin:""                                     
+        interestedin:''                                    
       }
 },
 mounted(){
+  fetch('https://app.outpostchess.com/api/v2/titule', {
+  method:'GET',
+  headers: {
+    'Content-Type': 'application/json',
+    "authorization":`Bearer ${localStorage.getItem('token')}`
+  }
+},        
+)
+.then(response => response.json())
+.then(data => this.titule=data)
+.then(data => console.log('titule',data))
   
   fetch('https://app.outpostchess.com/api/v2/users_search', {
   method:'GET',
@@ -239,6 +229,7 @@ fetch('https://app.outpostchess.com/api/v2/countries', {
             })
             .then(response => response.json())
             .then(data => this.flags=data)
+            .then(data => console.log('countries',data))
             
 )
 .then(response => response.json())
@@ -252,6 +243,7 @@ fetch('https://app.outpostchess.com/api/v2/countries', {
   }
 },        
 )
+
 .then(response => response.json())
 .then(data => this.user=data)
 .then(data => console.log('podaci',data))
@@ -261,12 +253,17 @@ fetch('https://app.outpostchess.com/api/v2/countries', {
 
 methods:{
   confirmsearch:function(){
-    this.searchresults=true;
+  //  this.searchresults=true;
+   // if (this.titleselected==""){
+ //    return this.titleselected=null
+ //  }
+    console.log(this.titleselected)
     fetch('https://app.outpostchess.com/api/v2/users_search', {
         method:'POST',
         headers: {'Content-Type': 'application/json',
         "Authorization":`Bearer ${localStorage.getItem('token')}`},
         body: JSON.stringify( { 
+        titule:[this.titleselected],
         years_min:this.agefrom,
         years_max:this.ageto,
         rating_standard_min:this.ratingfrom,
@@ -276,13 +273,13 @@ methods:{
         open2new_eng_club:this.interestedclub,
         open2new_eng_tournament:this.interestedtour,
         open2new_eng_event:this.interestedevent,
-        titule:this.titleselected,
         federation:this.country,
  } )
 })
   .then(response => response.json())
   .then(data => this.usersearchreact=data)
   .then(data => console.log(data));
+ 
   },
   clickside:function(){
      this.clickside1=!this.clickside1
