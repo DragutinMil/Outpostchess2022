@@ -573,11 +573,13 @@ export default {
          picked:'',
          pickedorg:'',
          switch3:'',
-         switchclublookplay:function(){return this.user.club_looking_for_new_player},
+         switchclublookplay:'',
          switch5:'',
-         switch6:'',
+         switchorgnwepart:'',
          photoinfo:'',
-         eventactive:'',
+         
+         
+         
 
       }
 },
@@ -830,6 +832,7 @@ userpatch:function(){
               club_current_playing:this.curplayclub1,
               about_me:this.about,
               organizer_current_event:this.curevent,
+              organizer_looking_for_new_participants:this.switchorgnwepart,
               titule:[  {
                 titula_uuid: "91f90e7e-1ec7-11ec-a733-0d4e300cf032",
                 is_checked: this.WCM},

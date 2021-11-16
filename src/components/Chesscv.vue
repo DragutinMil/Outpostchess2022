@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="chesscv">
       
       <div id="about-me">
         <div id="about-edit">
@@ -113,7 +113,7 @@ export default {
    border: 0.5px solid  rgba(199, 201, 208, 0.2);
     width:80%;
 }
-.container{
+.chesscv{
   display:block;
   align-items: left;
   text-align: left;

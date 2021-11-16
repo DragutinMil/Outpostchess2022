@@ -5,8 +5,8 @@
               <img src="../assets/logo2.png" alt="">
           </div>
           <hr>
-          <div> 
-              <p class="letter-24" > Make the most of your    &nbsp; <b> professional Chess Life. </b> </p>
+          <div > 
+              <p class="letter-24" > Make the most of your &nbsp; <b> professional Chess Life. </b> </p>
               <p id="letter-16">Connect and communicate.</p>
           </div>
           <div id="input-signup">
@@ -19,7 +19,7 @@
                   <div><input type="password" name=""  v-bind:class="{passin:isActive,'passin-danger':hasError1,'text-ok2':itsgood2}" placeholder="Repeat password" v-model="pass1repeat" > <p id="reqpass">{{req1}}</p> <p id="reqpass3">{{req3}}</p></div>
                </div>
                <hr style="width:85%">
-               <div style="padding-left:40px">
+               <div class="check-part">
                   <div class="start grid-check2">
                      <div class="grid-check ">
                         <div class="flex-center">
@@ -226,7 +226,6 @@ hr{
           display:flex;
           color:#FFFFFF;
           font-size:24px;
-          display: flex;
           justify-content: center;
           align-items: center;
          
@@ -260,7 +259,9 @@ hr{
       padding-left:15px;
       color:#F2358D;
     }
-  
+    .check-part{
+      padding-left:40px
+    }
     .left-check-text{
       text-align:left;
       padding-left:10px;
@@ -411,4 +412,44 @@ hr{
    margin:0;
    padding-left:15px;
    }
+
+
+@media only screen and (max-width: 1500px) and (min-width: 500px) {
+
+
+}
+@media only screen and (max-width: 499px){
+  #right-login{
+    display:none;
+  }
+  .home{
+    display: flex;
+   
+  }
+  #pass-in-flex{
+    display:block;
+  }
+  .letter-24{
+    font-size:16px; 
+    padding:10px;
+    }
+   #left-login{
+    width: 100%;
+    
+  }
+  .check-part{
+      padding-left:0px
+    }
+  #letter-16{
+         font-size:14px;
+    }
+  ::placeholder{
+    font-weight: 300;
+    font-size: 12px;
+}
+ .start{
+    width:90%;
+  }
+}
+
 </style>

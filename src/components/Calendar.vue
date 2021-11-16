@@ -3,7 +3,7 @@
       <div class="container flex-center">
             
              <img id="calendarpic" src="@/assets/calendar.svg" alt="">
-             <p class="rotate">Comming soon</p>
+             <p class="rotate">Coming soon</p>
       </div>
    
   </div>
@@ -22,9 +22,11 @@
 
 
 
-<style >
+<style>
+
     .container{
-       padding:30px
+       padding:30px;
+       
     }
     #calendarpic{
       width:100%;
@@ -41,8 +43,8 @@
     font-size:26px;
     font-weight: 600;
     letter-spacing: 15px;
-    position:relative;
-    bottom:300px;
+    position:absolute;
+    bottom:275px;
     opacity: 0.8;
     color:#FFFFFF;
     }
