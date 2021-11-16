@@ -5,8 +5,11 @@
               <img src="../assets/logo2.png" alt="">
           </div>
           <hr>
-          <div > 
-              <p class="letter-24" > Make the most of your &nbsp; <b> professional Chess Life. </b> </p>
+          <div>
+            <div id="inline">
+              <p class="letter-24" > Make the most of your &nbsp;</p>
+               <p class="letter-24" > <b> professional Chess Life. </b> </p> 
+            </div>
               <p id="letter-16">Connect and communicate.</p>
           </div>
           <div id="input-signup">
@@ -15,8 +18,8 @@
                   <p id="reqpass1">{{req2}}</p>
               </div>
               <div id="pass-in-flex">
-                  <div> <input type="password" name="" v-bind:class="{passin:isActive,'passin-danger':hasError2,'text-ok2':itsgood2}"  placeholder="Password" v-model="pass1" > <p id="reqpass">{{req}}</p></div>
-                  <div><input type="password" name=""  v-bind:class="{passin:isActive,'passin-danger':hasError1,'text-ok2':itsgood2}" placeholder="Repeat password" v-model="pass1repeat" > <p id="reqpass">{{req1}}</p> <p id="reqpass3">{{req3}}</p></div>
+                  <div> <input type="password" name="" v-bind:class="{passin:isActive,'passin-danger':hasError2,'text-ok2':itsgood2}"  placeholder="Password" v-model="pass1" > <p class="reqpass">{{req}}</p></div>
+                  <div><input type="password" name=""  v-bind:class="{passin:isActive,'passin-danger':hasError1,'text-ok2':itsgood2}" placeholder="Repeat password" v-model="pass1repeat" > <p class="reqpass">{{req1}}</p> <p id="reqpass3">{{req3}}</p></div>
                </div>
                <hr style="width:85%">
                <div class="check-part">
@@ -74,8 +77,8 @@
             <!--  <p id="text-or">or</p>
               <button type="button" onclick="alert('Kasnije!')"   class="text-join "  style="border: 1px solid #E8E8E8;"> <div id="google-cor1"> <div id="google-cor"> <img src="../assets/Group.svg" id="" alt="google"></div ><p id="joingoogle">Join with Google</p> </div></button> -->
           </div>
-          <div id="policy" > <p class="home-p">Already on Outpost?</p> &nbsp;   <router-link  to="/login" class="home-p blue">Sign in</router-link>  </div>
-      </div>
+          <!--   <div id="policy" > <p class="home-p">Already on Outpost?</p> &nbsp;   <router-link  to="/thnksver" class="home-p blue">Sign in</router-link>  </div>
+      -->    </div>
       <div id="right-login">
       </div>
   </div>
@@ -184,7 +187,8 @@ a{
 hr{
   border: 1px solid rgba(125, 120, 115, 0.2);
   width:70%;
-  margin:20px auto;
+  margin:15px auto 30px auto;
+  
   
 }
   .home{
@@ -223,12 +227,8 @@ hr{
 
   }
     .letter-24{
-          display:flex;
           color:#FFFFFF;
           font-size:24px;
-          justify-content: center;
-          align-items: center;
-         
     }
     .home-p{
       color:#707070;
@@ -257,6 +257,7 @@ hr{
       background-color: #1B1C1D;
       height: 40px;
       padding-left:15px;
+      padding-bottom: 15px;
       color:#F2358D;
     }
     .check-part{
@@ -303,13 +304,14 @@ hr{
   #input-signup{
     background-color: #1B1C1D;
     width: 70%;
-    padding: 20px 0 20px 0;
-    margin:auto;
+    padding: 35px 0 35px 0;
+    margin:20px auto;
     border-radius: 11px;
   }  
   #letter-16{
          color:#FFFFFF;
          font-size:16px;
+         padding:10px 0
     }
   #policy{
      display: flex;
@@ -389,18 +391,19 @@ hr{
      margin:auto 0 auto 0;
      padding-right:7px;
    }
-    #reqpass{
+    .reqpass{
      color:#F2358D;
      text-align: left;
      font-size: 12px;
+     padding-top:10px;
      
    }
     #reqpass1{
      color:#F2358D;
      text-align: left;
      font-size: 12px;
-     margin-top:15px;
-     padding-left:4.5%;
+     margin:15px auto;
+     width:85%;
      
    }
    #reqpass3{
@@ -418,27 +421,34 @@ hr{
 
 
 }
+@media only screen and (min-width: 499px){
+  #inline{
+       display: flex;
+       justify-content: center;
+       align-items: center;
+  }
+}
 @media only screen and (max-width: 499px){
   #right-login{
     display:none;
   }
   .home{
     display: flex;
-   
+    height: 100%;
+  
   }
   #pass-in-flex{
     display:block;
   }
   .letter-24{
     font-size:16px; 
-    padding:10px;
     }
    #left-login{
     width: 100%;
     
   }
   .check-part{
-      padding-left:0px
+      padding-left:15px
     }
   #letter-16{
          font-size:14px;
@@ -450,6 +460,27 @@ hr{
  .start{
     width:90%;
   }
+  .mailin{
+     width:75%;
+  }
+   #input-signup{
+    width: 85%;
+  }  
+   .start{
+    justify-content: flex-start  ;
+    width:90%;
+    margin:auto;
+    color:#707070;
+    padding:10px;
+
+  }
+  .reqpass{
+     text-align: center;
+   }
+    #reqpass1{
+      text-align: center;
+   }
+    
 }
 
 </style>

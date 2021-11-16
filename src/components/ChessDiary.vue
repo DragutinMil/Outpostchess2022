@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-     <p>DIARY</p>
+     <p>DIARY - Coming soon</p>
+     <img id="calendarpic" src="@/assets/chess_diary2.png" alt="">
   </div>
 </template>
 
@@ -10,7 +11,6 @@
 export default {
   name: 'ChessDiary',
   props:{
-    user:Object,
     },
   
     data () {

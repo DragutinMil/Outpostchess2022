@@ -44,7 +44,7 @@
     font-weight: 600;
     letter-spacing: 15px;
     position:absolute;
-    bottom:275px;
+    bottom:225px;
     opacity: 0.8;
     color:#FFFFFF;
     }

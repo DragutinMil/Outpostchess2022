@@ -7,9 +7,9 @@
                       <img src="../assets/logo2.png" alt="">
                 </div>
                 <div>
-                    <p class="thanks-text1">Thank you for joining us.</p>
-                    <p class="thanks-text2">Please check your email and verify your account.</p>
-                    <p class="thanks-text2 col">The Chess world is waiting for you!</p>
+                    <p class="thanks-text1">Thank you for verifying!</p>
+                    <p class="thanks-text2 col">Your profile we'll get back to you soon as we reach 
+                      enough registred users to make the best of your experience</p>
                 </div>
             </div>
         </div>
@@ -33,6 +33,10 @@
       font-size: 16px;
       line-height: 21px;
       color:#C8A07D;
+      width:70%;
+      margin:auto;
+      word-spacing: 2px;
+      padding:15px 0 30px 0;
   }
   .col{
       color:#707070;
@@ -74,7 +78,7 @@
 
   .home{
     display:flex;
-    height: 100vh;
+    height: 100%;
   }
   #right-login{
       display:none;
@@ -87,7 +91,7 @@
   
   }
   #logo-pic{
-     padding:30px 20px 30px 20px;
+     padding:30px 10px 30px 10px;
      margin: auto;
   }
   .thanks-text1{
@@ -95,7 +99,9 @@
       padding:20px 0;
   }
   .thanks-text2{
-      padding:10px
+      padding:10px;
+      width:90%;
+      line-height: 1.6;
   }
 }
 </style>

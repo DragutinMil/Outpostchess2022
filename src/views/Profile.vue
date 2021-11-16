@@ -888,7 +888,7 @@ userpatch:function(){
                )   
             .then(response => response.json())
             .then(data => console.log(data)) 
-            .then(this.$router.go());
+            .then(setTimeout(this.$router.go(),2000));
             },
     onFileSelected:function(event){
      this.selectedFile=event.target.files[0]
