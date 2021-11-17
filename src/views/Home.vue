@@ -132,7 +132,11 @@ export default {
       this.chooserole=true;
 
       if(this.pass1==""){
-        this.req="Enter Password";
+        this.req="Enter Password ";
+        this.hasError2=true;
+      }
+      if(this.pass1 !=="" && this.pass1.length < 6){
+        this.req="Enter at least 6 character";
         this.hasError2=true;
       }
       if(this.emailogin==""){
@@ -358,7 +362,6 @@ hr{
      border-radius: 4px;
      background-color: #1B1C1D;
      height: 40px;
-     padding-left:15px;
      font-size:14px;
      border: 1px solid #b4d111;
      color:#b4d111;
@@ -410,6 +413,9 @@ hr{
      color:#b4d111;
      text-align: left;
      font-size: 12px; 
+     position:relative;
+     bottom:15px
+    
    }
    #joingoogle{
    margin:0;
@@ -480,7 +486,11 @@ hr{
     #reqpass1{
       text-align: center;
    }
+   #reqpass3{
+     text-align: center;
     
+    
+   }  
 }
 
 </style>

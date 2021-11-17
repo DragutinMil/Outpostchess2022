@@ -9,7 +9,7 @@
                 <div>
                     <p class="thanks-text1">Thank you for verifying!</p>
                     <p class="thanks-text2 col">Your profile we'll get back to you soon as we reach 
-                      enough registred users to make the best of your experience</p>
+                      enough registred users to make the best of your experience.</p>
                 </div>
             </div>
         </div>
@@ -30,8 +30,8 @@
     
   }
   .thanks-text2{
-      font-size: 16px;
-      line-height: 21px;
+      font-size: 18px;
+      line-height: 26px;
       color:#C8A07D;
       width:70%;
       margin:auto;
@@ -99,8 +99,7 @@
       padding:20px 0;
   }
   .thanks-text2{
-      padding:10px;
-      width:90%;
+      width:100%;
       line-height: 1.6;
   }
 }

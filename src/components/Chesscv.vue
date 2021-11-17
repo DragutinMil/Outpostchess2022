@@ -6,9 +6,11 @@
           <p style="padding-right:10px">About Me</p> 
           <i @click="editable=!editable" v-if="!editable" class="far fa-edit"></i>
           
-        </div>
+        </div >
          <!--   <input v-if="editable" class="about-text" type="text" :value="user.about_me"> --->
-            <p  :contenteditable=editable style="white-space: pre-line;"   @input="onInput"   v-bind:class="{'about-text':isActive,'about-text2':editable,}" >{{user.about_me}} </p>
+            <div  >
+            <p  :contenteditable=editable style="white-space: pre-line;"   @input="onInput"  v-bind:class="{'about-text3':editable,'about-text':isActive,}"  >{{user.about_me}} </p>
+            </div>
             <div>
               <button class="middle2-buttons"   v-if="editable" @click="editconfirm"  type="button" >Confirm changes</button>
               <button class="middle2-buttons" @click="editable=!editable"  v-if="editable"  type="button" >Cancel</button>
@@ -138,6 +140,16 @@ i:hover{
 .about-text{
  color:#6F7381;
  margin-right:20px;
+ 
+}
+
+
+.about-text3{
+ color:#6F7381;
+ margin-right:20px;
+ background-color:rgba(27, 28, 29, 1);
+ padding:10px;
+ border-radius:5px
 }
 
 .file-input::before {
@@ -185,5 +197,6 @@ i:hover{
 .middle2-buttons:hover{
     opacity: 0.7;
 }
+
 
 </style>

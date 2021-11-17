@@ -356,7 +356,13 @@
                         </div>
                         <div class="mid5-padd">
                             <p class="middle5-text" style="padding-bottom:30px;">Looking for new player:</p>
-                            <v-app class="vuetify-switch">      
+                            <b-form-checkbox switch
+                            
+                            :checked=user.club_looking_for_new_player
+                            ></b-form-checkbox>
+                                                
+                          
+                       <!--     <v-app class="vuetify-switch">      
                                 <v-container class="switch-container"   >
                                     <v-switch 
                                     @change="lookpla"
@@ -364,7 +370,7 @@
                                     color="#C8A07D"
                                     ></v-switch>
                                 </v-container>  
-                            </v-app>
+                            </v-app>  -->
                         </div>
                    <!--     <div>
                             <label class="switch1">
@@ -430,7 +436,7 @@
                                  <v-app class="vuetify-switch"> 
                                     <v-container class="switch-container"   >
                                         <v-switch 
-                                        v-model="switch6"
+                                        v-model="switchorgnwepart"
                                         color="#C8A07D"
                                         ></v-switch>
                                     </v-container>  
@@ -568,12 +574,12 @@ export default {
                open2new_eng_tournament:'' ,
                club_looking_for_new_player:'' 
          },
-         rangeclub:[30,350],
+         rangeclub:[5,350],
          sexon:'',
          picked:'',
          pickedorg:'',
          switch3:'',
-         switchclublookplay:'',
+         switchclublookplay:"",
          switch5:'',
          switchorgnwepart:'',
          photoinfo:'',
