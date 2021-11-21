@@ -4,7 +4,7 @@
       <div id="about-me">
         <div id="about-edit">
           <p style="padding-right:10px">About Me</p> 
-          <i @click="editable=!editable" v-if="!editable" class="far fa-edit"></i>
+          <i @click="editable=!editable" v-if="!editable" class="far fa-edit fontawesome"></i>
           
         </div >
          <!--   <input v-if="editable" class="about-text" type="text" :value="user.about_me"> --->
@@ -100,7 +100,7 @@ export default {
   .catch(error => {
     console.error(error)
   })
-  .then(this.$router.go());
+  .then(this.$router.go())
 }
 }
 }  
@@ -189,11 +189,15 @@ i:hover{
   font-size: 12px;
   width: 120px;
   height: 24px;
-  margin:0 20px 35px 0;
-  
-  
-   
+  margin:0 20px 35px 0; 
 }
+.fontawesome{
+  color:#C8A07D;
+  cursor: pointer;
+}
+
+
+
 .middle2-buttons:hover{
     opacity: 0.7;
 }

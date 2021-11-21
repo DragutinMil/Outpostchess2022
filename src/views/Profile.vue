@@ -80,15 +80,17 @@
                       <div v-else-if='clickside && rolecolor3'  class="middle3-1"  >
                       <div    class="flex-center" style="display:flex">
                             <div v-if='rolecolor3'  class="flex-center" style="display:flex">
-                                <input type="radio" value='FIO'    v-model='pickedorg' >
+                                <input  type="radio"  value='FIO'   v-model='pickedorg'   >
                                 <div><p class="left-check-text">FIO</p></div>
+                                <!--:checked='user.titule_details[3].is_checked' :checked='user.titule_details[3].is_checked'      -->
                             </div>    
                         </div>
-                    </div>
+                    </div> 
                     <div v-else class="middle3-1"  >
                         <p style="color:#6F7381" >Title:</p>
                         <div  v-for="titul in user.titule_details" :key="titul.titula_uuid" >
-                            <div v-if="titul.is_checked===true" class="titles">{{titul.titula_short_name}}</div>
+                            <div  v-if="titul.is_checked===true" class="titles">{{titul.titula_short_name}} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->  </div>
+                            
                         </div>
                     </div>  
                 </div>
@@ -171,26 +173,24 @@
                         <div class="mid5-padd">
                             <div style="height:65px;display:flex">
                                 <p class="middle5-text" >Currently active:</p>
-                                <img v-if="switch1" id="plava-kugla" src="../assets/plavakugla.png" alt="">
+                                <img v-if="this.user.current_playing_bool" id="plava-kugla" src="../assets/plavakugla.png" alt="">
                             </div>
-                             <v-app class="vuetify-switch"> 
-                                 <v-container class="switch-container"   >
-                                    <v-switch 
-                                    v-model="switch1"
-                                    color="#C8A07D"
-                                    ></v-switch>
-                                </v-container>  
-                            </v-app>
+                                <b-form-checkbox switch
+                                @change="activeplayercur"
+                                :checked="user.current_playing_bool" 
+                                style="padding-left:55px;"
+                                ></b-form-checkbox> 
                             <div>
-                                <input type="text" style="margin-top:42px;" v-if="switch1 && user.current_playing=='' || clickside " class="inputcurplay" v-model="curplay"  :placeholder=user.current_playing>
-                                <p v-else-if="switch1" class="gold" style="margin-top:35px;"   >{{user.current_playing}}</p>
+                                <input type="text" style="margin-top:28px;" v-if="this.user.current_playing_bool && user.current_playing=='' || clickside " class="inputcurplay" v-model="curplay"  :placeholder=user.current_playing>
+                                <p v-else-if="this.user.current_playing_bool" class="gold" style="margin-top:30px;"   >{{user.current_playing}}</p>
                             </div>
                         </div>
                         <div class="mid5-padd">
                             <p class="middle5-text">Player form:</p>
                             <div id="form-middle5">
                                 <img style="height:25px" src="../assets/form.svg" alt="" >
-                                    <p style="margin:0;padding:0">Weak</p>
+                                    <p style="margin:0;padding:8px 0 0 0">Unknown
+to fide validation</p>
                             </div>
                         </div>
                     </div>
@@ -266,40 +266,41 @@
                             <p class="middle5-text">Interested in</p>
                         </div>
                     </div>
-                    <div id="middle5-right-end">
-                        <p class="middle5-text">Desired club compensation ( € )</p>
-                        <v-app class="vuetify-switch"> 
+                    <div id="middle5-right-end" @click="chenged_compensation=true">
+                        <p class="middle5-text" >Desired club compensation ( € )</p>
+
+                          <v-app class="vuetify-switch"> 
                             <v-container class="switch-container"   >  
                                 <v-card
                                 flat
                                 color="transparent"
                                 >
                                     <v-subheader></v-subheader>
-                                        <v-card-text>
-                                            <v-row>
-                                                <v-col class="px-4">
+                                        <v-card-text >
+                                            <v-row >
+                                                <v-col class="px-4"  >
                                                 <v-range-slider
                                                     v-model="rangeclub"
                                                     :max="max"
                                                     :min="min"
                                                     hide-details
                                                     class="align-center"
+                                                  
                                                 >
                                                     <template v-slot:prepend>
                                                     <v-text-field
-                                                        
-                                                        :value="rangeclub[0]"
+                                                        :value='rangeclub[0]'
                                                         class="mt-0 pt-0"
                                                         hide-details
                                                         single-line
                                                         type="number"
                                                         style="width: 0px"
-                                                        @change="$set(rangeclub, 0, $event)"
+                                                        @change="$set(rangeclub, 0, $event) "
                                                     ></v-text-field>
                                                     </template>
-                                                    <template v-slot:append>
+                                                    <template v-slot:append >
                                                     <v-text-field
-                                                        :value="rangeclub[1]"
+                                                        :value='rangeclub[1]'
                                                         class="mt-0 pt-0"
                                                         hide-details
                                                         single-line
@@ -314,9 +315,17 @@
                                         </v-card-text>
                                 </v-card>
                             </v-container>  
-                        </v-app>
-                        <div class="slider"> <p >{{rangeclub[0]}}$    </p><p style="padding-left:50px" >{{rangeclub[1]}}$ </p></div> 
+                        </v-app> 
+                        <div class="slider"  v-if="chenged_compensation"> 
+                            <p >{{rangeclub[0]}} </p><p class="slider-text"></p> <p >{{rangeclub[1]}} </p>
+                        </div> 
+                        <div class="slider" v-else >
+                            <p >{{user.comp_per_game_from}}  </p><p style="padding-left:50px" >{{user.comp_per_game_to}} </p>
+                        </div>   
+                        
+                        <button class="button-range"  @click="compensation()"     type="button" >Change value</button>
                     </div>
+                    
                 </div>
 <!-- END PLAYER PART  --> 
  <!-- CLUB PART  -->            
@@ -341,43 +350,34 @@
                                 <p class="middle5-text">My team currently active:</p>
                                 <img v-if="switch3" id="plava-kugla" src="../assets/plavakugla.png" alt="">
                             </div>
-                            <v-app class="vuetify-switch"> 
-                                <v-container class="switch-container"   >
+                           
+                                    <b-form-checkbox switch
+                                    @change="activeclubcur"
+                                    :checked="user.club_current_playing_bool" 
+                                    style="padding-left:55px;"
+                                    ></b-form-checkbox> 
+                           <!--  <v-app class="vuetify-switch"> 
+                                <v-container class="switch-container"   >  
                                     <v-switch 
                                     v-model="switch3"
                                     color="#C8A07D"
                                     ></v-switch>
                                 </v-container>  
-                            </v-app>
+                            </v-app> -->
                             <div>
-                                <input type="text" style="margin-top:42px;" v-if="switch1 && user.club_current_playing=='' || clickside " class="inputcurplay" v-model="curplayclub1"  :placeholder=user.club_current_playing>
-                                <p v-if="switch3" class="gold" style="margin-top:35px;"   >{{user.club_current_playing}}</p>
+                                <input type="text" style="margin-top:42px;" v-if="user.club_current_playing_bool && user.club_current_playing=='' || clickside " class="inputcurplay" v-model="curplayclub1"  :placeholder=user.club_current_playing>
+                                <p v-if="user.club_current_playing_bool" class="gold" style="margin-top:35px;"   >{{user.club_current_playing}}</p>
                             </div>
                         </div>
                         <div class="mid5-padd">
                             <p class="middle5-text" style="padding-bottom:30px;">Looking for new player:</p>
-                            <b-form-checkbox switch
-                            
-                            :checked=user.club_looking_for_new_player
-                            ></b-form-checkbox>
-                                                
-                          
-                       <!--     <v-app class="vuetify-switch">      
-                                <v-container class="switch-container"   >
-                                    <v-switch 
-                                    @change="lookpla"
-                                    v-model="switchclublookplay"
-                                    color="#C8A07D"
-                                    ></v-switch>
-                                </v-container>  
-                            </v-app>  -->
+                            <div class="switch-style">
+                                <b-form-checkbox switch
+                                @change="lookpla"
+                                :checked="user.club_looking_for_new_player"
+                                ></b-form-checkbox>                  
+                            </div>
                         </div>
-                   <!--     <div>
-                            <label class="switch1">
-                            <input type="checkbox" checked value=false>
-                            <div class="slider1 round"></div>
-                            </label>
-                        </div> -->
                     </div>
                     <div class="middle5-right-grid">
                         <div class="mid5-padd flex-center">
@@ -392,8 +392,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="middle5-right-grid">
-                        <div class="mid5-padd flex-center">
+                    <div class="middle5-right-grid" >
+                        <div class="mid5-padd flex-center" style="height:170px">
                              <div class="borderbutton flex-center">
                                 <img src="../assets/myclubpage.png" alt="">
                                 <p>My club page</p>
@@ -430,52 +430,15 @@
                         </div>
                     </div>
                     <div class="middle5-right-grid">
-                        <div class="mid5-padd flex-center">
-                            <p class="middle5-text">Looking for new participants?"</p>
+                        <div class="mid5-padd flex-center" >
+                            <p class="middle5-text" >Looking for new participants?"</p>
                             <div>
-                                 <v-app class="vuetify-switch"> 
-                                    <v-container class="switch-container"   >
-                                        <v-switch 
-                                        v-model="switchorgnwepart"
-                                        color="#C8A07D"
-                                        ></v-switch>
-                                    </v-container>  
-                                </v-app>
-                            </div>
-                        </div>
-                        <div class="mid5-padd flex-center">
-                            <div class="borderbutton flex-center">
-                                <p style="text-align:center">Interested in this Organizer</p>
-                            </div>               
-                        </div>
-                    </div>
-                    <div class="middle5-right-grid">
-                        <div class="mid5-padd">
-                            <div style="height:65px;">
-                                <p class="middle5-text" >My events:</p>
-                                <div class="list-events">
-                                    <p class="gold-event" >Event name:</p>
-                                    <p>DUBAI OPEN 2021.</p>
+                                <div class="switch-style">
+                                    <b-form-checkbox switch
+                                    @change="lookpart"
+                                    :checked="user.organizer_looking_for_new_participants"
+                                    ></b-form-checkbox>                  
                                 </div>
-                                <div class="list-events">
-                                        <p class="gold-event" >Date:</p>
-                                        <p>from 15 of May - 25 of May 2021.</p>
-                                </div>
-                                <div>
-                                    <div class="dropdown">
-                                        <button class="dropbtn">Events</button>
-                                        <div class="dropdown-content">
-                                            <p >Event1</p>
-                                            <p >Event2</p>
-                                            <p >Event3</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <input type="text" style="margin-top:42px;" v-if="switch1 && user.current_playing=='' || clickside " class="inputcurplay" v-model="curplay"  :placeholder=user.current_playing>
-                                <p v-else-if="switch1" class="gold" style="margin-top:35px;"   >{{user.current_playing}}</p>
                             </div>
                         </div>
                         <div class="mid5-padd flex-center">
@@ -484,6 +447,42 @@
                                 <p>Create an event</p>
                             </div>
                         </div>
+              <!--      <div class="mid5-padd flex-center">
+                            <div class="borderbutton flex-center">
+                                <p style="text-align:center">Interested in this Organizer</p>
+                            </div>               
+                        </div>    -->
+                    </div>
+                     <div id="middle5-right-startorg" >
+                            <div class="mid5-padd" >
+                                <div style="height:65px;">
+                                    <p class="middle5-text" >My events:</p>
+                                    <div class="list-events">
+                                        <p class="gold-event" >Event name:</p>
+                                        <p>DUBAI OPEN 2021.</p>
+                                    </div>
+                                    <div class="list-events">
+                                            <p class="gold-event" >Date:</p>
+                                            <p>from 15 of May - 25 of May 2021.</p>
+                                    </div>
+                                    <div>
+                                        <div class="dropdown">
+                                            <button class="dropbtn">Events</button>
+                                            <div class="dropdown-content">
+                                                <p >Event1</p>
+                                                <p >Event2</p>
+                                                <p >Event3</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <input type="text" style="margin-top:42px;" v-if="switch1 && user.current_playing=='' || clickside " class="inputcurplay" v-model="curplay"  :placeholder=user.current_playing>
+                                    <p v-else-if="switch1" class="gold" style="margin-top:35px;"   >{{user.current_playing}}</p>
+                                </div>
+                            </div>
+                       
                     </div>
                    
                     
@@ -572,27 +571,30 @@ export default {
                open2new_eng_club:'',
                open2new_eng_event:'',
                open2new_eng_tournament:'' ,
-               club_looking_for_new_player:'' 
+               club_looking_for_new_player:'',
+               current_playing_bool:'',
+               club_current_playing_bool:'',
+               organizer_looking_for_new_participants:''
          },
-         rangeclub:[5,350],
+         rangeclub:[350,2000],
          sexon:'',
          picked:'',
          pickedorg:'',
          switch3:'',
-         switchclublookplay:"",
          switch5:'',
-         switchorgnwepart:'',
          photoinfo:'',
+         chenged_compensation:false
          
          
          
 
       }
 },
-
+   
 //------------------------------MOUNTED-------------------------------//
 
 mounted(){
+
   fetch('https://app.outpostchess.com/api/v2/current_user_info', {
   method:'GET',
   headers: {
@@ -623,6 +625,8 @@ mounted(){
 
 
 updated() {
+
+   
    if(this.user.rola.indexOf('PLAYER')==-1){
      this.activeplayer=false 
      this.activeclub=true
@@ -633,17 +637,17 @@ updated() {
 
 //--------------METHODS----------------------//
 
-
 methods:{
     
     lookpla:function(){
+            this.user.club_looking_for_new_player=!this.user.club_looking_for_new_player
        fetch('https://app.outpostchess.com/api/v2/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify( { 
-              club_looking_for_new_player:this.switchclublookplay
+              club_looking_for_new_player:this.user.club_looking_for_new_player
                 
             })
         },
@@ -652,7 +656,78 @@ methods:{
             .then(data => console.log(data))
             
             },
-   
+   lookpart:function(){
+       
+            this.user.organizer_looking_for_new_participants=!this.user.organizer_looking_for_new_participants
+       fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+            method:'PATCH',
+            headers: {'Content-Type': 'application/json',
+            "Authorization":`Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify( { 
+              organizer_looking_for_new_participants:this.user.organizer_looking_for_new_participants
+                
+            })
+        },
+               )   
+            .then(response => response.json())
+            .then(data => console.log(data))
+            console.log(this.organizer_looking_for_new_participants)
+    },
+
+      activeplayercur: function(){
+          
+            this.user.current_playing_bool=!this.user.current_playing_bool 
+            console.log(this.user.current_playing_bool )
+           fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+            method:'PATCH',
+            headers: {'Content-Type': 'application/json',
+            "Authorization":`Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify( { 
+              current_playing_bool:this.user.current_playing_bool 
+                
+            })
+        },
+               )   
+            .then(response => response.json())
+            .then(data => console.log(data))
+            
+      },
+      activeclubcur: function(){
+            this.user.club_current_playing_bool=!this.user.club_current_playing_bool
+             fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+            method:'PATCH',
+            headers: {'Content-Type': 'application/json',
+            "Authorization":`Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify( { 
+              club_current_playing_bool:this.user.club_current_playing_bool
+                
+            })
+        },
+               )   
+            .then(response => response.json())
+            .then(data => console.log(data))
+            console.log(this.current_playing_bool)
+      },
+
+      compensation:function(){
+            
+       fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+            method:'PATCH',
+            headers: {'Content-Type': 'application/json',
+            "Authorization":`Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify( { 
+              comp_per_game_from:this.rangeclub[0],
+              comp_per_game_to:this.rangeclub[1],  
+            })
+          },
+               )   
+           .then(response => response.json())
+           .then(data => console.log(data))    
+         },        
    
  //   selectedRole: function(titule){
   //    this.selectedTitel = titule;
@@ -707,17 +782,11 @@ methods:{
            
       },
 
-
-
-       
-       
-   
    cvdairycal1: function(){
       this.clickActive1=true;
       this.clickActive2=false;
       this.clickActive3=false;
-      console.log(this.user.club_looking_for_new_player)
-            console.log(this.switchclublookplay)
+      
     } ,
      cvdairycal2: function(){
       this.clickActive1=false;
@@ -790,27 +859,58 @@ methods:{
     },
  //--------------USER PATCH----------------------// 
 userpatch:function(){
-            if( this.picked=='WCM'  ){
-                     this.WCM=true}
-            if(this.picked=='CM'){
-                     this.CM=true}
-            if(this.picked=='WFM'){
-                     this.WFM=true}
-            if(this.picked=='FM'){
-                     this.FM=true}
-            if(this.picked=='WIM'){
-                     this.WIM=true}
+        /*    switch(this.picked){
+              case this.picked=='WCM':
+               this.WCM=true
+               break;
+               case this.picked=='CM':
+               this.CM=true
+               break; case this.picked=='WFM':
+               this.WFM=true
+               break;
+                case this.picked=='FM':
+               this.FM=true
+               break;
+                case this.picked=='WIM':
+               this.WIM=true
+               break;
+                case this.picked=='IM':
+               this.IM=true
+               break;
+               case this.picked=='GM':
+               this.GM=true
+               break;
+               case this.picked=='WGM':
+               this.WGM=true
+               break;
+               case this.picked=='FIO':
+               this.FIO=true
+               break;
+            }*/
+            if( this.picked=='WCM'){this.WCM=true}
+            if(this.picked=='CM'){this.CM=true}
+            if(this.picked=='WFM'){this.WFM=true}
+            if(this.picked=='FM'){this.FM=true}
+            if(this.picked=='WIM'){this.WIM=true}
+            if(this.picked=='IM'){this.IM=true}
+            if(this.picked=='GM'){this.GM=true}
+            if(this.picked=='WGM'){this.WGM=true}
+            if(this.pickedorg=='FIO'){this.FIO=true}
+            if(this.WCM==false && this.CM==false && this.WFM==false && this.FM==false &&
+               this.WIM==false && this.IM==false &&this.GM==false && this.WGM==false){   
+                if(this.user.titule_details[4].is_checked==true){ this.WCM=true}
+                if(this.user.titule_details[5].is_checked==true){ this.CM=true }  
+                if(this.user.titule_details[6].is_checked==true){ this.WFM=true}
+                if(this.user.titule_details[7].is_checked==true){ this.FM=true}
+                if(this.user.titule_details[8].is_checked==true){ this.WIM=true}
+                if(this.user.titule_details[9].is_checked==true){ this.IM=true}
+                if(this.user.titule_details[10].is_checked==true){this.GM=true}
+                if(this.user.titule_details[11].is_checked==true){this.WGM=true}       
+         }  
 
-            if(this.picked=='IM'){
-                     this.IM=true}
-            if(this.picked=='GM'){
-                     this.GM=true}
-            if(this.picked=='WGM'){
-                     this.WGM=true}
-            if(this.pickedorg=='FIO'){
-                     this.FIO=true}
-
-            
+            if(this.user.titule_details[3].is_checked && this.rolecolor3==false){ this.FIO=true}
+            if(this.user.titule_details[3].is_checked && this.rolecolor3==true && this.pickedorg==false){ this.FIO=false}          
+           
 //USER PATCH
         fetch('https://app.outpostchess.com/api/v2/current_user_info', {
             method:'PATCH',
@@ -829,8 +929,6 @@ userpatch:function(){
               current_leagues:this.curleague,  
               city:this.town,
               federation:this.selected,
-              comp_per_game_from:this.rangeclub[0],
-              comp_per_game_to:this.rangeclub[1],
               sex:this.sexon,
               birth_year:this.birtyear,
               club_name:this.curclubname1,
@@ -838,7 +936,8 @@ userpatch:function(){
               club_current_playing:this.curplayclub1,
               about_me:this.about,
               organizer_current_event:this.curevent,
-              organizer_looking_for_new_participants:this.switchorgnwepart,
+              current_playing_bool:false,
+              club_current_playing_bool:false,
               titule:[  {
                 titula_uuid: "91f90e7e-1ec7-11ec-a733-0d4e300cf032",
                 is_checked: this.WCM},
@@ -867,41 +966,41 @@ userpatch:function(){
                 titula_uuid: "5fb356b6-1ee2-11ec-a733-0d4e300cf032",
                 is_checked: this.FIO} 
                 ],
-                
             })
-
-            
         },
+               )   
+            .then(response => response.json())
+            .then(data => console.log(data)) 
+            .then(this.$router.go());
+            },
+
 //END USER PATCH
-            this.formData = new FormData(),
+
+    onFileSelected:function(event){
+     this.selectedFile=event.target.files[0]
+     this.photoinfo='Photo uploaded. Confirm changes!'
+     
+     this.formData = new FormData(),
            this.formData.append('file' , this.selectedFile),
             this.formData.append('fileCategory' , 'PROFILE' ),
-            
-           fetch('https://app.outpostchess.com/api/v2/fileupload', {
+    fetch('https://app.outpostchess.com/api/v2/fileupload', {
                method: 'POST',
                         headers: {//'Content-Type': 'application/x-www-form-urlencoded',
                         "Authorization":`Bearer ${localStorage.getItem('token')}`
                        },		
                    body: this.formData
                })
-                .then(response => response.json())
+    .then(response => response.json())
                 .then(data => {
                     console.log(data)
                 })
                .catch(error => {
                     console.error(error)
-                }),
-               )   
-            .then(response => response.json())
-            .then(data => console.log(data)) 
-            .then(setTimeout(this.$router.go(),2000));
-            },
-    onFileSelected:function(event){
-     this.selectedFile=event.target.files[0]
-     this.photoinfo='Photo uploaded. Confirm changes!'
-    }, 
-    
-   
+                })
+},
+
+
+
 addrole:function(){
     fetch('https://app.outpostchess.com/api/v2/user_rola_add', {
         method: 'PATCH',
@@ -1120,7 +1219,7 @@ height: 80px;
     font-size: 14px;
 }
 .titles{
-    
+    cursor: pointer;
     outline: #C8A07D solid 2px;
     border-radius: 20px;
     width:82px;
@@ -1226,9 +1325,11 @@ height: 80px;
    
  }
  .mid5-padd{
-     padding:10px;
-     
- }
+     padding:10px;}
+ .title-arrow{
+    padding-left:8px
+}    
+ 
 .engage-grid{
     display:grid;
     grid-template-columns: 70% 30%;
@@ -1267,7 +1368,7 @@ height: 80px;
     padding-left:20px;
 }
 .middle5-text{
-    padding:10px 0 5px  20px;
+    padding:15px 0 5px  20px;
     font-weight: normal;
     font-size: 16px;
     line-height: 21px;
@@ -1285,13 +1386,23 @@ height: 80px;
     border-bottom: 1px solid #5C5E64;
     color:#FFFFFF;
 }
+.switch-style{
+    padding-left:15px;
+}
+
 .slider{
     display:flex;
+    width:100%
+
 }
 .slider>p{
-    width:800px;
+    width:38px;
     display:flex;
+    margin:auto;
+    text-align: center;
 }
+.njslider-text
+
 /**side-right */
 
 .edit-input{
@@ -1365,7 +1476,7 @@ input::-webkit-inner-spin-button {
 .vuetify-switch{
     height: 0px;
     position:relative;
-    bottom:45px;
+    bottom:65px;
     left:10px;  
 }
 
@@ -1396,7 +1507,6 @@ input::-webkit-inner-spin-button {
     width:180px
 }
 .slider>p{
-    padding-left:40px;
     text-align: center;
 }
 /*ORGANIZER*/
@@ -1411,9 +1521,11 @@ input::-webkit-inner-spin-button {
 #plava-kugla2{
     height: 100px;
     padding-left:80%;
-    
-    
-    
+   
+}
+#plava-kugla{
+   position: relative;
+   left:10%
 }
 .vuetify-switch2{
     height: 0px;
@@ -1532,6 +1644,28 @@ input:checked + .slider1:before {
 .slider1.round:before {
   border-radius: 50%;
 }
+
+.button-range{
+  border: 0.5px solid #5C5E64;
+  box-sizing: border-box; 
+  background-color:#202122 ;
+  color:#FFFFFF;
+  font-size: 14px;
+  width: 110px;
+  height: 32px;
+  margin-right: 15px;
+  margin-top:45px;
+  
+  
+}
+.button-range:hover{
+opacity: 0.7;
+cursor: pointer;
+}
+
+
+
+
 
 
 

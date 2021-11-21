@@ -8,8 +8,20 @@
                 </div>
                 <div>
                     <p class="thanks-text1">Thank you for verifying!</p>
-                    <p class="thanks-text2 col">Your profile we'll get back to you soon as we reach 
-                      enough registred users to make the best of your experience.</p>
+                    <p class="thanks-text2 col">
+                        Thank you for early sign up!
+                        Your profile we'll be ready as soon as we reach enough registered users to make the best of your experience.
+                        We are launching our beta version soon, so hang on there!
+                        Your feedback and support means a lot to us. 
+                    </p>
+                    <p class="thanks-text2 col">      
+                         See you in the chess connected world.
+                        
+                    </p>
+                    <p class="thanks-text2">      
+                        
+                        Outpost team - let's connect
+                    </p>
                 </div>
             </div>
         </div>
@@ -23,10 +35,12 @@
 </template>
 
 <style scoped>
+
 .home{
     display: grid;
     grid-template-columns: 50% 50%;
     height: 100vh;
+    margin:auto;
     
   }
   .thanks-text2{
@@ -57,7 +71,7 @@
    .left-login{
     background-color: #1B1B1C;
     height: 100%;
-    padding:30% 0;
+    padding:15% 0;
   }
  
   #logo-pic{

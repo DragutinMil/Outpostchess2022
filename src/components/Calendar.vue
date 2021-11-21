@@ -22,7 +22,7 @@
 
 
 
-<style>
+<style scoped>
 
     .container{
        padding:30px;
@@ -37,16 +37,17 @@
     }
     .calendar{
       margin:auto
-    }
+    } 
     .rotate {
     transform: rotate(-45deg);
     font-size:26px;
     font-weight: 600;
     letter-spacing: 15px;
     position:absolute;
-    bottom:225px;
+    
     opacity: 0.8;
     color:#FFFFFF;
+    
     }
 
  

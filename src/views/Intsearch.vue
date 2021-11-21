@@ -122,8 +122,9 @@
                 </div>
                 <div @click="clicktitle=!clicktitle" v-bind:class="{'side-bar-filter':isActive,'side-bar-filterclick':clicktitle}">Title</div>
                 <div v-if="clicktitle" class="clicksearch flex-center">
-                  <div class="custom-select" style="width:200px;">
+                  <div class="custom-select" >
                     <select v-model="titleselected" class="select-text">
+                      <option value="">Title search</option>
                       <option v-for="choosedtitle in titule" :key="choosedtitle.titula_uuid" :value="choosedtitle.titula_uuid">{{choosedtitle.titula_full_name}}</option>
                     </select>
                   </div>
@@ -253,11 +254,11 @@ fetch('https://app.outpostchess.com/api/v2/countries', {
 
 methods:{
   confirmsearch:function(){
-  //  this.searchresults=true;
-   // if (this.titleselected==""){
- //    return this.titleselected=null
- //  }
-    console.log(this.titleselected)
+    this.searchresults=true;
+    if (this.titleselected==""){
+     return this.titleselected=[]
+   }console.log(this.titleselected)
+     console.log(this.titule)
     fetch('https://app.outpostchess.com/api/v2/users_search', {
         method:'POST',
         headers: {'Content-Type': 'application/json',
@@ -458,7 +459,7 @@ hr{
   cursor: pointer;
 }
 .clicksearch{
-  height:20px;
+  height:20px; 
   display:flex;
   color:#FFFFFF;
  
@@ -479,15 +480,25 @@ hr{
 }
 
 /*SELECT*/
-
+select{
+    overflow: hidden;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 .custom-select {
   position: relative;
   background-color: #202122;
   color:#FFFFFF;
-  border:none
+  border:none;
+  font-size: 14px;
+  padding-left:20px;
+  
 }
 .select-text{
   color:#C8A07D;
+  cursor: pointer;
 }
 
 #select-css{
@@ -501,6 +512,7 @@ hr{
     cursor: pointer;
     font-size: 12px;
 }
+
 
 /*BUTTON*/
 .middle2-buttons{

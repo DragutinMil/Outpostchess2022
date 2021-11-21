@@ -53,7 +53,7 @@
    .left-login{
     background-color: #1B1B1C;
     height: 100%;
-    padding:30% 0;
+    padding:20% 0;
   }
  
   #logo-pic{
