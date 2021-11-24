@@ -5,17 +5,16 @@
           <div></div>
           <div id="right-middle">
             <div style="padding-bottom:40px">
-            <Searchpart />
             </div>
             <div id="input-filter">
-              <input type="search" name="" class="intelegent-filter" placeholder="INTELEGENT FILTER">
+              <input type="search" @keyup.enter="confirmsearch()" v-model="input_text" name="" class="intelegent-filter" placeholder="INTELEGENT FILTER">
               <div v-bind:class="{'second-part':isActive,'second-part2':clickside1}" @click="clickside()"  > 
                 <div style="display:flex;"  ><p id="category-text"  >Category</p>  <img   id="img-category" src="../assets/linije.png" alt=""></div>  
               </div>
             </div>
  <!--DECLARATION-->           
             <div class="search">
-              <div  class="search-header">No.</div>
+              <div  class="search-header" style="padding-left:8px;">No.</div>
               <div class="search-header">Name&Surname</div>
               <div class="search-header">Country</div>
               <div class="search-header">City</div>
@@ -24,19 +23,24 @@
               <div class="search-header">Rating </div>
               <div class="search-header">Interested in</div>
               <div class="search-header">Title</div>
+              <div class="search-header" style="padding-right:8px;">Club/Event</div>
+            </div>
+<!--SEARCH TEXT RESULTS -->
+            <div  v-if="textsearch" >
+                
             </div>
 <!--SEARCH RESULTS -->
-            <div  v-if="searchresults" >
+            <div  v-else-if="searchresults" >
               <div class="search" v-for="(usersrc,index) in usersearchreact" :key="usersrc.user_uuid">
                 <div class="search-res">{{index + 1}}</div>
                 <div class="search-res start " >
                   <div class="initials">{{usersrc.inicijali}}</div>
-                  <div>{{usersrc.name_first}} {{usersrc.name_last}}</div>
+                  <div><a href="#">{{usersrc.name_first}} {{usersrc.name_last}}</a></div>
                 </div>
                 <div class="search-res">{{usersrc.federation}}</div>
                 <div class="search-res">{{usersrc.city}}</div>
                 <div class="search-res">{{usersrc.godine}}</div>
-                <div class="search-res">{{usersrc.sex}}</div>
+                <div class="search-res">{{usersrc.sex}} </div>
                 <div class="search-res">{{usersrc.rating_standard}}</div>
                 <div class="search-res">
                   <div   class="search-res3">
@@ -54,6 +58,10 @@
                     </div>
                   </div>
                 </div>
+                <div class="search-res"  >
+                     <div>{{usersrc.club_name}} </div>
+                     <div> {{usersrc.organizer_current_event}}</div> 
+                </div>
               </div>
             </div >
 <!--ALL USERS -->
@@ -62,7 +70,7 @@
                 <div class="search-res">{{index + 1}}</div>
                 <div class="search-res start " >
                   <div class="initials">{{alluser.inicijali}}</div>
-                  <div >{{alluser.name_first}} {{alluser.name_last}}</div>
+                  <div ><a href="#">{{alluser.name_first}} {{alluser.name_last}}</a></div>
                 </div>
                 <div class="search-res">{{alluser.federation}}</div>
                 <div class="search-res">{{alluser.city}}</div>
@@ -84,6 +92,10 @@
                     </div>
                   </div>
                 </div>
+                <div class="search-res"  >
+                     <div>{{alluser.club_name}} </div>
+                     <div> {{alluser.organizer_current_event}}</div> 
+                </div>
               </div >
             </div>
           </div>
@@ -93,13 +105,15 @@
             <div  class="side-bar-filter">FILTER:</div>
                 <hr>
                 <div @click="clickage=!clickage" v-bind:class="{'side-bar-filter':isActive,'side-bar-filterclick':clickage}" >Age</div>
-                <div v-if="clickage" class="clicksearch flex-center">
-                   <p >From:</p> <input v-model="agefrom"  class="sideinput"  type="number" name="" id="">to: <input v-model="ageto" class="sideinput" type="number" name="" id="">
+                <div v-if="clickage" class="clicksearch">
+                    <input @keyup.enter="confirmsearch()" v-model="agefrom"  class="sideinput"  type="text" inputmode="numeric" placeholder="From" name="" id=""> 
+                     &nbsp;&nbsp; - &nbsp;&nbsp;  
+                    <input @keyup.enter="confirmsearch()" v-model="ageto" class="sideinput" type="text" inputmode="numeric" placeholder="To" name="" id="">
                 </div>
                 <div @click="clickcountry=!clickcountry" v-bind:class="{'side-bar-filter':isActive,'side-bar-filterclick':clickcountry}">Country</div>
-                <div v-if="clickcountry" class="clicksearch flex-center">
+                <div v-if="clickcountry" class="clicksearch">
                     <select v-model="country"    id="select-css">     
-                        <option disabled value="">Select</option>                           
+                        <option disabled value="">Select country</option>                           
                         <option  
                         v-for="fla in flags" :key="fla.code3"  :value="fla.code3"
                         >{{fla.name}}
@@ -107,41 +121,46 @@
                     </select>
                 </div>
                 <div @click="clickrating=!clickrating" v-bind:class="{'side-bar-filter':isActive,'side-bar-filterclick':clickrating}">Rating</div>
-                <div v-if="clickrating" class="clicksearch flex-center">
-                   <p >From:</p> 
-                   <input  v-model="ratingfrom" class="sideinput"  type="number" name="" id="">
-                   to: 
-                   <input v-model="ratingto" class="sideinput" type="number" name="" id="">
+                <div v-if="clickrating" class="clicksearch">
+                   <input @keyup.enter="confirmsearch()" v-model="ratingfrom" class="sideinput"  type="text" inputmode="numeric" placeholder="From" name="" id="">
+                   &nbsp;&nbsp; - &nbsp;&nbsp; 
+                   <input @keyup.enter="confirmsearch()" v-model="ratingto" class="sideinput" type="text" inputmode="numeric" placeholder="To" name="" id="">
                 </div>
                 <div @click="clickgender=!clickgender" v-bind:class="{'side-bar-filter':isActive,'side-bar-filterclick':clickgender}" >Gender</div>
-                <div v-if="clickgender" class="clicksearch flex-center">
+                <div v-if="clickgender" class="clicksearch ">
                     <div class="flex-center"> 
-                      <input  type="radio" checked="sexon" name="gender"  class="radiobutton" value="Male" v-model="sexon" ><p style="margin:0">Male</p>
+                      <input  type="radio" checked="sexon" name="gender"  class="radiobutton" value="Male" v-model="sexon" ><p style="margin:0;padding-right:10px;">Male</p>
                       <input type="radio"  checked="sexon"  name="gender"   class="radiobutton"  value="Female" v-model="sexon"  ><p style="margin:0">Female</p> 
                     </div> 
                 </div>
                 <div @click="clicktitle=!clicktitle" v-bind:class="{'side-bar-filter':isActive,'side-bar-filterclick':clicktitle}">Title</div>
-                <div v-if="clicktitle" class="clicksearch flex-center">
+                <div v-if="clicktitle" class="clicksearch">
                   <div class="custom-select" >
                     <select v-model="titleselected" class="select-text">
-                      <option value="">Title search</option>
-                      <option v-for="choosedtitle in titule" :key="choosedtitle.titula_uuid" :value="choosedtitle.titula_uuid">{{choosedtitle.titula_full_name}}</option>
+                      <option  value=""><p style="color:#FFFFFF;">Title search</p></option>
+                      <option v-for="choosedtitle in titule" :key="choosedtitle.titula_uuid" :value=[choosedtitle.titula_uuid]>{{choosedtitle.titula_short_name}} - {{choosedtitle.titula_full_name}} </option>
                     </select>
                   </div>
                 </div>
                 <div @click="clicktown=!clicktown" v-bind:class="{'side-bar-filter':isActive,'side-bar-filterclick':clicktown}" >Town</div>
-                <div v-if="clicktown" class="clicksearch flex-center">
-                  <input v-model="searchtown"  class="sideinput"  type="text" name="" id="">
+                <div v-if="clicktown" class="clicksearch">
+                  <input @keyup.enter="confirmsearch()" v-model="searchtown"  class="sideinput2"   type="text" name="" id="" placeholder="Enter town">
                 </div>
                 <div @click="clickinterested=!clickinterested" v-bind:class="{'side-bar-filter':isActive,'side-bar-filterclick':clickinterested}">Interested in</div>
-                <div v-if="clickinterested" class="clicksearch flex-center">
-                  <div class="flex-center"> 
-                     <input  type="checkbox"   class="radiobutton"  v-model='interestedclub' ><p style="margin:0">Club</p>
-                <!--     <input type="checkbox"    class="radiobutton"   v-model='interestedtour'  ><p style="margin:0">Tournamenr</p> 
-                     <input type="checkbox"    class="radiobutton"   v-model='interestedevent'  ><p style="margin:0">Event</p> 
-             -->     </div> 
+                <div v-if="clickinterested" class="clicksearch  paddd">
+                  <div id="search-interest">
+                    <div class="check_search-interest"> 
+                      <input  type="checkbox"   class="radiobutton "  v-model='interestedclub' ><p style="margin:0">Club</p>
+                    </div>
+                    <div class="check_search-interest">
+                      <input type="checkbox"    class="radiobutton"   v-model='interestedtour'  ><p style="margin:0">Tournamenr</p> 
+                    </div>
+                    <div class="check_search-interest">
+                      <input type="checkbox"    class="radiobutton"   v-model='interestedevent'  ><p style="margin:0">Event</p> 
+                    </div> 
+                  </div>
                 </div>
-                <div class="flex center">
+                <div class="flex center buttonsearch">
                     <button class="middle2-buttons" @click="confirmsearch"   type="button">Search</button>
                 </div>
             </div>
@@ -154,12 +173,10 @@
 
 
 import SideBar from '../components/SideBar.vue'
-import Searchpart from '../components/Searchpart.vue'
 export default {
   name: 'Intsearch',
   components: {
-    SideBar,
-    Searchpart
+    SideBar
   },
   data () {
       return {
@@ -177,7 +194,7 @@ export default {
          clickinterested:'',
          clicktitle:'',
          searchtown:'',
-         titleselected: '',
+         titleselected:'',
          agefrom:'',
          ageto:'',
          ratingfrom:'',
@@ -198,7 +215,9 @@ export default {
          use:[{titule_details:{ titula_uuid:'',
                                 titula_short_name:''               
                                              }}],
-        interestedin:''                                    
+        interestedin:'' ,
+        input_text:'',
+        textsearch:''                                   
       }
 },
 mounted(){
@@ -256,15 +275,15 @@ methods:{
   confirmsearch:function(){
     this.searchresults=true;
     if (this.titleselected==""){
-     return this.titleselected=[]
-   }console.log(this.titleselected)
-     console.log(this.titule)
+      this.titleselected=[]
+   }
+   console.log(this.interestedclub);
     fetch('https://app.outpostchess.com/api/v2/users_search', {
         method:'POST',
         headers: {'Content-Type': 'application/json',
         "Authorization":`Bearer ${localStorage.getItem('token')}`},
         body: JSON.stringify( { 
-        titule:[this.titleselected],
+        titule:this.titleselected,
         years_min:this.agefrom,
         years_max:this.ageto,
         rating_standard_min:this.ratingfrom,
@@ -275,13 +294,15 @@ methods:{
         open2new_eng_tournament:this.interestedtour,
         open2new_eng_event:this.interestedevent,
         federation:this.country,
+        search_text:this.input_text,
  } )
 })
   .then(response => response.json())
   .then(data => this.usersearchreact=data)
   .then(data => console.log(data));
- 
+  
   },
+
   clickside:function(){
      this.clickside1=!this.clickside1
      if(this.clickside1==false){
@@ -292,6 +313,11 @@ methods:{
          this.clicktown=false,
          this.clickinterested=false,
          this.clicktitle=false
+
+         console.log(this.usersearchreact.open2new_eng_club);
+  console.log(this.usersearchreact.open2new_eng_tournament);
+  console.log(this.usersearchreact.open2new_eng_event);
+  console.log(this.interestedclub)
    }
   },
   
@@ -302,9 +328,12 @@ methods:{
 
 
 <style scoped>
+a{
+  color:#FFFFFF;
+}
 hr{
   border: 0.5px solid rgba(255, 255, 255, 0.2);
-  margin:40px 0 40px 0;
+  margin:40px auto 40px auto;
 }
 .profile{
     display:grid;
@@ -340,7 +369,7 @@ hr{
       background-position-y: 14px;
       padding-left:60px;
       font-size: 14px;
-      color:#6F7381;
+      color:#FFFFFF;
       cursor:pointer;
       width:85%;
     }   
@@ -389,7 +418,7 @@ hr{
     
     .search{
       display:grid;
-      grid-template-columns:8% 26% 8% 8% 8% 8% 8% 12% 14% ;
+      grid-template-columns:4% 24% 8% 8% 6% 8% 8% 12% 12% 10%;
       background-color:#202122;
       height: 52px;
       margin:20px 0 20px 0;
@@ -461,20 +490,24 @@ hr{
 .clicksearch{
   height:20px; 
   display:flex;
+  font-size: 12px;
   color:#FFFFFF;
+  padding-left:20px;
+  margin-bottom: 20px;
  
 }
 .sideinput{
     color:#FFFFFF;
-    width: 70px;
+    width: 50px;
     padding:0 6px 0 6px;
     border-bottom:0.5px solid #FFFFFF;
 }
-.clicksearch>p{
-  padding-right:10px;
-  margin:0;
-  
+.sideinput2{
+    color:#FFFFFF;
+    width: 100px;
+    border-bottom:0.5px solid #FFFFFF;
 }
+
 .side-bar-filterclick{
   color:#FFFFFF;
 }
@@ -486,6 +519,7 @@ select{
     padding-bottom: 2px;
     text-overflow: ellipsis;
     white-space: nowrap;
+    background: #202122;
 }
 .custom-select {
   position: relative;
@@ -493,26 +527,24 @@ select{
   color:#FFFFFF;
   border:none;
   font-size: 14px;
-  padding-left:20px;
+  padding:0;
   
 }
 .select-text{
-  color:#C8A07D;
+  color:#FFFFFF;
   cursor: pointer;
 }
 
 #select-css{
     color:#FFFFFF;
     background-color: #202122;
-    width:75px;
+    width:80px;
     border-radius: 3px;
-    margin-left:25px;
     outline:0px;
     border: none;
     cursor: pointer;
     font-size: 12px;
 }
-
 
 /*BUTTON*/
 .middle2-buttons{
@@ -523,20 +555,30 @@ select{
   font-size: 14px;
   width: 130px;
   height: 46px;
-  margin-right: 15px;;
-  margin-top:50px;
+  margin-right: 15px;
   margin-left:15px;
 }
 .middle2-buttons:hover{
     opacity: 0.7;
 }
+.buttonsearch{
+  margin-top: 120px;
+}
 
 /*RADIO BUTTONS */
 .radiobutton{
-    margin:auto  15px auto 10px ;
-    
+    margin:auto  5px auto 0 ;
 }
-
+.radiobutton>p{
+  padding-right: 8px;
+}
+.check_search-interest{
+   display:flex;
+}
+#search-interest{
+  width: 100%;
+  
+}
 
 
 

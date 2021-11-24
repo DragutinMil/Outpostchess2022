@@ -71,7 +71,7 @@
                     <div v-if='clickside && rolecolor1'  class="middle3-1"   > 
                         <div  v-for="titul1 in user.titule_details" :key="titul1.titula_uuid"  class="flex-center" style="display:flex">
                             <div v-if='rolecolor1 &&titul1.rola=="PLAYER"'  class="flex-center" style="display:flex">
-                                <input type="radio" :value='titul1.titula_short_name'  name="titlepick" v-model='picked' >
+                                <input @change="selected_title" type="radio" :value='titul1.titula_short_name'  name="titlepick" v-model='picked' >
                                 <div><p class="left-check-text">{{titul1.titula_short_name}}</p></div>
                             </div>    
                         </div>
@@ -80,7 +80,7 @@
                       <div v-else-if='clickside && rolecolor3'  class="middle3-1"  >
                       <div    class="flex-center" style="display:flex">
                             <div v-if='rolecolor3'  class="flex-center" style="display:flex">
-                                <input  type="radio"  value='FIO'   v-model='pickedorg'   >
+                                <input @change="selected_title"  type="radio"  value='FIO'   v-model='pickedorg'   >
                                 <div><p class="left-check-text">FIO</p></div>
                                 <!--:checked='user.titule_details[3].is_checked' :checked='user.titule_details[3].is_checked'      -->
                             </div>    
@@ -266,7 +266,7 @@ to fide validation</p>
                             <p class="middle5-text">Interested in</p>
                         </div>
                     </div>
-                    <div id="middle5-right-end" @click="chenged_compensation=true">
+                    <div id="middle5-right-end" @click="changed_compensation=true">
                         <p class="middle5-text" >Desired club compensation ( € )</p>
 
                           <v-app class="vuetify-switch"> 
@@ -316,14 +316,14 @@ to fide validation</p>
                                 </v-card>
                             </v-container>  
                         </v-app> 
-                        <div class="slider"  v-if="chenged_compensation"> 
+                        <div class="slider"  v-if="changed_compensation"> 
                             <p >{{rangeclub[0]}} </p><p class="slider-text"></p> <p >{{rangeclub[1]}} </p>
                         </div> 
                         <div class="slider" v-else >
                             <p >{{user.comp_per_game_from}}  </p><p style="padding-left:50px" >{{user.comp_per_game_to}} </p>
                         </div>   
                         
-                        <button class="button-range"  @click="compensation()"     type="button" >Change value</button>
+                        <button class="button-range" v-if="changed_compensation"  @click="compensation()"     type="button" >Change value</button>
                     </div>
                     
                 </div>
@@ -454,7 +454,7 @@ to fide validation</p>
                         </div>    -->
                     </div>
                      <div id="middle5-right-startorg" >
-                            <div class="mid5-padd" >
+                            <div class="mid5-padd events" >
                                 <div style="height:65px;">
                                     <p class="middle5-text" >My events:</p>
                                     <div class="list-events">
@@ -465,14 +465,14 @@ to fide validation</p>
                                             <p class="gold-event" >Date:</p>
                                             <p>from 15 of May - 25 of May 2021.</p>
                                     </div>
-                                    <div>
-                                        <div class="dropdown">
-                                            <button class="dropbtn">Events</button>
-                                            <div class="dropdown-content">
-                                                <p >Event1</p>
-                                                <p >Event2</p>
-                                                <p >Event3</p>
-                                            </div>
+                                </div>
+                                <div id="list-event">
+                                    <div class="dropdown">
+                                        <button class="dropbtn">Events</button>
+                                        <div class="dropdown-content">
+                                            <p >Event1</p>
+                                            <p >Event2</p>
+                                            <p >Event3</p>
                                         </div>
                                     </div>
                                 </div>
@@ -583,7 +583,7 @@ export default {
          switch3:'',
          switch5:'',
          photoinfo:'',
-         chenged_compensation:false
+         changed_compensation:false
          
          
          
@@ -713,7 +713,6 @@ methods:{
       },
 
       compensation:function(){
-            
        fetch('https://app.outpostchess.com/api/v2/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
@@ -858,8 +857,9 @@ methods:{
       
     },
  //--------------USER PATCH----------------------// 
-userpatch:function(){
-        /*    switch(this.picked){
+
+selected_title:function(){
+     /*    switch(this.picked){
               case this.picked=='WCM':
                this.WCM=true
                break;
@@ -896,23 +896,25 @@ userpatch:function(){
             if(this.picked=='GM'){this.GM=true}
             if(this.picked=='WGM'){this.WGM=true}
             if(this.pickedorg=='FIO'){this.FIO=true}
-            if(this.WCM==false && this.CM==false && this.WFM==false && this.FM==false &&
-               this.WIM==false && this.IM==false &&this.GM==false && this.WGM==false){   
-                if(this.user.titule_details[4].is_checked==true){ this.WCM=true}
-                if(this.user.titule_details[5].is_checked==true){ this.CM=true }  
-                if(this.user.titule_details[6].is_checked==true){ this.WFM=true}
-                if(this.user.titule_details[7].is_checked==true){ this.FM=true}
-                if(this.user.titule_details[8].is_checked==true){ this.WIM=true}
-                if(this.user.titule_details[9].is_checked==true){ this.IM=true}
-                if(this.user.titule_details[10].is_checked==true){this.GM=true}
-                if(this.user.titule_details[11].is_checked==true){this.WGM=true}       
-         }  
-
             if(this.user.titule_details[3].is_checked && this.rolecolor3==false){ this.FIO=true}
-            if(this.user.titule_details[3].is_checked && this.rolecolor3==true && this.pickedorg==false){ this.FIO=false}          
-           
+          // if(this.user.titule_details[3].is_checked && this.rolecolor3==true && this.pickedorg==false){ this.FIO=false}          
+             if(this.WCM==false && this.CM==false && this.WFM==false && this.FM==false &&
+               this.WIM==false && this.IM==false &&this.GM==false && this.WGM==false ){   
+                if(this.user.titule_details[4].is_checked==true){ this.WCM=true}
+                else if(this.user.titule_details[5].is_checked==true){ this.CM=true } 
+                else if(this.user.titule_details[6].is_checked==true){ this.WFM=true}
+                else if(this.user.titule_details[7].is_checked==true){ this.FM=true}
+                else if(this.user.titule_details[8].is_checked==true){ this.WIM=true}
+                else if(this.user.titule_details[9].is_checked==true){ this.IM=true}
+                else if(this.user.titule_details[10].is_checked==true){this.GM=true}
+                else if(this.user.titule_details[11].is_checked==true){this.WGM=true}       
+         } 
+},
+
+userpatch:function(){
+        
 //USER PATCH
-        fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+          fetch('https://app.outpostchess.com/api/v2/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1325,7 +1327,14 @@ height: 80px;
    
  }
  .mid5-padd{
-     padding:10px;}
+     padding:10px;
+     }
+.events{
+    display:flex;
+}
+#list-event{
+   padding-left:25%;
+}
  .title-arrow{
     padding-left:8px
 }    

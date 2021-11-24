@@ -24,18 +24,19 @@ export default {
 
 <style scoped>
   .rotate{
-    position: relative;
-    bottom:325px;
-    
     transform: rotate(-45deg);
     font-size:26px;
     font-weight: 600;
     letter-spacing: 15px;
-    
+    position:relative;
+    bottom: 290px;
     opacity: 0.8;
     color:#FFFFFF;
-    width: 100%;
-    height: 100%;
-    margin:auto;
+}
+#calendarpic{
+  opacity: 0.8;
+}
+#calendarpic:hover{
+  opacity: 0.5;
 }
 </style>

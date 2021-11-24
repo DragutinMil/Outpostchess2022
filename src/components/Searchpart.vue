@@ -1,16 +1,21 @@
  <template>
-     <div id="middle1">
-          <input type="search" name="" class="search-profile" placeholder="Search">
-          <a  id="a-middle"><img src="../assets/notification_important_24px@2x.png" alt="" id="middle1-img"></a>
+     <div  id="middle1">
+          <input @keyup.enter='go_to_search' type="search" name="" class="search-profile" placeholder="Search">
+          <a  id="a-middle"> <img  src="../assets/notification_important_24px@2x.png" alt="" id="middle1-img"></a>
      </div>
  </template>
-
 
 <script>
  export default {
   name: 'Searchpart',
   props: {
   msg: String
+  },
+  methods:{
+      go_to_search:function(){
+        this.$router.push('../intsearch');
+        
+      }
   }
 }
 </script>
