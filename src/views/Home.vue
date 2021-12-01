@@ -77,8 +77,8 @@
             <!--  <p id="text-or">or</p>
               <button type="button" onclick="alert('Kasnije!')"   class="text-join "  style="border: 1px solid #E8E8E8;"> <div id="google-cor1"> <div id="google-cor"> <img src="../assets/Group.svg" id="" alt="google"></div ><p id="joingoogle">Join with Google</p> </div></button> -->
           </div>
-          <!--   <div id="policy" > <p class="home-p">Already on Outpost?</p> &nbsp;   <router-link  to="/thnksver" class="home-p blue">Sign in</router-link>  </div>
-      -->    </div>
+      <!--   <div id="policy" > <p class="home-p">Already on Outpost?</p> &nbsp;   <router-link  to="/login" class="home-p blue">Sign in</router-link>  </div>  -->
+          </div>
       <div id="right-login">
       </div>
   </div>

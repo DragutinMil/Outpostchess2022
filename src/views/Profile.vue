@@ -16,7 +16,7 @@
                         <p style="color:#C8A07D">{{photoinfo}}</p>
                     </div>
                 <!--    <input  v-if="clickside" type="file"  id="fileUpload" @change={up} /> -->
-                  <img v-else  id="profile-pic" :src='user.profile.file_url' alt="">
+                  <img v-else  id="profile-pic" :src='user.profile.file_url || "https://outpostchess.fra1.digitaloceanspaces.com/2bf139b2-7074-4fd4-8377-58efead41bf0.png"' alt="">
                 </div>
                 <div id="middle2-1" >
                     <div style="display:flex">
@@ -68,10 +68,12 @@
 <!--MID 3 -->
             <div id="middle3">
                 <div class="middle3-1">
-                    <div v-if='clickside && rolecolor1'  class="middle3-1"   > 
-                        <div  v-for="titul1 in user.titule_details" :key="titul1.titula_uuid"  class="flex-center" style="display:flex">
-                            <div v-if='rolecolor1 &&titul1.rola=="PLAYER"'  class="flex-center" style="display:flex">
-                                <input @change="selected_title" type="radio" :value='titul1.titula_short_name'  name="titlepick" v-model='picked' >
+                    <div v-if='clickside && rolecolor1'  class="middle3-1"> 
+                        <div  v-for="titul1 in titule" :key="titul1.titula_uuid"  class="flex-center" >
+                            <div v-if='rolecolor1 &&titul1.rola=="PLAYER"'  class="flex-center" >
+                                <input @change="selected_title" type="radio" 
+                                :value='titul1.titula_uuid'  name="titlepick" v-model='picked' 
+                                >
                                 <div><p class="left-check-text">{{titul1.titula_short_name}}</p></div>
                             </div>    
                         </div>
@@ -88,7 +90,7 @@
                     </div> 
                     <div v-else class="middle3-1"  >
                         <p style="color:#6F7381" >Title:</p>
-                        <div  v-for="titul in user.titule_details" :key="titul.titula_uuid" >
+                        <div  v-for="titul in titule" :key="titul.titula_uuid" >
                             <div  v-if="titul.is_checked===true" class="titles">{{titul.titula_short_name}} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->  </div>
                             
                         </div>
@@ -189,64 +191,14 @@
                             <p class="middle5-text">Player form:</p>
                             <div id="form-middle5">
                                 <img style="height:25px" src="../assets/form.svg" alt="" >
-                                    <p style="margin:0;padding:8px 0 0 0">Unknown
-to fide validation</p>
+                                    <p style="margin:0;padding:8px 0 0 0">Unknown</p>
                             </div>
                         </div>
                     </div>
                     <div class="middle5-right-grid" style="height:170px;">
                         <div class="mid5-padd" style="padding:0 0 0 10px">
                             <p class="middle5-text" style="margin-bottom:10px">Open to new engagements</p>
-                           <!-- <div v-if="clickside" id="check-engagements">
-                                <div class="grid-check ">
-                                    <div>
-                                        <v-app class="vuetify-switch">     
-                                            <v-container class="switch-engage"   >
-                                                <v-container fluid>
-                                                    <v-switch
-                                                    v-model="engageclub"
-                                                    ></v-switch>
-                                                </v-container>
-                                                </v-container>  
-                                        </v-app>
-                                    </div>
-                                    <div>
-                                        <p >Club</p>
-                                    </div>
-                                </div >
-                                <div class="grid-check ">
-                                    <div >
-                                        <v-app class="vuetify-switch">     
-                                            <v-container class="switch-engage"   >
-                                                <v-container fluid>
-                                                    <v-switch
-                                                    v-model="engagetournament"
-                                                    ></v-switch>
-                                                </v-container>
-                                            </v-container>  
-                                        </v-app>
-                                    </div>
-                                    <div>
-                                        <p>Tournaments</p>
-                                    </div>
-                                </div>
-                                <div class="grid-check ">
-                                    <div>
-                                        <v-app class="vuetify-switch">     
-                                            <v-container class="switch-engage"   >
-                                                <v-container fluid>
-                                                    <v-switch
-                                                    v-model="engageevent"
-                                                    ></v-switch>
-                                                </v-container>
-                                            </v-container>  
-                                        </v-app>
-                                    </div>
-                                    <div>
-                                        <p >Events</p>
-                                    </div>
-                                </div>
-                            </div>   -->
+                         
                             <div>
                                 <div  class="engage-grid stikl" :class="{stikl1:this.user.open2new_eng_club===false || this.engageclub===false}">
                                     <p class="gold2" >Club  </p>
@@ -263,7 +215,7 @@ to fide validation</p>
                             </div>
                         </div>
                         <div class="mid5-padd">
-                            <p class="middle5-text">Interested in</p>
+                            <p class="middle5-text"></p>
                         </div>
                     </div>
                     <div id="middle5-right-end" @click="changed_compensation=true">
@@ -347,7 +299,7 @@ to fide validation</p>
                     <div class="middle5-right-grid">
                         <div class="mid5-padd">
                             <div style="height:65px;display:flex">
-                                <p class="middle5-text">My team currently active:</p>
+                                <p class="middle5-text">My team is currently active:</p>
                                 <img v-if="switch3" id="plava-kugla" src="../assets/plavakugla.png" alt="">
                             </div>
                            
@@ -381,15 +333,13 @@ to fide validation</p>
                     </div>
                     <div class="middle5-right-grid">
                         <div class="mid5-padd flex-center">
-                            <div  class="borderbutton flex-center">
+                            <div @click="createevent=!createevent" class="borderbutton flex-center">
                                 <img src="../assets/createevent2.png" alt="">
                                 <p>Create an event</p>
                             </div>
                         </div>    
                         <div class="mid5-padd flex-center">
-                            <div class="borderbutton flex-center">
-                                <p>Interested in this Club</p>
-                            </div>
+                           
                         </div>
                     </div>
                     <div class="middle5-right-grid" >
@@ -459,20 +409,19 @@ to fide validation</p>
                                     <p class="middle5-text" >My events:</p>
                                     <div class="list-events">
                                         <p class="gold-event" >Event name:</p>
-                                        <p>DUBAI OPEN 2021.</p>
+                                        <p></p>
                                     </div>
                                     <div class="list-events">
                                             <p class="gold-event" >Date:</p>
-                                            <p>from 15 of May - 25 of May 2021.</p>
+                                            <p></p>
                                     </div>
                                 </div>
                                 <div id="list-event">
                                     <div class="dropdown">
                                         <button class="dropbtn">Events</button>
-                                        <div class="dropdown-content">
-                                            <p >Event1</p>
-                                            <p >Event2</p>
-                                            <p >Event3</p>
+                                        <div class="dropdown-content" >
+                                            <p >No events yet</p>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -559,8 +508,9 @@ export default {
          activeorg:false,
          switch1:'',
          switch2:'',
+         titule:[],
          min: 0,
-         max: 3000,
+         max: 5000,
          user:{rola:[],
                federation_details:{},
                rola_array:[],
@@ -574,7 +524,8 @@ export default {
                club_looking_for_new_player:'',
                current_playing_bool:'',
                club_current_playing_bool:'',
-               organizer_looking_for_new_participants:''
+               organizer_looking_for_new_participants:'',
+          
          },
          rangeclub:[350,2000],
          sexon:'',
@@ -583,7 +534,8 @@ export default {
          switch3:'',
          switch5:'',
          photoinfo:'',
-         changed_compensation:false
+         changed_compensation:false,
+         createevent:''
          
          
          
@@ -614,11 +566,20 @@ mounted(){
 )
 .then(response => response.json())
 .then(data => this.user=data)
-.then(data => console.log('podaci',data))
+.then(data => console.log('podaci',data))  
 
-
-       
-    
+fetch('https://app.outpostchess.com/api/v2/titule', {
+  method:'GET',
+  headers: {
+    'Content-Type': 'application/json',
+    "authorization":`Bearer ${localStorage.getItem('token')}`
+  }
+},        
+)
+.then(response => response.json())
+.then(data => this.titule=data)
+.then(data => console.log('titule',data))
+             
 },
 
 //--------------UPDATED----------------------//
@@ -887,7 +848,7 @@ selected_title:function(){
                this.FIO=true
                break;
             }*/
-            if( this.picked=='WCM'){this.WCM=true}
+       /*     if( this.picked=='WCM'){this.WCM=true}
             if(this.picked=='CM'){this.CM=true}
             if(this.picked=='WFM'){this.WFM=true}
             if(this.picked=='FM'){this.FM=true}
@@ -898,22 +859,22 @@ selected_title:function(){
             if(this.pickedorg=='FIO'){this.FIO=true}
             if(this.user.titule_details[3].is_checked && this.rolecolor3==false){ this.FIO=true}
           // if(this.user.titule_details[3].is_checked && this.rolecolor3==true && this.pickedorg==false){ this.FIO=false}          
-             if(this.WCM==false && this.CM==false && this.WFM==false && this.FM==false &&
-               this.WIM==false && this.IM==false &&this.GM==false && this.WGM==false ){   
-                if(this.user.titule_details[4].is_checked==true){ this.WCM=true}
-                else if(this.user.titule_details[5].is_checked==true){ this.CM=true } 
-                else if(this.user.titule_details[6].is_checked==true){ this.WFM=true}
-                else if(this.user.titule_details[7].is_checked==true){ this.FM=true}
-                else if(this.user.titule_details[8].is_checked==true){ this.WIM=true}
+           //  if(this.WCM==false && this.CM==false && this.WFM==false && this.FM==false &&
+           //    this.WIM==false && this.IM==false &&this.GM==false && this.WGM==false ){   
+             //   if(this.user.titule_details[4].is_checked==true){ this.WCM=true}
+             //   else if(this.user.titule_details[5].is_checked==true){ this.CM=true } 
+              //  else if(this.user.titule_details[6].is_checked==true){ this.WFM=true}
+             //   else if(this.user.titule_details[7].is_checked==true){ this.FM=true}
+            /*    else if(this.user.titule_details[8].is_checked==true){ this.WIM=true}
                 else if(this.user.titule_details[9].is_checked==true){ this.IM=true}
                 else if(this.user.titule_details[10].is_checked==true){this.GM=true}
-                else if(this.user.titule_details[11].is_checked==true){this.WGM=true}       
-         } 
+                else if(this.user.titule_details[11].is_checked==true){this.WGM=true}       */
+        // } 
 },
-
+//USER PATCH
 userpatch:function(){
         
-//USER PATCH
+          console.log(this.picked)
           fetch('https://app.outpostchess.com/api/v2/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
@@ -938,36 +899,11 @@ userpatch:function(){
               club_current_playing:this.curplayclub1,
               about_me:this.about,
               organizer_current_event:this.curevent,
-              current_playing_bool:false,
-              club_current_playing_bool:false,
-              titule:[  {
-                titula_uuid: "91f90e7e-1ec7-11ec-a733-0d4e300cf032",
-                is_checked: this.WCM},
-                {
-                titula_uuid: "4ffbf6b2-1ec7-11ec-a733-0d4e300cf032",
-                is_checked: this.CM},
-                {
-                titula_uuid: "a6019274-1ec7-11ec-a733-0d4e300cf032",
-                is_checked: this.WFM},
-                {
-                titula_uuid: "4ffbf6b3-1ec7-11ec-a733-0d4e300cf032",
-                is_checked: this.FM},
-                {
-                titula_uuid: "b9238c86-1ec7-11ec-a733-0d4e300cf032",
-                is_checked: this.WIM},
-                {
-                titula_uuid: "4ffbf6b4-1ec7-11ec-a733-0d4e300cf032",
-                is_checked: this.IM},
-                {
-                titula_uuid: "4ffbf6b5-1ec7-11ec-a733-0d4e300cf032",
-                is_checked: this.GM},
-                {
-                titula_uuid: "d18adaae-1ec7-11ec-a733-0d4e300cf032",
-                is_checked: this.WGM},
-                {
-                titula_uuid: "5fb356b6-1ee2-11ec-a733-0d4e300cf032",
-                is_checked: this.FIO} 
-                ],
+      //        titula_player_details: [{
+   // titula_uuid: "91f90e7e-1ec7-11ec-a733-0d4e300cf032",
+    
+      //        }],
+           
             })
         },
                )   
@@ -1031,6 +967,8 @@ removerole:function(){
             }) 
             //  .then(this.$router.go());
     },
+   
+  //fghfhfghfg
   }
 
 }
@@ -1330,10 +1268,12 @@ height: 80px;
      padding:10px;
      }
 .events{
-    display:flex;
+    display:grid;
+    grid-template-columns: 70% 30% ;
 }
 #list-event{
-   padding-left:25%;
+   padding-left:5%;
+   padding-top:15px;
 }
  .title-arrow{
     padding-left:8px

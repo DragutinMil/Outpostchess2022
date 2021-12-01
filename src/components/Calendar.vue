@@ -1,9 +1,9 @@
 <template>
   <div class="calendar">
       <div class="container flex-center">
-            
+             <p id="rotate">Coming soon</p> 
              <img id="calendarpic" src="@/assets/calendar.svg" alt="">
-             <p class="rotate">Coming soon</p>
+             
       </div>
    
   </div>
@@ -23,10 +23,17 @@
 
 
 <style scoped>
-
+     #rotate {
+    position:absolute;
+    transform: rotate(-45deg);
+    font-size:26px;
+    font-weight: 600;
+    letter-spacing: 15px;
+    opacity: 0.8;
+    color:#FFFFFF;
+    }
     .container{
        padding:30px;
-       
     }
     #calendarpic{
       width:100%;
@@ -38,17 +45,7 @@
     .calendar{
       margin:auto
     } 
-    .rotate {
-    transform: rotate(-45deg);
-    font-size:26px;
-    font-weight: 600;
-    letter-spacing: 15px;
-    position:absolute;
-    
-    opacity: 0.8;
-    color:#FFFFFF;
-    
-    }
+   
 
  
 </style>

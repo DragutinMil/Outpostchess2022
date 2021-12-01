@@ -7,7 +7,7 @@
                     </div>
                     <div class="side-options">
                           <div class="flex-center"><img src="../assets/Vector1.png" alt=""></div>
-                          <router-link  to="../Profile" style="color:#C7C9D0"><p class="left-sidetext">Chess Portfolio</p></router-link> 
+                          <router-link  to="../Profile" style="color:#C7C9D0"><p class="left-sidetext">My profile</p></router-link> 
                     </div>
                     <div class="side-options">
                           <div class="flex-center"><img src="../assets/mail_outline_24px.png" alt=""></div>

@@ -4,12 +4,10 @@
       <div id="about-me">
         <div id="about-edit">
           <p style="padding-right:10px">About Me</p> 
-          <i @click="editable=!editable" v-if="!editable" class="far fa-edit fontawesome"></i>
           
         </div >
-         <!--   <input v-if="editable" class="about-text" type="text" :value="user.about_me"> --->
             <div  >
-            <p  :contenteditable=editable style="white-space: pre-line;"   @input="onInput"  v-bind:class="{'about-text3':editable,'about-text':isActive,}"  >{{user.about_me}} </p>
+            <p  style="white-space: pre-line;"   v-bind:class="{'about-text3':editable,'about-text':isActive,}"  >{{user.about_me}} </p>
             </div>
             <div>
               <button class="middle2-buttons"   v-if="editable" @click="editconfirm"  type="button" >Confirm changes</button>
@@ -21,9 +19,8 @@
         <div>
           <p>My CV: </p>
           <div >
-            <p id="opencv" @click="newopenwindow()"  >{{user.cv.file_name}}</p> 
-               <input   type="file"  style="display:none;"  title=""  id="fileUpload"  @change="onCVSelected" />
-    <label for="fileUpload" class="file-input"></label> 
+            <p id="opencv" @click="newopenwindow()"   >{{user.cv.file_name}}</p> 
+            <input   type="file"  style="display:none;"  title=""  id="fileUpload"  />
           </div>
           
         </div>
@@ -40,70 +37,24 @@ export default {
     },
   data () {
       return {
-         files:'',
-         formData:'',
-         aboutme:'',
-         selectedCV:null,
-         editable:false,
-         isActive:true
+         isActive:true,
+         editable:false
          
       }
     },
-
-
- methods:{
-   onInput(e) {
-      this.aboutme=e.target.innerText
-    },
-
-
-   editconfirm:function(){
-       this.editable=false;
-      fetch('https://app.outpostchess.com/api/v2/current_user_info', {
-            method:'PATCH',
-            headers: {'Content-Type': 'application/json',
-            "Authorization":`Bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify( { 
-              about_me:this.aboutme,
-             
-              } )
-})
-        .then(response => response.json())
-            .then(data => console.log(data)) 
-           
-      },
-   
-
-   newopenwindow:function(){
+    methods:{  
+      newopenwindow:function(){
      window.open(this.user.cv.file_url);
    },
-  
-  onCVSelected:function(event) {
-    this.selectedCV = event.target.files[0]
-    this.formData = new FormData()
-    this.formData.append('file', this.selectedCV)
-    this.formData.append('fileCategory', 'CV' )
-	
-  fetch('https://app.outpostchess.com/api/v2/fileupload', {
-    method: 'POST',
-		headers: {//'Content-Type': 'application/x-www-form-urlencoded',
-		"Authorization":`Bearer ${localStorage.getItem('token')}`
-		},		
-    body: this.formData
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log(data)
-  })
-  
-  .catch(error => {
-    console.error(error)
-  })
-  .then(setTimeout(this.$router.go(),2000))
+    }
 }
-}
-}  
+
+
+
+ 
+   
+
+
 
 
 

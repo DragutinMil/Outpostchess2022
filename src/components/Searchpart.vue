@@ -1,7 +1,7 @@
  <template>
-     <div  id="middle1">
-          <input @keyup.enter='go_to_search' type="search" name="" class="search-profile" placeholder="Search">
-          <a  id="a-middle"> <img  src="../assets/notification_important_24px@2x.png" alt="" id="middle1-img"></a>
+     <div    id="middle1">
+          <input @click='go_to_search' type="search" name="" class="search-profile" placeholder="Go to search...">
+          <a  id="a-middle"> <img   src="../assets/notification_important_24px@2x.png" alt="" id="middle1-img"></a>
      </div>
  </template>
 
@@ -14,15 +14,14 @@
   methods:{
       go_to_search:function(){
         this.$router.push('../intsearch');
-        
       }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-    .search-profile{
+
+.search-profile{
       border: 1px solid #393939;
       box-sizing: border-box;
       border-radius: 20px;

@@ -25,76 +25,78 @@
               <div class="search-header">Title</div>
               <div class="search-header" style="padding-right:8px;">Club/Event</div>
             </div>
-<!--SEARCH TEXT RESULTS -->
-            <div  v-if="textsearch" >
-                
-            </div>
+
 <!--SEARCH RESULTS -->
-            <div  v-else-if="searchresults" >
+            <div  v-if="searchresults   " >
               <div class="search" v-for="(usersrc,index) in usersearchreact" :key="usersrc.user_uuid">
-                <div class="search-res">{{index + 1}}</div>
-                <div class="search-res start " >
-                  <div class="initials">{{usersrc.inicijali}}</div>
-                  <div><a href="#">{{usersrc.name_first}} {{usersrc.name_last}}</a></div>
-                </div>
-                <div class="search-res">{{usersrc.federation}}</div>
-                <div class="search-res">{{usersrc.city}}</div>
-                <div class="search-res">{{usersrc.godine}}</div>
-                <div class="search-res">{{usersrc.sex}} </div>
-                <div class="search-res">{{usersrc.rating_standard}}</div>
-                <div class="search-res">
-                  <div   class="search-res3">
-                    <div class="inetrestedin" v-if="usersrc.open2new_eng_club==true">Club</div>
-                    <div class="inetrestedin" v-if="usersrc.open2new_eng_tournament==true">Tournament</div>
-                    <div class="inetrestedin" v-if="usersrc.open2new_eng_event==true">Event</div>
+                
+                  <div class="search-res">{{index + 1}}</div>
+                  <div class="search-res start " >
+                    <div class="initials">{{usersrc.inicijali}}</div>
+                    <div><a href="#">{{usersrc.name_first}} {{usersrc.name_last}}</a></div>
                   </div>
-                </div>
-                <div class="search-res2">
-                  <div v-for="titles in usersrc.titule" :key="titles" style="padding:6px">
-                    <div v-for="use in user.titule_details" :key="use.user_uuid" >
-                      <div  v-if="titles==use.titula_uuid" >
-                          {{use.titula_short_name}}
+                  <div class="search-res">{{usersrc.federation}}</div>
+                  <div class="search-res">{{usersrc.city}}</div>
+                  <div class="search-res">{{usersrc.godine}}</div>
+                  <div class="search-res">{{usersrc.sex}} </div>
+                  <div class="search-res">{{usersrc.rating_standard}}</div>
+                  <div class="search-res">
+                    <div   class="search-res3">
+                      <div class="inetrestedin" v-if="usersrc.open2new_eng_club==true">Club</div>
+                      <div class="inetrestedin" v-if="usersrc.open2new_eng_tournament==true">Tournament</div>
+                      <div class="inetrestedin" v-if="usersrc.open2new_eng_event==true">Event</div>
+                    </div>
+                  </div>
+                  <div class="search-res2">
+                    <div v-for="titles in usersrc.titule" :key="titles" style="padding:6px">
+                      <div v-for="use in user.titule_details" :key="use.user_uuid" >
+                        <div  v-if="titles==use.titula_uuid" >
+                            {{use.titula_short_name}}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="search-res"  >
-                     <div>{{usersrc.club_name}} </div>
-                     <div> {{usersrc.organizer_current_event}}</div> 
-                </div>
+                  <div class="search-res"  >
+                      <div>{{usersrc.club_name}} </div>
+                      <div> {{usersrc.organizer_current_event}}</div> 
+                  </div>
+                
               </div>
             </div >
 <!--ALL USERS -->
             <div v-else>
-              <div class="search" v-for="(alluser,index) in usersearch" :key="alluser.user_uuid">
-                <div class="search-res">{{index + 1}}</div>
-                <div class="search-res start " >
-                  <div class="initials">{{alluser.inicijali}}</div>
-                  <div ><a href="#">{{alluser.name_first}} {{alluser.name_last}}</a></div>
-                </div>
-                <div class="search-res">{{alluser.federation}}</div>
-                <div class="search-res">{{alluser.city}}</div>
-                <div class="search-res">{{alluser.godine}}</div>
-                <div class="search-res">{{alluser.sex}}</div>
-                <div class="search-res">{{alluser.rating_standard}}</div>
+              <div  v-for="alluser in usersearch" :key="alluser.user_uuid">
+                <div class="search" v-if="alluser.name_first!=null " >
+                  <div  class="search-res"></div>
+                  <div class="search-res start " >
+                    <div class="initials">{{alluser.inicijali}}</div>
+                    <div ><router-link :user_uuid='alluser.user_uuid'   :to="{ name:'Publicprofile',params:{ id:alluser.user_uuid}}">{{alluser.name_first}} {{alluser.name_last }} </router-link></div>  
+                    
+                  </div>
+                  <div class="search-res">{{alluser.federation}}</div>
+                  <div class="search-res">{{alluser.city}}</div>
+                  <div class="search-res">{{alluser.godine}}</div>
+                  <div class="search-res">{{alluser.sex}}</div>
+                  <div class="search-res">{{alluser.rating_standard}}</div>
 
-                <div   class="search-res3">
-                  <div class="inetrestedin" v-if="alluser.open2new_eng_club==true">Club</div>
-                  <div class="inetrestedin" v-if="alluser.open2new_eng_tournament==true">Tournament</div>
-                  <div class="inetrestedin" v-if="alluser.open2new_eng_event==true">Event</div>
-                </div>
-                <div class="search-res2">
-                  <div v-for="titles in alluser.titule" :key="titles"  style="padding:6px" >
-                    <div  v-for="use in user.titule_details" :key="use.user_uuid" >
-                      <div  v-if="titles==use.titula_uuid" >
-                          {{use.titula_short_name}}
+                  <div   class="search-res3">
+                    <div class="inetrestedin" v-if="alluser.open2new_eng_club==true">Club</div>
+                    <div class="inetrestedin" v-if="alluser.open2new_eng_tournament==true">Tournament</div>
+                    <div class="inetrestedin" v-if="alluser.open2new_eng_event==true">Event</div>
+                  </div>
+                  <div class="search-res2">
+                    <div v-for="titles in alluser.titule" :key="titles"  style="padding:6px" >
+                      <div  v-for="use in user.titule_details" :key="use.user_uuid" >
+                        <div  v-if="titles==use.titula_uuid" >
+                            {{use.titula_short_name}}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="search-res"  >
-                     <div>{{alluser.club_name}} </div>
-                     <div> {{alluser.organizer_current_event}}</div> 
+                  <div class="search-res"  >
+                      <div>{{alluser.club_name}} </div>
+                      <div> {{alluser.organizer_current_event}}</div> 
+                  </div>
                 </div>
               </div >
             </div>
@@ -217,7 +219,7 @@ export default {
                                              }}],
         interestedin:'' ,
         input_text:'',
-        textsearch:''                                   
+        textsearch:''                               
       }
 },
 mounted(){
@@ -272,6 +274,7 @@ fetch('https://app.outpostchess.com/api/v2/countries', {
 
 
 methods:{
+ 
   confirmsearch:function(){
     this.searchresults=true;
     if (this.titleselected==""){
