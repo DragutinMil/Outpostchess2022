@@ -19,18 +19,25 @@
                   <img v-else  id="profile-pic" :src='user.profile.file_url || "https://outpostchess.fra1.digitaloceanspaces.com/2bf139b2-7074-4fd4-8377-58efead41bf0.png"' alt="">
                 </div>
                 <div id="middle2-1" >
-                    <div style="display:flex">
-                        <input type="text" v-if="clickside" class="profile-name2" v-model="nf"   :placeholder=user.name_first>
-                        <input type="text" v-if="clickside" class="profile-name2" v-model="nl"   :placeholder=user.name_last>
-                        <p v-else  id="profile-name" >{{user.name_first}} {{user.name_last}}</p>
+                    <div >
+                        <div v-if="clickside" style="display:flex">
+                           <p>Name</p> <input type="text"  class="profile-name2"  v-model="user.name_first" >
+                            <p>Lastname</p> <input type="text"  class="profile-name2" v-model="user.name_last">
+                        </div>  
+                            <p v-else  id="profile-name" >{{user.name_first}} {{user.name_last}}</p>
+                        
                     </div>
                     <div class="profile-info1" >
                         <div class="profile-info1-1">
-                            <img src="../assets/Vector-1.svg" alt="" >  
-                            <input type="text" v-if="clickside" class="profile-name2" style="margin-top:5px" v-model="town"   :placeholder=user.city>
-                            <p v-else >{{user.city}}</p>
+                             
+                            <p class="flex-center" v-if="clickside" style="padding-right:4px;">Town</p><input type="text" v-if="clickside" class="profile-name2" style="margin-top:8px" v-model="user.city"  >
+                            <div class="profile-info1-1" v-else >
+                            <img src="../assets/Vector-1.svg" alt="" > 
+                            <p >{{user.city}}</p>
+                            </div>
                         </div>
-                        <input type="number" v-if="clickside" class="profile-name2" style="margin-top:5px;width:50px" v-model="birtyear"   :placeholder=user.birth_year>
+                        <p class="flex-center" v-if="clickside">Birth year</p>
+                        <input type="number" v-if="clickside" class="profile-name2" style="margin-top:8px;margin-left:5px;width:50px" v-model="user.birth_year">
                         <p v-else class="padd-text"> Age : {{user.godine}}</p>
                         <div class="radiouser flex-center" v-if="clickside"> 
                             <input  type="radio" checked="sexon" name="gender"  class="radiobutton" value="Male" v-model="sexon" ><p>Male</p>
@@ -55,7 +62,7 @@
                             </div>
                         </div>
                         <p  style="margin-bottom:10px;padding:0">Fide ID:</p>
-                        <input type="number" v-if="clickside" class="profile-name2"  v-model="fideid"   :placeholder=user.fide_id>
+                        <input type="number" v-if="clickside" class="profile-name2"  v-model="user.fide_id">
                         <p v-else style="margin-bottom:10px;padding:0 0 0 10px;color:#C8A07D"    >{{user.fide_id}}</p>    
                     </div>
                 </div>
@@ -71,8 +78,8 @@
                     <div v-if='clickside && rolecolor1'  class="middle3-1"> 
                         <div  v-for="titul1 in titule" :key="titul1.titula_uuid"  class="flex-center" >
                             <div v-if='rolecolor1 &&titul1.rola=="PLAYER"'  class="flex-center" >
-                                <input @change="selected_title" type="radio" 
-                                :value='titul1.titula_uuid'  name="titlepick" v-model='picked' 
+                                <input @change="selected_title" type="radio"  :value='titul1.titula_uuid'
+                                  name="titlepick" v-model='picked' 
                                 >
                                 <div><p class="left-check-text">{{titul1.titula_short_name}}</p></div>
                             </div>    
@@ -90,18 +97,26 @@
                     </div> 
                     <div v-else class="middle3-1"  >
                         <p style="color:#6F7381" >Title:</p>
-                        <div  v-for="titul in titule" :key="titul.titula_uuid" >
-                            <div  v-if="titul.is_checked===true" class="titles">{{titul.titula_short_name}} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->  </div>
-                            
+                        <div style="display:flex" >
+                            <div  v-if="user.titula_player!=='' && this.user.rola.indexOf('PLAYER')!==-1" class="titles">{{user.titula_player_details.titula_short_name}} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->  </div>
+                            <div  v-if="user.titula_organizer!=='' && this.user.rola.indexOf('ORGANIZER')!==-1 " class="titles">{{user.titula_organizer_details.titula_short_name}} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->  </div>
                         </div>
                     </div>  
                 </div>
                 <div v-if="clickside" class="middle3-1 ">
                     <p style="color:#6F7381">Rating:</p>
-                    <div class="ratings"><p  class="text-ratings ">Standard:</p><input type="number"  class="rating-patch"  v-model="standard"   :placeholder=user.rating_standard> </div>
-                    <div class="ratings"><p class="text-ratings">Rapid:</p><input type="number"  class="rating-patch"  v-model="rapid"   :placeholder=user.rating_rapid> </div>
-                    <div class="ratings"><p class="text-ratings">Blitz:</p><input type="number"  class="rating-patch"  v-model="blitz"   :placeholder=user.rating_blitz>  </div>
-                             
+                    <div class="ratings">
+                        <p  class="text-ratings ">Standard:</p>
+                        <input type="number"  class="rating-patch"  v-model="user.rating_standard"> 
+                    </div>
+                    <div class="ratings">
+                        <p class="text-ratings">Rapid:</p>
+                        <input type="number"  class="rating-patch"  v-model="user.rating_rapid"> 
+                    </div>
+                    <div class="ratings">
+                        <p class="text-ratings">Blitz:</p>
+                        <input type="number"  class="rating-patch"  v-model="user.rating_blitz" >  
+                    </div>    
                 </div>
                 <div v-else class="middle3-1 ">
                     <p style="color:#6F7381">Rating:</p>
@@ -119,12 +134,12 @@
                 </div>
                 <div class="middle3-1" >
                     <div style="margin-left:25px" v-if="user.rola.indexOf('PLAYER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor1}" @click="rolecol1()"  >Player</div>
-                    <div style="margin-left:35px" v-if="this.user.rola.indexOf('CLUBADMIN') !==-1" v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor2}"  @click="rolecol2()" >Club</div> 
+                    <div style="margin-left:35px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap; " v-if="this.user.rola.indexOf('CLUBADMIN') !==-1" v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor2}"  @click="rolecol2()" >Club Admin</div> 
                     <div style="margin-left:35px" v-if="this.user.rola.indexOf('ORGANIZER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor3}" @click="rolecol3()" >Organizer</div>
                     <div style="margin-left:35px" v-if="this.user.rola.indexOf('ARBITER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor4}" @click="rolecol4()" >Arbiter</div>
                     <div style="margin-left:35px" v-if="this.user.rola.indexOf('TRAINER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor5}" @click="rolecol5()" >Trainer</div>
                     <div style="margin-left:35px" v-if="this.user.rola.indexOf('OTHER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor6}" @click="rolecol6()" >Other</div>
-                   <!-- <div style="display:flex" v-if="clickside">
+                    <div style="display:flex" v-if="clickside">
                         <select v-model="selectedrole" id="select-css"  >
                             <option disabled value="">Add/Remove</option>
                             <option value="player">Player</option>
@@ -136,7 +151,7 @@
                         </select>
                         <div @click="addrole()" class="add-remove">+</div> 
                         <div @click="removerole()" class="add-remove">-</div>
-                    </div> -->
+                    </div> 
                 </div>
             </div>
 <!--END MIDDLE 4 -->
@@ -144,7 +159,7 @@
             <div id="middle5">
                 <div  class="middle5-left" > 
                     <div v-if="clickActive2">
-                        <ChessDiary     :user="user" :key="user.user_uuid"   />
+                        <ChessDiary  :user="user" :key="user.user_uuid"   />
                     </div>
                     <div v-if="clickActive1">
                         <Chesscv     :user="user" :key="user.user_uuid"   />
@@ -155,287 +170,301 @@
                 </div>
                 <div >
 <!--PLAYER PART -->      
-                <div v-if="activeplayer">
-                    <div class="middle5-right-grid">
-                        <div class="mid5-padd">
-                            <p class="middle5-text">Current club:</p>
-                            <div>
-                                <input type="text" v-if="clickside" class="inputcurplay" v-model="curclub"   :placeholder=user.current_clubs>
-                                <p v-else class="gold" style="margin-top:20px;"  >{{user.current_clubs}}</p>
-                            </div>
-                        </div>
-                        <div class="mid5-padd">
-                            <p class="middle5-text">Current league:</p>
-                            <input type="text" v-if="clickside" class="inputcurplay" v-model="curleague"   :placeholder=user.current_leagues>
-                            <p v-else class="gold" style="margin-top:20px;"  >{{user.current_leagues}}</p>
-                                           
-                        </div>
-                    </div>
-                    <div class="middle5-right-grid">
-                        <div class="mid5-padd">
-                            <div style="height:65px;display:flex">
-                                <p class="middle5-text" >Currently active:</p>
-                                <img v-if="this.user.current_playing_bool" id="plava-kugla" src="../assets/plavakugla.png" alt="">
-                            </div>
-                                <b-form-checkbox switch
-                                @change="activeplayercur"
-                                :checked="user.current_playing_bool" 
-                                style="padding-left:55px;"
-                                ></b-form-checkbox> 
-                            <div>
-                                <input type="text" style="margin-top:28px;" v-if="this.user.current_playing_bool && user.current_playing=='' || clickside " class="inputcurplay" v-model="curplay"  :placeholder=user.current_playing>
-                                <p v-else-if="this.user.current_playing_bool" class="gold" style="margin-top:30px;"   >{{user.current_playing}}</p>
-                            </div>
-                        </div>
-                        <div class="mid5-padd">
-                            <p class="middle5-text">Player form:</p>
-                            <div id="form-middle5">
-                                <img style="height:25px" src="../assets/form.svg" alt="" >
-                                    <p style="margin:0;padding:8px 0 0 0">Unknown</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="middle5-right-grid" style="height:170px;">
-                        <div class="mid5-padd" style="padding:0 0 0 10px">
-                            <p class="middle5-text" style="margin-bottom:10px">Open to new engagements</p>
-                         
-                            <div>
-                                <div  class="engage-grid stikl" :class="{stikl1:this.user.open2new_eng_club===false || this.engageclub===false}">
-                                    <p class="gold2" >Club  </p>
-                                    <img  class="engage-stikl" @click="clubinterested"  src="../assets/stikla.png" alt="" >
-                                </div>
-                                <div class="engage-grid stikl" :class="{stikl1:this.user.open2new_eng_tournament===false ||  this.engagetournament===false}" > 
-                                    <p class="gold2">Tournaments</p>
-                                    <img class="engage-stikl " @click="tourinterested" src="../assets/stikla.png" alt="" >
-                                </div> 
-                                <div class="engage-grid stikl" :class="{stikl1:this.user.open2new_eng_event===false ||  this.engageevent===false}"> 
-                                    <p class="gold2">Events</p>
-                                    <img class="engage-stikl" @click="eventinterested"  src="../assets/stikla.png" alt="" >
+                    <div v-if="activeplayer">
+                        <div class="middle5-right-grid">
+                            <div class="mid5-padd">
+                                <p class="middle5-text">Current club:</p>
+                                <div>
+                                    <input type="text" v-if="clickside" class="inputcurplay" v-model="user.current_clubs" >
+                                    <p v-else class="gold" style="margin-top:20px;"  >{{user.current_clubs}}</p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="mid5-padd">
-                            <p class="middle5-text"></p>
-                        </div>
-                    </div>
-                    <div id="middle5-right-end" @click="changed_compensation=true">
-                        <p class="middle5-text" >Desired club compensation ( € )</p>
-
-                          <v-app class="vuetify-switch"> 
-                            <v-container class="switch-container"   >  
-                                <v-card
-                                flat
-                                color="transparent"
-                                >
-                                    <v-subheader></v-subheader>
-                                        <v-card-text >
-                                            <v-row >
-                                                <v-col class="px-4"  >
-                                                <v-range-slider
-                                                    v-model="rangeclub"
-                                                    :max="max"
-                                                    :min="min"
-                                                    hide-details
-                                                    class="align-center"
-                                                  
-                                                >
-                                                    <template v-slot:prepend>
-                                                    <v-text-field
-                                                        :value='rangeclub[0]'
-                                                        class="mt-0 pt-0"
-                                                        hide-details
-                                                        single-line
-                                                        type="number"
-                                                        style="width: 0px"
-                                                        @change="$set(rangeclub, 0, $event) "
-                                                    ></v-text-field>
-                                                    </template>
-                                                    <template v-slot:append >
-                                                    <v-text-field
-                                                        :value='rangeclub[1]'
-                                                        class="mt-0 pt-0"
-                                                        hide-details
-                                                        single-line
-                                                        type="number"
-                                                        style="width: 0px"
-                                                        @change="$set(rangeclub, 1, $event)"
-                                                    ></v-text-field>
-                                                </template>
-                                                </v-range-slider>
-                                                </v-col>
-                                            </v-row>
-                                        </v-card-text>
-                                </v-card>
-                            </v-container>  
-                        </v-app> 
-                        <div class="slider"  v-if="changed_compensation"> 
-                            <p >{{rangeclub[0]}} </p><p class="slider-text"></p> <p >{{rangeclub[1]}} </p>
-                        </div> 
-                        <div class="slider" v-else >
-                            <p >{{user.comp_per_game_from}}  </p><p style="padding-left:50px" >{{user.comp_per_game_to}} </p>
-                        </div>   
-                        
-                        <button class="button-range" v-if="changed_compensation"  @click="compensation()"     type="button" >Change value</button>
-                    </div>
-                    
-                </div>
-<!-- END PLAYER PART  --> 
- <!-- CLUB PART  -->            
-                <div  v-if="activeclub">
-                    <div class="middle5-right-grid">
-                        <div class="mid5-padd">
-                            <p class="middle5-text">My club name:</p>
-                            <div>
-                                <input type="text" v-if="clickside" class="inputcurplay" v-model="curclubname1"   :placeholder=user.club_name>
-                                <p v-else class="gold" style="margin-top:20px;"  >{{user.club_name}}</p>
+                            <div class="mid5-padd">
+                                <p class="middle5-text">Current league:</p>
+                                <input type="text" v-if="clickside" class="inputcurplay" v-model="user.current_leagues" >
+                                <p v-else class="gold" style="margin-top:20px;"  >{{user.current_leagues}}</p>
+                                            
                             </div>
                         </div>
-                        <div class="mid5-padd">
-                            <p class="middle5-text">Current league:</p>
-                            <input type="text" v-if="clickside" class="inputcurplay" v-model="curleagueclub1"   :placeholder=user.club_current_league>
-                            <p v-else class="gold" style="margin-top:20px;"  >{{user.club_current_league}}</p>
-                        </div>
-                    </div>
-                    <div class="middle5-right-grid">
-                        <div class="mid5-padd">
-                            <div style="height:65px;display:flex">
-                                <p class="middle5-text">My team is currently active:</p>
-                                <img v-if="switch3" id="plava-kugla" src="../assets/plavakugla.png" alt="">
-                            </div>
-                           
+                        <div class="middle5-right-grid">
+                            <div class="mid5-padd">
+                                <div style="height:65px;display:flex">
+                                    <p class="middle5-text" >Currently active:</p>
+                                    <img v-if="this.user.current_playing_bool" id="plava-kugla" src="../assets/plavakugla.png" alt="">
+                                </div>
                                     <b-form-checkbox switch
-                                    @change="activeclubcur"
-                                    :checked="user.club_current_playing_bool" 
+                                    @change="activeplayercur"
+                                    :checked="user.current_playing_bool" 
                                     style="padding-left:55px;"
                                     ></b-form-checkbox> 
-                           <!--  <v-app class="vuetify-switch"> 
+                                <div>
+                                    <input type="text" style="margin-top:28px;font-size:12px" v-if="this.user.current_playing_bool && user.current_playing=='' || clickside " class="inputcurplay" v-model="user.current_playing">
+                                    <p v-else-if="this.user.current_playing_bool" class="gold" style="margin-top:16px;font-size:12px;"   >{{user.current_playing}}</p>
+                                </div>
+                            </div>
+                            <div class="mid5-padd">
+                                <p class="middle5-text">Player form:</p>
+                                <div id="form-middle5">
+                                    <img style="height:25px" src="../assets/form.svg" alt="" >
+                                        <p style="margin:0;padding:8px 0 0 0">Unknown</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="middle5-right-grid" style="height:170px;">
+                            <div class="mid5-padd" style="padding:0 0 0 10px">
+                                <p class="middle5-text" style="margin-bottom:10px">Open to new engagements</p>
+                            
+                                <div>
+                                    <div  class="engage-grid stikl" :class="{stikl1:this.user.open2new_eng_club===false || this.engageclub===false}">
+                                        <p class="gold2" >Club  </p>
+                                        <img  class="engage-stikl" @click="clubinterested"  src="../assets/stikla.png" alt="" >
+                                    </div>
+                                    <div class="engage-grid stikl" :class="{stikl1:this.user.open2new_eng_tournament===false ||  this.engagetournament===false}" > 
+                                        <p class="gold2">Tournaments</p>
+                                        <img class="engage-stikl " @click="tourinterested" src="../assets/stikla.png" alt="" >
+                                    </div> 
+                                    <div class="engage-grid stikl" :class="{stikl1:this.user.open2new_eng_event===false ||  this.engageevent===false}"> 
+                                        <p class="gold2">Events</p>
+                                        <img class="engage-stikl" @click="eventinterested"  src="../assets/stikla.png" alt="" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mid5-padd">
+                                <p class="middle5-text"></p>
+                            </div>
+                        </div>
+                        <div id="middle5-right-end">
+                            <p class="middle5-text" >Desired club compensation ( € )</p>
+                            <div @click="changed_compensation=true">
+                            <v-app class="vuetify-switch"  > 
                                 <v-container class="switch-container"   >  
-                                    <v-switch 
-                                    v-model="switch3"
-                                    color="#C8A07D"
-                                    ></v-switch>
-                                </v-container>  
-                            </v-app> -->
-                            <div>
-                                <input type="text" style="margin-top:42px;" v-if="user.club_current_playing_bool && user.club_current_playing=='' || clickside " class="inputcurplay" v-model="curplayclub1"  :placeholder=user.club_current_playing>
-                                <p v-if="user.club_current_playing_bool" class="gold" style="margin-top:35px;"   >{{user.club_current_playing}}</p>
-                            </div>
-                        </div>
-                        <div class="mid5-padd">
-                            <p class="middle5-text" style="padding-bottom:30px;">Looking for new player:</p>
-                            <div class="switch-style">
-                                <b-form-checkbox switch
-                                @change="lookpla"
-                                :checked="user.club_looking_for_new_player"
-                                ></b-form-checkbox>                  
-                            </div>
-                        </div>
-                    </div>
-                    <div class="middle5-right-grid">
-                        <div class="mid5-padd flex-center">
-                            <div @click="createevent=!createevent" class="borderbutton flex-center">
-                                <img src="../assets/createevent2.png" alt="">
-                                <p>Create an event</p>
-                            </div>
-                        </div>    
-                        <div class="mid5-padd flex-center">
-                           
-                        </div>
-                    </div>
-                    <div class="middle5-right-grid" >
-                        <div class="mid5-padd flex-center" style="height:170px">
-                             <div class="borderbutton flex-center">
-                                <img src="../assets/myclubpage.png" alt="">
-                                <p>My club page</p>
-                             </div>
-                        </div>
-                        <div class="mid5-padd flex-center">
-                            <div class="borderbutton flex-center">
-                                 <p>Create Club page</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-<!--END CLUB PART  -->
-<!-- ORGANIZER PART  -->            
-                <div  v-if="activeorg">
-                    <div id="middle5-right-startorg">
-                        <p class="middle5-text">My Event is currently active:</p>
-                         <div class="mid5-padd">
-                            <div style="height:65px;display:flex">
-                                <img v-if="switch5" id="plava-kugla2" src="../assets/plavakugla.png" alt="">
-                            </div>
-                             <v-app class="vuetify-switch2"> 
-                                 <v-container class="switch-container"   >
-                                    <v-switch 
-                                    v-model="switch5"
-                                    color="#C8A07D"
-                                    ></v-switch>
+                                    <v-card
+                                    flat
+                                    color="transparent"
+                                    >
+                                        <v-subheader></v-subheader>
+                                            <v-card-text >
+                                                <v-row >
+                                                    <v-col class="px-4"  >
+                                                    <v-range-slider
+                                                        v-model="rangeclub"
+                                                        :max="max"
+                                                        :min="min"
+                                                        hide-details
+                                                        class="align-center"
+                                                    
+                                                    >
+                                                        <template v-slot:prepend>
+                                                        <v-text-field
+                                                            :value='rangeclub[0]'
+                                                            class="mt-0 pt-0"
+                                                            hide-details
+                                                            single-line
+                                                            type="number"
+                                                            style="width: 0px"
+                                                            @change="$set(rangeclub, 0, $event) "
+                                                        ></v-text-field>
+                                                        </template>
+                                                        <template v-slot:append >
+                                                        <v-text-field
+                                                            :value='rangeclub[1]'
+                                                            class="mt-0 pt-0"
+                                                            hide-details
+                                                            single-line
+                                                            type="number"
+                                                            style="width: 0px"
+                                                            @change="$set(rangeclub, 1, $event)"
+                                                        ></v-text-field>
+                                                    </template>
+                                                    </v-range-slider>
+                                                    </v-col>
+                                                </v-row>
+                                            </v-card-text>
+                                    </v-card>
                                 </v-container>  
                             </v-app>
-                            <div>
-                                <input type="text" style="margin-top:42px;" v-if="clickside " class="inputcurplay" v-model="curevent"  :placeholder=user.organizer_current_event>
-                                <p v-else-if="switch5" class="gold" style="margin-top:35px;padding-left:6px"   >{{user.organizer_current_event}}</p>
+                            </div> 
+                            <div class="slider"  v-if="changed_compensation"> 
+                                <p >{{rangeclub[0]}} </p><p class="slider-text"></p> <p >{{rangeclub[1]}} </p>
+                            </div> 
+                            <div class="slider" v-else >
+                                <p >{{user.comp_per_game_from}}  </p><p style="padding-left:50px" >{{user.comp_per_game_to}} </p>
+                            </div>   
+                            <div v-if="changed_compensation" @click="changed_compensation=!changed_compensation">
+                                <button class="button-range"   @click="compensation"     type="button" >Save</button>
                             </div>
                         </div>
+                        
                     </div>
-                    <div class="middle5-right-grid">
-                        <div class="mid5-padd flex-center" >
-                            <p class="middle5-text" >Looking for new participants?"</p>
-                            <div>
+    <!-- END PLAYER PART  --> 
+    <!-- CLUB PART  -->            
+                    <div  v-if="activeclub">
+                        <div class="middle5-right-grid">
+                            <div class="mid5-padd">
+                                <p class="middle5-text">My club name:</p>
+                                <div>
+                                    <input type="text" v-if="clickside" class="inputcurplay" v-model="user.club_name"   >
+                                    <p v-else class="gold" style="margin-top:20px;"  >{{user.club_name}}</p>
+                                </div>
+                            </div>
+                            <div class="mid5-padd">
+                                <p class="middle5-text">Current league:</p>
+                                <input type="text" v-if="clickside" class="inputcurplay" v-model="user.club_current_league"   >
+                                <p v-else class="gold" style="margin-top:20px;"  >{{user.club_current_league}}</p>
+                            </div>
+                        </div>
+                        <div class="middle5-right-grid">
+                            <div class="mid5-padd">
+                                <div style="height:65px;display:flex">
+                                    <p class="middle5-text">My team is currently active:</p>
+                                    <img v-if="switch3" id="plava-kugla" src="../assets/plavakugla.png" alt="">
+                                </div>
+                            
+                                        <b-form-checkbox switch
+                                        @change="activeclubcur"
+                                        :checked="user.club_current_playing_bool" 
+                                        style="padding-left:55px;"
+                                        ></b-form-checkbox> 
+                            <!--  <v-app class="vuetify-switch"> 
+                                    <v-container class="switch-container"   >  
+                                        <v-switch 
+                                        v-model="switch3"
+                                        color="#C8A07D"
+                                        ></v-switch>
+                                    </v-container>  
+                                </v-app> -->
+                                <div>
+                                    <input type="text" style="margin-top:42px;" v-if="user.club_current_playing_bool && user.club_current_playing=='' || clickside " class="inputcurplay" v-model="user.club_current_playing" >
+                                    <p v-if="user.club_current_playing_bool" class="gold" style="margin-top:25px;"   >{{user.club_current_playing}}</p>
+                                </div>
+                            </div>
+                            <div class="mid5-padd">
+                                <p class="middle5-text" style="padding-bottom:30px;">Looking for new player:</p>
                                 <div class="switch-style">
                                     <b-form-checkbox switch
-                                    @change="lookpart"
-                                    :checked="user.organizer_looking_for_new_participants"
+                                    @change="lookpla"
+                                    :checked="user.club_looking_for_new_player"
                                     ></b-form-checkbox>                  
                                 </div>
                             </div>
                         </div>
-                        <div class="mid5-padd flex-center">
-                            <div class="borderbutton flex-center">
-                                <img src="../assets/createevent2.png" alt="">
-                                <p>Create an event</p>
+                        <div class="middle5-right-grid">
+                            <div class="mid5-padd flex-center">
+                                <div  class="borderbutton flex-center">
+                                    <img src="../assets/createevent2.png" alt="">
+                                    <p>Create an event</p>
+                                </div>
+                            </div>    
+                            <div class="mid5-padd flex-center">
+                            
                             </div>
                         </div>
-              <!--      <div class="mid5-padd flex-center">
-                            <div class="borderbutton flex-center">
-                                <p style="text-align:center">Interested in this Organizer</p>
-                            </div>               
-                        </div>    -->
-                    </div>
-                     <div id="middle5-right-startorg" >
-                            <div class="mid5-padd events" >
-                                <div style="height:65px;">
-                                    <p class="middle5-text" >My events:</p>
-                                    <div class="list-events">
-                                        <p class="gold-event" >Event name:</p>
-                                        <p></p>
-                                    </div>
-                                    <div class="list-events">
-                                            <p class="gold-event" >Date:</p>
-                                            <p></p>
-                                    </div>
-                                </div>
-                                <div id="list-event">
-                                    <div class="dropdown">
-                                        <button class="dropbtn">Events</button>
-                                        <div class="dropdown-content" >
-                                            <p >No events yet</p>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div>
-                                    <input type="text" style="margin-top:42px;" v-if="switch1 && user.current_playing=='' || clickside " class="inputcurplay" v-model="curplay"  :placeholder=user.current_playing>
-                                    <p v-else-if="switch1" class="gold" style="margin-top:35px;"   >{{user.current_playing}}</p>
+                        <div class="middle5-right-grid" >
+                            <div class="mid5-padd flex-center" style="height:170px">
+                                <div class="borderbutton flex-center">
+                                    <img src="../assets/myclubpage.png" alt="">
+                                    <p>My club page</p>
                                 </div>
                             </div>
-                       
+                            <div class="mid5-padd flex-center">
+                                <div class="borderbutton flex-center">
+                                    <p>Create Club page</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                   
+    <!--END CLUB PART  -->
+    <!-- ORGANIZER PART  -->            
+                    <div  v-if="activeorg">
+                        <div id="middle5-right-startorg">
+                            <p class="middle5-text">My Event is currently active:</p>
+                            <div class="mid5-padd">
+                                <div style="height:65px;display:flex">
+                                    <img v-if="switch5" id="plava-kugla2" src="../assets/plavakugla.png" alt="">
+                                </div>
+                                <v-app class="vuetify-switch2"> 
+                                    <v-container class="switch-container"   >
+                                        <v-switch 
+                                        value=switch5
+                                        color="#C8A07D"
+                                        ></v-switch>
+                                    </v-container>  
+                                </v-app>
+                                <div>
+                                    <input type="text" style="margin-top:42px;" v-if="clickside " class="inputcurplay" v-model="user.organizer_current_event">
+                                    <p v-else-if="switch5" class="gold" style="margin-top:35px;padding-left:6px"   >{{user.organizer_current_event.event_name}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="middle5-right-grid">
+                            <div class="mid5-padd flex-center" >
+                                <p class="middle5-text" >Looking for new participants?"</p>
+                                <div>
+                                    <div class="switch-style">
+                                        <b-form-checkbox switch
+                                        @change="lookpart"
+                                        :checked="user.organizer_looking_for_new_participants"
+                                        ></b-form-checkbox>                  
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mid5-padd flex-center">
+                                <div @click="newevent=!newevent" class="borderbutton flex-center">
+                                    <img src="../assets/createevent2.png" alt="">
+                                    <p>Create an event</p>
+                                </div>
+                            </div>
+                <!--      <div class="mid5-padd flex-center">
+                                <div class="borderbutton flex-center">
+                                    <p style="text-align:center">Interested in this Organizer</p>
+                                </div>               
+                            </div>    -->
+                        </div>
+                        <div id="middle5-right-startorg" >
+                                <div v-if="newevent" style="display:flex">
+                                    <div style="height:65px;">
+                                        <p class="middle5-text" >My new event:</p>
+                                        <div class="list-events">
+                                            <p class="gold-event" >Enter name:</p>
+                                            <p><input type="text"  class="profile-name2 line2" v-model="new_event_name"></p>
+                                        </div>
+                                        <div class="list-events">
+                                                <p class="gold-event" >Date from:</p>
+                                                <p><input type="date"  class="profile-name2 line2" v-model="new_event_from"></p>
+                                        </div>
+                                        <div class="list-events">
+                                                <p class="gold-event" >Date to:</p>
+                                                <p><input type="date"  class="profile-name2 line2" v-model="new_event_to"></p>
+                                        </div>
+                                        
+                                       
+                                    </div>
+                                    <div>
+                                        <button @click="post_event" class="middle2-buttons" style="margin-left:40%"  type="submit">Create</button>
+                                    </div>
+                                </div>
+                                <div v-else class="mid5-padd-extensive" style="background-color: #202122;" >
+                                    <p class="middle5-text" >My events:</p>
+                                    <div style="display:flex"  v-for="(event,index) in events" :key="event.event_uuid">
+                                            <p style="padding-right:5px;">{{index+1}}. </p>   <p class="gold-event"> {{event.event_name}}</p> 
+                                      
+                                    </div>  
+                                </div>
+                        
+                        </div>
+                        
+                    </div>
+                    <div  v-if="activetre" style="opacity:0.5">
+                        <p class="rotate">Coming soon!</p>
+                         <img style="width:100%" src="../assets/coach1.jpg" alt="">  
+                    </div>
+                    <div  v-if="activearb" style="opacity:0.5">
+                        <p class="rotate">Coming soon!</p>
+                        <img style="width:100%" src="../assets/arbiter.jpg" alt=""> 
+                    </div>
                     
-                </div>
+               
+
                 </div>
             </div>
         </div>    
@@ -466,28 +495,13 @@ export default {
          isActive:true,
          clickActive1:true,
          clickActive2:'',
-         clickActive3:'', 
-         nl:"",
-         nf:"",      
+         clickActive3:'',    
          use:'',
          isActive2: true,
          clickside:false,
-         rapid:'',
-         standard:'',
-         blitz:'',
-         curclub:"",
-         curleague:"",
-         curplay:"",
-         curevent:"",
-         town:"",
-         fideid:"",
          engageclub:function(){return this.user.open2new_eng_club},
          engageevent:function(){return this.user.open2new_eng_event},
          engagetournament:function(){return this.user.open2new_eng_tournament},
-         curclubname1:'',
-         curleagueclub1:'',
-         curplayclub1:'',
-         birtyear:'',
          about:'',
          flags:[],
          fla:'',
@@ -506,9 +520,12 @@ export default {
          activeplayer:true,
          activeclub:false,
          activeorg:false,
+         activearb:false,
+         activetre:false,
          switch1:'',
          switch2:'',
          titule:[],
+         titul1:{titula_uuid:''},
          min: 0,
          max: 5000,
          user:{rola:[],
@@ -525,28 +542,49 @@ export default {
                current_playing_bool:'',
                club_current_playing_bool:'',
                organizer_looking_for_new_participants:'',
-          
+               name_first:'',
+               name_last:'',
+               city:'',
+               birth_year:'',
+               fide_id:'',
+               rating_standard:'',
+               rating_blitz:'',
+               rating_rapid:'',
+               current_clubs:'',
+               current_leagues:'',
+               current_playing:'',
+               club_name:'',
+               club_current_playing:'',
+               club_current_league:'',
+               organizer_current_event:{event_name:''},
+
          },
          rangeclub:[350,2000],
          sexon:'',
          picked:'',
          pickedorg:'',
          switch3:'',
-         switch5:'',
+         switch5:null,
          photoinfo:'',
          changed_compensation:false,
-         createevent:''
-         
-         
-         
-
+         createevent:'',
+         newevent:false,
+         new_event_name:'',
+         new_event_description:'',
+         new_event_from:'',
+         new_event_to:'',
+         events:[],
+       //  event:[],
+         event_list:false
       }
 },
    
 //------------------------------MOUNTED-------------------------------//
 
 mounted(){
-
+  if(this.user.organizer_current_event.event_name!=null){
+      this.switch5=true
+  }
   fetch('https://app.outpostchess.com/api/v2/current_user_info', {
   method:'GET',
   headers: {
@@ -578,8 +616,19 @@ fetch('https://app.outpostchess.com/api/v2/titule', {
 )
 .then(response => response.json())
 .then(data => this.titule=data)
-.then(data => console.log('titule',data))
-             
+//.then(data => console.log('titule',data))
+  
+  fetch('https://app.outpostchess.com/api/v2/organiser_events', {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json',
+                "Authorization":`Bearer ${localStorage.getItem('token')}`
+                },		
+               
+            })
+        .then(response => response.json())
+        .then(data => this.events=data)
+        .then(data => console.log('events',data))       
+            
 },
 
 //--------------UPDATED----------------------//
@@ -674,6 +723,7 @@ methods:{
       },
 
       compensation:function(){
+       console.log(this.changed_compensation)
        fetch('https://app.outpostchess.com/api/v2/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
@@ -686,7 +736,8 @@ methods:{
           },
                )   
            .then(response => response.json())
-           .then(data => console.log(data))    
+           .then(data => console.log(data))
+             
          },        
    
  //   selectedRole: function(titule){
@@ -743,173 +794,97 @@ methods:{
       },
 
    cvdairycal1: function(){
-      this.clickActive1=true;
-      this.clickActive2=false;
-      this.clickActive3=false;
+      this.clickActive1=true; this.clickActive2=false;  this.clickActive3=false;
       
     } ,
      cvdairycal2: function(){
-      this.clickActive1=false;
-      this.clickActive2=true;
-      this.clickActive3=false;
+      this.clickActive1=false;  this.clickActive2=true;  this.clickActive3=false;
     } ,
     cvdairycal3: function(){
-      this.clickActive1=false;
-      this.clickActive2=false;
-      this.clickActive3=true;
+      this.clickActive1=false;this.clickActive2=false;  this.clickActive3=true;
     } ,
     rolecol1:function(){
-       
-      this.activeplayer=true;  
-      this.activeclub=false;
-      this.activeorg=false;
-      this.rolecolor1=true;
-      this.rolecolor2=false;
-      this.rolecolor3=false; 
-      this.rolecolor4=false;  
-      this.rolecolor5=false;  
-      this.rolecolor6=false;   
+      this.activeplayer=true;this.activeclub=false; this.activeorg=false; 
+      this.activetre=false;  this.activearb=false;
+      this.rolecolor1=true; this.rolecolor2=false;this.rolecolor3=false;
+      this.rolecolor4=false;this.rolecolor5=false;this.rolecolor6=false;   
     },
     rolecol2:function(){
-      this.activeclub=true;
-      this.activeplayer=false;   
-      this.activeorg=false; 
-      this.rolecolor1=false;
-      this.rolecolor2=true;
-      this.rolecolor3=false; 
-      this.rolecolor4=false;  
-      this.rolecolor5=false;  
-      this.rolecolor6=false;   
+      this.activeclub=true; this.activeplayer=false;this.activeorg=false;
+      this.activetre=false;  this.activearb=false;
+      this.rolecolor1=false; this.rolecolor2=true; this.rolecolor3=false; 
+      this.rolecolor4=false;   this.rolecolor5=false; this.rolecolor6=false;   
     },
     rolecol3:function(){
-      this.rolecolor1=false;
-      this.rolecolor2=false;
-      this.rolecolor3=true; 
-      this.rolecolor4=false;  
-      this.rolecolor5=false;  
-      this.rolecolor6=false;  
-      this.activeorg=true; 
-      this.activeplayer=false; 
-      this.activeclub=false;
+      this.rolecolor1=false;  this.rolecolor2=false; this.rolecolor3=true;  
+      this.rolecolor4=false;  this.rolecolor5=false; this.rolecolor6=false;  
+      this.activeorg=true;   this.activeplayer=false; this.activeclub=false; 
+      this.activetre=false; this.activearb=false;
     },
     rolecol4:function(){
-      this.rolecolor1=false;
-      this.rolecolor2=false;
-      this.rolecolor3=false; 
-      this.rolecolor4=true;  
-      this.rolecolor5=false;  
-      this.rolecolor6=false;   
+      this.activeorg=false;   this.activeplayer=false; this.activeclub=false;  
+      this.activetre=false;    this.activearb=true;
+      this.rolecolor1=false; this.rolecolor2=false; this.rolecolor3=false;   
+      this.rolecolor4=true; this.rolecolor5=false; this.rolecolor6=false;   
     },
     rolecol5:function(){
-      this.rolecolor1=false;
-      this.rolecolor2=false;
-      this.rolecolor3=false; 
-      this.rolecolor4=false;  
-      this.rolecolor5=true;  
-      this.rolecolor6=false;   
+      this.activeorg=false;this.activeplayer=false;   this.activeclub=false;  
+      this.activetre=true;  this.activearb=false;
+      this.rolecolor1=false;  this.rolecolor2=false;  this.rolecolor3=false;  
+      this.rolecolor4=false; this.rolecolor5=true;  this.rolecolor6=false;   
     },
     rolecol6:function(){
-      this.rolecolor1=false;
-      this.rolecolor2=false;
-      this.rolecolor3=false; 
-      this.rolecolor4=false;  
-      this.rolecolor5=false;  
-      this.rolecolor6=true;   
+      this.rolecolor1=false; this.rolecolor2=false;   this.rolecolor3=false;   
+      this.rolecolor4=false;  this.rolecolor5=false;   this.rolecolor6=true;   
       
     },
  //--------------USER PATCH----------------------// 
 
 selected_title:function(){
-     /*    switch(this.picked){
-              case this.picked=='WCM':
-               this.WCM=true
-               break;
-               case this.picked=='CM':
-               this.CM=true
-               break; case this.picked=='WFM':
-               this.WFM=true
-               break;
-                case this.picked=='FM':
-               this.FM=true
-               break;
-                case this.picked=='WIM':
-               this.WIM=true
-               break;
-                case this.picked=='IM':
-               this.IM=true
-               break;
-               case this.picked=='GM':
-               this.GM=true
-               break;
-               case this.picked=='WGM':
-               this.WGM=true
-               break;
-               case this.picked=='FIO':
-               this.FIO=true
-               break;
-            }*/
-       /*     if( this.picked=='WCM'){this.WCM=true}
-            if(this.picked=='CM'){this.CM=true}
-            if(this.picked=='WFM'){this.WFM=true}
-            if(this.picked=='FM'){this.FM=true}
-            if(this.picked=='WIM'){this.WIM=true}
-            if(this.picked=='IM'){this.IM=true}
-            if(this.picked=='GM'){this.GM=true}
-            if(this.picked=='WGM'){this.WGM=true}
-            if(this.pickedorg=='FIO'){this.FIO=true}
-            if(this.user.titule_details[3].is_checked && this.rolecolor3==false){ this.FIO=true}
-          // if(this.user.titule_details[3].is_checked && this.rolecolor3==true && this.pickedorg==false){ this.FIO=false}          
-           //  if(this.WCM==false && this.CM==false && this.WFM==false && this.FM==false &&
-           //    this.WIM==false && this.IM==false &&this.GM==false && this.WGM==false ){   
-             //   if(this.user.titule_details[4].is_checked==true){ this.WCM=true}
-             //   else if(this.user.titule_details[5].is_checked==true){ this.CM=true } 
-              //  else if(this.user.titule_details[6].is_checked==true){ this.WFM=true}
-             //   else if(this.user.titule_details[7].is_checked==true){ this.FM=true}
-            /*    else if(this.user.titule_details[8].is_checked==true){ this.WIM=true}
-                else if(this.user.titule_details[9].is_checked==true){ this.IM=true}
-                else if(this.user.titule_details[10].is_checked==true){this.GM=true}
-                else if(this.user.titule_details[11].is_checked==true){this.WGM=true}       */
-        // } 
+   
 },
 //USER PATCH
 userpatch:function(){
-        
-          console.log(this.picked)
+          this.clickside=false;
           fetch('https://app.outpostchess.com/api/v2/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify( { 
-              name_last:this.nl ,
-              name_first:this.nf,
-              fide_id:this.fideid,  
-              rating_standard:this.standard, 
-              rating_rapid:this.rapid, 
-              rating_blitz:this.blitz,  
-              current_clubs:this.curclub,
-              current_playing:this.curplay,
-              current_leagues:this.curleague,  
-              city:this.town,
+              name_last:this.user.name_last ,
+              name_first:this.user.name_first,
+              fide_id:this.user.fide_id,  
+              rating_standard:this.user.rating_standard, 
+              rating_rapid:this.user.rating_rapid, 
+              rating_blitz:this.user.rating_blitz,  
+              current_clubs:this.user.current_clubs,
+              current_playing:this.user.current_playing,
+              current_leagues:this.user.current_leagues,  
+              city:this.user.city,
               federation:this.selected,
               sex:this.sexon,
-              birth_year:this.birtyear,
-              club_name:this.curclubname1,
-              club_current_league:this.curleagueclub1,
-              club_current_playing:this.curplayclub1,
-              about_me:this.about,
-              organizer_current_event:this.curevent,
-      //        titula_player_details: [{
-   // titula_uuid: "91f90e7e-1ec7-11ec-a733-0d4e300cf032",
-    
-      //        }],
-           
+              birth_year:this.user.birth_year,
+              club_name:this.user.club_name,
+              club_current_league:this.user.club_current_league,
+              club_current_playing:this.user.club_current_playing,
+              organizer_current_event:this.user.organizer_current_event,
+              titula_player:this.picked,
+              titula_player_details: [{
+              titula_uuid: this.picked,
+              }],
+              titula_organizer:this.pickedorg,
+              titula_organiyer_details: [{
+              titula_uuid: this.pickedorg,
+              }],
             })
         },
                )   
             .then(response => response.json())
             .then(data => console.log(data)) 
-            .then(this.$router.go());
+             if(this.picked!=='' || this.pickedorg!=='' || this.photoinfo!==''){
+                     this.$router.go()
+                     }
             },
 
 //END USER PATCH
@@ -967,10 +942,25 @@ removerole:function(){
             }) 
             //  .then(this.$router.go());
     },
+post_event:function(){
+    this.newevent=false;
+    fetch('https://app.outpostchess.com/api/v2/organiser_event', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json',
+                "Authorization":`Bearer ${localStorage.getItem('token')}`
+                },		
+                body: JSON.stringify( { 
+                event_name:this.new_event_name,
+                event_date_from:this.new_event_from,
+                event_date_to:this.new_event_to,
+                })
+            })
+            .catch(error => {
+            console.error(error)
+            }) 
+}
    
-  //fghfhfghfg
-  }
-
+}
 }
  </script>
 <style scoped>
@@ -989,7 +979,7 @@ hr{
 .right-profile{
     background-color:  #171819;
     display:grid;
-    grid-template-columns: 8% 84% 8% 0%;
+    grid-template-columns: 8% 84% 8%;
     background-color: #1B1C1D;
 }
 
@@ -1082,8 +1072,9 @@ hr{
    margin-bottom:15px;
    border-bottom: 1px solid #5C5E64;
    margin-right: 5px;
-   padding-left:10px;
-   font-size:14px
+   padding-left:5px;
+   font-size:14px;
+   width:100px
 }
 .rating-patch{
    color: #FFFFFF;
@@ -1267,10 +1258,6 @@ height: 80px;
  .mid5-padd{
      padding:10px;
      }
-.events{
-    display:grid;
-    grid-template-columns: 70% 30% ;
-}
 #list-event{
    padding-left:5%;
    padding-top:15px;
@@ -1458,9 +1445,16 @@ input::-webkit-inner-spin-button {
 .slider>p{
     text-align: center;
 }
+/*ARBITER*/
+.rotate{transform: rotate(-45deg);
+position:relative;
+top:300px;
+    font-size:26px;
+    font-weight: 600;
+    letter-spacing: 15px;}
 /*ORGANIZER*/
 #middle5-right-startorg{
-    height: 205px;
+    min-height: 205px;
     background-color: #202122;
     margin-bottom:10px;
     text-align:left;
@@ -1472,6 +1466,10 @@ input::-webkit-inner-spin-button {
     padding-left:80%;
    
 }
+.line2{
+    width:150px;
+}
+
 #plava-kugla{
    position: relative;
    left:10%
@@ -1493,46 +1491,6 @@ font-size:12px
    color:#C8A07D;
    padding-right:4px;
 }
-
-/*DROPDOWN */
-.dropbtn {
-  background-color: #202122;
-  color: white;
-  padding: 8px 20px;
-  font-size: 14px;
-  border: 0.5px solid #5C5E64;
-  box-sizing: border-box;
-  margin-left:20px;
-  margin-top:10px;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #202122;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content p {
-  color: white;
-  padding: 10px 10px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content p:hover {background-color: #5C5E64;}
-
-.dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .dropbtn {opacity:0.3}
-
 
 
 
@@ -1603,7 +1561,7 @@ input:checked + .slider1:before {
   width: 110px;
   height: 32px;
   margin-right: 15px;
-  margin-top:45px;
+  margin-top:50px;
   
   
 }
@@ -1618,8 +1576,13 @@ cursor: pointer;
 
 
 
-@media only screen and (max-width: 1500px) and (min-width: 500px) {
+@media only screen and (max-width: 1500px)  {
 
+.right-profile{
+    display:grid;
+    grid-template-columns: 3% 94% 3%;
+ 
+}
 .profile{
     display:grid;
     grid-template-columns: 200px auto;

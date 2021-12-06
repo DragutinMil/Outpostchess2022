@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <p id="rotate">Coming soon</p>
+    <p id="rotate2">Coming soon</p>
     <img id="calendarpic" src="@/assets/chess_diary2.png" alt="">
     
   </div>
@@ -24,16 +24,17 @@ export default {
 
 
 <style scoped>
-  #rotate{
+  #rotate2{
+    position:relative;
     transform: rotate(-45deg);
     font-size:26px;
     font-weight: 600;
     letter-spacing: 15px;
-    position: absolute;
-    bottom:200px;
-    left:520px;
+    top:300px;
     opacity: 0.8;
     color:#FFFFFF;
+    
+
 }
 #calendarpic{
   opacity: 0.8;

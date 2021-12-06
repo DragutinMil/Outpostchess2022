@@ -11,7 +11,7 @@
                     </div>
                     <div class="side-options">
                           <div class="flex-center"><img src="../assets/mail_outline_24px.png" alt=""></div>
-                           <p class="left-sidetext">Inbox</p>
+                          <router-link to="../chatroom" style="color:#C7C9D0">  <p class="left-sidetext">Inbox</p></router-link>
                     </div>
                     <div class="side-options"> 
                              <div class="flex-center"><img src="../assets/Vector5.png" alt=""></div>

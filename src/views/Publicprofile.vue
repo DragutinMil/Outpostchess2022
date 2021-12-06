@@ -46,10 +46,13 @@
                       
                     <div  class="middle3-1"  >
                         <p style="color:#6F7381" >Title:</p>
-                        <div  v-for="titul in user.titule_details" :key="titul.titula_uuid" >
-                            <div  v-if="titul.is_checked===true" class="titles">{{titul.titula_short_name}} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->  </div>   
+                        <div style="display:flex" >
+                            <div  v-if="user.titula_player!==null && this.user.rola.indexOf('PLAYER')!==-1" class="titles">{{user.titula_player_details.titula_short_name}} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->  </div>
+                           <div v-if="user.titula_organizer!==null && this.user.rola.indexOf('ORGANIZER')!==-1 " >
+                            <div  class="titles">{{user.titula_organizer_details.titula_short_name}} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->  </div>
+                           </div>
                         </div>
-                    </div>  
+                    </div> 
                 </div>
                 <div  class="middle3-1 ">
                     <p style="color:#6F7381">Rating:</p>
@@ -67,7 +70,7 @@
                 </div>
                 <div class="middle3-1" >
                     <div style="margin-left:25px" v-if="user.rola.indexOf('PLAYER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor1}" @click="rolecol1()"  >Player</div>
-                    <div style="margin-left:35px" v-if="this.user.rola.indexOf('CLUBADMIN') !==-1" v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor2}"  @click="rolecol2()" >Club</div> 
+                    <div style="margin-left:35px" v-if="this.user.rola.indexOf('CLUBADMIN') !==-1" v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor2}"  @click="rolecol2()" >Club Admin</div> 
                     <div style="margin-left:35px" v-if="this.user.rola.indexOf('ORGANIZER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor3}" @click="rolecol3()" >Organizer</div>
                     <div style="margin-left:35px" v-if="this.user.rola.indexOf('ARBITER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor4}" @click="rolecol4()" >Arbiter</div>
                     <div style="margin-left:35px" v-if="this.user.rola.indexOf('TRAINER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor5}" @click="rolecol5()" >Trainer</div>
@@ -310,35 +313,16 @@
                             </div>
                         </div>
                         <div class="mid5-padd flex-center">
-                            <div class="borderbutton flex-center">
-                                <img src="../assets/createevent2.png" alt="">
-                                <p>Create an event</p>
-                            </div>
+                           
                         </div>
              
                     </div>
-                     <div id="middle5-right-startorg" >
-                            <div class="mid5-padd events" >
-                                <div style="height:65px;">
-                                    <p class="middle5-text" >My events:</p>
-                                    <div class="list-events">
-                                        <p class="gold-event" >Event name:</p>
-                                        <p></p>
-                                    </div>
-                                    <div class="list-events">
-                                            <p class="gold-event" >Date:</p>
-                                            <p></p>
-                                    </div>
-                                </div>
-                                <div id="list-event">
-                                    <div class="dropdown">
-                                        <button class="dropbtn">Events</button>
-                                        <div class="dropdown-content" >
-                                            <p >Event1</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                     <div  class="mid5-padd" >
+                                <p class="middle5-text" >My events:</p>
+                                <div style="display:flex"  v-for="(event,index) in events" :key="event.event_uuid">
+                                <p style="padding-right:5px;">{{index+1}}. </p>   <p class="gold-event"> {{event.event_name}}</p> 
+                                      
+                            </div>  
                     </div>
                 </div>
                 </div>
@@ -435,7 +419,8 @@ export default {
          switch3:'',
          switch5:'',
          createevent:'',
-         idt:''
+         idt:'',
+         
       }
 },
    
@@ -444,7 +429,18 @@ export default {
 
 
 mounted(){
-  
+   fetch('https://app.outpostchess.com/api/v2/organiser_events', {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json',
+                "Authorization":`Bearer ${localStorage.getItem('token')}`
+                },		
+               
+            })
+        .then(response => response.json())
+        .then(data => this.events=data)
+        .then(data => console.log('events',data))       
+            
+
   fetch( `https://app.outpostchess.com/api/v2/public_user_info/${this.idt} `, {
   method:'GET',
   headers: {
@@ -848,6 +844,7 @@ height: 80px;
  }
  .mid5-padd{
      padding:10px;
+     background-color:#202122;
      }
 .events{
     display:grid;
@@ -1040,7 +1037,7 @@ input::-webkit-inner-spin-button {
 }
 /*ORGANIZER*/
 #middle5-right-startorg{
-    height: 205px;
+    min-height: 205px;
     background-color: #202122;
     margin-bottom:10px;
     text-align:left;
@@ -1184,7 +1181,11 @@ opacity: 0.7;
 cursor: pointer;
 }
 @media only screen and (max-width: 1500px) and (min-width: 500px) {
-
+.right-profile{
+    display:grid;
+    grid-template-columns: 3% 94% 3%;
+ 
+}
 .profile{
     display:grid;
     grid-template-columns: 200px auto;

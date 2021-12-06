@@ -23,7 +23,7 @@
               <div class="search-header">Rating </div>
               <div class="search-header">Interested in</div>
               <div class="search-header">Title</div>
-              <div class="search-header" style="padding-right:8px;">Club/Event</div>
+              <div class="search-header" style="padding-right:8px;">Club</div>
             </div>
 
 <!--SEARCH RESULTS -->
@@ -33,7 +33,7 @@
                   <div class="search-res">{{index + 1}}</div>
                   <div class="search-res start " >
                     <div class="initials">{{usersrc.inicijali}}</div>
-                    <div><a href="#">{{usersrc.name_first}} {{usersrc.name_last}}</a></div>
+                    <div><router-link :user_uuid='usersrc.user_uuid'   :to="{ name:'Publicprofile',params:{ id:usersrc.user_uuid}}"> {{usersrc.name_first}} {{usersrc.name_last}}</router-link></div>
                   </div>
                   <div class="search-res">{{usersrc.federation}}</div>
                   <div class="search-res">{{usersrc.city}}</div>
@@ -48,17 +48,17 @@
                     </div>
                   </div>
                   <div class="search-res2">
-                    <div v-for="titles in usersrc.titule" :key="titles" style="padding:6px">
-                      <div v-for="use in user.titule_details" :key="use.user_uuid" >
-                        <div  v-if="titles==use.titula_uuid" >
-                            {{use.titula_short_name}}
-                        </div>
-                      </div>
+                    <div v-for="titles in titule" :key="titles.titula_uuid"  >
+                 
+                        <div  v-if="titles.titula_uuid==usersrc.titule" >
+                            {{titles.titula_short_name}}
+                        </div> 
+                    
                     </div>
+                    
                   </div>
                   <div class="search-res"  >
                       <div>{{usersrc.club_name}} </div>
-                      <div> {{usersrc.organizer_current_event}}</div> 
                   </div>
                 
               </div>
@@ -85,17 +85,17 @@
                     <div class="inetrestedin" v-if="alluser.open2new_eng_event==true">Event</div>
                   </div>
                   <div class="search-res2">
-                    <div v-for="titles in alluser.titule" :key="titles"  style="padding:6px" >
-                      <div  v-for="use in user.titule_details" :key="use.user_uuid" >
-                        <div  v-if="titles==use.titula_uuid" >
-                            {{use.titula_short_name}}
-                        </div>
-                      </div>
+                      <div v-for="titles in titule" :key="titles.titula_uuid"   >
+                 
+                        <div  v-if="titles.titula_uuid==alluser.titule" >
+                            {{titles.titula_short_name}}
+                        </div> 
+                    
                     </div>
                   </div>
-                  <div class="search-res"  >
+                  <div class="search-res">
                       <div>{{alluser.club_name}} </div>
-                      <div> {{alluser.organizer_current_event}}</div> 
+                <!--  <div v-if="alluser.organizer_current_event.event_name!=null"> {{alluser.organizer_current_event.event_name}}</div> -->
                   </div>
                 </div>
               </div >
@@ -210,16 +210,21 @@ export default {
          interestedtour:'',
          interestedevent:'',
          searchresults:false,
-         user:{titule_details:{ titula_uuid:'',
-                                titula_short_name:'',
-              open2new_eng_club:Boolean
-                                             }},
-         use:[{titule_details:{ titula_uuid:'',
-                                titula_short_name:''               
-                                             }}],
+         user:{titula_player_details:{titula_short_name:'',
+         titula_uuid:''},
+         titula_player:'',
+         user_uuid:'',
+               titula_organizer_details:{titula_short_name:''},
+                                             },
+         use:{titula_player_details:{titula_short_name:'',
+                                     titula_uuid:''},
+               user_uuid:'',                      
+               titula_player:'',
+               titula_organizer_details:{titula_short_name:''}},
         interestedin:'' ,
         input_text:'',
-        textsearch:''                               
+        textsearch:'',
+
       }
 },
 mounted(){
@@ -421,7 +426,7 @@ hr{
     
     .search{
       display:grid;
-      grid-template-columns:4% 24% 8% 8% 6% 8% 8% 12% 12% 10%;
+      grid-template-columns:4% 23% 7% 10% 6% 8% 8% 12% 12% 10%;
       background-color:#202122;
       height: 52px;
       margin:20px 0 20px 0;
