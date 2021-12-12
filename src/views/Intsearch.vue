@@ -7,7 +7,8 @@
             <div style="padding-bottom:40px">
             </div>
             <div id="input-filter">
-              <input type="search" @keyup.enter="confirmsearch()" v-model="input_text" name="" class="intelegent-filter" placeholder="INTELEGENT FILTER">
+              <div id="filter_height"><img id="imgsearch" @click="confirmsearch()" src="../assets/search_24px.png" alt=""></div>
+              <input type="search"  @keyup.enter="confirmsearch()" v-model="input_text" name="" class="intelegent-filter" placeholder="INTELEGENT FILTER">
               <div v-bind:class="{'second-part':isActive,'second-part2':clickside1}" @click="clickside()"  > 
                 <div style="display:flex;"  ><p id="category-text"  >Category</p>  <img   id="img-category" src="../assets/linije.png" alt=""></div>  
               </div>
@@ -70,7 +71,7 @@
                   <div  class="search-res"></div>
                   <div class="search-res start " >
                     <div class="initials">{{alluser.inicijali}}</div>
-                    <div ><router-link :user_uuid='alluser.user_uuid'   :to="{ name:'Publicprofile',params:{ id:alluser.user_uuid}}">{{alluser.name_first}} {{alluser.name_last }} </router-link></div>  
+                    <div ><router-link :user_uuid='alluser.user_uuid' :token_id='user.user_uuid'   :to="{ name:'Publicprofile',params:{ id:alluser.user_uuid}}">{{alluser.name_first}} {{alluser.name_last }} </router-link></div>  
                     
                   </div>
                   <div class="search-res">{{alluser.federation}}</div>
@@ -321,11 +322,6 @@ methods:{
          this.clicktown=false,
          this.clickinterested=false,
          this.clicktitle=false
-
-         console.log(this.usersearchreact.open2new_eng_club);
-  console.log(this.usersearchreact.open2new_eng_tournament);
-  console.log(this.usersearchreact.open2new_eng_event);
-  console.log(this.interestedclub)
    }
   },
   
@@ -363,22 +359,32 @@ hr{
   transition-timing-function: ease-in;
   transition: 1.5s;
 }
-.intelegent-filter{
-      
-      border: 0.5px solid rgba(111, 115, 129, 0.5);
+#filter_height{
+       height: 48px;
+      border-left: 0.5px solid rgba(111, 115, 129, 0.5); 
+      border-top:0.5px solid rgba(111, 115, 129, 0.5); 
+      border-bottom:0.5px solid rgba(111, 115, 129, 0.5);
       box-sizing: border-box;
       border-radius: 26px 0 0 26px;
+}
+#imgsearch{
+     /* border: 0.5px solid rgba(111, 115, 129, 0.5);*/
+      height: 35px;
+      padding-top:15px;
+      padding-left:15px;
+      cursor:pointer;
+}
+.intelegent-filter{
+      border-top: 0.5px solid rgba(111, 115, 129, 0.5);
+      border-bottom: 0.5px solid rgba(111, 115, 129, 0.5);
+      box-sizing: border-box;
       background-color:#1B1C1D ;
       display:flex;
       height: 48px;
-      background-image: url(../assets/search_24px.png);
-      background-repeat:no-repeat;
-      background-position-x: 22px;
-      background-position-y: 14px;
-      padding-left:60px;
+      padding-left:30px;
       font-size: 14px;
       color:#FFFFFF;
-      cursor:pointer;
+      
       width:85%;
     }   
     #input-filter{

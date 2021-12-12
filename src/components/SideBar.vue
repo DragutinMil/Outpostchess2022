@@ -44,7 +44,7 @@
                                     <div class="flex-center"><img src="../assets/Vector4.png" alt=""></div>
                                     <p class="left-sidetext">Contact Us</p>
                             </div></a>
-                          
+                            <button class="middle2-buttons" @click="logOut"  type="button" >Sign Out</button>
                     </div>
         </div>
 </template>
@@ -54,17 +54,28 @@ export default {
   name: 'SideBar',
   props: {
   msg: String
-  }
+  },
+  methods:{
+logOut:function(){
+       localStorage.removeItem('token')
+        this.$router.push('/login');
+    },
 }
+}
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.middle2-buttons{
+    margin-top:0px
+}
 .side-bar{
     background-color: #202122;
     position:sticky;
     top:0;
+    margin:0;
+    padding:0;
     height:100vh; 
 }
 .logoimg{
@@ -91,13 +102,13 @@ padding: 10px 0 15px 53px;
 hr{
     border: 0.5px solid  rgba(199, 201, 208, 0.2);
     width:80%;
-    margin:auto
-}
-#side-flexend{
-    padding-top:50px;
-    
+    margin:5px auto;
 
 }
+/*#side-flexend{
+    
+
+}*/
 
 @media only screen and (max-width: 1500px) and (min-width: 500px) {
 .side-options{

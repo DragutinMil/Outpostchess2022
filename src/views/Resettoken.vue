@@ -7,39 +7,40 @@
                
               <div> 
                     <div id="welcom-text">
-                        <p class="letter-44" >Welcome to your</p> 
-                        <p class="letter-44 weight700" > professional chess</p> 
-                        <p class="letter-44 weight700">community.</p>                        
+                        <p class="letter-44" style="padding-bottom:40px;"  @click="trt">Enter new password:</p> 
                     </div>
                    
               </div>
              <div id="input-signup">
                
-                <div>
-                     <input type="email" @keyup.enter="signin()" name=""  v-bind:class="{mailin:isActive,'text-danger':hasError}" placeholder="Email" v-model="emailsignin">
-                     <p id="reqpass">{{req1}}</p>
+                <div style="padding-bottom:15px;">
+                     <input type="password" name=""  v-bind:class="{mailin:isActive}" placeholder="New password" v-model="newpassword">
+                  
                 </div> 
-             
-                <div style="padding:20px 0 20px 0;"> 
-                     <input type="password" @keyup.enter="signin()" name="" v-bind:class="{mailin:isActive,'text-danger':hasError2,}" placeholder="Password" v-model="passsignin" >
-                     <p id="reqpass">{{req}} </p>
-                     <p id="reqpass">{{request}} </p>
-                </div>
+                <div style="padding-bottom:20px;">
+                     <input type="password"  name=""  v-bind:class="{mailin:isActive}" placeholder="Repeat password" v-model="newpassword1">
+                  
+                </div> 
                 
 
               <div id="forgot-text" >
-                  <router-link to="/resetpass" >  <p class="home-p blue">Forgot password?</p>     </router-link>
                 
-              </div>
-              <div id="butt1">
-                 <button  type="button"  @click="signin()"  class="text-join" style=" border: 1px solid #C8A07D; ">Sign in</button> 
                
               </div>
+              <div id="butt1">
+                 <button  type="button"  @click="reset()"  class="text-join" style=" border: 1px solid #C8A07D; ">Reset pasword</button> 
+                 
+              </div>
+              
            <!--   <p id="text-or">or</p>
                 <button type="button" onclick="alert('Hello world!')"   class="text-join"  style="border: 1px solid #E8E8E8;"> <div id="google-cor1"> <div id="google-cor"> <img src="../assets/Group.svg" id="" alt="google"></div><p id="joingoogle">Join with Google</p> </div></button>         
              -->
            </div>
- 
+           <div id="welcom-text">
+              <p class="letter-34" >{{req}}</p>
+              <p class="letter-34" >{{req1}}</p>
+              <p class="letter-34" >{{req2}}</p>
+            </div>
         </div>
       
       <div id="right-login">
@@ -50,69 +51,68 @@
 
 <script>
 export default {
-  name: "Signin",
+  name: "Resettoken",
    data () {
       return {
-         passsignin:"",
-         emailsignin:"",
-         req:"",
-         req1:"",
-         image1:"",
+         emailreset:"",
+         req:'',
+         req1:'',
+         req2:'',
          isActive:true,
-         hasError:false,
-         hasError2:false,
-         request:""
+         newpassword:'',
+         newpassword1:'',
+         last_segment : '',
+         resettoken2:window.location.href.split('/').pop()
       }
       
     },
-    mounted() {
-    this.emailsignin= this.$route.query.email;
-  },
+   //  created() {
+   // this.newpassword= this.$route.query.password;
+ //   this.resettoken2= window.location.pathname.split('/').pop();
+    
+  //},
     methods:{
-    signin: function(){
-      this.req="",
-      this.req1="",
-      this.hasError2=false,
-      this.hasError=false,
-      this.request=""
-      if(this.passsignin==""){
-        this.req="Enter Password";
-        this.hasError2=true;
-      }
-      if(this.emailsignin==""){
-        this.req1=" Enter Email" ;
-        this.hasError=true;
-      }
-      if(this.emailsignin!=="" && this.passsignin!==""){
-        
-        fetch('https://app.outpostchess.com/api/v2/auth', {
+    trt: function(){
+      console.log(this.resettoken2);
+     //// this.last_segment = window.location.pathname.split('/').pop();
+   //   console.log(this.last_segment);
+    },
+    reset: function(){
+        this.req='';
+        this.req1='';
+        this.req2='';
+        if(this.newpassword !== this.newpassword1){
+        this.req="*Password doesn't match";
+        }
+        if(this.newpassword==""){
+        this.req1="*Enter new Password ";
+        }
+        if(this.newpassword !=="" && this.newpassword.length < 6){
+        this.req="*Enter at least 6 character";
+        }
+        if(this.newpassword == this.newpassword1 && this.newpassword !=="" && this.newpassword1 !=="" && this.newpassword.length > 6){
+        fetch('https://app.outpostchess.com/api/v2/public_reset_forgotten_password', {
         method:'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify( { email: this.emailsignin, password: this.passsignin } )
+        body: JSON.stringify( { password: this.newpassword,
+                                resettoken:this.resettoken2
+        })
         })
         .then(response => {
           if (response.ok) {
-            return response.json();
+          console.log('ok')
+          this.$router.push('/login');
           } else {
             throw new Error('Something went wrong')
             
           }
           
         })
-        .then((data) => {
-          console.log("ok");
-          // Do something with the response
-          localStorage.setItem('token',  data?.token);
-          this.$router.push('/profile');
-        })
-        .catch((error) => {
-          console.log("error");
-          console.log(error);
-          this.request=' Login failed.'
-        });
+        
       }
 
     } ,
+    
   },
 }
 </script>
@@ -140,9 +140,12 @@ a{
     .letter-44{
           display:flex;
           color:#FFFFFF;
-          font-size:44px;
+          font-size:18px;
     }
-    
+     .letter-34{
+          color:#FFFFFF;
+          font-size:14px;
+    }
     .home-p{
       color:#707070;
 
@@ -163,7 +166,7 @@ a{
       color:#FFFFFF;
      
     }
-    
+   
       .text-join{
     font-size: 14px;
     color:#FFFFFF;
@@ -199,7 +202,8 @@ a{
    padding-left:29%;
 }
 #welcom-text{
-  margin:30px 0 30px 0;
+  margin:30px;
+  text-align: left;
 }
   #left-login{
     background-color: #1B1B1C;
@@ -215,7 +219,7 @@ a{
   #input-signup{
     background-color: #1B1C1D;
     width: 65%;
-    padding: 20px 0 20px 0;
+    padding: 35px 0 35px 0;
     margin:auto;
     border-radius: 11px;
   }  
