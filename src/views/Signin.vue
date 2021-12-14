@@ -1,8 +1,8 @@
 <template>
   <div class="home">
       <div id="left-login">
-              <div id="logo-pic">
-                    <img src="../assets/logo2.png"  alt="">
+              <div id="logo-pic"> 
+                    <img id="imglog" src="../assets/logo2.png"  alt="">
               </div>
                
               <div> 
@@ -297,7 +297,16 @@ a{
     #left-login{
       width:100%
     }
+   
+     #logo-pic{
+    padding:50px 35px 0px 35px;
+    display:flex;
+    width:55%;
+    margin-left:10%;
+    
   }
+  }
+  
 
 
 </style>
