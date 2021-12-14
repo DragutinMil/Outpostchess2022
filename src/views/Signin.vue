@@ -1,8 +1,8 @@
 <template>
   <div class="home">
       <div id="left-login">
-              <div id="logo-pic"> 
-                    <img id="imglog" src="../assets/logo2.png"  alt="">
+              <div id="logo-pic">
+                    <img src="../assets/logo2.png"  alt="">
               </div>
                
               <div> 
@@ -279,11 +279,9 @@ a{
       margin:0;
    padding-left:15px;
    }
-
-   @media only screen and (max-width: 499px){
-     #right-login{
+@media only screen and (max-width: 499px){
+  #right-login{
     display:none;
-
   } 
   .home{
     display: flex;
@@ -292,21 +290,17 @@ a{
     
   }
   .letter-44{
-          font-size:20px;
+    font-size:20px;
     }
     #left-login{
-      width:100%
+    width:100%
     }
    
-     #logo-pic{
+  #logo-pic{
     padding:50px 35px 0px 35px;
     display:flex;
     width:55%;
     margin-left:10%;
-    
   }
-  }
-  
-
-
+}
 </style>

@@ -14,17 +14,17 @@
                           <router-link to="../chatroom" style="color:#C7C9D0">  <p class="left-sidetext">Inbox</p></router-link>
                     </div>
                     <div class="side-options"> 
-                             <div class="flex-center"><img src="../assets/Vector5.png" alt=""></div>
+                             <div class="flex-center" ><img src="../assets/Vector5.png" alt=""></div>
                               <router-link to="../intsearch" style="color:#C7C9D0"> <p  class="left-sidetext">Intelligent search</p></router-link> 
                     </div>
                     <div class="side-options"> 
-                            <div class="flex-center"><img src="../assets/hands.png" alt=""></div>
+                            <div class="flex-center "><img src="../assets/hands.png" alt=""></div>
                              <p class="left-sidetext diffcol">My connections</p>
                     </div>
                     
                     <hr>
                     <div class="side-options"> 
-                             <div class="flex-center"><img src="../assets/book.png" alt=""></div>
+                             <div class="flex-center"><img  src="../assets/book.png" alt=""></div>
                              <p class="left-sidetext diffcol">Blog</p>
                     </div>
 
@@ -33,17 +33,17 @@
                         </div>
                             <hr>
                             <div class="side-options" > 
-                                    <div class="flex-center"><img src="../assets/settings_24px_rounded.svg" alt=""></div>
-                                    <p class="left-sidetext">Settings</p>
+                                    <div style="opacity:0.4" class="flex-center"><img src="../assets/settings_24px_rounded.svg" alt=""></div>
+                                    <p class="left-sidetext diffcol">Settings</p>
                             </div>
-                            <div class="side-options"> 
-                                    <div class="flex-center"><img src="../assets/Vector7.png" alt=""></div>
-                                    <p class="left-sidetext">Help</p>
+                            <div  class="side-options"> 
+                                    <div style="opacity:0.4" class="flex-center"><img src="../assets/Vector7.png" alt=""></div>
+                                    <p class="left-sidetext diffcol">Help</p>
                             </div>
-                            <a href=""> <div class="side-options" style="margin-bottom:30px"> 
-                                    <div class="flex-center"><img src="../assets/Vector4.png" alt=""></div>
-                                    <p class="left-sidetext">Contact Us</p>
-                            </div></a>
+                            <div class="side-options" style="margin-bottom:30px"> 
+                                    <div style="opacity:0.4" class="flex-center"><img src="../assets/Vector4.png" alt=""></div>
+                                    <p class="left-sidetext diffcol">Contact Us</p>
+                            </div>
                             <button class="middle2-buttons" @click="logOut"  type="button" >Sign Out</button>
                     </div>
         </div>
@@ -74,8 +74,6 @@ logOut:function(){
     background-color: #202122;
     position:sticky;
     top:0;
-    margin:0;
-    padding:0;
     height:100vh; 
 }
 .logoimg{
@@ -105,10 +103,11 @@ hr{
     margin:5px auto;
 
 }
-/*#side-flexend{
+#side-flexend{
+    padding-top:30px;
     
 
-}*/
+}
 
 @media only screen and (max-width: 1500px) and (min-width: 500px) {
 .side-options{

@@ -72,11 +72,7 @@ export default {
     
   //},
     methods:{
-    trt: function(){
-      console.log(this.resettoken2);
-     //// this.last_segment = window.location.pathname.split('/').pop();
-   //   console.log(this.last_segment);
-    },
+  
     reset: function(){
         this.req='';
         this.req1='';

@@ -91,7 +91,7 @@
                       <div    class="flex-center" style="display:flex">
                             <div v-if='rolecolor3'  class="flex-center" style="display:flex">
                                 <input @change="selected_title"  type="radio"  value='5fb356b6-1ee2-11ec-a733-0d4e300cf032'   v-model='pickedorg'   >
-                                <div><p class="left-check-text">FIO</p></div>
+                                <div><p class="left-check-text">IO</p></div>
                                 <!--:checked='user.titule_details[3].is_checked' :checked='user.titule_details[3].is_checked'      -->
                             </div>    
                         </div>
@@ -102,7 +102,7 @@
                             <div  v-if="user.titula_player!==null && this.user.rola.indexOf('PLAYER')!==-1" class="titles">
                                 {{user.titula_player_details.titula_short_name}} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->  </div>
                       
-                            <div class="titles" v-if="user.titula_organizer!==null && this.user.rola.indexOf('ORGANIZER')!==-1 " >{{user.titula_organizer_details.titula_short_name}} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->  </div>
+                            <div class="titles" v-if="user.titula_organizer!==null && this.user.rola.indexOf('ORGANIZER')!==-1 " >IO <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->  </div>
                          
                         </div>
                     </div>  
@@ -294,7 +294,7 @@
                             <div class="slider" v-else >
                                 <p >{{user.comp_per_game_from}}  </p><p style="padding-left:50px" >{{user.comp_per_game_to}} </p>
                             </div>   
-                            <div v-if="changed_compensation" @click="changed_compensation=!changed_compensation">
+                            <div v-if="changed_compensation" >
                                 <button class="button-range"   @click="compensation"     type="button" >Save</button>
                             </div>
                         </div>
@@ -441,8 +441,6 @@
                                                 <p class="gold-event" >Date to:</p>
                                                 <p><input type="date"  class="profile-name2 line2" v-model="new_event_to"></p>
                                         </div>
-                                        
-                                       
                                     </div>
                                     <div>
                                         <button @click="post_event" class="middle2-buttons" style="margin-left:40%"  type="submit">Create</button>
@@ -451,8 +449,8 @@
                                 <div v-else class="mid5-padd listevent" style="background-color: #202122;padding:10px;" >
                                     <p class="middle5-text" >My events:</p>
                                     <div style="display:flex"  v-for="(event,index) in events" :key="event.event_uuid">
-                                            <p v-if="event.organiser_uuid=user.user_uuid" style="padding-right:8px ;margin-left:15px">{{index+1}}. </p>   <p class="gold-event"> {{event.event_name}}</p> <p >  X </p> 
-                                      
+                                            <p v-if="event.organiser_uuid=user.user_uuid" style="padding-right:8px ;margin-left:15px">{{index+1}}. </p>   
+                                            <p style="cursor:pointer" class="gold-event"> {{event.event_name}}</p> <p style="cursor:pointer" @click="delete_event(event)"> x </p> 
                                     </div>  
                                 </div>
                         
@@ -653,7 +651,22 @@ updated() {
 //--------------METHODS----------------------//
 
 methods:{
+
+    delete_event:function(eve){
+            console.log(eve.event_uuid);
+           fetch(`https://app.outpostchess.com/api/v2/organiser_event/${eve.event_uuid}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                     "authorization":`Bearer ${localStorage.getItem('token')}`
+                },
+                body:null
+})       .then(() => {
+            window.location.reload();
+        })
     
+    // .then(this.$router.go()) 
+    },
     lookpla:function(){
             this.user.club_looking_for_new_player=!this.user.club_looking_for_new_player
        fetch('https://app.outpostchess.com/api/v2/current_user_info', {
@@ -687,7 +700,7 @@ methods:{
                )   
             .then(response => response.json())
             .then(data => console.log(data))
-            console.log(this.organizer_looking_for_new_participants)
+          //  console.log(this.organizer_looking_for_new_participants)
     },
 
       activeplayercur: function(){
@@ -724,11 +737,10 @@ methods:{
                )   
             .then(response => response.json())
             .then(data => console.log(data))
-            console.log(this.current_playing_bool)
+           // console.log(this.current_playing_bool)
       },
 
       compensation:function(){
-       console.log(this.changed_compensation)
        fetch('https://app.outpostchess.com/api/v2/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
@@ -741,8 +753,8 @@ methods:{
           },
                )   
            .then(response => response.json())
-           .then(data => console.log(data))
-             
+          // .then(data => console.log(data))
+            // this.$router.go() 
          },        
    
  //   selectedRole: function(titule){
@@ -963,8 +975,10 @@ post_event:function(){
             })
             .catch(error => {
             console.error(error)
-            }) 
-           // .then(this.$router.go());
+            }) .then(() => {
+            window.location.reload();
+        })
+           
             this.rolecol3=true
 }       
    
