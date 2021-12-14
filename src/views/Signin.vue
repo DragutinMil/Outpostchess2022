@@ -279,4 +279,25 @@ a{
       margin:0;
    padding-left:15px;
    }
+
+   @media only screen and (max-width: 499px){
+     #right-login{
+    display:none;
+
+  } 
+  .home{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    
+  }
+  .letter-44{
+          font-size:20px;
+    }
+    #left-login{
+      width:100%
+    }
+  }
+
+
 </style>
