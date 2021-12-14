@@ -35,8 +35,8 @@
                     </div>
                 </div>
                 <div id="middle2-button-container">
-                    <button class="middle2-buttons"    type="button" >Message</button>
-                    <button class="middle2-buttons"      type="button" >Connect</button>
+                    <button class="middle2-buttons" @click="disconnection_people"      type="button" >Message</button>
+                    <button class="middle2-buttons" @click="connection_people"     type="button" >Connect</button>
                 </div>
             </div>
 <!--END MID 2 -->     
@@ -312,19 +312,33 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mid5-padd flex-center">
-                           
-                        </div>
+                        
+                         <div class="mid5-padd flex-center">
+                            <div class="borderbutton flex-center">
+                                <p style="text-align:center">Interested in this Organizer</p>
+                            </div>               
+                        </div>               
+                        
              
                     </div>
-                     <div  class="mid5-padd" >
-                                <p class="middle5-text" >My events:</p>
-                                <div style="display:flex"  v-for="(event,index) in events" :key="event.event_uuid">
-                                <p style="padding-right:5px;">{{index+1}}. </p>   <p class="gold-event"> {{event.event_name}}</p> 
-                                      
+                     <div  class="mid5-padd listevent" style="padding:10px; ">
+                        <p class="middle5-text" >My events:</p>
+                        <div  v-for="(event,index) in events" :key="event.event_uuid">
+                            <div style="display:flex" v-if="event.organiser_uuid==user.user_uuid">
+                                <p  style="padding-right:8px;margin-left:20px">{{index+1}}. </p>   
+                                <p class="gold-event"> {{event.event_name}}</p>
                             </div>  
+                        </div>  
                     </div>
                 </div>
+                 <div  v-if="activetre" style="opacity:0.5">
+                        <p class="rotate">Coming soon!</p>
+                         <img style="width:100%" src="../assets/coach1.jpg" alt="">  
+                    </div>
+                    <div  v-if="activearb" style="opacity:0.5">
+                        <p class="rotate">Coming soon!</p>
+                        <img style="width:100%" src="../assets/arbiter.jpg" alt=""> 
+                    </div>
                 </div>
             </div>
         </div>    
@@ -395,6 +409,8 @@ export default {
          activeplayer:true,
          activeclub:false,
          activeorg:false,
+         activearb:false,
+         activetre:false,
          switch1:'',
          switch2:'',
          min: 0,
@@ -451,7 +467,21 @@ mounted(){
 .then(response => response.json())
 .then(data => this.user=data)
 .then(data => console.log('public',data))  
+
+ fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+  method:'GET',
+  headers: {
+    'Content-Type': 'application/json',
+    "authorization":`Bearer ${localStorage.getItem('token')}`
+  }
+},        
+)
+
+.then(response => response.json())
+.then(data => this.userinitiator=data)
+.then(data => console.log('initiator',data)) 
 },
+
 
 
 //--------------METHODS----------------------//
@@ -469,84 +499,81 @@ mounted(){
 
 },
 methods:{
-  
-   cvdairycal1: function(){
-      this.clickActive1=true;
-      this.clickActive2=false;
-      this.clickActive3=false;
-      console.log(this.current_playing_bool);
-      console.log(this.club_current_playing_bool);
-      console.log(this.club_looking_for_new_player);
+    
+    cvdairycal1: function(){
+      this.clickActive1=true; this.clickActive2=false;  this.clickActive3=false;
+      console.log(this.idt)
+       console.log(this.userinitiator.user_uuid)
     } ,
      cvdairycal2: function(){
-      this.clickActive1=false;
-      this.clickActive2=true;
-      this.clickActive3=false;
+      this.clickActive1=false;  this.clickActive2=true;  this.clickActive3=false;
     } ,
     cvdairycal3: function(){
-      this.clickActive1=false;
-      this.clickActive2=false;
-      this.clickActive3=true;
+      this.clickActive1=false;this.clickActive2=false;  this.clickActive3=true;
     } ,
     rolecol1:function(){
-      this.activeplayer=true;  
-      this.activeclub=false;
-      this.activeorg=false;
-      this.rolecolor1=true;
-      this.rolecolor2=false;
-      this.rolecolor3=false; 
-      this.rolecolor4=false;  
-      this.rolecolor5=false;  
-      this.rolecolor6=false;   
+      this.activeplayer=true;this.activeclub=false; this.activeorg=false; 
+      this.activetre=false;  this.activearb=false;
+      this.rolecolor1=true; this.rolecolor2=false;this.rolecolor3=false;
+      this.rolecolor4=false;this.rolecolor5=false;this.rolecolor6=false;   
     },
     rolecol2:function(){
-      this.activeclub=true;
-      this.activeplayer=false;   
-      this.activeorg=false; 
-      this.rolecolor1=false;
-      this.rolecolor2=true;
-      this.rolecolor3=false; 
-      this.rolecolor4=false;  
-      this.rolecolor5=false;  
-      this.rolecolor6=false;   
+      this.activeclub=true; this.activeplayer=false;this.activeorg=false;
+      this.activetre=false;  this.activearb=false;
+      this.rolecolor1=false; this.rolecolor2=true; this.rolecolor3=false; 
+      this.rolecolor4=false;   this.rolecolor5=false; this.rolecolor6=false;   
     },
     rolecol3:function(){
-      this.rolecolor1=false;
-      this.rolecolor2=false;
-      this.rolecolor3=true; 
-      this.rolecolor4=false;  
-      this.rolecolor5=false;  
-      this.rolecolor6=false;  
-      this.activeorg=true; 
-      this.activeplayer=false; 
-      this.activeclub=false;
+      this.rolecolor1=false;  this.rolecolor2=false; this.rolecolor3=true;  
+      this.rolecolor4=false;  this.rolecolor5=false; this.rolecolor6=false;  
+      this.activeorg=true;   this.activeplayer=false; this.activeclub=false; 
+      this.activetre=false; this.activearb=false;
     },
     rolecol4:function(){
-      this.rolecolor1=false;
-      this.rolecolor2=false;
-      this.rolecolor3=false; 
-      this.rolecolor4=true;  
-      this.rolecolor5=false;  
-      this.rolecolor6=false;   
+      this.activeorg=false;   this.activeplayer=false; this.activeclub=false;  
+      this.activetre=false;    this.activearb=true;
+      this.rolecolor1=false; this.rolecolor2=false; this.rolecolor3=false;   
+      this.rolecolor4=true; this.rolecolor5=false; this.rolecolor6=false;   
     },
     rolecol5:function(){
-      this.rolecolor1=false;
-      this.rolecolor2=false;
-      this.rolecolor3=false; 
-      this.rolecolor4=false;  
-      this.rolecolor5=true;  
-      this.rolecolor6=false;   
+      this.activeorg=false;this.activeplayer=false;   this.activeclub=false;  
+      this.activetre=true;  this.activearb=false;
+      this.rolecolor1=false;  this.rolecolor2=false;  this.rolecolor3=false;  
+      this.rolecolor4=false; this.rolecolor5=true;  this.rolecolor6=false;   
     },
     rolecol6:function(){
-      this.rolecolor1=false;
-      this.rolecolor2=false;
-      this.rolecolor3=false; 
-      this.rolecolor4=false;  
-      this.rolecolor5=false;  
-      this.rolecolor6=true;   
-      
+      this.rolecolor1=false; this.rolecolor2=false;   this.rolecolor3=false;   
+      this.rolecolor4=false;  this.rolecolor5=false;   this.rolecolor6=true; 
     },
 
+    connection_people:function(){
+    fetch( ` https://app.outpostchess.com/api/v2/connection_initiate/${this.idt} `, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json',
+                "Authorization":`Bearer ${localStorage.getItem('token')}`
+                },		
+                body: JSON.stringify( { 
+                 conn_initiator_uuid:this.userinitiator.user_uuid,
+                 conn_target_uuid: this.itd,
+                })
+            })
+            
+            .catch(error => {
+            console.error(error)
+            }) 
+     },
+     disconnection_people:function(){
+    fetch( ` https://app.outpostchess.com/api/v2/connection_initiator_delete/${this.idt} `, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json',
+                "Authorization":`Bearer ${localStorage.getItem('token')}`
+                },
+            })
+            
+            .catch(error => {
+            console.error(error)
+            }) 
+     }
 
   }
 }
@@ -1043,6 +1070,9 @@ input::-webkit-inner-spin-button {
     text-align:left;
     padding:10px
 }
+.listevent{
+    min-height: 205px;
+}
 
 #plava-kugla2{
     height: 100px;
@@ -1070,6 +1100,13 @@ font-size:12px
    color:#C8A07D;
    padding-right:4px;
 }
+/*ARBITER */
+.rotate{transform: rotate(-45deg);
+position:relative;
+top:300px;
+    font-size:26px;
+    font-weight: 600;
+    letter-spacing: 15px;}
 
 /*DROPDOWN */
 .dropbtn {

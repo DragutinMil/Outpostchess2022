@@ -6,7 +6,7 @@
         <div>  </div>  
         <div id="right-middle">
              <Searchpart />
-<!-- MID 2 -->             
+<!-- MID 2    -->             
              <div  id="middle2">
                 <div class="upload-pic" >
                     <div v-if="clickside">
@@ -69,9 +69,10 @@
                 <div id="middle2-button-container">
                     <button class="middle2-buttons"  @click="clickside=!clickside"  type="button" >Edit Profile</button>
                     <button class="middle2-buttons" v-if="clickside"  @click="userpatch()"   type="button" >Confirm changes</button>
+                    
                 </div>
             </div>
-<!--END MID 2 -->     
+<!--END MID 2   -->     
 <!--MID 3 -->
             <div id="middle3">
                 <div class="middle3-1">
@@ -89,8 +90,8 @@
                       <div v-else-if='clickside && rolecolor3'  class="middle3-1"  >
                       <div    class="flex-center" style="display:flex">
                             <div v-if='rolecolor3'  class="flex-center" style="display:flex">
-                                <input @change="selected_title"  type="radio"  value='FIO'   v-model='pickedorg'   >
-                                <div><p class="left-check-text">FIO</p></div>
+                                <input @change="selected_title"  type="radio"  value='5fb356b6-1ee2-11ec-a733-0d4e300cf032'   v-model='pickedorg'   >
+                                <div><p class="left-check-text">IO</p></div>
                                 <!--:checked='user.titule_details[3].is_checked' :checked='user.titule_details[3].is_checked'      -->
                             </div>    
                         </div>
@@ -98,8 +99,11 @@
                     <div v-else class="middle3-1"  >
                         <p style="color:#6F7381" >Title:</p>
                         <div style="display:flex" >
-                            <div  v-if="user.titula_player!=='' && this.user.rola.indexOf('PLAYER')!==-1" class="titles">{{user.titula_player_details.titula_short_name}} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->  </div>
-                            <div  v-if="user.titula_organizer!=='' && this.user.rola.indexOf('ORGANIZER')!==-1 " class="titles">{{user.titula_organizer_details.titula_short_name}} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->  </div>
+                            <div  v-if="user.titula_player!==null && this.user.rola.indexOf('PLAYER')!==-1" class="titles">
+                                {{user.titula_player_details.titula_short_name}} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->  </div>
+                      
+                            <div class="titles" v-if="user.titula_organizer!==null && this.user.rola.indexOf('ORGANIZER')!==-1 " >IO <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->  </div>
+                         
                         </div>
                     </div>  
                 </div>
@@ -290,7 +294,7 @@
                             <div class="slider" v-else >
                                 <p >{{user.comp_per_game_from}}  </p><p style="padding-left:50px" >{{user.comp_per_game_to}} </p>
                             </div>   
-                            <div v-if="changed_compensation" @click="changed_compensation=!changed_compensation">
+                            <div v-if="changed_compensation" >
                                 <button class="button-range"   @click="compensation"     type="button" >Save</button>
                             </div>
                         </div>
@@ -382,17 +386,18 @@
                                 <div style="height:65px;display:flex">
                                     <img v-if="switch5" id="plava-kugla2" src="../assets/plavakugla.png" alt="">
                                 </div>
-                                <v-app class="vuetify-switch2"> 
+                          <!--      <v-app class="vuetify-switch2"> 
                                     <v-container class="switch-container"   >
                                         <v-switch 
                                         value=switch5
                                         color="#C8A07D"
                                         ></v-switch>
                                     </v-container>  
-                                </v-app>
-                                <div>
-                                    <input type="text" style="margin-top:42px;" v-if="clickside " class="inputcurplay" v-model="user.organizer_current_event">
-                                    <p v-else-if="switch5" class="gold" style="margin-top:35px;padding-left:6px"   >{{user.organizer_current_event.event_name}}</p>
+                                </v-app> -->
+                                <div class="gold" v-if="switch5" style="padding-left:6px;">
+                                     <p v-if="user.organizer_current_event">{{user.organizer_current_event.event_name}}</p>
+                                     <p v-if="user.organizer_current_event">From {{user.organizer_current_event.event_date_from}} to {{user.organizer_current_event.event_date_to}}</p> 
+                                    <p v-if="user.organizer_current_event">{{user.organizer_current_event.event_description}}</p>  
                                 </div>
                             </div>
                         </div>
@@ -426,7 +431,7 @@
                                         <p class="middle5-text" >My new event:</p>
                                         <div class="list-events">
                                             <p class="gold-event" >Enter name:</p>
-                                            <p><input type="text"  class="profile-name2 line2" v-model="new_event_name"></p>
+                                            <input type="text" required  class="profile-name2 line2" v-model="new_event_name">
                                         </div>
                                         <div class="list-events">
                                                 <p class="gold-event" >Date from:</p>
@@ -436,18 +441,16 @@
                                                 <p class="gold-event" >Date to:</p>
                                                 <p><input type="date"  class="profile-name2 line2" v-model="new_event_to"></p>
                                         </div>
-                                        
-                                       
                                     </div>
                                     <div>
                                         <button @click="post_event" class="middle2-buttons" style="margin-left:40%"  type="submit">Create</button>
                                     </div>
                                 </div>
-                                <div v-else class="mid5-padd-extensive" style="background-color: #202122;" >
+                                <div v-else class="mid5-padd listevent" style="background-color: #202122;padding:10px;" >
                                     <p class="middle5-text" >My events:</p>
                                     <div style="display:flex"  v-for="(event,index) in events" :key="event.event_uuid">
-                                            <p style="padding-right:5px;">{{index+1}}. </p>   <p class="gold-event"> {{event.event_name}}</p> 
-                                      
+                                            <p v-if="event.organiser_uuid=user.user_uuid" style="padding-right:8px ;margin-left:15px">{{index+1}}. </p>   
+                                            <p style="cursor:pointer" class="gold-event"> {{event.event_name}}</p> <p style="cursor:pointer" @click="delete_event(event)"> x </p> 
                                     </div>  
                                 </div>
                         
@@ -627,7 +630,7 @@ fetch('https://app.outpostchess.com/api/v2/titule', {
             })
         .then(response => response.json())
         .then(data => this.events=data)
-        .then(data => console.log('events',data))       
+      //  .then(data => console.log('events',data))       
             
 },
 
@@ -648,7 +651,22 @@ updated() {
 //--------------METHODS----------------------//
 
 methods:{
+
+    delete_event:function(eve){
+            console.log(eve.event_uuid);
+           fetch(`https://app.outpostchess.com/api/v2/organiser_event/${eve.event_uuid}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                     "authorization":`Bearer ${localStorage.getItem('token')}`
+                },
+                body:null
+})       .then(() => {
+            window.location.reload();
+        })
     
+    // .then(this.$router.go()) 
+    },
     lookpla:function(){
             this.user.club_looking_for_new_player=!this.user.club_looking_for_new_player
        fetch('https://app.outpostchess.com/api/v2/current_user_info', {
@@ -682,7 +700,7 @@ methods:{
                )   
             .then(response => response.json())
             .then(data => console.log(data))
-            console.log(this.organizer_looking_for_new_participants)
+          //  console.log(this.organizer_looking_for_new_participants)
     },
 
       activeplayercur: function(){
@@ -719,11 +737,10 @@ methods:{
                )   
             .then(response => response.json())
             .then(data => console.log(data))
-            console.log(this.current_playing_bool)
+           // console.log(this.current_playing_bool)
       },
 
       compensation:function(){
-       console.log(this.changed_compensation)
        fetch('https://app.outpostchess.com/api/v2/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
@@ -736,8 +753,8 @@ methods:{
           },
                )   
            .then(response => response.json())
-           .then(data => console.log(data))
-             
+          // .then(data => console.log(data))
+            // this.$router.go() 
          },        
    
  //   selectedRole: function(titule){
@@ -874,7 +891,7 @@ userpatch:function(){
               titula_uuid: this.picked,
               }],
               titula_organizer:this.pickedorg,
-              titula_organiyer_details: [{
+              titula_organizer_details: [{
               titula_uuid: this.pickedorg,
               }],
             })
@@ -882,7 +899,7 @@ userpatch:function(){
                )   
             .then(response => response.json())
             .then(data => console.log(data)) 
-             if(this.picked!=='' || this.pickedorg!=='' || this.photoinfo!==''){
+             if(this.picked !== '' || this.pickedorg !== '' || this.photoinfo !== ''  ){
                      this.$router.go()
                      }
             },
@@ -942,6 +959,7 @@ removerole:function(){
             }) 
             //  .then(this.$router.go());
     },
+
 post_event:function(){
     this.newevent=false;
     fetch('https://app.outpostchess.com/api/v2/organiser_event', {
@@ -957,8 +975,12 @@ post_event:function(){
             })
             .catch(error => {
             console.error(error)
-            }) 
-}
+            }) .then(() => {
+            window.location.reload();
+        })
+           
+            this.rolecol3=true
+}       
    
 }
 }
@@ -1460,7 +1482,9 @@ top:300px;
     text-align:left;
     padding:10px
 }
-
+.listevent{
+    min-height: 205px;
+}
 #plava-kugla2{
     height: 100px;
     padding-left:80%;

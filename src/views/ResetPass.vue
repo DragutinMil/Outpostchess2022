@@ -4,43 +4,31 @@
               <div id="logo-pic">
                     <img src="../assets/logo2.png"  alt="">
               </div>
-               
-              <div> 
+              <div style="padding'-top:25px;"> 
                     <div id="welcom-text">
-                        <p class="letter-44" >Welcome to your</p> 
-                        <p class="letter-44 weight700" > professional chess</p> 
-                        <p class="letter-44 weight700">community.</p>                        
-                    </div>
-                   
+                        <p class="letter-44" style="padding-bottom:40px;" >Forgotten your password?</p> 
+                        <p class="letter-44" > No need to despair - just enter your email </p>  
+                        <p class="letter-44" style="padding-bottom:20px;" >address below to request a password reset.</p>
+                    </div>  
               </div>
-             <div id="input-signup">
-               
+              <div id="input-signup">
                 <div>
-                     <input type="email" @keyup.enter="signin()" name=""  v-bind:class="{mailin:isActive,'text-danger':hasError}" placeholder="Email" v-model="emailsignin">
-                     <p id="reqpass">{{req1}}</p>
+                     <input type="email" @keyup.enter="passreset()" name=""  v-bind:class="{mailin:isActive}" placeholder="Email" v-model="emailreset">
                 </div> 
-             
-                <div style="padding:20px 0 20px 0;"> 
-                     <input type="password" @keyup.enter="signin()" name="" v-bind:class="{mailin:isActive,'text-danger':hasError2,}" placeholder="Password" v-model="passsignin" >
-                     <p id="reqpass">{{req}} </p>
-                     <p id="reqpass">{{request}} </p>
+                 <div id="forgot-text" > </div>
+                 <div id="butt1">
+                 <button  type="button"  @click="passreset()"  class="text-join" style=" border: 1px solid #C8A07D; ">
+                  Request password reset</button> 
                 </div>
-                
-
-              <div id="forgot-text" >
-                  <router-link to="/resetpass" >  <p class="home-p blue">Forgot password?</p>     </router-link>
-                
-              </div>
-              <div id="butt1">
-                 <button  type="button"  @click="signin()"  class="text-join" style=" border: 1px solid #C8A07D; ">Sign in</button> 
-               
-              </div>
+              
            <!--   <p id="text-or">or</p>
                 <button type="button" onclick="alert('Hello world!')"   class="text-join"  style="border: 1px solid #E8E8E8;"> <div id="google-cor1"> <div id="google-cor"> <img src="../assets/Group.svg" id="" alt="google"></div><p id="joingoogle">Join with Google</p> </div></button>         
              -->
-           </div>
- 
-        </div>
+             </div>
+             <div id="welcom-text">
+              <p class="letter-34" >{{request}}</p>
+             </div>
+      </div>
       
       <div id="right-login">
              
@@ -53,66 +41,33 @@ export default {
   name: "Signin",
    data () {
       return {
-         passsignin:"",
-         emailsignin:"",
-         req:"",
-         req1:"",
-         image1:"",
+         emailreset:'',
+         request:'',
          isActive:true,
-         hasError:false,
-         hasError2:false,
-         request:""
+       
       }
       
     },
-    mounted() {
-    this.emailsignin= this.$route.query.email;
-  },
     methods:{
-    signin: function(){
-      this.req="",
-      this.req1="",
-      this.hasError2=false,
-      this.hasError=false,
-      this.request=""
-      if(this.passsignin==""){
-        this.req="Enter Password";
-        this.hasError2=true;
-      }
-      if(this.emailsignin==""){
-        this.req1=" Enter Email" ;
-        this.hasError=true;
-      }
-      if(this.emailsignin!=="" && this.passsignin!==""){
-        
-        fetch('https://app.outpostchess.com/api/v2/auth', {
+    passreset: function(){
+        if(this.emailreset==""){
+          return this.request='*Enter email adress'
+        }
+        if(this.emailreset !==""  ){
+        fetch('https://app.outpostchess.com/api/v2/public_forgot_password', {
         method:'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify( { email: this.emailsignin, password: this.passsignin } )
+        body: JSON.stringify( { email: this.emailreset})
         })
         .then(response => {
           if (response.ok) {
-            return response.json();
+             console.log('ok');
           } else {
-            throw new Error('Something went wrong')
-            
-          }
-          
+            throw new Error('Something went wrong') }
         })
-        .then((data) => {
-          console.log("ok");
-          // Do something with the response
-          localStorage.setItem('token',  data?.token);
-          this.$router.push('/profile');
-        })
-        .catch((error) => {
-          console.log("error");
-          console.log(error);
-          this.request=' Login failed.'
-        });
-      }
-
-    } ,
+          this.request='*Please check your email and reset password'
+       } 
+     }
   },
 }
 </script>
@@ -140,7 +95,7 @@ a{
     .letter-44{
           display:flex;
           color:#FFFFFF;
-          font-size:44px;
+          font-size:18px;
     }
     
     .home-p{
@@ -163,7 +118,11 @@ a{
       color:#FFFFFF;
      
     }
-    
+   
+    .letter-34{
+        font-size:14px;
+        color:#FFFFFF;
+    }
       .text-join{
     font-size: 14px;
     color:#FFFFFF;
@@ -199,7 +158,8 @@ a{
    padding-left:29%;
 }
 #welcom-text{
-  margin:30px 0 30px 0;
+  margin:30px;
+  text-align: left;
 }
   #left-login{
     background-color: #1B1B1C;
@@ -215,7 +175,7 @@ a{
   #input-signup{
     background-color: #1B1C1D;
     width: 65%;
-    padding: 20px 0 20px 0;
+    padding: 35px 0 35px 0;
     margin:auto;
     border-radius: 11px;
   }  
@@ -279,28 +239,4 @@ a{
       margin:0;
    padding-left:15px;
    }
-@media only screen and (max-width: 499px){
-  #right-login{
-    display:none;
-  } 
-  .home{
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    
-  }
-  .letter-44{
-    font-size:20px;
-    }
-    #left-login{
-    width:100%
-    }
-   
-  #logo-pic{
-    padding:50px 35px 0px 35px;
-    display:flex;
-    width:55%;
-    margin-left:10%;
-  }
-}
 </style>

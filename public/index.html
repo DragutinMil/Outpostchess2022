@@ -12,6 +12,9 @@
     <title>OutpostChess</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+  
+   
+  
     <!-- Facebook Pixel Code -->
     
  <script>
@@ -31,16 +34,45 @@
   /></noscript>  
  
   <!-- End Facebook Pixel Code -->
+  
   </head>
   <body>
-    
+     <!-- Messenger Chat Plugin Code 
+     <div id="fb-root"></div>
+ 
+      Your Chat Plugin code 
+     <div id="fb-customer-chat" class="fb-customerchat">
+     </div>
+ 
+     <script>
+       var chatbox = document.getElementById('fb-customer-chat');
+       chatbox.setAttribute("page_id", "111362191055819");
+       chatbox.setAttribute("attribution", "biz_inbox");
+     </script>
+       Your SDK code 
+     <script>
+       window.fbAsyncInit = function() {
+         FB.init({
+           xfbml            : true,
+           version          : 'v12.0'
+         });
+       };
+ 
+       (function(d, s, id) {
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) return;
+         js = d.createElement(s); js.id = id;
+         js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+     </script>  -->
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
-  
+    
   
 
 </html>
