@@ -137,24 +137,22 @@
                     <p v-bind:class="{'middle4-1':isActive,'ratingsi':clickActive3,}" @click="cvdairycal3()"  >CALENDAR</p>
                 </div>
                 <div class="middle3-1" >
-                    <div style="margin-left:25px" v-if="user.rola.indexOf('PLAYER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor1}" @click="rolecol1()"  >Player</div>
-                    <div style="margin-left:35px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap; " v-if="this.user.rola.indexOf('CLUBADMIN') !==-1" v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor2}"  @click="rolecol2()" >Club Admin</div> 
-                    <div style="margin-left:35px" v-if="this.user.rola.indexOf('ORGANIZER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor3}" @click="rolecol3()" >Organizer</div>
-                    <div style="margin-left:35px" v-if="this.user.rola.indexOf('ARBITER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor4}" @click="rolecol4()" >Arbiter</div>
-                    <div style="margin-left:35px" v-if="this.user.rola.indexOf('TRAINER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor5}" @click="rolecol5()" >Trainer</div>
-                    <div style="margin-left:35px" v-if="this.user.rola.indexOf('OTHER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor6}" @click="rolecol6()" >Other</div>
+                    <div style="margin-left:25px" v-if="user.rola.indexOf('PLAYER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor1}" @click="rolecol1"  >Player</div>
+                    <div style="margin-left:35px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap; " v-if="this.user.rola.indexOf('CLUBADMIN') !==-1" v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor2}"  @click="rolecol2" >Club Admin</div> 
+                    <div style="margin-left:35px" v-if="this.user.rola.indexOf('ORGANIZER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor3}" @click="rolecol3" >Organizer</div>
+                    <div style="margin-left:35px" v-if="this.user.rola.indexOf('ARBITER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor4}" @click="rolecol4" >Arbiter</div>
+                    <div style="margin-left:35px" v-if="this.user.rola.indexOf('TRAINER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor5}" @click="rolecol5" >Trainer</div>
+                    <div style="margin-left:35px" v-if="this.user.rola.indexOf('OTHER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor6}" @click="rolecol6" >Other</div>
                     <div style="display:flex" v-if="clickside">
-                        <select v-model="selectedrole" id="select-css"  >
+                        <select @change="addrole"  v-model="selectedrole" id="select-css"  >
                             <option disabled value="">Add/Remove</option>
-                            <option value="player">Player</option>
-                            <option value="clubadmin">Clubadmin</option>
-                            <option value="organizer">Organizer</option>
-                            <option value="arbiter">Arbiter</option>
-                            <option value="trainer">Trainer</option>
-                            <option value="other">Other</option>
+                            <option value="PLAYER">Player</option>
+                            <option value="CLUBADMIN">Clubadmin</option>
+                            <option value="ORGANIZER">Organizer</option>
+                            <option value="ARBITER">Arbiter</option>
+                            <option value="TRAINER">Trainer</option>
+                            <option value="OTHER">Other</option>
                         </select>
-                        <div @click="addrole()" class="add-remove">+</div> 
-                        <div @click="removerole()" class="add-remove">-</div>
                     </div> 
                 </div>
             </div>
@@ -174,7 +172,7 @@
                 </div>
                 <div >
 <!--PLAYER PART -->      
-                    <div v-if="activeplayer">
+                    <div v-if="activeplayer && this.user.rola.indexOf('PLAYER')!==-1">
                         <div class="middle5-right-grid">
                             <div class="mid5-padd">
                                 <p class="middle5-text">Current club:</p>
@@ -214,7 +212,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="middle5-right-grid" style="height:170px;">
+                        <div class="middle5-right-grid2" style="min-height:170px;">
                             <div class="mid5-padd" style="padding:0 0 0 10px">
                                 <p class="middle5-text" style="margin-bottom:10px">Open to new engagements</p>
                             
@@ -233,8 +231,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mid5-padd">
-                                <p class="middle5-text"></p>
+                            <div class="mid5-padd" style="padding:0 0 0 10px">
+                                <p class="middle5-text" style="margin-bottom:10px"> My interested in shortlist:</p>
+                                <p v-for="listpla in my_interested_list" :key="listpla.target_uuid" class="gold2" >
+                                    <router-link  class="link"  :to="{ name:'Publicprofile',params:{ id:listpla.target_uuid}}"> 
+                                        - {{listpla.target_object.name_first}} {{listpla.target_object.name_last}} 
+                                    </router-link>
+                                </p>  
+                                <p v-for="listclub in my_intclub_list" :key="listclub.target_uuid" class="gold2" >
+                                    <router-link  class="link"  :to="{ name:'Publicprofile',params:{ id:listclub.target_uuid}}"> 
+                                        - {{listclub.target_object.name_first}} {{listclub.target_object.name_last}}, club:{{listclub.target_object.club}} 
+                                    </router-link>
+                                </p> 
                             </div>
                         </div>
                         <div id="middle5-right-end">
@@ -302,7 +310,7 @@
                     </div>
     <!-- END PLAYER PART  --> 
     <!-- CLUB PART  -->            
-                    <div  v-if="activeclub">
+                    <div  v-else-if="activeclub && this.user.rola.indexOf('CLUB')!==-1">
                         <div class="middle5-right-grid">
                             <div class="mid5-padd">
                                 <p class="middle5-text">My club name:</p>
@@ -352,15 +360,25 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="middle5-right-grid">
+                        <div class="middle5-right-grid2">
                             <div class="mid5-padd flex-center">
                                 <div  class="borderbutton flex-center">
                                     <img src="../assets/createevent2.png" alt="">
                                     <p>Create an event</p>
                                 </div>
                             </div>    
-                            <div class="mid5-padd flex-center">
-                            
+                            <div class="mid5-padd" style="padding:0 0 0 10px">
+                                <p class="middle5-text" style="margin-bottom:10px"> My interested in shortlist:</p>
+                                <p v-for="listpla in my_interested_list" :key="listpla.target_uuid" class="gold2" >
+                                    <router-link  class="link"  :to="{ name:'Publicprofile',params:{ id:listpla.target_uuid}}"> 
+                                        - {{listpla.target_object.name_first}} {{listpla.target_object.name_last}} 
+                                    </router-link>
+                                </p>  
+                                <p v-for="listclub in my_intclub_list" :key="listclub.target_uuid" class="gold2" >
+                                    <router-link  class="link"  :to="{ name:'Publicprofile',params:{ id:listclub.target_uuid}}"> 
+                                        - {{listclub.target_object.name_first}} {{listclub.target_object.name_last}}, club:{{listclub.target_object.club}} 
+                                    </router-link>
+                                </p> 
                             </div>
                         </div>
                         <div class="middle5-right-grid" >
@@ -379,12 +397,12 @@
                     </div>
     <!--END CLUB PART  -->
     <!-- ORGANIZER PART  -->            
-                    <div  v-if="activeorg">
+                    <div  v-else-if="activeorg && this.user.rola.indexOf('ORGANIZER')!==-1">
                         <div id="middle5-right-startorg">
                             <p class="middle5-text">My Event is currently active:</p>
                             <div class="mid5-padd">
                                 <div style="height:65px;display:flex">
-                                    <img v-if="switch5" id="plava-kugla2" src="../assets/plavakugla.png" alt="">
+                                    <img v-if="user.organizer_current_event!=null" id="plava-kugla2" src="../assets/plavakugla.png" alt="">
                                 </div>
                           <!--      <v-app class="vuetify-switch2"> 
                                     <v-container class="switch-container"   >
@@ -394,7 +412,7 @@
                                         ></v-switch>
                                     </v-container>  
                                 </v-app> -->
-                                <div class="gold" v-if="switch5" style="padding-left:6px;">
+                                <div class="gold" v-if="user.organizer_current_event!=null" style="padding-left:6px;">
                                      <p v-if="user.organizer_current_event">{{user.organizer_current_event.event_name}}</p>
                                      <p v-if="user.organizer_current_event">From {{user.organizer_current_event.event_date_from}} to {{user.organizer_current_event.event_date_to}}</p> 
                                     <p v-if="user.organizer_current_event">{{user.organizer_current_event.event_description}}</p>  
@@ -457,11 +475,11 @@
                         </div>
                         
                     </div>
-                    <div  v-if="activetre" style="opacity:0.5">
+                    <div  v-else-if="activetre && this.user.rola.indexOf('TRAINER')!==-1" style="opacity:0.5">
                         <p class="rotate">Coming soon!</p>
                          <img style="width:100%" src="../assets/coach1.jpg" alt="">  
                     </div>
-                    <div  v-if="activearb" style="opacity:0.5">
+                    <div  v-else-if="activearb && this.user.rola.indexOf('ARBITER')!==-1" style="opacity:0.5">
                         <p class="rotate">Coming soon!</p>
                         <img style="width:100%" src="../assets/arbiter.jpg" alt=""> 
                     </div>
@@ -521,10 +539,10 @@ export default {
          rolecolor5:false,
          rolecolor6:false,
          activeplayer:true,
-         activeclub:false,
-         activeorg:false,
-         activearb:false,
-         activetre:false,
+         activeclub:true,
+         activeorg:true,
+         activearb:true,
+         activetre:true,
          switch1:'',
          switch2:'',
          titule:[],
@@ -567,7 +585,6 @@ export default {
          picked:'',
          pickedorg:'',
          switch3:'',
-         switch5:null,
          photoinfo:'',
          changed_compensation:false,
          createevent:'',
@@ -578,23 +595,24 @@ export default {
          new_event_to:'',
          events:[],
        //  event:[],
-         event_list:false
+         event_list:false,
+         my_interested_list:[],
+         my_intclub_list:[]
+         
       }
 },
    
 //------------------------------MOUNTED-------------------------------//
 
 mounted(){
-  if(this.user.organizer_current_event.event_name!=null){
-      this.switch5=true
-  }
-  fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+  
+fetch('https://app.outpostchess.com/api/v2/current_user_info', {
   method:'GET',
   headers: {
     'Content-Type': 'application/json',
     "authorization":`Bearer ${localStorage.getItem('token')}`
   }
-  }, fetch('https://app.outpostchess.com/api/v2/countries', {
+  },        fetch('https://app.outpostchess.com/api/v2/countries', {
             method:'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -607,7 +625,9 @@ mounted(){
 )
 .then(response => response.json())
 .then(data => this.user=data)
-.then(data => console.log('podaci',data))  
+.then(data => console.log('podaci',data)) 
+  
+  
 
 fetch('https://app.outpostchess.com/api/v2/titule', {
   method:'GET',
@@ -620,8 +640,10 @@ fetch('https://app.outpostchess.com/api/v2/titule', {
 .then(response => response.json())
 .then(data => this.titule=data)
 //.then(data => console.log('titule',data))
-  
-  fetch('https://app.outpostchess.com/api/v2/organiser_events', {
+
+     
+    
+fetch('https://app.outpostchess.com/api/v2/organiser_events', {
         method: 'GET',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -630,28 +652,34 @@ fetch('https://app.outpostchess.com/api/v2/titule', {
             })
         .then(response => response.json())
         .then(data => this.events=data)
-      //  .then(data => console.log('events',data))       
-            
+      //  .then(data => console.log('events',data))   
+      
+fetch('https://app.outpostchess.com/api/v2/interested_in_player', {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json',
+                "Authorization":`Bearer ${localStorage.getItem('token')}`
+                },		
+               
+            })
+        .then(response => response.json())
+        .then(data => this.my_interested_list=data)   
+        //.then(data => console.log('my_list',data))
+
+fetch('https://app.outpostchess.com/api/v2/interested_in_club', {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json',
+                "Authorization":`Bearer ${localStorage.getItem('token')}`
+                },		
+               
+            })
+        .then(response => response.json())
+        .then(data => this.my_intclub_list=data)   
+        .then(data => console.log('my_clublist',data))           
 },
-
-//--------------UPDATED----------------------//
-
-
-updated() {
-
-   
-   if(this.user.rola.indexOf('PLAYER')==-1){
-     this.activeplayer=false 
-     this.activeclub=true
-    }
-    
-
-},
-
 //--------------METHODS----------------------//
 
 methods:{
-
+     
     delete_event:function(eve){
             console.log(eve.event_uuid);
            fetch(`https://app.outpostchess.com/api/v2/organiser_event/${eve.event_uuid}`, {
@@ -899,8 +927,8 @@ userpatch:function(){
                )   
             .then(response => response.json())
             .then(data => console.log(data)) 
-             if(this.picked !== '' || this.pickedorg !== '' || this.photoinfo !== ''  ){
-                     this.$router.go()
+             if(this.picked !== '' || this.pickedorg !== '' || this.photoinfo !== '' || this.selectedrole !== '' ){
+                     window.location.reload();
                      }
             },
 
@@ -932,6 +960,9 @@ userpatch:function(){
 
 
 addrole:function(){
+          console.log(this.selectedrole)   
+          console.log(this.user.rola.indexOf(this.selectedrole))   
+    if(this.user.rola.indexOf(this.selectedrole)==-1){
     fetch('https://app.outpostchess.com/api/v2/user_rola_add', {
         method: 'PATCH',
         headers: {
@@ -942,10 +973,9 @@ addrole:function(){
       })
       .catch(error => {
         console.error(error)
-      }) 
-    },
-removerole:function(){
-    fetch('https://app.outpostchess.com/api/v2/user_rola_remove', {
+      })
+      }else {
+      fetch('https://app.outpostchess.com/api/v2/user_rola_remove', {
         method: 'PATCH',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -957,8 +987,9 @@ removerole:function(){
             .catch(error => {
             console.error(error)
             }) 
-            //  .then(this.$router.go());
+           }
     },
+
 
 post_event:function(){
     this.newevent=false;
@@ -979,7 +1010,7 @@ post_event:function(){
             window.location.reload();
         })
            
-            this.rolecol3=true
+          
 }       
    
 }
@@ -1277,6 +1308,15 @@ height: 80px;
   
    
  }
+ .middle5-right-grid2{
+    display:grid; 
+    grid-template-columns: 48% 48%;
+    gap:2%;
+    min-height:160px;
+    margin-bottom: 2%;
+    text-align: left;
+    background-color:#202122 ;
+ }
  .mid5-padd{
      padding:10px;
      }
@@ -1325,6 +1365,7 @@ height: 80px;
     font-size: 14px;
     padding-left:20px;
 }
+
 .middle5-text{
     padding:15px 0 5px  20px;
     font-weight: normal;
@@ -1431,6 +1472,10 @@ input::-webkit-inner-spin-button {
 }
 
 /* CLUB */
+.link:hover{
+    color:#C8A07D;
+    opacity: 0.8;
+}
 .vuetify-switch{
     height: 0px;
     position:relative;

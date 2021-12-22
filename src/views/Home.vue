@@ -164,14 +164,14 @@ export default {
           method:'POST',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify( 
-            { email: this.emailogin, password: this.pass1,
+           { email: this.emailogin, password: this.pass1,
             rola:{ 
           PLAYER:this.player,
           ORGANIZER:this.organizer, 
           ARBITER:this.arbiter, 
           CLUBADMIN:this.admin, 
           OTHER:this.other,
-          TRAINER:this.trainer}
+          TRAINER:this.trainer} 
             })
           })
             .then(response => response.json())

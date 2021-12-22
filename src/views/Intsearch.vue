@@ -71,8 +71,8 @@
                   <div  class="search-res"></div>
                   <div class="search-res start " >
                     <div class="initials">{{alluser.inicijali}}</div>
-                    <div ><router-link :user_uuid='alluser.user_uuid' :token_id='user.user_uuid'   :to="{ name:'Publicprofile',params:{ id:alluser.user_uuid}}">{{alluser.name_first}} {{alluser.name_last }} </router-link></div>  
-                    
+                    <div v-if='user.user_uuid!==alluser.user_uuid'><router-link :user_uuid='alluser.user_uuid' :token_id='user.user_uuid'   :to="{ name:'Publicprofile',params:{ id:alluser.user_uuid}}">{{alluser.name_first}} {{alluser.name_last }} </router-link></div>  
+                    <div v-if='user.user_uuid==alluser.user_uuid'><router-link    to="../profile" >{{alluser.name_first}} {{alluser.name_last }} </router-link></div> 
                   </div>
                   <div class="search-res">{{alluser.federation}}</div>
                   <div class="search-res">{{alluser.city}}</div>
@@ -225,6 +225,7 @@ export default {
         interestedin:'' ,
         input_text:'',
         textsearch:'',
+        titule:[]
 
       }
 },
@@ -239,7 +240,7 @@ mounted(){
 )
 .then(response => response.json())
 .then(data => this.titule=data)
-.then(data => console.log('titule',data))
+//.then(data => console.log('titule',data))
   
   fetch('https://app.outpostchess.com/api/v2/users_search', {
   method:'GET',
@@ -257,7 +258,7 @@ fetch('https://app.outpostchess.com/api/v2/countries', {
             })
             .then(response => response.json())
             .then(data => this.flags=data)
-            .then(data => console.log('countries',data))
+      //    .then(data => console.log('countries',data))
             
 )
 .then(response => response.json())
@@ -274,7 +275,7 @@ fetch('https://app.outpostchess.com/api/v2/countries', {
 
 .then(response => response.json())
 .then(data => this.user=data)
-.then(data => console.log('podaci',data))
+//.then(data => console.log('podaci',data))
 
 },
 

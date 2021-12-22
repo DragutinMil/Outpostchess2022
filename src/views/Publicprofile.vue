@@ -94,7 +94,7 @@
                 </div>
                 <div >
 <!--PLAYER PART -->      
-                <div v-if="activeplayer">
+                <div v-if="activeplayer && this.user.rola.indexOf('PLAYER')!==-1">
                     <div class="middle5-right-grid">
                         <div class="mid5-padd">
                             <p class="middle5-text">Current club:</p>
@@ -150,9 +150,23 @@
                                 </div>
                             </div>
                         </div>
-                         <div class="mid5-padd flex-center">
-                            <div class="borderbutton flex-center">
-                                <p>Interested in this Player</p>
+                         <div  class="mid5-padd flex-center">
+                             <div>
+                                <div v-if="interested_no" style="margin-bottom:10px; "   class="borderbutton flex-center">
+                                    <p  @click="interested_player" style="font-size:12px;">Interested in this Player</p>
+                                </div>
+                                <div v-if="clicked_interested2">  
+                                    <div  v-for="listpla in my_interested_list" :key="listpla.created_date"  >  
+                                        <div  v-if="listpla.target_uuid==user.user_uuid" class="borderbutton flex-center">
+                                            <div style="font-size:12px;" >
+                                            <p   @click="interested_player_del">Remove from shortlist</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div @click="interested_player_del" v-if="clicked_interested" style="margin-bottom:10px; "   class="borderbutton flex-center">
+                                    <p  style="font-size:12px;">Remove from shortlist</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -210,7 +224,7 @@
                 </div>
 <!-- END PLAYER PART  --> 
  <!-- CLUB PART  -->            
-                <div  v-if="activeclub">
+                <div  v-else-if="activeclub && this.user.rola.indexOf('CLUB')!==-1">
                     <div class="middle5-right-grid">
                         <div class="mid5-padd">
                             <p class="middle5-text">My club name:</p>
@@ -258,8 +272,22 @@
                             </div>
                         </div>    
                         <div class="mid5-padd flex-center">
-                            <div class="borderbutton flex-center">
-                                <p>Interested in this Club</p>
+                             <div>
+                                <div style="margin-bottom:10px; "   class="borderbutton flex-center">
+                                    <p  @click="interested_club" style="font-size:12px;">Interested in this Club</p>
+                                </div>
+                                <div v-if="clicked_interested4">  
+                                    <div  v-for="listclub in my_intclub_list" :key="listclub.created_date"  >  
+                                        <div  v-if="listclub.target_uuid==user.user_uuid" class="borderbutton flex-center">
+                                            <div style="font-size:12px;" >
+                                            <p   @click="interested_club_del">Remove from shortlist</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div @click="interested_club_del" v-if="clicked_interested3" style="margin-bottom:10px; "   class="borderbutton flex-center">
+                                    <p  style="font-size:12px;">Remove from shortlist</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -279,12 +307,12 @@
                 </div>
 <!--END CLUB PART  -->
 <!-- ORGANIZER PART  -->            
-                <div  v-if="activeorg">
+                <div  v-if="activeorg && this.user.rola.indexOf('ORGANIZER')!==-1">
                     <div id="middle5-right-startorg">
                         <p class="middle5-text">My Event is currently active:</p>
                          <div class="mid5-padd">
                             <div style="height:65px;display:flex">
-                                <img v-if="switch5" id="plava-kugla2" src="../assets/plavakugla.png" alt="">
+                                <img v-if="user.organizer_current_event.event_name!=null" id="plava-kugla2" src="../assets/plavakugla.png" alt="">
                             </div>
                              <v-app class="vuetify-switch2"> 
                                  <v-container class="switch-container"   >
@@ -296,7 +324,7 @@
                                 </v-container>  
                             </v-app>
                             <div>
-                                 <p v-if="switch5" class="gold" style="margin-top:35px;padding-left:6px"   >{{user.organizer_current_event}}</p>
+                                 <p v-if="user.organizer_current_event.event_name!=null" class="gold" style="margin-top:35px;padding-left:6px"   >{{user.organizer_current_event}}</p>
                             </div>
                         </div>
                     </div>
@@ -314,7 +342,7 @@
                         </div>
                         
                          <div class="mid5-padd flex-center">
-                            <div class="borderbutton flex-center">
+                            <div @click="interested_event" class="borderbutton flex-center">
                                 <p style="text-align:center">Interested in this Organizer</p>
                             </div>               
                         </div>               
@@ -331,11 +359,11 @@
                         </div>  
                     </div>
                 </div>
-                 <div  v-if="activetre" style="opacity:0.5">
+                 <div  v-if="activetre && this.user.rola.indexOf('TRAINER')!==-1" style="opacity:0.5">
                         <p class="rotate">Coming soon!</p>
                          <img style="width:100%" src="../assets/coach1.jpg" alt="">  
                     </div>
-                    <div  v-if="activearb" style="opacity:0.5">
+                    <div  v-if="activearb && this.user.rola.indexOf('ARBITER')!==-1" style="opacity:0.5">
                         <p class="rotate">Coming soon!</p>
                         <img style="width:100%" src="../assets/arbiter.jpg" alt=""> 
                     </div>
@@ -416,6 +444,7 @@ export default {
          min: 0,
          max: 3000,
          user:{rola:[],
+               user_uuid:'',
                federation_details:{},
                rola_array:[],
                comp_per_game_from:'',
@@ -436,6 +465,15 @@ export default {
          switch5:'',
          createevent:'',
          idt:'',
+         my_interested_list:[],
+         my_intclub_list:[],
+         listpla:{target_uuid:''},
+         clicked_interested:false,
+         clicked_interested2:true,
+         clicked_interested4:true,
+         clicked_interested3:false,
+         interested_no:true
+         
          
       }
 },
@@ -454,7 +492,7 @@ mounted(){
             })
         .then(response => response.json())
         .then(data => this.events=data)
-        .then(data => console.log('events',data))       
+        //.then(data => console.log('events',data))       
             
 
   fetch( `https://app.outpostchess.com/api/v2/public_user_info/${this.idt} `, {
@@ -479,7 +517,28 @@ mounted(){
 
 .then(response => response.json())
 .then(data => this.userinitiator=data)
-.then(data => console.log('initiator',data)) 
+//.then(data => console.log('initiator',data)) 
+fetch('https://app.outpostchess.com/api/v2/interested_in_player', {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json',
+                "Authorization":`Bearer ${localStorage.getItem('token')}`
+                },		
+               
+            })
+        .then(response => response.json())
+        .then(data => this.my_interested_list=data)   
+       // .then(data => console.log('my_list',data))
+
+fetch('https://app.outpostchess.com/api/v2/interested_in_club', {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json',
+                "Authorization":`Bearer ${localStorage.getItem('token')}`
+                },		
+               
+            })
+        .then(response => response.json())
+        .then(data => this.my_intclub_list=data)   
+        .then(data => console.log('my_clublist',data))      
 },
 
 
@@ -487,23 +546,99 @@ mounted(){
 //--------------METHODS----------------------//
  created() {
             this.idt = this.$route.params.id;
+           
         },
- updated() {
 
-   
-   if(this.user.rola.indexOf('PLAYER')==-1){
-     this.activeplayer=false 
-     this.activeclub=true
-    }
-    
-
-},
 methods:{
     
+    interested_club:function(){
+          this.clicked_interested4=false;
+          this.clicked_interested3=true;
+           fetch(`https://app.outpostchess.com/api/v2/interested_in_club/${this.idt} `, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                     "authorization":`Bearer ${localStorage.getItem('token')}`
+                },
+                body:null
+            }).then(() => {
+           // window.location.reload();
+        })
+    },
+    interested_player:function(){
+           this.interested_no=false;
+           this.clicked_interested=true;
+           this.clicked_interested2=false;
+           fetch(`https://app.outpostchess.com/api/v2/interested_in_player/${this.idt} `, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                     "authorization":`Bearer ${localStorage.getItem('token')}`
+                },
+                body:null
+            }).then(() => {
+                this.intpla_switch=true
+           // window.location.reload();
+        })
+    },
+    interested_event:function(){
+           fetch(`https://app.outpostchess.com/api/v2/interested_in_event/${this.idt} `, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                     "authorization":`Bearer ${localStorage.getItem('token')}`
+                },
+                body:null
+            }).then(() => {
+           // window.location.reload();
+        })
+    },
+     interested_club_del:function(){
+          this.clicked_interested4=false;
+          this.clicked_interested3=false;
+           fetch(`https://app.outpostchess.com/api/v2/interested_in_club/${this.idt} `, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                     "authorization":`Bearer ${localStorage.getItem('token')}`
+                },
+                body:null
+            }).then(() => {
+           // window.location.reload();
+        })
+    },
+    interested_player_del:function(){
+           this.interested_no=true;
+           this.clicked_interested=false;
+           this.clicked_interested2=false;
+           fetch(`https://app.outpostchess.com/api/v2/interested_in_player/${this.idt} `, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                     "authorization":`Bearer ${localStorage.getItem('token')}`
+                },
+                body:null
+            }).then(() => {
+           // window.location.reload();
+        })
+    },
+    interested_event_del:function(){
+           fetch(`https://app.outpostchess.com/api/v2/interested_in_event/${this.idt} `, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                     "authorization":`Bearer ${localStorage.getItem('token')}`
+                },
+                body:null
+            }).then(() => {
+           // window.location.reload();
+        })
+    },
+
     cvdairycal1: function(){
+
       this.clickActive1=true; this.clickActive2=false;  this.clickActive3=false;
-      console.log(this.idt)
-       console.log(this.userinitiator.user_uuid)
+      
     } ,
      cvdairycal2: function(){
       this.clickActive1=false;  this.clickActive2=true;  this.clickActive3=false;
@@ -512,6 +647,7 @@ methods:{
       this.clickActive1=false;this.clickActive2=false;  this.clickActive3=true;
     } ,
     rolecol1:function(){
+      
       this.activeplayer=true;this.activeclub=false; this.activeorg=false; 
       this.activetre=false;  this.activearb=false;
       this.rolecolor1=true; this.rolecolor2=false;this.rolecolor3=false;
@@ -552,10 +688,7 @@ methods:{
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
                 },		
-                body: JSON.stringify( { 
-                 conn_initiator_uuid:this.userinitiator.user_uuid,
-                 conn_target_uuid: this.itd,
-                })
+                body:null
             })
             
             .catch(error => {
@@ -568,6 +701,7 @@ methods:{
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
                 },
+                body:null
             })
             
             .catch(error => {
@@ -869,6 +1003,15 @@ height: 80px;
   
    
  }
+ .middle5-right-grid2{
+    display:grid; 
+    grid-template-columns: 48% 48%;
+    gap:2%;
+    min-height:160px;
+    margin-bottom: 2%;
+    text-align: left;
+    background-color:#202122 ;
+ }
  .mid5-padd{
      padding:10px;
      background-color:#202122;
@@ -1045,6 +1188,7 @@ input::-webkit-inner-spin-button {
     border: 1px solid #2E2E2E;
     box-sizing: border-box;
     border-radius: 6px;
+    text-align: center;
 }
 .borderbutton:hover{
     opacity:0.7;

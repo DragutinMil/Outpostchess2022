@@ -4,7 +4,7 @@
               <div id="logo-pic">
                     <img src="../assets/logo2.png"  alt="">
               </div>
-              <div style="padding'-top:25px;"> 
+              <div style="padding-top:25px;"> 
                     <div id="welcom-text">
                         <p class="letter-44" style="padding-bottom:40px;" >Forgotten your password?</p> 
                         <p class="letter-44" > No need to despair - just enter your email </p>  
@@ -20,14 +20,13 @@
                  <button  type="button"  @click="passreset()"  class="text-join" style=" border: 1px solid #C8A07D; ">
                   Request password reset</button> 
                 </div>
-              
-           <!--   <p id="text-or">or</p>
-                <button type="button" onclick="alert('Hello world!')"   class="text-join"  style="border: 1px solid #E8E8E8;"> <div id="google-cor1"> <div id="google-cor"> <img src="../assets/Group.svg" id="" alt="google"></div><p id="joingoogle">Join with Google</p> </div></button>         
-             -->
+          
              </div>
              <div id="welcom-text">
               <p class="letter-34" >{{request}}</p>
              </div>
+             
+
       </div>
       
       <div id="right-login">
@@ -67,7 +66,9 @@ export default {
         })
           this.request='*Please check your email and reset password'
        } 
-     }
+       
+     },
+     
   },
 }
 </script>
@@ -95,7 +96,7 @@ a{
     .letter-44{
           display:flex;
           color:#FFFFFF;
-          font-size:18px;
+          font-size:16px;
     }
     
     .home-p{

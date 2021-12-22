@@ -17,7 +17,7 @@
             <div class="header_list">Time</div>
             <div class="header_list">Invitation</div>
           </div>
-      <!--     <div class="center_list_header connect">
+       <!--   <div class="center_list_header connect">
             <div style="display:flex">
               <div class="initials"> LK </div><p class="flex-center p_text" >Name  Lastname </p>
             </div>
