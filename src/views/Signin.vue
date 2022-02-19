@@ -1,0 +1,376 @@
+<template>
+  <div class="home">
+    <div id="left-login">
+      <div id="logo-pic">
+        <img
+          src="../assets/logo2.png"
+          alt=""
+        >
+      </div>
+               
+      <div> 
+        <div id="welcom-text">
+          <p class="letter-44">
+            Welcome to your
+          </p> 
+          <p class="letter-44 weight700">
+            professional chess
+          </p> 
+          <p class="letter-44 weight700">
+            community.
+          </p>                        
+        </div>
+      </div>
+      <div id="input-signup">
+        <div>
+          <input
+            v-model="emailsignin"
+            type="email"
+            name=""
+            :class="{mailin:isActive,'text-danger':hasError}"
+            placeholder="Email"
+            @keyup.enter="signin()"
+          >
+          <p id="reqpass">
+            {{ req1 }}
+          </p>
+        </div> 
+             
+        <div style="padding:20px 0 20px 0;"> 
+          <input
+            v-model="passsignin"
+            type="password"
+            name=""
+            :class="{mailin:isActive,'text-danger':hasError2,}"
+            placeholder="Password"
+            @keyup.enter="signin()"
+          >
+          <p id="reqpass">
+            {{ req }}
+          </p>
+          <p id="reqpass">
+            {{ request }}
+          </p>
+        </div>
+                
+
+        <div id="forgot-text">
+          <router-link to="/resetpass">
+            <p class="home-p blue">
+              Forgot password?
+            </p>
+          </router-link>
+          <router-link
+            v-if="pojava"
+            to="/vermail"
+          >
+            <p class="home-p blue">
+              You didn't verify the email?
+            </p>
+          </router-link>
+        </div>
+        <div id="butt1">
+          <button
+            type="button"
+            class="text-join"
+            style=" border: 1px solid #C8A07D; "
+            @click="signin()"
+          >
+            Sign in
+          </button>
+        </div>
+        <!--   <p id="text-or">or</p>
+                <button type="button" onclick="alert('Hello world!')"   class="text-join"  style="border: 1px solid #E8E8E8;"> <div id="google-cor1"> <div id="google-cor"> <img src="../assets/Group.svg" id="" alt="google"></div><p id="joingoogle">Join with Google</p> </div></button>         
+             -->
+        <div id="policy">
+        <p id="text-or">or</p>
+        <button type="button" @click="back"   class="text-join"  style="border: 1px solid #E8E8E8;"> <p id="joingoogle">Sign up</p> </button>   
+        &nbsp;
+      <!--  <div id="forgot-text">
+          <router-link
+            to="/"
+            class="home-p blue"
+          >
+            Sign up
+          </router-link>
+        </div>-->
+      </div>
+      </div>
+    </div>
+      
+    <div id="right-login" />
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Signin",
+   data () {
+      return {
+         passsignin:"",
+         emailsignin:"",
+         req:"",
+         req1:"",
+         image1:"",
+         isActive:true,
+         hasError:false,
+         hasError2:false,
+         request:"",
+         pojava:false
+      }
+      
+    },
+    mounted() {
+    this.emailsignin= this.$route.query.email;
+  },
+    methods:{
+    back:function(){
+      this.$router.push('/');
+    },
+    signin: function(){
+      this.req="",
+      this.req1="",
+      this.hasError2=false,
+      this.hasError=false,
+      this.request=""
+      if(this.passsignin==""){
+        this.req="Enter Password";
+        this.hasError2=true;
+      }
+      if(this.emailsignin==""){
+        this.req1=" Enter Email" ;
+        this.hasError=true;
+      }
+      if(this.emailsignin!=="" && this.passsignin!==""){
+        
+        fetch('https://app.outpostchess.com/api/v2/auth', {
+        method:'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify( { email: this.emailsignin, password: this.passsignin } )
+        })
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error('Something went wrong')
+            
+          }
+          
+        })
+        
+        .then((data) => {
+          console.log("ok");
+          // Do something with the response
+          localStorage.setItem('token',  data?.token);
+          this.$router.push('/profile');
+        })
+        
+        .catch((error) => {
+          console.log("error");
+          console.log(error);
+          this.request='Login failed.'
+          this.pojava=true
+        })
+     
+      }
+
+    } ,
+  },
+}
+</script>
+<style scoped>
+p{
+  padding:0;
+}
+a{
+  text-decoration: none;
+}
+
+  .home{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    height: 100vh;
+    
+  }
+
+  .flex-center{
+       display: flex;
+       justify-content: center;
+       align-items: center;
+  }
+ 
+    .letter-44{
+          display:flex;
+          color:#FFFFFF;
+          font-size:44px;
+    }
+    
+    .home-p{
+      color:#707070;
+
+      font-size: 12px;
+      line-height: 12px;
+      
+    }
+    .blue{
+     color: #11C6D1;
+    }
+    .pass-in{
+      border: 1px solid rgba(196, 196, 196, 0.5);
+      box-sizing: border-box;
+      border-radius: 4px;
+      background-color: #1B1C1D;
+      height: 40px;
+      padding-left:15px;
+      color:#FFFFFF;
+     
+    }
+    
+      .text-join{
+    font-size: 14px;
+    color:#FFFFFF;
+    background-color: #1B1C1D;
+    border-radius: 11px;
+    width: 65%;
+    box-sizing: border-box;
+    border-radius: 6px;
+    height: 44px;
+    }
+     .text-join:hover{
+       opacity:0.7;
+     }
+
+  #right-login{
+      
+      background-image: url("../assets/loginphoto.jpg");
+      width:100%;
+      background-size:  cover;
+      background-position: center;
+      color:#707070;
+
+  }
+  #forgot-text{
+    width:80%;
+    padding-left:18%;
+    padding-top:5px;
+    text-align: left;
+
+    }
+   
+#welcom-text>p{
+   margin:0;
+   padding-left:29%;
+}
+#welcom-text{
+  margin:30px 0 30px 0;
+}
+  #left-login{
+    background-color: #1B1B1C;
+  }
+  #logo-pic{
+    padding:50px 35px 0px 35px;
+    display:flex;
+    width:65%;
+    margin-left:24%;
+    
+  }
+  
+  #input-signup{
+    background-color: #1B1C1D;
+    width: 65%;
+    padding: 20px 0 20px 0;
+    margin:auto;
+    border-radius: 11px;
+  }  
+  #letter-16{
+         color:#FFFFFF;
+         font-size:16px;
+    }
+  
+  .mailin{
+     width:65%;
+     border: 1px solid rgba(196, 196, 196, 0.5);
+     box-sizing: border-box;
+     border-radius: 4px;
+     background-color: #1B1C1D;
+     height: 40px;
+     padding-left:15px;
+     font-size:14px;
+     color:#FFFFFF;
+  }
+  
+  .text-danger{
+     width:65%; 
+     box-sizing: border-box;
+     border-radius: 4px;
+     background-color: #1B1C1D;
+     height: 40px;
+     padding-left:15px;
+     font-size:14px;
+     border: 1px solid #F2358D;
+     color:#FFFFFF;
+     color:#F2358D;
+  }
+
+
+  #text-or{
+    font-size: 14px;
+    color:#FFFFFF;
+    padding-top:15px;
+  }
+  #butt1{
+    padding-top:20px;
+  }
+ 
+  #google-cor1{
+     display:flex;
+      justify-content: center;
+       align-items: center;
+  }
+   #google-cor{
+     width:20px;
+     margin:auto 0 auto 0;
+     padding-right:7px;
+   }
+   #reqpass{
+     color:#F2358D;
+     text-align: left;
+     padding-left:17.5%;
+     font-size: 12px;
+   }
+   #joingoogle{
+      margin:0;
+   padding-left:15px;
+   }
+   #signup{
+     text-align: left;
+
+     padding-right:50%
+   }
+ 
+
+@media only screen and (max-width: 499px){
+  #right-login{
+    display:none;
+  } 
+  .home{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    
+  }
+  .letter-44{
+    font-size:20px;
+    }
+    #left-login{
+    width:100%
+    }
+   
+  #logo-pic{
+    padding:50px 35px 0px 35px;
+    display:flex;
+    width:55%;
+    margin-left:10%;
+  }
+}
+</style>
