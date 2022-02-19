@@ -1,13 +1,8 @@
 <template>
   <div class="container">
-    <p id="rotate2">
-      Coming soon
-    </p>
-    <img
-      id="calendarpic"
-      src="@/assets/chess_diary2.png"
-      alt=""
-    >
+    <p id="rotate2">Coming soon</p>
+    <img id="calendarpic" src="@/assets/chess_diary2.png" alt="">
+    
   </div>
 </template>
 

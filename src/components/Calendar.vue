@@ -1,15 +1,11 @@
 <template>
   <div class="calendar">
-    <div class="container flex-center">
-      <p id="rotate">
-        Coming soon
-      </p> 
-      <img
-        id="calendarpic"
-        src="@/assets/calendar.svg"
-        alt=""
-      >
-    </div>
+      <div class="container flex-center">
+             <p id="rotate">Coming soon</p> 
+             <img id="calendarpic" src="@/assets/calendar.svg" alt="">
+             
+      </div>
+   
   </div>
 </template>
 <script>

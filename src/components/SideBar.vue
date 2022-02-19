@@ -25,7 +25,7 @@
                     <hr>
                     <div class="side-options"> 
                              <div class="flex-center"><img  src="../assets/book.png" alt=""></div>
-                             <router-link to="../blog" style="color:#C7C9D0"> <p class="left-sidetext diffcol">Blog</p></router-link> 
+                             <p class="left-sidetext diffcol">Blog</p>
                     </div>
 
                     <div id="side-flexend">

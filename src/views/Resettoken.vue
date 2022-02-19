@@ -1,75 +1,51 @@
 <template>
   <div class="home">
-    <div id="left-login">
-      <div id="logo-pic">
-        <img
-          src="../assets/logo2.png"
-          alt=""
-        >
-      </div>
+      <div id="left-login">
+              <div id="logo-pic">
+                    <img src="../assets/logo2.png"  alt="">
+              </div>
                
-      <div> 
-        <div id="welcom-text">
-          <p
-            class="letter-44"
-            style="padding-bottom:40px;"
-            @click="trt"
-          >
-            Enter new password:
-          </p> 
-        </div>
-      </div>
-      <div id="input-signup">
-        <div style="padding-bottom:15px;">
-          <input
-            v-model="newpassword"
-            type="password"
-            name=""
-            :class="{mailin:isActive}"
-            placeholder="New password"
-          >
-        </div> 
-        <div style="padding-bottom:20px;">
-          <input
-            v-model="newpassword1"
-            type="password"
-            name=""
-            :class="{mailin:isActive}"
-            placeholder="Repeat password"
-          >
-        </div> 
+              <div> 
+                    <div id="welcom-text">
+                        <p class="letter-44" style="padding-bottom:40px;"  @click="trt">Enter new password:</p> 
+                    </div>
+                   
+              </div>
+             <div id="input-signup">
+               
+                <div style="padding-bottom:15px;">
+                     <input type="password" name=""  v-bind:class="{mailin:isActive}" placeholder="New password" v-model="newpassword">
+                  
+                </div> 
+                <div style="padding-bottom:20px;">
+                     <input type="password"  name=""  v-bind:class="{mailin:isActive}" placeholder="Repeat password" v-model="newpassword1">
+                  
+                </div> 
                 
 
-        <div id="forgot-text" />
-        <div id="butt1">
-          <button
-            type="button"
-            class="text-join"
-            style=" border: 1px solid #C8A07D; "
-            @click="reset()"
-          >
-            Reset pasword
-          </button>
-        </div>
+              <div id="forgot-text" >
+                
+               
+              </div>
+              <div id="butt1">
+                 <button  type="button"  @click="reset()"  class="text-join" style=" border: 1px solid #C8A07D; ">Reset pasword</button> 
+                 
+              </div>
               
-        <!--   <p id="text-or">or</p>
+           <!--   <p id="text-or">or</p>
                 <button type="button" onclick="alert('Hello world!')"   class="text-join"  style="border: 1px solid #E8E8E8;"> <div id="google-cor1"> <div id="google-cor"> <img src="../assets/Group.svg" id="" alt="google"></div><p id="joingoogle">Join with Google</p> </div></button>         
              -->
-      </div>
-      <div id="welcom-text">
-        <p class="letter-34">
-          {{ req }}
-        </p>
-        <p class="letter-34">
-          {{ req1 }}
-        </p>
-        <p class="letter-34">
-          {{ req2 }}
-        </p>
-      </div>
-    </div>
+           </div>
+           <div id="welcom-text">
+              <p class="letter-34" >{{req}}</p>
+              <p class="letter-34" >{{req1}}</p>
+              <p class="letter-34" >{{req2}}</p>
+            </div>
+        </div>
       
-    <div id="right-login" />
+      <div id="right-login">
+             
+      </div>
   </div>
 </template>
 

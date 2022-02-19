@@ -1,35 +1,34 @@
 <template>
   <div class="home">
-    <div id="left-background">
-      <div class="left-login  thanks-text1">
-        <div id="input-signup">
-          <div id="logo-pic">
-            <img
-              src="../assets/logo2.png"
-              alt=""
-            >
-          </div>
-          <div>
-            <p class="thanks-text1">
-              Thank you for verifying!
-            </p>
-            <p class="thanks-text2 col">
-              Thank you for early sign up!
-              Your profile we'll be ready as soon as we reach enough registered users to make the best of your experience.
-              We are launching our beta version soon, so hang on there!
-              Your feedback and support means a lot to us. 
-            </p>
-            <p class="thanks-text2 col">      
-              See you in the chess connected world.
-            </p>
-            <p class="thanks-text2">
-              Outpost team - let's connect
-            </p>
-          </div>
+      <div id="left-background">
+        <div class="left-login  thanks-text1">
+            <div id="input-signup">
+                <div id="logo-pic">
+                      <img src="../assets/logo2.png" alt="">
+                </div>
+                <div>
+                    <p class="thanks-text1">Thank you for verifying!</p>
+                    <p class="thanks-text2 col">
+                        Thank you for early sign up!
+                        Your profile we'll be ready as soon as we reach enough registered users to make the best of your experience.
+                        We are launching our beta version soon, so hang on there!
+                        Your feedback and support means a lot to us. 
+                    </p>
+                    <p class="thanks-text2 col">      
+                         See you in the chess connected world.
+                        
+                    </p>
+                    <p class="thanks-text2">      
+                        
+                        Outpost team - let's connect
+                    </p>
+                </div>
+            </div>
         </div>
       </div>
-    </div>
-    <div id="right-login" />
+      <div id="right-login">
+             
+      </div>
       
   <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   </div>
