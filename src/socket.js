@@ -1,4 +1,4 @@
-import io from "socket.io-client";
+/*import io from "socket.io-client";
 
 console.log('socket connect init')
 var socket = io.connect('https://app.outpostchess.com/');
@@ -13,3 +13,4 @@ socket.on('connect', async function(){
 //}) 
 
 export default socket
+*/

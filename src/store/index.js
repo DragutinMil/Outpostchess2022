@@ -1,4 +1,4 @@
-import Vue from 'vue'
+/*import Vue from 'vue'
 import Vuex from 'vuex'
 import createWebSocketPlugin from './websocketStorePlugin'
 import socket from '../socket'
@@ -25,3 +25,4 @@ export default new Vuex.Store({
 
 
 
+*/

@@ -1,6 +1,6 @@
-import axios from "axios"
+//import axios from "axios"
 
-export const getNotification = ({commit}) => {
+/*export const getNotification = ({commit}) => {
      
       
         axios.get('https://app.outpostchess.com/api/v2/notifications', {
@@ -14,4 +14,4 @@ export const getNotification = ({commit}) => {
           })
         
       
-}
+}*/
