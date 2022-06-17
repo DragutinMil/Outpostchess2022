@@ -1,23 +1,40 @@
 <template>
-   <div class="profile">
-      <div><SideBar /></div>
-<!-- CENTER -->
+  <div>
+    <div class="profile">
+      <div>
+        <SideBar />
+      </div>
+
+      <!-- CENTER -->
       <div class="container-center">
-        <div id="notify">
-          <a  id="a-middle"> <img   src="../assets/notification_important_24px@2x.png" alt="" id="middle1-img"></a>
+        <div id="searchpart-chat">
+          <Searchpart />
         </div>
         <div id="input-filter">
-          <input type="search"  name="" class="search-filter" placeholder="Search">
+          <input
+            type="search"
+            name=""
+            class="search-filter"
+            placeholder="Search"
+          >
         </div>
-<!-- CENTER/LIST -->
+        <!-- CENTER/LIST -->
         <div id="center_list">
           <div class="center_list_header">
-            <div class="header_list">Name & Surname</div>
-            <div class="header_list">Messages</div>
-            <div class="header_list">Time</div>
-            <div class="header_list">Invitation</div>
+            <div class="header_list">
+              Name & Surname
+            </div>
+            <div class="header_list">
+              Messages
+            </div>
+            <div class="header_list">
+              Time
+            </div>
+            <div class="header_list">
+              Invitation
+            </div>
           </div>
-          <div class="center_list_header connect">
+          <!--   <div class="center_list_header connect">
             <div style="display:flex">
               <div class="initials"> LK </div><p class="flex-center p_text" >Name  Lastname </p>
             </div>
@@ -44,26 +61,28 @@
             <div >
               <div class="flex-center p_text" > <img src="../assets/message_read.png" alt="" ></div>
             </div>
-          </div>
+          </div> -->
         </div>
-
       </div>
- <!-- RIGHT -->     
+      <!-- RIGHT -->     
       <div class="container-right">
-
+        <div><ChatApp /> </div>
       </div>
-         
     </div>
+  </div>
 </template>
 
 <script>
 
-
+import ChatApp from '../components/ChatApp.vue'
 import SideBar from '../components/SideBar.vue'
+import Searchpart from '../components/Searchpart.vue'
 export default {
-  name: 'chatroom',
+  name: 'Chatroom',
   components: {
-    SideBar
+    ChatApp,
+    SideBar,
+    Searchpart
   },
   data () {
       return {
@@ -81,7 +100,7 @@ mounted(){
 )
 .then(response => response.json())
 .then(data => this.titule=data)
-.then(data => console.log('titule',data))
+//.then(data => console.log('titule',data))
   
  
  fetch('https://app.outpostchess.com/api/v2/current_user_info', {
@@ -95,7 +114,7 @@ mounted(){
 
 .then(response => response.json())
 .then(data => this.user=data)
-.then(data => console.log('podaci',data))
+//.then(data => console.log('podaci',data))
 
 },
 
@@ -123,6 +142,10 @@ hr{
     grid-template-columns: 17% 65% 18%;
     
 }  
+#searchpart-chat{
+  margin:auto;
+  width:92%;
+}
 /* CENTER */
 .container-center {
  background-color:#171819;
@@ -218,6 +241,7 @@ hr{
 /* RIGHT */
 .container-right{
 background-color:#202122;
+color:#FFFFFF
 }
 
 

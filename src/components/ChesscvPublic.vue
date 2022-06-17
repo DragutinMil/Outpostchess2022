@@ -1,30 +1,58 @@
 <template>
-    <div class="chesscv">
-      
-      <div id="about-me">
-        <div id="about-edit">
-          <p style="padding-right:10px">About Me</p> 
-          
-        </div >
-            <div  >
-            <p  style="white-space: pre-line;"   v-bind:class="{'about-text3':editable,'about-text':isActive,}"  >{{user.about_me}} </p>
-            </div>
-            <div>
-              <button class="middle2-buttons"   v-if="editable" @click="editconfirm"  type="button" >Confirm changes</button>
-              <button class="middle2-buttons" @click="editable=!editable"  v-if="editable"  type="button" >Cancel</button>
-            </div>
-     <!--    <input  type="text" class="about-text" v-if="editable"   v-model="aboutme"   placeholder='about me'>
+  <div class="chesscv">
+    <div id="about-me">
+      <div id="about-edit">
+        <p style="padding-right:10px">
+          About Me
+        </p>
+      </div>
+      <div>
+        <p
+          style="white-space: pre-line;"
+          :class="{'about-text3':editable,'about-text':isActive,}"
+        >
+          {{ user.about_me }}
+        </p>
+      </div>
+      <div>
+        <button
+          v-if="editable"
+          class="middle2-buttons"
+          type="button"
+          @click="editconfirm"
+        >
+          Confirm changes
+        </button>
+        <button
+          v-if="editable"
+          class="middle2-buttons"
+          type="button"
+          @click="editable=!editable"
+        >
+          Cancel
+        </button>
+      </div>
+      <!--    <input  type="text" class="about-text" v-if="editable"   v-model="aboutme"   placeholder='about me'>
         <p v-else class="about-text">tekst  {{user.about_me}} </p>-->
-        <hr>
+      <hr>
+      <div>
+        <p>My CV: </p>
         <div>
-          <p>My CV: </p>
-          <div >
-            <p id="opencv" @click="newopenwindow()"   >{{user.cv.file_name}}</p> 
-            <input   type="file"  style="display:none;"  title=""  id="fileUpload"  />
-          </div>
-          
+          <p
+            id="opencv"
+            @click="newopenwindow()"
+          >
+            {{ user.cv.file_name }}
+          </p> 
+          <input
+            id="fileUpload"
+            type="file"
+            style="display:none;"
+            title=""
+          >
         </div>
       </div>
+    </div>
   </div>
 </template>
 
@@ -33,7 +61,10 @@
 export default {
   name: 'Chesscv',
   props:{
-    user:Object,
+    user:{
+      type: Object,
+      required: true,
+    }
     },
   data () {
       return {

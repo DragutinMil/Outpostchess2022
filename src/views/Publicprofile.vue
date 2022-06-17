@@ -1,362 +1,766 @@
 <template>
-    <div class="profile">
-        <SideBar />
-<!--  RIGHT PROFILE -->
-    <div  class="right-profile">
-        <div>  </div>  
-        <div id="right-middle">
-             <Searchpart />
-<!-- MID 2 -->             
-             <div  id="middle2">
-                <div class="upload-pic" >
-                   <img v-if="user.profile.file_url==null"  id="profile-pic" src="https://outpostchess.fra1.digitaloceanspaces.com/2bf139b2-7074-4fd4-8377-58efead41bf0.png" alt="">  
-                  <img v-else  id="profile-pic" :src='user.profile.file_url' alt="">
-                </div>
-                <div id="middle2-1" >
-                    <div style="display:flex">
-                         <p  id="profile-name" >{{user.name_first || "Name"}} {{user.name_last || "Last name"}}</p>
-                    </div>
-                    <div class="profile-info1" >
-                        <div class="profile-info1-1">
-                            <img src="../assets/Vector-1.svg" alt="" >  
-                             <p  >{{user.city}}</p>
-                        </div>
-                          <p class="padd-text"> Age : {{user.godine}}</p>
-                         <p class="padd-text"  style="color:#FFFFFF"> {{user.sex}} </p>
-                    </div>
-                    <div class="profile-info1-1">
-                           <div  style="margin-bottom:10px" >
-                            <div >
-                                <p  style="margin:0;padding-right:20px;">Federation: <span style="color:#C8A07D"> {{user.federation_details.name}} </span> </p>
-                            </div>
-                        </div>
-                        <p  style="margin-bottom:10px;padding:0">Fide ID:</p>
-                         <p  style="margin-bottom:10px;padding:0 0 0 10px;color:#C8A07D"    >{{user.fide_id}}</p>    
-                    </div>
-                </div>
-                <div id="middle2-button-container">
-                    <button class="middle2-buttons" @click="disconnection_people"      type="button" >Message</button>
-                    <button class="middle2-buttons" @click="connection_people"     type="button" >Connect</button>
-                </div>
+  <div class="profile">
+    <SideBar />
+    <!--  RIGHT PROFILE -->
+    <div class="right-profile">
+      <div />  
+      <div id="right-middle">
+        <Searchpart  />
+        <!-- MID 2 -->             
+        <div id="middle2">
+          <div class="upload-pic">
+            <img
+              v-if="user.profile.file_url==null" 
+              id="profile-pic"
+              src="https://outpostchess.fra1.digitaloceanspaces.com/2bf139b2-7074-4fd4-8377-58efead41bf0.png"
+              alt=""
+            >  
+            <img
+              v-else
+              id="profile-pic"
+              :src="user.profile.file_url"
+              alt=""
+            >
+          </div>
+          <div id="middle2-1">
+            <div style="display:flex">
+              <p id="profile-name">
+                {{ user.name_first || "Name" }} {{ user.name_last || "Last name" }}
+              </p>  
             </div>
-<!--END MID 2 -->     
-<!--MID 3 -->
-            <div id="middle3">
-                <div class="middle3-1">
-                      
-                    <div  class="middle3-1"  >
-                        <p style="color:#6F7381" >Title:</p>
-                        <div style="display:flex" >
-                            <div  v-if="user.titula_player!==null && this.user.rola.indexOf('PLAYER')!==-1" class="titles">{{user.titula_player_details.titula_short_name}} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->  </div>
-                           <div v-if="user.titula_organizer!==null && this.user.rola.indexOf('ORGANIZER')!==-1 " >
-                            <div  class="titles">{{user.titula_organizer_details.titula_short_name}} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->  </div>
-                           </div>
-                        </div>
-                    </div> 
-                </div>
-                <div  class="middle3-1 ">
-                    <p style="color:#6F7381">Rating:</p>
-                    <div class="ratings"><p  class="text-ratings ">Standard:</p>{{user.rating_standard}}  </div>
-                    <div class="ratings"><p class="text-ratings">Rapid:</p>{{user.rating_rapid}} </div>
-                    <div class="ratings"><p class="text-ratings">Blitz:</p>{{user.rating_blitz}} </div>
-                </div>
+            <div class="profile-info1">
+              <div class="profile-info1-1">
+                <img
+                  src="../assets/Vector-1.svg"
+                  alt=""
+                >  
+                <p>{{ user.city }}</p>
+              </div>
+              <p class="padd-text">
+                Age : {{ user.godine }}
+              </p>
+              <p
+                class="padd-text"
+                style="color:#FFFFFF"
+              >
+                {{ user.sex }}
+              </p>
             </div>
-<!--MIDDLE 4 -->
-            <div id="middle4">
-                <div class="middle3-1" style="justify-content:space-evenly ">
-                     <p  v-bind:class="{'middle4-1':isActive,'ratingsi':clickActive1,}" @click="cvdairycal1()" > CHESS CV</p>
-                     <p v-bind:class="{'middle4-1':isActive,'ratingsi':clickActive2,}" @click="cvdairycal2()" >CHESS DIARY</p>  
-                    <p v-bind:class="{'middle4-1':isActive,'ratingsi':clickActive3,}" @click="cvdairycal3()"  >CALENDAR</p>
+            <div class="profile-info1-1">
+              <div style="margin-bottom:10px">
+                <div>
+                  <p style="margin:0;padding-right:20px;">
+                    Federation: <span style="color:#C8A07D"> {{ user.federation_details.name }} </span>
+                  </p>
                 </div>
-                <div class="middle3-1" >
-                    <div style="margin-left:25px" v-if="user.rola.indexOf('PLAYER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor1}" @click="rolecol1()"  >Player</div>
-                    <div style="margin-left:35px" v-if="this.user.rola.indexOf('CLUBADMIN') !==-1" v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor2}"  @click="rolecol2()" >Club Admin</div> 
-                    <div style="margin-left:35px" v-if="this.user.rola.indexOf('ORGANIZER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor3}" @click="rolecol3()" >Organizer</div>
-                    <div style="margin-left:35px" v-if="this.user.rola.indexOf('ARBITER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor4}" @click="rolecol4()" >Arbiter</div>
-                    <div style="margin-left:35px" v-if="this.user.rola.indexOf('TRAINER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor5}" @click="rolecol5()" >Trainer</div>
-                    <div style="margin-left:35px" v-if="this.user.rola.indexOf('OTHER')!==-1"  v-bind:class="{'middle4-1':isActive,'rola-text':rolecolor6}" @click="rolecol6()" >Other</div>
-                  
-                </div>
+              </div>
+              <p style="margin-bottom:10px;padding:0">
+                Fide ID:
+              </p>
+              <p style="margin-bottom:10px;padding:0 0 0 10px;color:#C8A07D">
+                {{ user.fide_id }}
+              </p>    
             </div>
-<!--END MIDDLE 4 -->
-<!--MIDDLE 5 -->
-            <div id="middle5">
-                <div  class="middle5-left" > 
-                    <div v-if="clickActive2">
-                        <ChessDiary     :user="user" :key="user.user_uuid"   />
-                    </div>
-                    <div v-if="clickActive1">
-                        <ChesscvPublic     :user="user" :key="user.user_uuid"   />
-                    </div>
-                    <div v-if="clickActive3">
-                        <Calendar     :user="user" :key="user.user_uuid"   />
-                    </div>
-                </div>
-                <div >
-<!--PLAYER PART -->      
-                <div v-if="activeplayer">
-                    <div class="middle5-right-grid">
-                        <div class="mid5-padd">
-                            <p class="middle5-text">Current club:</p>
-                            <div>
-                                <p  class="gold" style="margin-top:20px;"  >{{user.current_clubs}}</p>
-                            </div>
-                        </div>
-                        <div class="mid5-padd">
-                            <p class="middle5-text">Current league:</p>
-                            <p  class="gold" style="margin-top:20px;"  >{{user.current_leagues}}</p>
-                                           
-                        </div>
-                    </div>
-                    <div class="middle5-right-grid">
-                        <div class="mid5-padd">
-                            <div style="height:65px;display:flex">
-                                <p class="middle5-text" >Currently active:</p>
-                                <img v-if="this.user.current_playing_bool" id="plava-kugla" src="../assets/plavakugla.png" alt="">
-                            </div>
-                                <b-form-checkbox switch
-                                disabled
-                                :checked="this.user.current_playing_bool"
-                                style="padding-left:55px;"
-                                ></b-form-checkbox> 
-                            <div>
-                                <p v-if="this.user.current_playing_bool" class="gold" style="margin-top:30px;">{{user.current_playing}}</p>
-                            </div>
-                        </div>
-                        <div class="mid5-padd">
-                            <p class="middle5-text">Player form:</p>
-                            <div id="form-middle5">
-                                <img style="height:25px" src="../assets/form.svg" alt="" >
-                                    <p style="margin:0;padding:8px 0 0 0">Unknown</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="middle5-right-grid" style="height:170px;">
-                        <div class="mid5-padd" style="padding:0 0 0 10px">
-                            <p class="middle5-text" style="margin-bottom:10px">Open to new engagements  </p>
-                   
-                            <div>
-                                <div  class="engage-grid stikl" :class="{stikl1:this.user.open2new_eng_club===false}">
-                                    <p class="gold2" >Club  </p>
-                                    <img  class="engage-stikl"   src="../assets/stikla.png" alt="" >
-                                </div>
-                                <div class="engage-grid stikl" :class="{stikl1:this.user.open2new_eng_tournament===false }" > 
-                                    <p class="gold2">Tournaments</p>
-                                    <img class="engage-stikl "  src="../assets/stikla.png" alt="" >
-                                </div> 
-                                <div class="engage-grid stikl" :class="{stikl1:this.user.open2new_eng_event===false }"> 
-                                    <p class="gold2">Events</p>
-                                    <img class="engage-stikl"   src="../assets/stikla.png" alt="" >
-                                </div>
-                            </div>
-                        </div>
-                         <div class="mid5-padd flex-center">
-                            <div class="borderbutton flex-center">
-                                <p>Interested in this Player</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="middle5-right-end" >
-                        <p class="middle5-text" >Desired club compensation ( € )</p>
-
-                          <v-app class="vuetify-switch"> 
-                            <v-container class="switch-container"   >  
-                                <v-card
-                                flat
-                                color="transparent"
-                                >
-                                    <v-subheader></v-subheader>
-                                        <v-card-text >
-                                            <v-row >
-                                                <v-col class="px-4"  >
-                                                <v-range-slider
-                                                    v-model="rangeclub"
-                                                    :max="max"
-                                                    :min="min"
-                                                    hide-details
-                                                    class="align-center"
-                                                >
-                                                    <template v-slot:prepend>
-                                                    <v-text-field
-                                                        :value=user.comp_per_game_from
-                                                        class="mt-0 pt-0"
-                                                        hide-details
-                                                        single-line
-                                                        type="number"
-                                                        style="width: 0px"
-                                                    ></v-text-field>
-                                                    </template>
-                                                    <template v-slot:append >
-                                                    <v-text-field
-                                                        :value=user.comp_per_game_to
-                                                        class="mt-0 pt-0"
-                                                        hide-details
-                                                        single-line
-                                                        type="number"
-                                                        style="width: 0px"
-                                                    ></v-text-field>
-                                                </template>
-                                                </v-range-slider>
-                                                </v-col>
-                                            </v-row>
-                                        </v-card-text>
-                                </v-card>
-                            </v-container>  
-                        </v-app>
-                        <div class="slider"  >
-                            <p >{{user.comp_per_game_from}}  </p><p style="padding-left:50px" >{{user.comp_per_game_to}} </p>
-                        </div>  
-                    </div>
-                </div>
-<!-- END PLAYER PART  --> 
- <!-- CLUB PART  -->            
-                <div  v-if="activeclub">
-                    <div class="middle5-right-grid">
-                        <div class="mid5-padd">
-                            <p class="middle5-text">My club name:</p>
-                            <div>
-                                <p  class="gold" style="margin-top:20px;"  >{{user.club_name}}</p>
-                            </div>
-                        </div>
-                        <div class="mid5-padd">
-                            <p class="middle5-text">Current league:</p>
-                           <p  class="gold" style="margin-top:20px;"  >{{user.club_current_league}}</p>
-                        </div>
-                    </div>
-                    <div class="middle5-right-grid">
-                        <div class="mid5-padd">
-                            <div style="height:65px;display:flex">
-                                <p class="middle5-text">My team is currently active:</p>
-                                <img v-if="this.user.club_current_playing_bool" id="plava-kugla" src="../assets/plavakugla.png" alt="">
-                            </div>
-                            <div>
-                                <b-form-checkbox switch
-                                    disabled
-                                    :checked=user.club_current_playing_bool
-                                    style="padding-left:55px;"
-                                ></b-form-checkbox> 
-                            </div>
-                            <div>
-                                 <p v-if="user.club_current_playing_bool" class="gold" style="margin-top:35px;"   >{{user.club_current_playing}}</p>
-                            </div>
-                        </div>
-                        <div class="mid5-padd">
-                            <p class="middle5-text" style="padding-bottom:30px;">Looking for new player:</p>
-                            <div class="switch-style">
-                                <b-form-checkbox switch
-                                disabled
-                                :checked=user.club_looking_for_new_player
-                                ></b-form-checkbox>                  
-                            </div>
-                        </div>
-                    </div>
-                    <div class="middle5-right-grid">
-                        <div class="mid5-padd flex-center">
-                            <div  class="borderbutton flex-center">
-                                <img src="../assets/createevent2.png" alt="">
-                                <p>Create an event</p>
-                            </div>
-                        </div>    
-                        <div class="mid5-padd flex-center">
-                            <div class="borderbutton flex-center">
-                                <p>Interested in this Club</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="middle5-right-grid" >
-                        <div class="mid5-padd flex-center" style="height:170px">
-                             <div class="borderbutton flex-center">
-                                <img src="../assets/myclubpage.png" alt="">
-                                <p>My club page</p>
-                             </div>
-                        </div>
-                        <div class="mid5-padd flex-center">
-                            <div class="borderbutton flex-center">
-                                 <p>Create Club page</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-<!--END CLUB PART  -->
-<!-- ORGANIZER PART  -->            
-                <div  v-if="activeorg">
-                    <div id="middle5-right-startorg">
-                        <p class="middle5-text">My Event is currently active:</p>
-                         <div class="mid5-padd">
-                            <div style="height:65px;display:flex">
-                                <img v-if="switch5" id="plava-kugla2" src="../assets/plavakugla.png" alt="">
-                            </div>
-                             <v-app class="vuetify-switch2"> 
-                                 <v-container class="switch-container"   >
-                                    <v-switch 
-                                    v-model="switch5"
-                                    disabled
-                                    color="#C8A07D"
-                                    ></v-switch>
-                                </v-container>  
-                            </v-app>
-                            <div>
-                                 <p v-if="switch5" class="gold" style="margin-top:35px;padding-left:6px"   >{{user.organizer_current_event}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="middle5-right-grid">
-                        <div class="mid5-padd flex-center" >
-                            <p class="middle5-text" >Looking for new participants?"</p>
-                            <div>
-                                <div class="switch-style">
-                                    <b-form-checkbox switch
-                                    disabled
-                                    :checked="user.organizer_looking_for_new_participants"
-                                    ></b-form-checkbox>                  
-                                </div>
-                            </div>
-                        </div>
-                        
-                         <div class="mid5-padd flex-center">
-                            <div class="borderbutton flex-center">
-                                <p style="text-align:center">Interested in this Organizer</p>
-                            </div>               
-                        </div>               
-                        
+          </div>
+          <div id="middle2-button-container">
+            <button
+              class="middle2-buttons"
+              type="button"
+            >
+              Message
+            </button>
+          
              
-                    </div>
-                     <div  class="mid5-padd listevent" style="padding:10px; ">
-                        <p class="middle5-text" >My events:</p>
-                        <div  v-for="(event,index) in events" :key="event.event_uuid">
-                            <div style="display:flex" v-if="event.organiser_uuid==user.user_uuid">
-                                <p  style="padding-right:8px;margin-left:20px">{{index+1}}. </p>   
-                                <p class="gold-event"> {{event.event_name}}</p>
-                            </div>  
-                        </div>  
-                    </div>
+          <!--    <div  v-for="list in my_connection_list" :key="list.conn_uuid">
+                <button 
+                v-if="
+                list.i_am_initiator==true &&  
+                list.conn_status!==null &&  
+                list.conn_target_uuid==user.user_uuid"
+                  class="middle2-buttons"
+                  type="button"
+                  @click="disconnection_people"
+                >
+                  Disconnect
+                </button>
+                <button v-else-if="
+                list.i_am_initiator==true &&  
+                list.conn_status===null &&  
+                list.conn_target_uuid==user.user_uuid" 
+                class="middle2-buttons"
+                type="button"
+                @click="connection_people"
+              >
+                Connect
+              </button>
+              </div>
+            -->
+           
+              
+            
+          </div>
+        </div>
+        <!--END MID 2 -->     
+        <!--MID 3 -->
+        <div id="middle3">
+          <div class="middle3-1">
+            <div class="middle3-1">
+              <p style="color:#6F7381">
+                Title:
+              </p>
+              <div style="display:flex">
+                <div
+                  v-if="user.titula_player!==null && user.rola.indexOf('PLAYER')!==-1"
+                  class="titles"
+                >
+                  {{ user.titula_player_details.titula_short_name }} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->
                 </div>
-                 <div  v-if="activetre" style="opacity:0.5">
-                        <p class="rotate">Coming soon!</p>
-                         <img style="width:100%" src="../assets/coach1.jpg" alt="">  
-                    </div>
-                    <div  v-if="activearb" style="opacity:0.5">
-                        <p class="rotate">Coming soon!</p>
-                        <img style="width:100%" src="../assets/arbiter.jpg" alt=""> 
-                    </div>
+                <div v-if="user.titula_organizer!==null && user.rola.indexOf('ORGANIZER')!==-1 ">
+                  <div class="titles">
+                    IO <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->
+                  </div>
                 </div>
+              </div>
+            </div> 
+          </div>
+          <div class="middle3-1 ">
+            <p style="color:#6F7381">
+              Rating:
+            </p>
+            <div class="ratings">
+              <p class="text-ratings ">
+                Standard:
+              </p>{{ user.rating_standard }}
             </div>
-        </div>    
-        <div></div>
-    </div>  
-<!--END  RIGHT PROFILE -->
-    </div>
-</template>
+            <div class="ratings">
+              <p class="text-ratings">
+                Rapid:
+              </p>{{ user.rating_rapid }}
+            </div>
+            <div class="ratings">
+              <p class="text-ratings">
+                Blitz:
+              </p>{{ user.rating_blitz }}
+            </div>
+          </div>
+        </div>
+        <!--MIDDLE 4 -->
+        <div id="middle4">
+          <div
+            class="middle3-1"
+            style="justify-content:space-evenly "
+          >
+            <p
+              :class="{'middle4-1':isActive,'ratingsi':clickActive1,}"
+              @click="cvdairycal1()"
+            >
+              CHESS CV
+            </p>
+            <p
+              :class="{'middle4-1':isActive,'ratingsi':clickActive2,}"
+              @click="cvdairycal2()"
+            >
+              CHESS DIARY
+            </p>  
+            <p
+              :class="{'middle4-1':isActive,'ratingsi':clickActive3,}"
+              @click="cvdairycal3()"
+            >
+              CALENDAR
+            </p>
+          </div>
+          <div class="middle3-1">
+            <div
+              v-if="user.rola.indexOf('PLAYER')!==-1"
+              style="margin-left:25px"
+              :class="{'middle4-1':isActive,'rola-text':rolecolor1}"
+              @click="rolecol1()"
+            >
+              Player
+            </div>
+            <div
+              v-if="user.rola.indexOf('CLUBADMIN') !==-1"
+              style="margin-left:35px"
+              :class="{'middle4-1':isActive,'rola-text':rolecolor2}"
+              @click="rolecol2()"
+            >
+              Club Admin
+            </div> 
+            <div
+              v-if="user.rola.indexOf('ORGANIZER')!==-1"
+              style="margin-left:35px"
+              :class="{'middle4-1':isActive,'rola-text':rolecolor3}"
+              @click="rolecol3()"
+            >
+              Organizer
+            </div>
+            <div
+              v-if="user.rola.indexOf('ARBITER')!==-1"
+              style="margin-left:35px"
+              :class="{'middle4-1':isActive,'rola-text':rolecolor4}"
+              @click="rolecol4()"
+            >
+              Arbiter
+            </div>
+            <div
+              v-if="user.rola.indexOf('TRAINER')!==-1"
+              style="margin-left:35px"
+              :class="{'middle4-1':isActive,'rola-text':rolecolor5}"
+              @click="rolecol5()"
+            >
+              Trainer
+            </div>
+            <div
+              v-if="user.rola.indexOf('OTHER')!==-1"
+              style="margin-left:35px"
+              :class="{'middle4-1':isActive,'rola-text':rolecolor6}"
+              @click="rolecol6()"
+            >
+              Other
+            </div>
+          </div>
+        </div>
+        <!--END MIDDLE 4 -->
+        <!--MIDDLE 5 -->
+        <div id="middle5">
+          <div class="middle5-left"> 
+            <div v-if="clickActive2">
+              <ChessDiary
+                :key="user.user_uuid"
+                :user="user"
+              />
+            </div>
+            <div v-if="clickActive1">
+              <ChesscvPublic
+                :key="user.user_uuid"
+                :user="user"
+              />
+            </div>
+            <div v-if="clickActive3">
+              <Calendar
+                :key="user.user_uuid"
+                :user="user"
+              />
+            </div>
+          </div>
+          <div>
+            <!--PLAYER PART -->      
+            <div v-if="activeplayer && user.rola.indexOf('PLAYER')!==-1">
+              <div class="middle5-right-grid">
+                <div class="mid5-padd">
+                  <p class="middle5-text">
+                    Current club:
+                  </p>
+                  <div>
+                    <p
+                      class="gold"
+                      style="margin-top:20px;"
+                    >
+                      {{ user.current_clubs }}
+                    </p>
+                  </div>
+                </div>
+                <div class="mid5-padd">
+                  <p class="middle5-text">
+                    Current league:
+                  </p>
+                  <p
+                    class="gold"
+                    style="margin-top:20px;"
+                  >
+                    {{ user.current_leagues }}
+                  </p>
+                </div>
+              </div>
+              <div class="middle5-right-grid">
+                <div class="mid5-padd">
+                  <div style="height:65px;display:flex">
+                    <p class="middle5-text">
+                      Currently active:
+                    </p>
+                    <img
+                      v-if="user.current_playing_bool"
+                      id="plava-kugla"
+                      src="../assets/plavakugla.png"
+                      alt=""
+                    >
+                  </div>
+                  <b-form-checkbox
+                    switch
+                    disabled
+                    :checked="user.current_playing_bool"
+                    style="padding-left:55px;"
+                  /> 
+                  <div>
+                    <p
+                      v-if="user.current_playing_bool"
+                      class="gold"
+                      style="margin-top:30px;"
+                    >
+                      {{ user.current_playing }}
+                    </p>
+                  </div>
+                </div>
+                <div class="mid5-padd">
+                  <p class="middle5-text">
+                    Player form:
+                  </p>
+                  <div id="form-middle5">
+                    <img
+                      style="height:25px"
+                      src="../assets/form.svg"
+                      alt=""
+                    >
+                    <p style="margin:0;padding:8px 0 0 0">
+                      Unknown
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="middle5-right-grid"
+                style="height:170px;"
+              >
+                <div
+                  class="mid5-padd"
+                  style="padding:0 0 0 10px"
+                >
+                  <p
+                    class="middle5-text"
+                    style="margin-bottom:10px"
+                  >
+                    Open to new engagements
+                  </p>
+                   
+                  <div>
+                    <div
+                      class="engage-grid stikl"
+                      :class="{stikl1:user.open2new_eng_club===false}"
+                    >
+                      <p class="gold2">
+                        Club
+                      </p>
+                      <img
+                        class="engage-stikl"
+                        src="../assets/stikla.png"
+                        alt=""
+                      >
+                    </div>
+                    <div
+                      class="engage-grid stikl"
+                      :class="{stikl1:user.open2new_eng_tournament===false }"
+                    > 
+                      <p class="gold2">
+                        Tournaments
+                      </p>
+                      <img
+                        class="engage-stikl "
+                        src="../assets/stikla.png"
+                        alt=""
+                      >
+                    </div> 
+                    <div
+                      class="engage-grid stikl"
+                      :class="{stikl1:user.open2new_eng_event===false }"
+                    > 
+                      <p class="gold2">
+                        Events
+                      </p>
+                      <img
+                        class="engage-stikl"
+                        src="../assets/stikla.png"
+                        alt=""
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="mid5-padd flex-center">
+                  <div>
+                    <div
+                      v-if="interested_no"
+                      style="margin-bottom:10px; "
+                      class="borderbutton flex-center"
+                    >
+                      <p
+                        style="font-size:12px;"
+                        @click="interested_player"
+                      >
+                        Interested in this Player
+                      </p>
+                    </div>
+                    <div v-if="clicked_interested2">  
+                      <div
+                        v-for="listpla in my_interested_list"
+                        :key="listpla.created_date"
+                      >  
+                        <div
+                          v-if="listpla.target_uuid==user.user_uuid"
+                          class="borderbutton flex-center"
+                        >
+                          <div style="font-size:12px;">
+                            <p @click="interested_player_del">
+                              Remove from shortlist
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      v-if="clicked_interested"
+                      style="margin-bottom:10px; "
+                      class="borderbutton flex-center"
+                      @click="interested_player_del"
+                    >
+                      <p style="font-size:12px;">
+                        Remove from shortlist
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="middle5-right-end">
+                <p class="middle5-text">
+                  Desired club compensation ( € )
+                </p>
 
+                <v-app class="vuetify-switch"> 
+                  <v-container class="switch-container">  
+                    <v-card
+                      flat
+                      color="transparent"
+                    >
+                      <v-subheader />
+                      <v-card-text>
+                        <v-row>
+                          <v-col class="px-4">
+                            <v-range-slider
+                              v-model="rangeclub"
+                              :max="max"
+                              :min="min"
+                              hide-details
+                              class="align-center"
+                            >
+                              <template v-slot:prepend>
+                                <v-text-field
+                                  :value="user.comp_per_game_from"
+                                  class="mt-0 pt-0"
+                                  hide-details
+                                  single-line
+                                  type="number"
+                                  style="width: 0px"
+                                />
+                              </template>
+                              <template v-slot:append>
+                                <v-text-field
+                                  :value="user.comp_per_game_to"
+                                  class="mt-0 pt-0"
+                                  hide-details
+                                  single-line
+                                  type="number"
+                                  style="width: 0px"
+                                />
+                              </template>
+                            </v-range-slider>
+                          </v-col>
+                        </v-row>
+                      </v-card-text>
+                    </v-card>
+                  </v-container>  
+                </v-app>
+                <div class="slider">
+                  <p>{{ user.comp_per_game_from }}  </p><p style="padding-left:50px">
+                    {{ user.comp_per_game_to }}
+                  </p>
+                </div>  
+              </div>
+            </div>
+            <!-- END PLAYER PART  --> 
+            <!-- CLUB PART  -->            
+            <div v-else-if="activeclub && user.rola.indexOf('CLUB')!==-1">
+              <div class="middle5-right-grid">
+                <div class="mid5-padd">
+                  <p class="middle5-text">
+                    My club name:
+                  </p>
+                  <div>
+                    <p
+                      class="gold"
+                      style="margin-top:20px;"
+                    >
+                      {{ user.club_name }}
+                    </p>
+                  </div>
+                </div>
+                <div class="mid5-padd">
+                  <p class="middle5-text">
+                    Current league:
+                  </p>
+                  <p
+                    class="gold"
+                    style="margin-top:20px;"
+                  >
+                    {{ user.club_current_league }}
+                  </p>
+                </div>
+              </div>
+              <div class="middle5-right-grid">
+                <div class="mid5-padd">
+                  <div style="height:65px;display:flex">
+                    <p class="middle5-text">
+                      My team is currently active:
+                    </p>
+                    <img
+                      v-if="user.club_current_playing_bool"
+                      id="plava-kugla"
+                      src="../assets/plavakugla.png"
+                      alt=""
+                    >
+                  </div>
+                  <div>
+                    <b-form-checkbox
+                      switch
+                      disabled
+                      :checked="user.club_current_playing_bool"
+                      style="padding-left:55px;"
+                    /> 
+                  </div>
+                  <div>
+                    <p
+                      v-if="user.club_current_playing_bool"
+                      class="gold"
+                      style="margin-top:35px;"
+                    >
+                      {{ user.club_current_playing }}
+                    </p>
+                  </div>
+                </div>
+                <div class="mid5-padd">
+                  <p
+                    class="middle5-text"
+                    style="padding-bottom:30px;"
+                  >
+                    Looking for new player:
+                  </p>
+                  <div class="switch-style">
+                    <b-form-checkbox
+                      switch
+                      disabled
+                      :checked="user.club_looking_for_new_player"
+                    />                  
+                  </div>
+                </div>
+              </div>
+              <div class="middle5-right-grid">
+                <div class="mid5-padd flex-center">
+                  <div class="borderbutton flex-center">
+                    <img
+                      src="../assets/createevent2.png"
+                      alt=""
+                    >
+                    <p>Create an event</p>
+                  </div>
+                </div>    
+                <div class="mid5-padd flex-center">
+                  <div>
+                    <div
+                      style="margin-bottom:10px; "
+                      class="borderbutton flex-center"
+                    >
+                      <p
+                        style="font-size:12px;"
+                        @click="interested_club"
+                      >
+                        Interested in this Club
+                      </p>
+                    </div>
+                    <div v-if="clicked_interested4">  
+                      <div
+                        v-for="listclub in my_intclub_list"
+                        :key="listclub.created_date"
+                      >  
+                        <div
+                          v-if="listclub.target_uuid==user.user_uuid"
+                          class="borderbutton flex-center"
+                        >
+                          <div style="font-size:12px;">
+                            <p @click="interested_club_del">
+                              Remove from shortlist
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      v-if="clicked_interested3"
+                      style="margin-bottom:10px; "
+                      class="borderbutton flex-center"
+                      @click="interested_club_del"
+                    >
+                      <p style="font-size:12px;">
+                        Remove from shortlist
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="middle5-right-grid">
+                <div
+                  class="mid5-padd flex-center"
+                  style="height:170px"
+                >
+                  <div class="borderbutton flex-center">
+                    <img
+                      src="../assets/myclubpage.png"
+                      alt=""
+                    >
+                    <p>My club page</p>
+                  </div>
+                </div>
+                <div class="mid5-padd flex-center">
+                  <div class="borderbutton flex-center">
+                    <p>Create Club page</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--END CLUB PART  -->
+            <!-- ORGANIZER PART  -->            
+            <div v-if="activeorg && user.rola.indexOf('ORGANIZER')!==-1">
+              <div id="middle5-right-startorg">
+                <p class="middle5-text">
+                  My Event is currently active:
+                </p>
+                <div class="mid5-padd">
+                  <div style="height:65px;display:flex">
+                    <div v-if="user.organizer_current_event!=null">
+                      <img
+                        v-if="user.organizer_current_event.event_name!=null"
+                        id="plava-kugla2"
+                        src="../assets/plavakugla.png"
+                        alt=""
+                      >
+                    </div>
+                  </div>
+                  <v-app class="vuetify-switch2"> 
+                    <v-container class="switch-container">
+                      <v-switch 
+                        v-model="switch5"
+                        disabled
+                        color="#C8A07D"
+                      />
+                    </v-container>  
+                  </v-app>
+                  <div>
+                    <div v-if="user.organizer_current_event!=null">
+                      <p
+                        v-if="user.organizer_current_event.event_name!=null"
+                        class="gold"
+                        style="margin-top:35px;padding-left:6px"
+                      >
+                        {{ user.organizer_current_event.event_name }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="middle5-right-grid">
+                <div class="mid5-padd flex-center">
+                  <p class="middle5-text">
+                    Looking for new participants?"
+                  </p>
+                  <div>
+                    <div class="switch-style">
+                      <b-form-checkbox
+                        switch
+                        disabled
+                        :checked="user.organizer_looking_for_new_participants"
+                      />                  
+                    </div>
+                  </div>
+                </div>
+                        
+                <div class="mid5-padd flex-center">
+                  <div
+                    class="borderbutton flex-center"
+                    @click="interested_event"
+                  >
+                    <p style="text-align:center">
+                      Interested in this Organizer
+                    </p>
+                  </div>               
+                </div>
+              </div>
+              <div
+                class="mid5-padd listevent"
+                style="padding:10px; "
+              >
+                <p class="middle5-text">
+                  My events:
+                </p>
+                <div
+                  v-for="(event,index) in events"
+                  :key="event.event_uuid"
+                >
+                  <div
+                    v-if="event.organiser_uuid==user.user_uuid"
+                    style="display:flex"
+                  >
+                    <p style="padding-right:8px;margin-left:20px">
+                      {{ index+1 }}.
+                    </p>   
+                    <p class="gold-event">
+                      {{ event.event_name }}
+                    </p>
+                  </div>  
+                </div>  
+              </div>
+            </div>
+            <div
+              v-if="activetre && user.rola.indexOf('TRAINER')!==-1"
+              style="opacity:0.5"
+            >
+              <p class="rotate">
+                Coming soon!
+              </p>
+              <img
+                style="width:100%"
+                src="../assets/coach1.jpg"
+                alt=""
+              >  
+            </div>
+            <div
+              v-if="activearb && user.rola.indexOf('ARBITER')!==-1"
+              style="opacity:0.5"
+            >
+              <p class="rotate">
+                Coming soon!
+              </p>
+              <img
+                style="width:100%"
+                src="../assets/arbiter.jpg"
+                alt=""
+              > 
+            </div>
+          </div>
+        </div>
+      </div>    
+      <div />
+    </div>  
+    <!--END  RIGHT PROFILE -->
+  </div>
+</template>
+ 
 <script>
 import SideBar from '../components/SideBar.vue'
 import Searchpart from '../components/Searchpart.vue'
 import ChessDiary from '../components/ChessDiary.vue'
 import ChesscvPublic from '../components/ChesscvPublic.vue'
 import Calendar from '../components/Calendar.vue'
+//import Notification from '../utils/notification.js'
 
 export default {
   name: 'Profile',
+
   components: {
     SideBar,
     Searchpart,
@@ -416,6 +820,7 @@ export default {
          min: 0,
          max: 3000,
          user:{rola:[],
+               user_uuid:'',
                federation_details:{},
                rola_array:[],
                comp_per_game_from:'',
@@ -436,6 +841,18 @@ export default {
          switch5:'',
          createevent:'',
          idt:'',
+         my_interested_list:[],
+         my_intclub_list:[],
+         listpla:{target_uuid:''},
+         clicked_interested:false,
+         clicked_interested2:true,
+         clicked_interested4:true,
+         clicked_interested3:false,
+         interested_no:true,
+         notif_arr : [],
+         connected:false,
+         my_connection_list:[]
+         
          
       }
 },
@@ -445,6 +862,7 @@ export default {
 
 
 mounted(){
+   this.$store.dispatch('getNotification');
    fetch('https://app.outpostchess.com/api/v2/organiser_events', {
         method: 'GET',
         headers: {'Content-Type': 'application/json',
@@ -454,7 +872,7 @@ mounted(){
             })
         .then(response => response.json())
         .then(data => this.events=data)
-        .then(data => console.log('events',data))       
+        //.then(data => console.log('events',data))       
             
 
   fetch( `https://app.outpostchess.com/api/v2/public_user_info/${this.idt} `, {
@@ -466,7 +884,7 @@ mounted(){
 )
 .then(response => response.json())
 .then(data => this.user=data)
-.then(data => console.log('public',data))  
+//.then(data => console.log('public',data))  
 
  fetch('https://app.outpostchess.com/api/v2/current_user_info', {
   method:'GET',
@@ -479,31 +897,149 @@ mounted(){
 
 .then(response => response.json())
 .then(data => this.userinitiator=data)
-.then(data => console.log('initiator',data)) 
+//.then(data => console.log('initiator',data)) 
+fetch('https://app.outpostchess.com/api/v2/interested_in_player', {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json',
+                "Authorization":`Bearer ${localStorage.getItem('token')}`
+                },		
+               
+            })
+        .then(response => response.json())
+        .then(data => this.my_interested_list=data)   
+       // .then(data => console.log('my_list',data))
+
+fetch('https://app.outpostchess.com/api/v2/interested_in_club', {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json',
+                "Authorization":`Bearer ${localStorage.getItem('token')}`
+                },		
+               
+            })
+        .then(response => response.json())
+        .then(data => this.my_intclub_list=data)   
+     //   .then(data => console.log('my_clublist',data))      
+fetch('https://app.outpostchess.com/api/v2/connection_list',{
+        method: 'GET',
+        headers: {'Content-Type': 'application/json',
+                "Authorization":`Bearer ${localStorage.getItem('token')}`
+                },		
+               
+            })
+        .then(response => response.json())
+        .then(data => this.my_connection_list=data)   
+       .then(data => console.log('my_connection_list',data))      
+
+
+
 },
 
 
 
 //--------------METHODS----------------------//
  created() {
+            this.$socket.on( 'tb_notification' , this.receiveNotif )
             this.idt = this.$route.params.id;
+            
         },
- updated() {
 
-   
-   if(this.user.rola.indexOf('PLAYER')==-1){
-     this.activeplayer=false 
-     this.activeclub=true
-    }
-    
-
-},
 methods:{
-    
+   
+   receiveNotif(payload){
+              //console.log('received a notif', payload)
+              //this.notif_arr=[payload,...this.notif_arr]
+              //console.log(this.$store.state.counter)
+              this.$store.commit('receiveNotif',payload)
+         
+        }  ,
+
+   /*INTERESTED CLUB*/       
+
+    interested_club_del(){
+        this.clicked_interested4=false;
+        this.clicked_interested3=false;
+         fetch(`https://app.outpostchess.com/api/v2/interested_in_club/${this.idt} `, {
+                      method: 'DELETE',
+                      headers: {
+                          'Content-Type': 'application/json',
+                           "authorization":`Bearer ${localStorage.getItem('token')}`
+                      },
+                      body:null
+                  }).then(() => {
+                 // window.location.reload();
+                 
+              })
+    },
+    interested_club(){
+        this.clicked_interested4=false;
+        this.clicked_interested3=true;
+          fetch(`https://app.outpostchess.com/api/v2/interested_in_club/${this.idt} `, {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/json',
+                           "authorization":`Bearer ${localStorage.getItem('token')}`
+                      },
+                  }).then(() => {
+                 // window.location.reload();
+              })
+    },
+  /* INTERESTED PLAYER */
+
+    interested_player(){
+           this.interested_no=false;
+           this.clicked_interested=true;
+           this.clicked_interested2=false;
+           fetch(`https://app.outpostchess.com/api/v2/interested_in_player/${this.idt} `, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                     "authorization":`Bearer ${localStorage.getItem('token')}`
+                },
+            })
+         
+            
+           
+    },
+     interested_player_del:function(){
+           this.interested_no=true;
+           this.clicked_interested=false;
+           this.clicked_interested2=false;
+           fetch(`https://app.outpostchess.com/api/v2/interested_in_player/${this.idt} `, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                     "authorization":`Bearer ${localStorage.getItem('token')}`
+                },
+            })
+            
+    },
+  
+  /* INTERESTED EVENT */
+
+    interested_event:function(){
+           fetch(`https://app.outpostchess.com/api/v2/interested_in_event/${this.idt} `, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                     "authorization":`Bearer ${localStorage.getItem('token')}`
+                },
+            })
+    },
+   
+    interested_event_del:function(){
+           fetch(`https://app.outpostchess.com/api/v2/interested_in_event/${this.idt} `, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                     "authorization":`Bearer ${localStorage.getItem('token')}`
+                },
+            })
+    },
+
     cvdairycal1: function(){
+
       this.clickActive1=true; this.clickActive2=false;  this.clickActive3=false;
-      console.log(this.idt)
-       console.log(this.userinitiator.user_uuid)
+      
     } ,
      cvdairycal2: function(){
       this.clickActive1=false;  this.clickActive2=true;  this.clickActive3=false;
@@ -512,6 +1048,7 @@ methods:{
       this.clickActive1=false;this.clickActive2=false;  this.clickActive3=true;
     } ,
     rolecol1:function(){
+      
       this.activeplayer=true;this.activeclub=false; this.activeorg=false; 
       this.activetre=false;  this.activearb=false;
       this.rolecolor1=true; this.rolecolor2=false;this.rolecolor3=false;
@@ -547,15 +1084,15 @@ methods:{
     },
 
     connection_people:function(){
+      
+      this.connected=true
+      console.log(this.connected)
     fetch( ` https://app.outpostchess.com/api/v2/connection_initiate/${this.idt} `, {
         method: 'POST',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
                 },		
-                body: JSON.stringify( { 
-                 conn_initiator_uuid:this.userinitiator.user_uuid,
-                 conn_target_uuid: this.itd,
-                })
+                body:null
             })
             
             .catch(error => {
@@ -563,11 +1100,13 @@ methods:{
             }) 
      },
      disconnection_people:function(){
+       this.connected=false
     fetch( ` https://app.outpostchess.com/api/v2/connection_initiator_delete/${this.idt} `, {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
                 },
+                body:null
             })
             
             .catch(error => {
@@ -869,6 +1408,15 @@ height: 80px;
   
    
  }
+ .middle5-right-grid2{
+    display:grid; 
+    grid-template-columns: 48% 48%;
+    gap:2%;
+    min-height:160px;
+    margin-bottom: 2%;
+    text-align: left;
+    background-color:#202122 ;
+ }
  .mid5-padd{
      padding:10px;
      background-color:#202122;
@@ -1045,6 +1593,7 @@ input::-webkit-inner-spin-button {
     border: 1px solid #2E2E2E;
     box-sizing: border-box;
     border-radius: 6px;
+    text-align: center;
 }
 .borderbutton:hover{
     opacity:0.7;
@@ -1075,9 +1624,10 @@ input::-webkit-inner-spin-button {
 }
 
 #plava-kugla2{
+    position: relative;
     height: 100px;
-    padding-left:80%;
-   
+    left:340%;
+    bottom: 50px;
 }
 #plava-kugla{
    position: relative;

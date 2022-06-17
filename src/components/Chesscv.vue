@@ -1,33 +1,71 @@
 <template>
-    <div class="chesscv">
-      
-      <div id="about-me">
-        <div id="about-edit">
-          <p style="padding-right:10px">About Me</p> 
-          <i @click="editable=!editable" v-if="!editable" class="far fa-edit fontawesome"></i>
-          
-        </div >
-         <!--   <input v-if="editable" class="about-text" type="text" :value="user.about_me"> --->
-            <div  >
-            <p  :contenteditable=editable style="white-space: pre-line;"   @input="onInput"  v-bind:class="{'about-text3':editable,'about-text':isActive,}"  >{{user.about_me}} </p>
-            </div>
-            <div>
-              <button class="middle2-buttons"   v-if="editable" @click="editconfirm"  type="button" >Confirm changes</button>
-              <button class="middle2-buttons" @click="editable=!editable"  v-if="editable"  type="button" >Cancel</button>
-            </div>
-     <!--    <input  type="text" class="about-text" v-if="editable"   v-model="aboutme"   placeholder='about me'>
+  <div class="chesscv">
+    <div id="about-me">
+      <div id="about-edit">
+        <p style="padding-right:10px">
+          About Me
+        </p> 
+        <i
+          v-if="!editable"
+          class="far fa-edit fontawesome"
+          @click="editable=!editable"
+        />
+      </div>
+      <!--   <input v-if="editable" class="about-text" type="text" :value="user.about_me"> --->
+      <div>
+        <p
+          :contenteditable="editable"
+          style="white-space: pre-line;"
+          :class="{'about-text3':editable,'about-text':isActive,}"
+          @input="onInput"
+        >
+          {{ user.about_me }}
+        </p>
+      </div>
+      <div>
+        <button
+          v-if="editable"
+          class="middle2-buttons"
+          type="button"
+          @click="editconfirm"
+        >
+          Confirm changes
+        </button>
+        <button
+          v-if="editable"
+          class="middle2-buttons"
+          type="button"
+          @click="editable=!editable"
+        >
+          Cancel
+        </button>
+      </div>
+      <!--    <input  type="text" class="about-text" v-if="editable"   v-model="aboutme"   placeholder='about me'>
         <p v-else class="about-text">tekst  {{user.about_me}} </p>-->
-        <hr>
+      <hr>
+      <div>
+        <p>My CV: </p>
         <div>
-          <p>My CV: </p>
-          <div >
-            <p id="opencv" @click="newopenwindow()"  >{{user.cv.file_name}}</p> 
-               <input   type="file"  style="display:none;"  title=""  id="fileUpload"  @change="onCVSelected" />
-    <label for="fileUpload" class="file-input"></label> 
-          </div>
-          
+          <p
+            id="opencv"
+            @click="newopenwindow()"
+          >
+            {{ user.cv.file_name }}
+          </p> 
+          <input
+            id="fileUpload"
+            type="file"
+            style="display:none;"
+            title=""
+            @change="onCVSelected"
+          >
+          <label
+            for="fileUpload"
+            class="file-input"
+          /> 
         </div>
       </div>
+    </div>
   </div>
 </template>
 
@@ -36,7 +74,10 @@
 export default {
   name: 'Chesscv',
   props:{
-    user:Object,
+    user:{
+      type: Object,
+      required: true,
+    }
     },
   data () {
       return {
@@ -100,7 +141,7 @@ export default {
   .catch(error => {
     console.error(error)
   })
-  .then(setTimeout(this.$router.go(),2000))
+  .then( response=>window.location.reload(response))
 }
 }
 }  

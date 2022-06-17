@@ -7,64 +7,54 @@
           alt=""
         >
       </div>
-               
-      <div> 
+      <div style="padding-top:25px;"> 
         <div id="welcom-text">
           <p
             class="letter-44"
             style="padding-bottom:40px;"
-            @click="trt"
+          /> 
+          <p class="letter-44">
+            Enter email address below,
+          </p>  
+          <p
+            class="letter-44"
+            style="padding-bottom:10px;"
           >
-            Enter new password:
-          </p> 
-        </div>
+            and request to resend verification mail
+          </p>
+        </div>  
       </div>
       <div id="input-signup">
-        <div style="padding-bottom:15px;">
+        <div>
           <input
-            v-model="newpassword"
-            type="password"
+            v-model="emailreset"
+            type="email"
             name=""
             :class="{mailin:isActive}"
-            placeholder="New password"
+            placeholder="Email"
+            @keyup.enter="passreset()"
           >
         </div> 
-        <div style="padding-bottom:20px;">
-          <input
-            v-model="newpassword1"
-            type="password"
-            name=""
-            :class="{mailin:isActive}"
-            placeholder="Repeat password"
-          >
-        </div> 
-                
-
         <div id="forgot-text" />
         <div id="butt1">
           <button
             type="button"
             class="text-join"
             style=" border: 1px solid #C8A07D; "
-            @click="reset()"
+            @click="verreset()"
           >
-            Reset pasword
+            Resend verification mail
           </button>
         </div>
-              
+                 
+                 
         <!--   <p id="text-or">or</p>
                 <button type="button" onclick="alert('Hello world!')"   class="text-join"  style="border: 1px solid #E8E8E8;"> <div id="google-cor1"> <div id="google-cor"> <img src="../assets/Group.svg" id="" alt="google"></div><p id="joingoogle">Join with Google</p> </div></button>         
              -->
       </div>
       <div id="welcom-text">
         <p class="letter-34">
-          {{ req }}
-        </p>
-        <p class="letter-34">
-          {{ req1 }}
-        </p>
-        <p class="letter-34">
-          {{ req2 }}
+          {{ request }}
         </p>
       </div>
     </div>
@@ -75,64 +65,38 @@
 
 <script>
 export default {
-  name: "Resettoken",
+  name: "Signin",
    data () {
       return {
-         emailreset:"",
-         req:'',
-         req1:'',
-         req2:'',
+         emailreset:'',
+         request:'',
          isActive:true,
-         newpassword:'',
-         newpassword1:'',
-         last_segment : '',
-         resettoken2:window.location.href.split('/').pop()
+       
       }
       
     },
-   //  created() {
-   // this.newpassword= this.$route.query.password;
- //   this.resettoken2= window.location.pathname.split('/').pop();
-    
-  //},
     methods:{
-  
-    reset: function(){
-        this.req='';
-        this.req1='';
-        this.req2='';
-        if(this.newpassword !== this.newpassword1){
-        this.req="*Password doesn't match";
+   
+     verreset: function(){
+        if(this.emailreset==""){
+          return this.request='*Enter email adress'
         }
-        if(this.newpassword==""){
-        this.req1="*Enter new Password ";
-        }
-        if(this.newpassword !=="" && this.newpassword.length < 6){
-        this.req="*Enter at least 6 character";
-        }
-        if(this.newpassword == this.newpassword1 && this.newpassword !=="" && this.newpassword1 !=="" && this.newpassword.length > 6){
-        fetch('https://app.outpostchess.com/api/v2/public_reset_forgotten_password', {
+        if(this.emailreset !==""  ){
+        fetch('https://app.outpostchess.com/api/v2/public_resend_activation_email', {
         method:'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify( { password: this.newpassword,
-                                resettoken:this.resettoken2
-        })
+        body: JSON.stringify( { email: this.emailreset})
         })
         .then(response => {
           if (response.ok) {
-          console.log('ok')
-          this.$router.push('/login');
+             console.log('ok');
           } else {
-            throw new Error('Something went wrong')
-            
-          }
-          
+            throw new Error('Something went wrong') }
         })
-        
-      }
-
-    } ,
-    
+          this.request='*Please check your email'
+       } 
+       
+     }
   },
 }
 </script>
@@ -160,12 +124,9 @@ a{
     .letter-44{
           display:flex;
           color:#FFFFFF;
-          font-size:18px;
+          font-size:16px;
     }
-     .letter-34{
-          color:#FFFFFF;
-          font-size:14px;
-    }
+    
     .home-p{
       color:#707070;
 
@@ -187,6 +148,10 @@ a{
      
     }
    
+    .letter-34{
+        font-size:14px;
+        color:#FFFFFF;
+    }
       .text-join{
     font-size: 14px;
     color:#FFFFFF;
@@ -209,7 +174,7 @@ a{
       background-position: center;
       color:#707070;
 
-  }
+  } 
   #forgot-text{
     width:65%;
     padding-left:18%;
