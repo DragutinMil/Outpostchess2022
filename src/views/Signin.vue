@@ -62,7 +62,7 @@
           </router-link>
           <router-link
             v-if="pojava"
-            to="/vermail"
+            to="/verification-mail"
           >
             <p class="home-p blue">
               You didn't verify the email?

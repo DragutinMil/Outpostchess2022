@@ -15,7 +15,7 @@
  
     </p>     
     </div>
-    <div class="dropdown-notification">
+    <div class="dropdown-notification" >
       <a id="a-middle"> <img 
          @click="see_notification" 
         id="middle1-img"
@@ -65,6 +65,8 @@ import NotifList from './NotifList.vue';
   },
   
   methods:{
+    
+    
        All_notifications:function(){
          this.$router.push('../notifications')
        },

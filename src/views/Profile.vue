@@ -1830,7 +1830,7 @@ methods:{
 //USER PATCH
 userpatch : async function()  {
           
-          //this.clickside=false;
+          this.clickside=false;
 
              fetch( 'https://app.outpostchess.com/api/v2/current_user_info', {
             method:'PATCH',
@@ -1870,7 +1870,7 @@ userpatch : async function()  {
             .then(response =>  response.json())
             .then(data => console.log(data)) 
             .then(response =>{if(this.picked !== '' || this.pickedorg !== '' || this.pickedtre || this.pickedarb || this.photoinfo !== '' || this.selectedrole !== '' ){
-            window.location.reload(response)    }
+            window.location.reload(response)  }
              })
        
         

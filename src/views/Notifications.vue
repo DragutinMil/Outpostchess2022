@@ -72,7 +72,7 @@
                       </div>
                     </div>
                     <div class="header_list" >
-                      {{allnotif.created_date.slice(2,4)}}.{{allnotif.created_date.slice(5,7)}}.{{allnotif.created_date.slice(0,4)}}.  
+                      {{allnotif.created_date.slice(8,10)}}.{{allnotif.created_date.slice(5,7)}}.{{allnotif.created_date.slice(0,4)}}.  
                       -  {{allnotif.created_date.slice(11,13)}}:{{allnotif.created_date.slice(14,16)}}
                     </div>
                 </div>
