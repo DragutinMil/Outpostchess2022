@@ -31,7 +31,7 @@
             placeholder="Email"
             @keyup.enter="signin()"
           >
-          <p id="reqpass">
+          <p class="reqpass">
             {{ req1 }}
           </p>
         </div> 
@@ -45,17 +45,17 @@
             placeholder="Password"
             @keyup.enter="signin()"
           >
-          <p id="reqpass">
+          <p class="reqpass">
             {{ req }}
           </p>
-          <p id="reqpass">
+          <p class="reqpass">
             {{ request }}
           </p>
         </div>
                 
 
         <div id="forgot-text">
-          <router-link to="/resetpass">
+          <router-link to="/reset-password">
             <p class="home-p blue">
               Forgot password?
             </p>
@@ -332,7 +332,7 @@ a{
      margin:auto 0 auto 0;
      padding-right:7px;
    }
-   #reqpass{
+   .reqpass{
      color:#F2358D;
      text-align: left;
      padding-left:17.5%;

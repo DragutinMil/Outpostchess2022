@@ -52,13 +52,13 @@ fetch('https://app.outpostchess.com/api/v2/public_blog_list',{
 
 <style scoped>
  >>>.blog_content > h1{
-  font-size:32px
+  font-size:2rem
 }
 >>>.blog_content > p{
-  font-size:18px
+  font-size:1.125rem
 }
 >>>.blog_content >blockquote> h2{
-  font-size:18px
+  font-size:1.125rem
 }
 >>> .blog_content >p> img{     
   width:60%
@@ -71,21 +71,20 @@ fetch('https://app.outpostchess.com/api/v2/public_blog_list',{
  padding-top:30px;
  text-align: left;
  margin:auto;
- font-size:18px;
+ font-size:1.125rem;
  font-family: 'Red Hat Display', Helvetica, Arial, sans-serif;
 }
 .blog_title{
     text-align: left;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 1.25rem;
     color:#FFFFFF
 }
-h1{
-  padding: 25px;
-}
+
+
 .profile{
     display:grid;
-    grid-template-columns: 259px auto;
+    grid-template-columns: 16.25rem auto;
 }  
 .right-profile{
     display:grid;

@@ -2,7 +2,7 @@
   <div class="chesscv">
     <div id="about-me">
       <div id="about-edit">
-        <p style="padding-right:10px">
+        <p style="padding-right:0.625rem">
           About Me
         </p> 
         <i
@@ -160,13 +160,13 @@ export default {
   display:block;
   align-items: left;
   text-align: left;
-   margin:30px
+   margin:1.875rem
 }
  
       
     
 .about-me{
-  padding-top:30px;
+  padding-top:1.875rem;
  
 }
 #about-edit{
@@ -180,16 +180,16 @@ i:hover{
 }
 .about-text{
  color:#6F7381;
- margin-right:20px;
+ margin-right:1.25rem;
  
 }
 
 
 .about-text3{
  color:#6F7381;
- margin-right:20px;
+ margin-right:1.25rem;
  background-color:rgba(27, 28, 29, 1);
- padding:10px;
+ padding:0.625rem;
  border-radius:5px
 }
 
@@ -199,12 +199,12 @@ i:hover{
   background: linear-gradient(top, #f9f9f9, #e3e3e3);
   border: 1px solid #999;
   border-radius: 3px;
-  padding: 5px 8px;
+  padding: 5px 0.5rem;
   outline: none;
   white-space: nowrap;
   cursor: pointer;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 .file-input:hover::before {
   opacity: 0.7;
@@ -227,10 +227,10 @@ i:hover{
   box-sizing: border-box; 
   background-color:#202122 ;
   color:#FFFFFF;
-  font-size: 12px;
-  width: 120px;
-  height: 24px;
-  margin:0 20px 35px 0; 
+  font-size: 0.75rem;
+  width: 7.5rem;
+  height: 1.5rem;
+  margin:0 1.25rem 2.1875rem 0; 
 }
 .fontawesome{
   color:#C8A07D;

@@ -336,7 +336,7 @@ export default {
         })
           .then((response) => response.json())
           .then((data) => console.log(data));
-        this.$router.push("/thnks");
+        this.$router.push("/thanks");
       }
     },
   },
@@ -386,7 +386,7 @@ hr {
 }
 .letter-24 {
   color: #ffffff;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 .home-p {
   color: #707070;

@@ -72,21 +72,5 @@
        display:flex;
        flex-direction: column;
    }
-   .user-name{
-      height: 30px;
-      font-size: 20px;
-      padding:5px;
-      margin-bottom: 5px;
-      border: 1px solid #ffffff;
-   }
-   .join-button{
-       height: 30px;
-       font-size: 20px;
-       
-   }
-   .text-message{
-        color:#ffffff;
-        margin-top: 100px;
-        border: 1px solid #ffffff;
-   }
+  
 </style>

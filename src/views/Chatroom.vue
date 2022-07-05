@@ -4,7 +4,7 @@
       <div>
         <SideBar />
       </div>
-
+      
       <!-- CENTER -->
       <div class="container-center">
         <div id="searchpart-chat">
@@ -34,53 +34,21 @@
               Invitation
             </div>
           </div>
-          <!--   <div class="center_list_header connect">
-            <div style="display:flex">
-              <div class="initials"> LK </div><p class="flex-center p_text" >Name  Lastname </p>
-            </div>
-            <div >
-              <div class="flex-center p_text" > Message-  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, nulla. </div>
-            </div>
-            <div >
-              <div class="flex-center p_text" > 9 : 30 PM </div>
-            </div>
-            <div >
-              <div class="flex-center p_text" > <img src="../assets/message_new.png" alt="" ></div>
-            </div>
-          </div>
-          <div class="center_list_header connect">
-            <div style="display:flex">
-              <div class="initials"> GM </div><p class="flex-center p_text" >Name  Lastname </p>
-            </div>
-            <div >
-              <div class="flex-center p_text" > Message-  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, nulla. </div>
-            </div>
-            <div >
-              <div class="flex-center p_text" > 9 : 30 PM </div>
-            </div>
-            <div >
-              <div class="flex-center p_text" > <img src="../assets/message_read.png" alt="" ></div>
-            </div>
-          </div> -->
+          
         </div>
       </div>
       <!-- RIGHT -->     
-      <div class="container-right">
-        <div><ChatApp /> </div>
-      </div>
+      
     </div>
   </div>
 </template>
 
 <script>
-
-import ChatApp from '../components/ChatApp.vue'
 import SideBar from '../components/SideBar.vue'
 import Searchpart from '../components/Searchpart.vue'
 export default {
   name: 'Chatroom',
   components: {
-    ChatApp,
     SideBar,
     Searchpart
   },
@@ -121,8 +89,6 @@ mounted(){
 
 methods:{
  
-  
-  
 },
 
 }
@@ -135,11 +101,12 @@ a{
 }
 hr{
   border: 0.5px solid rgba(255, 255, 255, 0.2);
-  margin:40px auto 40px auto;
+  margin:2.5rem auto 2.5rem auto;
 }
 .profile {
     display:grid;
-    grid-template-columns: 17% 65% 18%;
+    grid-template-columns: 259px auto;
+
     
 }  
 #searchpart-chat{
@@ -150,9 +117,6 @@ hr{
 .container-center {
  background-color:#171819;
 }
-.input-filter {
-   width:92%;
-}
 .search-filter{
      
       border: 0.5px solid rgba(111, 115, 129, 0.5);
@@ -160,32 +124,32 @@ hr{
       border-radius: 26px;
       display:flex;
       justify-content: flex-start;
-      height: 42px;
+      height: 2.625rem;
       background-image: url(../assets/search_24px.png);
       background-repeat:no-repeat;
-      background-position-x: 22px;
-      background-position-y: 14px;
+      background-position-x: 1.375rem;
+      background-position-y: 0.875rem;
       padding-left:60px;
-      font-size: 14px;
+      font-size: 0.875rem;
       color:#FFFFFF;
       cursor:pointer;
       width:78%;
-      margin:32px 4%;
+      margin:2rem 4%;
     }   
 #notify{
   display: flex;
-  padding-top:28px;
+  padding-top:1.75rem;
   width:92%;
   margin:auto;
   justify-content:flex-end
 }
 #middle1-img{
-   height: 25px;
+   height: 1.5625rem;
 }
 #a-middle{
     border-radius: 50% ;
-    height: 45px;
-    width: 45px;
+    height: 2.8125rem;
+    width: 2.8125rem;
     background-color: #202122;
     display: flex;
     justify-content: center;
@@ -200,7 +164,7 @@ hr{
   background-color:#202122 ;
   display:grid;
   grid-template-columns: 29% 25% 21% 25%;
-  height: 68px;
+  height: 4.25rem;
   margin:auto;
 }
 .header_list{
@@ -209,40 +173,9 @@ hr{
   align-items: center;
   color:#FFFFFF
 }
-.connect{
-  margin-top:22px;
-  height: 56px;
-  margin-bottom:22px;
-    align-items: center;
-}
-.initials{
-    border:1px ; 
-    margin: 0 0 0 8%;
-    background-color: rgba(255, 255, 255, 0.7);
-    width:35px;
-    height: 35px;
-    border-radius: 50%;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    }
-.p_text{
-  color:rgba(111, 115, 129, 1);
-  margin:auto;
-   overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* after 3 line show ... */
-    -webkit-box-orient: vertical;
-}
-
-
 
 /* RIGHT */
-.container-right{
-background-color:#202122;
-color:#FFFFFF
-}
+
 
 
 
@@ -250,8 +183,7 @@ color:#FFFFFF
 
 .profile {
     display:grid;
-    grid-template-columns: 17% 65% 18%;
-    font-size:14px;
+    font-size:0.875rem;
 }  
 
 

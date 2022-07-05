@@ -32,10 +32,10 @@ export default {
   #rotate2{
     position:relative;
     transform: rotate(-45deg);
-    font-size:26px;
+    font-size:1.625rem;
     font-weight: 600;
-    letter-spacing: 15px;
-    top:300px;
+    letter-spacing: 1rem;
+    top:18.75rem;
     opacity: 0.8;
     color:#FFFFFF;
     

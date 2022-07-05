@@ -30,7 +30,7 @@
         
       
     </div> 
-    <p style="color:white;padding-left:20px;">
+    <p style="color:white;padding-left:1.25rem;">
       
      <!--  {{ $store.state.notif_arr }} -->
     </p>
@@ -110,32 +110,32 @@ a{
 .search-profile{
       border: 1px solid #393939;
       box-sizing: border-box;
-      border-radius: 20px;
+      border-radius: 1.25rem;
       background-color:#1B1C1D ;
       display:flex;
-      height: 33px;
+      height: 2.0625rem;
       background-image: url(../assets/search_24px.png);
       background-repeat:no-repeat;
-      background-position-x: 22px;
-      background-position-y: 6px;
-      padding-left:60px;
-      font-size: 14px;
+      background-position-x: 1.375rem;
+      background-position-y: 0.375rem;
+      padding-left:3.75rem;
+      font-size: 0.875rem;
       color:#C7C9D0;
       cursor:pointer;
-      width:270px;
+      width:16.875rem;
     }
 #middle1{
     display:grid;
     grid-template-columns: 90% 5% 5%;
-    margin-top:50px;
+    margin-top:3.125rem;
 }
 #middle1-img{
-   height: 25px;
+   height: 1.5625rem;
 }
 #a-middle{
     border-radius: 50% ;
-    height: 45px;
-    width: 45px;
+    height: 2.8125rem;
+    width: 2.8125rem;
     background-color: #202122;
     display: flex;
     justify-content: center;
@@ -148,12 +148,12 @@ a{
 #notification_counter{
    color:white;
    position:relative;
-   left:50px;
+   left:3.125rem;
    border:1px solid #11C6D1;
-   border-radius: 50px;
+   border-radius: 3.125rem;
    background-color: #11C6D1;
-   height: 20px;
-   width: 20px;
+   height: 1.25rem;
+   width: 1.25rem;
    z-index: 10;
 }
 
@@ -173,17 +173,17 @@ a{
   display: block;
   z-index: 1;
   float:left;
-  right:25px;
-  width: 300px;
+  right:1.5625rem;
+  width: 18.75rem;
   border: 1px solid #FFFFFF;
 }
 .dropdown-content a{
   display: block;
   float: left;
   color: white;
-  padding: 0 15px;
-  line-height: 30px;
-  font-size: 14px;
+  padding: 0 0.9375rem;
+  line-height: 1.875rem;
+  font-size: 0.875rem;
   background: #202122;
   transition: .5s;
   width: 100%;

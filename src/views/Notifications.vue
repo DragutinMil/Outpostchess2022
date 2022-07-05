@@ -159,8 +159,8 @@ a{
   background-color:#202122 ;
   display:grid;
   grid-template-columns: 33% 33% 23%;
-  height: 52px;
-  margin-bottom: 25px;
+  height: 3.25rem;
+  margin-bottom: 1.5625rem;
   
 }
 .header_list{
@@ -175,7 +175,7 @@ a{
 .profile {
     display:grid;
     grid-template-columns: 17% 83%;
-    font-size:14px;
+    font-size:0.875rem;
 } 
 }
 </style>

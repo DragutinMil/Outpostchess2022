@@ -47,17 +47,17 @@
               </p>
             </div>
             <div class="profile-info1-1">
-              <div style="margin-bottom:10px">
+              <div style="margin-bottom:0.625rem">
                 <div>
-                  <p style="margin:0;padding-right:20px;">
+                  <p style="margin:0;padding-right:1.25rem;">
                     Federation: <span style="color:#C8A07D"> {{ user.federation_details.name }} </span>
                   </p>
                 </div>
               </div>
-              <p style="margin-bottom:10px;padding:0">
+              <p style="margin-bottom:0.625rem;padding:0">
                 Fide ID:
               </p>
-              <p style="margin-bottom:10px;padding:0 0 0 10px;color:#C8A07D">
+              <p style="margin-bottom:0.625rem;padding:0 0 0 0.625rem;color:#C8A07D">
                 {{ user.fide_id }}
               </p>    
             </div>
@@ -172,7 +172,7 @@
           <div class="middle3-1">
             <div
               v-if="user.rola.indexOf('PLAYER')!==-1"
-              style="margin-left:25px"
+              style="margin-left:1.5625rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor1}"
               @click="rolecol1()"
             >
@@ -180,7 +180,7 @@
             </div>
             <div
               v-if="user.rola.indexOf('CLUBADMIN') !==-1"
-              style="margin-left:35px"
+              style="margin-left:2.25rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor2}"
               @click="rolecol2()"
             >
@@ -188,7 +188,7 @@
             </div> 
             <div
               v-if="user.rola.indexOf('ORGANIZER')!==-1"
-              style="margin-left:35px"
+              style="margin-left:2.25rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor3}"
               @click="rolecol3()"
             >
@@ -196,7 +196,7 @@
             </div>
             <div
               v-if="user.rola.indexOf('ARBITER')!==-1"
-              style="margin-left:35px"
+              style="margin-left:2.25rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor4}"
               @click="rolecol4()"
             >
@@ -204,7 +204,7 @@
             </div>
             <div
               v-if="user.rola.indexOf('TRAINER')!==-1"
-              style="margin-left:35px"
+              style="margin-left:2.25rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor5}"
               @click="rolecol5()"
             >
@@ -212,7 +212,7 @@
             </div>
             <div
               v-if="user.rola.indexOf('OTHER')!==-1"
-              style="margin-left:35px"
+              style="margin-left:2.25rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor6}"
               @click="rolecol6()"
             >
@@ -254,7 +254,7 @@
                   <div>
                     <p
                       class="gold"
-                      style="margin-top:20px;"
+                      style="margin-top:1.25rem;"
                     >
                       {{ user.current_clubs }}
                     </p>
@@ -266,7 +266,7 @@
                   </p>
                   <p
                     class="gold"
-                    style="margin-top:20px;"
+                    style="margin-top:1.25rem;"
                   >
                     {{ user.current_leagues }}
                   </p>
@@ -274,7 +274,7 @@
               </div>
               <div class="middle5-right-grid">
                 <div class="mid5-padd">
-                  <div style="height:65px;display:flex">
+                  <div style="height:4.0625rem;display:flex">
                     <p class="middle5-text">
                       Currently active:
                     </p>
@@ -289,13 +289,13 @@
                     switch
                     disabled
                     :checked="user.current_playing_bool"
-                    style="padding-left:55px;"
+                    style="padding-left:3.4375rem;"
                   /> 
                   <div>
                     <p
                       v-if="user.current_playing_bool"
                       class="gold"
-                      style="margin-top:30px;"
+                      style="margin-top:1.875rem;"
                     >
                       {{ user.current_playing }}
                     </p>
@@ -307,11 +307,11 @@
                   </p>
                   <div id="form-middle5">
                     <img
-                      style="height:25px"
+                      style="height:1.5625rem"
                       src="../assets/form.svg"
                       alt=""
                     >
-                    <p style="margin:0;padding:8px 0 0 0">
+                    <p style="margin:0;padding:0.5rem 0 0 0">
                       Unknown
                     </p>
                   </div>
@@ -319,15 +319,15 @@
               </div>
               <div
                 class="middle5-right-grid"
-                style="height:170px;"
+                style="height:10.625rem;"
               >
                 <div
                   class="mid5-padd"
-                  style="padding:0 0 0 10px"
+                  style="padding:0 0 0 0.625rem"
                 >
                   <p
                     class="middle5-text"
-                    style="margin-bottom:10px"
+                    style="margin-bottom:0.625rem"
                   >
                     Open to new engagements
                   </p>
@@ -378,11 +378,11 @@
                   <div>
                     <div
                       v-if="interested_no"
-                      style="margin-bottom:10px; "
+                      style="margin-bottom:0.625rem; "
                       class="borderbutton flex-center"
                     >
                       <p
-                        style="font-size:12px;"
+                        style="font-size:0.75rem;"
                         @click="interested_player"
                       >
                         Interested in this Player
@@ -397,7 +397,7 @@
                           v-if="listpla.target_uuid==user.user_uuid"
                           class="borderbutton flex-center"
                         >
-                          <div style="font-size:12px;">
+                          <div style="font-size:0.75rem;">
                             <p @click="interested_player_del">
                               Remove from shortlist
                             </p>
@@ -407,11 +407,11 @@
                     </div>
                     <div
                       v-if="clicked_interested"
-                      style="margin-bottom:10px; "
+                      style="margin-bottom:0.625rem; "
                       class="borderbutton flex-center"
                       @click="interested_player_del"
                     >
-                      <p style="font-size:12px;">
+                      <p style="font-size:0.75rem;">
                         Remove from shortlist
                       </p>
                     </div>
@@ -468,7 +468,7 @@
                   </v-container>  
                 </v-app>
                 <div class="slider">
-                  <p>{{ user.comp_per_game_from }}  </p><p style="padding-left:50px">
+                  <p>{{ user.comp_per_game_from }}  </p><p style="padding-left:3.125rem">
                     {{ user.comp_per_game_to }}
                   </p>
                 </div>  
@@ -485,7 +485,7 @@
                   <div>
                     <p
                       class="gold"
-                      style="margin-top:20px;"
+                      style="margin-top:1.25rem;"
                     >
                       {{ user.club_name }}
                     </p>
@@ -497,7 +497,7 @@
                   </p>
                   <p
                     class="gold"
-                    style="margin-top:20px;"
+                    style="margin-top:1.25rem;"
                   >
                     {{ user.club_current_league }}
                   </p>
@@ -505,7 +505,7 @@
               </div>
               <div class="middle5-right-grid">
                 <div class="mid5-padd">
-                  <div style="height:65px;display:flex">
+                  <div style="height:4.0625rem;display:flex">
                     <p class="middle5-text">
                       My team is currently active:
                     </p>
@@ -521,14 +521,14 @@
                       switch
                       disabled
                       :checked="user.club_current_playing_bool"
-                      style="padding-left:55px;"
+                      style="padding-left:3.4375rem;"
                     /> 
                   </div>
                   <div>
                     <p
                       v-if="user.club_current_playing_bool"
                       class="gold"
-                      style="margin-top:35px;"
+                      style="margin-top:2.25rem;"
                     >
                       {{ user.club_current_playing }}
                     </p>
@@ -537,7 +537,7 @@
                 <div class="mid5-padd">
                   <p
                     class="middle5-text"
-                    style="padding-bottom:30px;"
+                    style="padding-bottom:1.875rem;"
                   >
                     Looking for new player:
                   </p>
@@ -563,11 +563,11 @@
                 <div class="mid5-padd flex-center">
                   <div>
                     <div
-                      style="margin-bottom:10px; "
+                      style="margin-bottom:0.625rem; "
                       class="borderbutton flex-center"
                     >
                       <p
-                        style="font-size:12px;"
+                        style="font-size:0.75rem;"
                         @click="interested_club"
                       >
                         Interested in this Club
@@ -582,7 +582,7 @@
                           v-if="listclub.target_uuid==user.user_uuid"
                           class="borderbutton flex-center"
                         >
-                          <div style="font-size:12px;">
+                          <div style="font-size:0.75rem;">
                             <p @click="interested_club_del">
                               Remove from shortlist
                             </p>
@@ -592,11 +592,11 @@
                     </div>
                     <div
                       v-if="clicked_interested3"
-                      style="margin-bottom:10px; "
+                      style="margin-bottom:0.625rem; "
                       class="borderbutton flex-center"
                       @click="interested_club_del"
                     >
-                      <p style="font-size:12px;">
+                      <p style="font-size:0.75rem;">
                         Remove from shortlist
                       </p>
                     </div>
@@ -606,7 +606,7 @@
               <div class="middle5-right-grid">
                 <div
                   class="mid5-padd flex-center"
-                  style="height:170px"
+                  style="height:10.625rem"
                 >
                   <div class="borderbutton flex-center">
                     <img
@@ -631,7 +631,7 @@
                   My Event is currently active:
                 </p>
                 <div class="mid5-padd">
-                  <div style="height:65px;display:flex">
+                  <div style="height:4.0625rem;display:flex">
                     <div v-if="user.organizer_current_event!=null">
                       <img
                         v-if="user.organizer_current_event.event_name!=null"
@@ -655,7 +655,7 @@
                       <p
                         v-if="user.organizer_current_event.event_name!=null"
                         class="gold"
-                        style="margin-top:35px;padding-left:6px"
+                        style="margin-top:2.25rem;padding-left:6px"
                       >
                         {{ user.organizer_current_event.event_name }}
                       </p>
@@ -692,7 +692,7 @@
               </div>
               <div
                 class="mid5-padd listevent"
-                style="padding:10px; "
+                style="padding:0.625rem; "
               >
                 <p class="middle5-text">
                   My events:
@@ -705,7 +705,7 @@
                     v-if="event.organiser_uuid==user.user_uuid"
                     style="display:flex"
                   >
-                    <p style="padding-right:8px;margin-left:20px">
+                    <p style="padding-right:0.5rem;margin-left:1.25rem">
                       {{ index+1 }}.
                     </p>   
                     <p class="gold-event">
@@ -1127,7 +1127,7 @@ hr{
 }
 .profile{
     display:grid;
-    grid-template-columns: 259px auto;
+    grid-template-columns: 16.1875rem auto;
 }  
 
 .right-profile{
@@ -1142,43 +1142,26 @@ hr{
   width: 100%;
   background-color:#202122;
   color:#FFFFFF;
-  padding:70px 10px 50px 10px;
-  font-size: 14px;
+  padding:4.375rem 0.625rem 3.125rem 0.625rem;
+  font-size: 0.875em;
 }
 
-.left-sidetext{
-    padding-left:15px;
-    cursor: pointer;
-}
 
-.diffcol{
-    color:rgba(199, 201, 208, 0.2);
-}
-/*--------------------------Check-------------------------------------- */
- .grid-check{
-    display:grid;
-    grid-template-columns: auto 85% ;
-   
-  }
-.left-check-text{
-      text-align:left;
-      padding-right:15px;
-      padding-left:5px;
-      color:#C8A07D;
-    }
+
+
    
 /*--------------------------MIDLE1-------------------------------------- */
 
 
 /*--------------------------MIDLE2-------------------------------------- */
 #middle2{
-    height: 140px;
+    height: 8.75rem;
     background-color: #202122;
     display: grid;
-    padding:8px 15px 8px 25px;
+    padding:0.5rem 1rem 0.5rem 1.5625rem;
     grid-template-columns: 15% 60% 25%;
     color:#6F7381;
-    margin-top:10px;
+    margin-top:0.625rem;
 }
 .profile-info1{
     display: flex;
@@ -1192,78 +1175,41 @@ hr{
 }
 .profile-info1-1>img{
      padding-right:7px;
-     padding-bottom: 16px;
+     padding-bottom: 1rem;
 }
 .upload-pic{
-    padding-right:30px;
+    padding-right:1.875rem;
     
 }
 #profile-pic{
     border-radius: 50%;
-    height: 126px;
+    height: 7.875rem;
     object-fit: contain;
 }
 .photo-input{
-    width:55px;
+    width:3.4375rem;
     cursor: pointer;
 }
-
-
 #profile-name{
    font-weight: 700;
    font-style: normal;
    font-weight: bold;
    color: #C8A07D;
    display: flex;
-   height: 20px;
-   margin-bottom:15px;
-   
-}
-.profile-name2{
-   color: #FFFFFF;
-   display: flex;
-   height: 20px;
-   margin-bottom:15px;
-   border-bottom: 1px solid #5C5E64;
-   margin-right: 5px;
-   padding-left:10px;
-   font-size:14px
-}
-.rating-patch{
-   color: #FFFFFF;
-   display: flex;
-   height: 20px;
-   border-bottom: 1px solid #5C5E64;
-   width: 35px;
-   font-size:14px;
-
-}
-.file-input::before {
-  content: 'Upload Photo';
-  display: inline-block;
-  background: linear-gradient(top, #f9f9f9, #e3e3e3);
-  border: 1px solid #999;
-  border-radius: 3px;
-  padding: 5px 8px;
-  outline: none;
-  white-space: nowrap;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 14px;
-  color:#FFFFFF;
-  margin-top:30px;
+   height: 1.25rem;
+   margin-bottom:1rem;
 }
 
 #middle2-1{
-    padding-left:40px;
-    padding-top:14px ;
+    padding-left:2.5rem;
+    padding-top:0.875em ;
 }
 .padd-text{
-    padding-left:17px;
+    padding-left:1rem;
 }
 #middle2-flag{
-    height: 30px;
-    padding: 0 30px 0 10px;
+    height: 1.875rem;
+    padding: 0 1.875rem 0 0.625rem;
     
 }
 #middle2-flag:hover{
@@ -1275,11 +1221,11 @@ hr{
   box-sizing: border-box; 
   background-color:#202122 ;
   color:#FFFFFF;
-  font-size: 14px;
-  width: 130px;
-  height: 46px;
-  margin-right: 15px;;
-  margin-top:50px;
+  font-size: 0.875em;
+  width: 8.125rem;
+  height: 2.875rem;
+  margin-right: 1rem;;
+  margin-top:3.125rem;
    
 }
 .middle2-buttons:hover{
@@ -1295,76 +1241,76 @@ hr{
 #middle3{
 display:grid;
 grid-template-columns: 58% 42%;
-height: 80px;
+height: 5rem;
 }
 ::placeholder{
     color:#C7C9D0;
     font-weight: 300;
-    font-size: 14px;
+    font-size: 0.875em;
 }
 .titles{
     cursor: pointer;
     outline: #C8A07D solid 2px;
-    border-radius: 20px;
-    width:82px;
-    height: 31px;
-    margin-left:20px;
+    border-radius: 1.25rem;
+    width:5.375rem;
+    height: 2rem;
+    margin-left:1.25rem;
     display:flex;
     align-items: center;
     justify-content: center;
     color:#FFFFFF;
-    font-size: 14px;
+    font-size: 0.875em;
 }
 .middle3-1{
     display:flex;
     align-items: center;
 }
 .ratings{
-    border-radius: 20px;
-    width:120px;
-    height: 31px;
-    margin-left:10px;
+    border-radius: 1.25rem;
+    width:7.5rem;
+    height: 2rem;
+    margin-left:0.625rem;
     display:flex;
     align-items: center;
     justify-content: center;
     color:#FFFFFF; 
-    font-size: 14px;
+    font-size: 0.875em;
     outline: #C8A07D solid 2px;
 }
 .ratingsi{
     background: #C8A07D;
-    border-radius: 20px;
-    width:120px;
-    height: 31px;
-    margin-left:20px;
+    border-radius: 1.25rem;
+    width:7.5rem;
+    height: 2rem;
+    margin-left:1.25rem;
     display:flex;
     align-items: center;
     justify-content: center;
     color:#FFFFFF !important; 
-    font-size: 14px;
+    font-size: 0.875em;
     
 }
 .rola-text{
     background: #C8A07D;
-    border-radius: 20px;
-    width:80px;
-    height: 31px;
-    margin-left:20px;
+    border-radius: 1.25rem;
+    width:5rem;
+    height: 2rem;
+    margin-left:1.25rem;
     display:flex;
     align-items: center;
     justify-content: center;
     color:#FFFFFF !important; 
-    font-size: 14px;
+    font-size: 0.875em;
     font-weight: 500;
 }
 
 .text-ratings{
     color:#C8A07D;
-    padding-right:10px
+    padding-right:0.625rem
 }
 /*--------------------------MIDDLE4-------------------------------------- */
 #middle4{
-    height: 63px;
+    height: 4rem;
   
      background-color: #202122;
      display:grid;
@@ -1372,20 +1318,14 @@ height: 80px;
 }
 .middle4-1  {
    color:#6F7381;
-   padding:0 10px 0 10px;
-   font-size:14px;
+   padding:0 0.625rem 0 0.625rem;
+   font-size:0.875em;
 }
 .middle4-1:hover{
     cursor: pointer;
     text-decoration: none;
 }
-.add-remove{
-    color:#FFFFFF;
-    padding-left:5px;
-    font-size: 20px;
-    cursor: pointer;
-    
-}
+
 /*--------------------------MIDDLE5-------------------------------------- */
 
 #middle5{
@@ -1393,7 +1333,7 @@ height: 80px;
     grid-template-columns: 54.5% 44.5%;
     gap:1%;   
     height: auto;
-    margin:1% 0 30px 0;
+    margin:1% 0 1.875rem 0;
     color:#FFFFFF;
  
 }
@@ -1402,43 +1342,30 @@ height: 80px;
     display:grid; 
     grid-template-columns: 49% 49%;
     gap:2%;
-    height:160px;
+    height:10rem;
     margin-bottom: 2%;
     text-align: left;
   
    
  }
- .middle5-right-grid2{
-    display:grid; 
-    grid-template-columns: 48% 48%;
-    gap:2%;
-    min-height:160px;
-    margin-bottom: 2%;
-    text-align: left;
-    background-color:#202122 ;
- }
+ 
  .mid5-padd{
-     padding:10px;
+     padding:0.625rem;
      background-color:#202122;
      }
-.events{
-    display:grid;
-    grid-template-columns: 70% 30% ;
-}
+
 #list-event{
    padding-left:5%;
-   padding-top:15px;
+   padding-top:1rem;
 }
- .title-arrow{
-    padding-left:8px
-}    
+
  
 .engage-grid{
     display:grid;
     grid-template-columns: 70% 30%;
 }
 .engage-stikl{
-    height: 14px;
+    height: 0.875em;
     cursor: pointer;
 
 }
@@ -1456,41 +1383,35 @@ height: 80px;
     background-color: #202122;
 }
 #middle5-right-end{
-    height: 153px;
+    height: 9.5625rem;
     background-color: #202122;
 }
 .gold{
     color:#C8A07D;
-    font-size: 14px;
+    font-size: 0.875em;
     margin-top:10%;
-    padding-left:20px;
+    padding-left:1.25rem;
 }
 .gold2{
     color:#C8A07D;
-    font-size: 14px;
-    padding-left:20px;
+    font-size: 0.875em;
+    padding-left:1.25rem;
 }
 .middle5-text{
-    padding:15px 0 5px  20px;
+    padding:1rem 0 5px  1.25rem;
     font-weight: normal;
-    font-size: 16px;
-    line-height: 21px;
-    letter-spacing: 0.15px;
+    font-size: 1rem;
+    line-height: 1.3125rem;
+    letter-spacing: 0.1rem;
 }
 #form-middle5{
     color:#F2358D;
     text-align: center;
-    padding-top:30px;
+    padding-top:1.875rem;
 }
-.inputcurplay{
-    margin-top:36px;
-    margin-left:20px;
-    padding-left:5px;
-    border-bottom: 1px solid #5C5E64;
-    color:#FFFFFF;
-}
+
 .switch-style{
-    padding-left:15px;
+    padding-left:1rem;
 }
 
 .slider{
@@ -1499,39 +1420,21 @@ height: 80px;
 
 }
 .slider>p{
-    width:38px;
+    width:2.375rem;
     display:flex;
     margin:auto;
     text-align: center;
 }
-.njslider-text
 
 /**side-right */
 
-.edit-input{
-    border-bottom: 1px solid #5C5E64;
-    color:#FFFFFF;
-}
-.radiouser{
-    display:flex;
-    padding-left:100px;
-    width:60px;
-    padding-right:10px;
-}
-.radiobutton{
-    margin:auto  15px auto 10px ;
-}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.grid-check{
-    padding-bottom: 15px;
-    font-size:18px;
-    transform: scale(0.7);
-    transform-origin: left;
-  }
+
 
 #check-engagements{
     width:100%;
@@ -1545,51 +1448,42 @@ input::-webkit-inner-spin-button {
 #select-css{
     color:#FFFFFF;
     background-color: #202122;
-    width:75px;
     border-radius: 3px;
-    margin-left:25px;
+    margin-left:1.5625rem;
     outline:0px;
     border: none;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 0.75rem;
 }
 #select-css2{
     color:#FFFFFF !important;
-    width:140px;
+    width:8.75rem;
     border-radius: 3px;
-    margin-left:25px;
+    margin-left:1.5625rem;
     outline:0px;
     border: none;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 0.875em;
     background-color:  #202122;
 }
 
-.switch-engage{
-    margin-left:10px;
-}
 
-/* RADIO */
-.radio-titule{
-   display:flex;
-   font-size: 14px;;
-}
 
 /* CLUB */
 .vuetify-switch{
     height: 0px;
     position:relative;
-    bottom:65px;
-    left:10px;  
+    bottom:4.0625rem;
+    left:0.625rem;  
 }
 
 .switch-container{
-    padding-left: 20px ;
+    padding-left: 1.25rem ;
     margin:0;
 }
 .borderbutton{
-    width: 170px;
-    height: 44px;
+    width: 10.625rem;
+    height: 2.75rem;
     border: 1px solid #2E2E2E;
     box-sizing: border-box;
     border-radius: 6px;
@@ -1600,34 +1494,34 @@ input::-webkit-inner-spin-button {
     cursor: pointer;
 }
 .borderbutton>p{
-    font-size:14px;
+    font-size:0.875em;
     padding:0 5px 0 5px
 }
 .slider{
     display:flex;
     margin: auto;
-    width:180px
+    width:11.25rem
 }
 .slider>p{
     text-align: center;
 }
 /*ORGANIZER*/
 #middle5-right-startorg{
-    min-height: 205px;
+    min-height: 12.8125rem;
     background-color: #202122;
-    margin-bottom:10px;
+    margin-bottom:0.625rem;
     text-align:left;
-    padding:10px
+    padding:0.625rem
 }
 .listevent{
-    min-height: 205px;
+    min-height: 12.8125rem;
 }
 
 #plava-kugla2{
     position: relative;
-    height: 100px;
+    height: 6.25rem;
     left:340%;
-    bottom: 50px;
+    bottom: 3.125rem;
 }
 #plava-kugla{
    position: relative;
@@ -1636,15 +1530,8 @@ input::-webkit-inner-spin-button {
 .vuetify-switch2{
     height: 0px;
     position:relative;
-    bottom:55px;
-    right:15px;
-}
-.list-events{
-    display: flex;
-    padding-left:20px
-}
-.list-events>p{
-font-size:12px
+    bottom:3.4375rem;
+    right:1rem;
 }
 .gold-event{
    color:#C8A07D;
@@ -1652,22 +1539,22 @@ font-size:12px
 }
 /*ARBITER */
 .rotate{transform: rotate(-45deg);
-position:relative;
-top:300px;
-    font-size:26px;
+    position:relative;
+    top:18.75rem;
+    font-size:1.625rem;
     font-weight: 600;
-    letter-spacing: 15px;}
+    letter-spacing: 1rem;}
 
 /*DROPDOWN */
-.dropbtn {
+/*.dropbtn {
   background-color: #202122;
   color: white;
-  padding: 8px 20px;
-  font-size: 14px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875em;
   border: 0.5px solid #5C5E64;
   box-sizing: border-box;
-  margin-left:20px;
-  margin-top:10px;
+  margin-left:1.25rem;
+  margin-top:0.625rem;
 }
 
 .dropdown {
@@ -1679,14 +1566,14 @@ top:300px;
   display: none;
   position: absolute;
   background-color: #202122;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  min-width: 10rem;
+  box-shadow: 0px 0.5rem 1rem 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
 
 .dropdown-content p {
   color: white;
-  padding: 10px 10px;
+  padding: 0.625rem 0.625rem;
   text-decoration: none;
   display: block;
 }
@@ -1704,69 +1591,7 @@ top:300px;
 }
 
 /* Hide default HTML checkbox */
-.switch1 input {display:none;}
 
-/* The slider */
-.slider1 {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider1:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider1 {
-  background-color: #2196F3;
-}
-
-input:focus + .slider1 {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider1:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-/* Rounded sliders */
-.slider1.round {
-  border-radius: 34px;
-}
-.slider1.round:before {
-  border-radius: 50%;
-}
-.button-range{
-  border: 0.5px solid #5C5E64;
-  box-sizing: border-box; 
-  background-color:#202122 ;
-  color:#FFFFFF;
-  font-size: 14px;
-  width: 110px;
-  height: 32px;
-  margin-right: 15px;
-  margin-top:45px;
-  
-}
-.button-range:hover{
-opacity: 0.7;
-cursor: pointer;
-}
 @media only screen and (max-width: 1500px) and (min-width: 500px) {
 .right-profile{
     display:grid;
@@ -1775,8 +1600,8 @@ cursor: pointer;
 }
 .profile{
     display:grid;
-    grid-template-columns: 200px auto;
-    font-size:14px;
+    grid-template-columns: 12.5rem auto;
+    font-size:0.875em;
 }  
 
 }

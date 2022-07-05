@@ -6,7 +6,7 @@
     >
       <div />
       <div id="right-middle">
-        <div style="padding-bottom: 40px" />
+        <div style="padding-bottom: 2.5rem" />
         <div id="input-filter">
           <div id="filter_height">
             <img
@@ -77,7 +77,7 @@
           </div>
           <div
             class="search-header"
-            style="padding-right: 8px"
+            style="padding-right: 0.5rem"
           >
             Club
           </div>
@@ -707,11 +707,11 @@ a {
 }
 hr {
   border: 0.5px solid rgba(255, 255, 255, 0.2);
-  margin: 40px auto 40px auto;
+  margin: 2.5rem auto 2.5rem auto;
 }
 .profile {
   display: grid;
-  grid-template-columns: 259px auto;
+  grid-template-columns: 16.25rem auto;
   width: 100%;
 }
 
@@ -728,18 +728,18 @@ hr {
   transition: 1.5s;
 }
 #filter_height {
-  height: 48px;
+  height: 3rem;
   border-left: 0.5px solid rgba(111, 115, 129, 0.5);
   border-top: 0.5px solid rgba(111, 115, 129, 0.5);
   border-bottom: 0.5px solid rgba(111, 115, 129, 0.5);
   box-sizing: border-box;
-  border-radius: 26px 0 0 26px;
+  border-radius: 1.625rem 0 0 1.625rem;
 }
 #imgsearch {
   /* border: 0.5px solid rgba(111, 115, 129, 0.5);*/
-  height: 35px;
-  padding-top: 15px;
-  padding-left: 15px;
+  height: 2.1875rem;
+  padding-top: 1rem;
+  padding-left: 1rem;
   cursor: pointer;
 }
 .intelegent-filter {
@@ -748,16 +748,16 @@ hr {
   box-sizing: border-box;
   background-color: #1b1c1d;
   display: flex;
-  height: 48px;
-  padding-left: 30px;
-  font-size: 14px;
+  height: 3rem;
+  padding-left: 1.875rem;
+  font-size: 0.875rem;
   color: #ffffff;
 
   width: 85%;
 }
 #input-filter {
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
 .second-part {
   display: flex;
@@ -765,9 +765,9 @@ hr {
   align-items: center;
 
   border: 0.5px solid rgba(111, 115, 129, 0.5);
-  height: 48px;
-  padding-left: 20px;
-  border-radius: 0 26px 26px 0;
+  height: 3rem;
+  padding-left: 1.25rem;
+  border-radius: 0 1.625rem 1.625rem 0;
   width: 15%;
   color: #6f7381;
   cursor: pointer;
@@ -777,9 +777,9 @@ hr {
   justify-content: center;
   align-items: center;
   border: 0.5px solid rgba(111, 115, 129, 0.5);
-  height: 48px;
-  padding-left: 20px;
-  border-radius: 0 26px 26px 0;
+  height: 3rem;
+  padding-left: 1.25rem;
+  border-radius: 0 1.625rem 1.625rem 0;
   width: 15%;
   color: #ffffff;
   cursor: pointer;
@@ -789,8 +789,8 @@ hr {
   opacity: 0.7;
 }
 #img-category {
-  height: 15px;
-  padding: 0 0 0 15px;
+  height: 1rem;
+  padding: 0 0 0 1rem;
   margin: auto;
 }
 #category-text {
@@ -801,8 +801,8 @@ hr {
   display: grid;
   grid-template-columns: 4% 23% 7% 10% 6% 8% 8% 12% 12% 10%;
   background-color: #202122;
-  height: 52px;
-  margin: 20px 0 20px 0;
+  height: 3.25rem;
+  margin: 1.25rem 0 1.25rem 0;
   color: #ffffff;
   align-items: center;
 }
@@ -816,7 +816,7 @@ hr {
   margin: auto;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 .start {
   display: flex;
@@ -827,8 +827,8 @@ hr {
   border: 1px;
   margin: 0 10% 0 10%;
   background-color: rgba(255, 255, 255, 0.7);
-  width: 35px;
-  height: 35px;
+  width: 2.1875rem;
+  height: 2.1875rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -838,12 +838,12 @@ hr {
   display: block;
 }
 .inetrestedin {
-  font-size: 12px;
+  font-size: 0.75rem;
   color: rgba(17, 198, 209, 1);
 }
 
 .search-header {
-  font-size: 14px;
+  font-size: 0.875rem;
   background-color: #202122;
 }
 
@@ -856,33 +856,33 @@ hr {
   color: #6f7381;
   font-weight: 500;
   text-align: left;
-  padding: 40px 0 40px 0;
+  padding: 2.5rem 0 2.5rem 0;
 }
 
 .side-bar-filter {
-  padding: 15px 20px 15px 20px;
+  padding: 1rem 1.25rem 1rem 1.25rem;
 }
 .side-bar-filter:hover {
   color: #ffffff;
   cursor: pointer;
 }
 .clicksearch {
-  height: 20px;
+  height: 1.25rem;
   display: flex;
-  font-size: 12px;
+  font-size: 0.75rem;
   color: #ffffff;
-  padding-left: 20px;
-  margin-bottom: 20px;
+  padding-left: 1.25rem;
+  margin-bottom: 1.25rem;
 }
 .sideinput {
   color: #ffffff;
-  width: 50px;
-  padding: 0 6px 0 6px;
+  width: 3.125rem;
+  padding: 0 0.375rem 0 0.375rem;
   border-bottom: 0.5px solid #ffffff;
 }
 .sideinput2 {
   color: #ffffff;
-  width: 100px;
+  width: 6.25rem;
   border-bottom: 0.5px solid #ffffff;
 }
 
@@ -904,7 +904,7 @@ select {
   background-color: #202122;
   color: #ffffff;
   border: none;
-  font-size: 14px;
+  font-size: 0.875rem;
   padding: 0;
 }
 .select-text {
@@ -915,12 +915,12 @@ select {
 #select-css {
   color: #ffffff;
   background-color: #202122;
-  width: 80px;
+  width: 5rem;
   border-radius: 3px;
   outline: 0px;
   border: none;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 /*BUTTON*/
@@ -929,17 +929,17 @@ select {
   box-sizing: border-box;
   background-color: #202122;
   color: #ffffff;
-  font-size: 14px;
-  width: 130px;
-  height: 46px;
-  margin-right: 15px;
-  margin-left: 15px;
+  font-size: 0.875rem;
+  width: 8.125rem;
+  height: 4.375rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
 }
 .middle2-buttons:hover {
   opacity: 0.7;
 }
 .buttonsearch {
-  margin-top: 120px;
+  margin-top: 1.25rem;
 }
 
 /*RADIO BUTTONS */
@@ -947,7 +947,7 @@ select {
   margin: auto 5px auto 0;
 }
 .radiobutton > p {
-  padding-right: 8px;
+  padding-right: 0.5rem;
 }
 .check_search-interest {
   display: flex;
@@ -959,8 +959,8 @@ select {
 @media only screen and (max-width: 1500px) and (min-width: 500px) {
   .profile {
     display: grid;
-    grid-template-columns: 200px auto;
-    font-size: 14px;
+    grid-template-columns: 12.5rem auto;
+    font-size: 0.875rem;
   }
 
   .right-profile {

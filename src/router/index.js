@@ -22,12 +22,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Signin.vue')
   },
   {
-    path: '/thnks',
-    name: 'Thnks',
+    path: '/thanks',
+    name: 'Thanks',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Thnks.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Thanks.vue')
   },
   {
     path: '/profile',
@@ -55,12 +55,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Notifications.vue')
   },
   {
-    path: '/thnksver',
-    name: 'Thnksver',
+    path: '/thanks-verification',
+    name: 'Thanks-verification',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Thnksver.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Thanks-verification.vue')
   },
   {
     path: '/chatroom',
@@ -71,20 +71,20 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Chatroom.vue')
   },
   {
-    path: '/resetpass',
-    name: 'ResetPass',
+    path: '/reset-password',
+    name: 'Reset-password',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/ResetPass.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Reset-password.vue')
   },
   {
-    path: '/vermail',
-    name: 'Vermail',
+    path: '/verification-mail',
+    name: 'Verification-mail',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Vermail.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Verification-mail.vue')
   },
   {
     path: '/publicprofile/:id',
