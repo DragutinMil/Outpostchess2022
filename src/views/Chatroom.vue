@@ -28,7 +28,7 @@
               Messages
             </div>
             <div class="header_list">
-              Time
+              Times
             </div>
             <div class="header_list">
               Invitation
