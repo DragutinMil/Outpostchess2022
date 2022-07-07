@@ -1,30 +1,58 @@
 <template>
-    <div class="chesscv">
-      
-      <div id="about-me">
-        <div id="about-edit">
-          <p style="padding-right:10px">About Me</p> 
-          
-        </div >
-            <div  >
-            <p  style="white-space: pre-line;"   v-bind:class="{'about-text3':editable,'about-text':isActive,}"  >{{user.about_me}} </p>
-            </div>
-            <div>
-              <button class="middle2-buttons"   v-if="editable" @click="editconfirm"  type="button" >Confirm changes</button>
-              <button class="middle2-buttons" @click="editable=!editable"  v-if="editable"  type="button" >Cancel</button>
-            </div>
-     <!--    <input  type="text" class="about-text" v-if="editable"   v-model="aboutme"   placeholder='about me'>
+  <div class="chesscv">
+    <div id="about-me">
+      <div id="about-edit">
+        <p style="padding-right:0.625rem">
+          About Me
+        </p>
+      </div>
+      <div>
+        <p
+          style="white-space: pre-line;"
+          :class="{'about-text3':editable,'about-text':isActive,}"
+        >
+          {{ user.about_me }}
+        </p>
+      </div>
+      <div>
+        <button
+          v-if="editable"
+          class="middle2-buttons"
+          type="button"
+          @click="editconfirm"
+        >
+          Confirm changes
+        </button>
+        <button
+          v-if="editable"
+          class="middle2-buttons"
+          type="button"
+          @click="editable=!editable"
+        >
+          Cancel
+        </button>
+      </div>
+      <!--    <input  type="text" class="about-text" v-if="editable"   v-model="aboutme"   placeholder='about me'>
         <p v-else class="about-text">tekst  {{user.about_me}} </p>-->
-        <hr>
+      <hr>
+      <div>
+        <p>My CV: </p>
         <div>
-          <p>My CV: </p>
-          <div >
-            <p id="opencv" @click="newopenwindow()"   >{{user.cv.file_name}}</p> 
-            <input   type="file"  style="display:none;"  title=""  id="fileUpload"  />
-          </div>
-          
+          <p
+            id="opencv"
+            @click="newopenwindow()"
+          >
+            {{ user.cv.file_name }}
+          </p> 
+          <input
+            id="fileUpload"
+            type="file"
+            style="display:none;"
+            title=""
+          >
         </div>
       </div>
+    </div>
   </div>
 </template>
 
@@ -33,7 +61,10 @@
 export default {
   name: 'Chesscv',
   props:{
-    user:Object,
+    user:{
+      type: Object,
+      required: true,
+    }
     },
   data () {
       return {
@@ -70,13 +101,13 @@ export default {
   display:block;
   align-items: left;
   text-align: left;
-   margin:30px
+   margin:1.875rem
 }
  
       
     
 .about-me{
-  padding-top:30px;
+  padding-top:1.875rem;
  
 }
 #about-edit{
@@ -90,16 +121,16 @@ i:hover{
 }
 .about-text{
  color:#6F7381;
- margin-right:20px;
+ margin-right:1.25rem;
  
 }
 
 
 .about-text3{
  color:#6F7381;
- margin-right:20px;
+ margin-right:1.25rem;
  background-color:rgba(27, 28, 29, 1);
- padding:10px;
+ padding:0.625rem;
  border-radius:5px
 }
 
@@ -109,12 +140,12 @@ i:hover{
   background: linear-gradient(top, #f9f9f9, #e3e3e3);
   border: 1px solid #999;
   border-radius: 3px;
-  padding: 5px 8px;
+  padding: 5px 0.5rem;
   outline: none;
   white-space: nowrap;
   cursor: pointer;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 .file-input:hover::before {
   opacity: 0.7;
@@ -137,10 +168,10 @@ i:hover{
   box-sizing: border-box; 
   background-color:#202122 ;
   color:#FFFFFF;
-  font-size: 12px;
-  width: 120px;
-  height: 24px;
-  margin:0 20px 35px 0; 
+  font-size: 0.75rem;
+  width: 11.25rem;
+  height: 1.5rem;
+  margin:0 1.25rem 2.25em 0; 
 }
 .fontawesome{
   color:#C8A07D;

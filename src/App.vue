@@ -1,20 +1,21 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/"></router-link>
-     
+      <router-link to="/" />
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'App', 
-
+ 
   data: () => ({
     //
   }),
+  
 };
 </script>
 
@@ -25,8 +26,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-
+  
 }
+
 body{
   margin:0;
   padding:0;

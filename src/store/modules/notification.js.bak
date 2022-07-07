@@ -1,0 +1,46 @@
+const state = {
+  
+  };
+
+const getters = {  };
+  
+const actions = {
+  getNotification({commit}) {
+      
+    fetch('https://app.outpostchess.com/api/v2/notifications', {
+      method:'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        "authorization":`Bearer ${localStorage.getItem('token')}`
+      }
+    },        
+    )
+    .then(response => response.json())
+
+    .then(data => this.myNotification=data)
+    .then(data => console.log('my notifications',data)) 
+    commit('setNotification',this.myNotification)
+    console.log("trt")
+    }
+  };
+  
+const mutations = {
+  setNotification (state,notifications) {
+    state.notifications=notifications
+    console.log("trtara")
+    console.log(state.myNotifications)
+  },
+  receiveNotif (state,payload) {
+    state.notif_arr=[payload,...state.notif_arr]
+    state.counterNot++
+    }
+  };
+  
+  export default {
+    state,
+    getters,
+    actions,
+    mutations
+  };
+  
+

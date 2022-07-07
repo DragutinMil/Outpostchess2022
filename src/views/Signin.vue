@@ -1,50 +1,104 @@
 <template>
   <div class="home">
-      <div id="left-login">
-              <div id="logo-pic">
-                    <img src="../assets/logo2.png"  alt="">
-              </div>
+    <div id="left-login">
+      <div id="logo-pic">
+        <img
+          src="../assets/logo2.png"
+          alt=""
+        >
+      </div>
                
-              <div> 
-                    <div id="welcom-text">
-                        <p class="letter-44" >Welcome to your</p> 
-                        <p class="letter-44 weight700" > professional chess</p> 
-                        <p class="letter-44 weight700">community.</p>                        
-                    </div>
-                   
-              </div>
-             <div id="input-signup">
-               
-                <div>
-                     <input type="email" @keyup.enter="signin()" name=""  v-bind:class="{mailin:isActive,'text-danger':hasError}" placeholder="Email" v-model="emailsignin">
-                     <p id="reqpass">{{req1}}</p>
-                </div> 
+      <div> 
+        <div id="welcom-text">
+          <p class="letter-44">
+            Welcome to your
+          </p> 
+          <p class="letter-44 weight700">
+            professional chess
+          </p> 
+          <p class="letter-44 weight700">
+            community.
+          </p>                        
+        </div>
+      </div>
+      <div id="input-signup">
+        <div>
+          <input
+            v-model="emailsignin"
+            type="email"
+            name=""
+            :class="{mailin:isActive,'text-danger':hasError}"
+            placeholder="Email"
+            @keyup.enter="signin()"
+          >
+          <p class="reqpass">
+            {{ req1 }}
+          </p>
+        </div> 
              
-                <div style="padding:20px 0 20px 0;"> 
-                     <input type="password" @keyup.enter="signin()" name="" v-bind:class="{mailin:isActive,'text-danger':hasError2,}" placeholder="Password" v-model="passsignin" >
-                     <p id="reqpass">{{req}} </p>
-                     <p id="reqpass">{{request}} </p>
-                </div>
+        <div style="padding:20px 0 20px 0;"> 
+          <input
+            v-model="passsignin"
+            type="password"
+            name=""
+            :class="{mailin:isActive,'text-danger':hasError2,}"
+            placeholder="Password"
+            @keyup.enter="signin()"
+          >
+          <p class="reqpass">
+            {{ req }}
+          </p>
+          <p class="reqpass">
+            {{ request }}
+          </p>
+        </div>
                 
 
-              <div id="forgot-text" >
-                  <router-link to="/resetpass" >  <p class="home-p blue">Forgot password?</p>     </router-link>
-                  <router-link v-if="pojava" to="/vermail" >  <p class="home-p blue"> You didn't verify the email?</p>     </router-link>
-              </div>
-              <div id="butt1">
-                 <button  type="button"  @click="signin()"  class="text-join" style=" border: 1px solid #C8A07D; ">Sign in</button> 
-               
-              </div>
-           <!--   <p id="text-or">or</p>
+        <div id="forgot-text">
+          <router-link to="/reset-password">
+            <p class="home-p blue">
+              Forgot password?
+            </p>
+          </router-link>
+          <router-link
+            v-if="pojava"
+            to="/verification-mail"
+          >
+            <p class="home-p blue">
+              You didn't verify the email?
+            </p>
+          </router-link>
+        </div>
+        <div id="butt1">
+          <button
+            type="button"
+            class="text-join"
+            style=" border: 1px solid #C8A07D; "
+            @click="signin()"
+          >
+            Sign in
+          </button>
+        </div>
+        <!--   <p id="text-or">or</p>
                 <button type="button" onclick="alert('Hello world!')"   class="text-join"  style="border: 1px solid #E8E8E8;"> <div id="google-cor1"> <div id="google-cor"> <img src="../assets/Group.svg" id="" alt="google"></div><p id="joingoogle">Join with Google</p> </div></button>         
              -->
-           </div>
- 
-        </div>
-      
-      <div id="right-login">
-             
+        <div id="policy">
+        <p id="text-or">or</p>
+        <button type="button" @click="back"   class="text-join"  style="border: 1px solid #E8E8E8;"> <p id="joingoogle">Sign up</p> </button>   
+        &nbsp;
+      <!--  <div id="forgot-text">
+          <router-link
+            to="/"
+            class="home-p blue"
+          >
+            Sign up
+          </router-link>
+        </div>-->
       </div>
+      </div>
+    </div>
+      
+    <div id="right-login" />
   </div>
 </template>
 
@@ -70,6 +124,9 @@ export default {
     this.emailsignin= this.$route.query.email;
   },
     methods:{
+    back:function(){
+      this.$router.push('/');
+    },
     signin: function(){
       this.req="",
       this.req1="",
@@ -275,7 +332,7 @@ a{
      margin:auto 0 auto 0;
      padding-right:7px;
    }
-   #reqpass{
+   .reqpass{
      color:#F2358D;
      text-align: left;
      padding-left:17.5%;
@@ -285,6 +342,13 @@ a{
       margin:0;
    padding-left:15px;
    }
+   #signup{
+     text-align: left;
+
+     padding-right:50%
+   }
+ 
+
 @media only screen and (max-width: 499px){
   #right-login{
     display:none;

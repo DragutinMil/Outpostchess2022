@@ -1,11 +1,15 @@
 <template>
   <div class="calendar">
-      <div class="container flex-center">
-             <p id="rotate">Coming soon</p> 
-             <img id="calendarpic" src="@/assets/calendar.svg" alt="">
-             
-      </div>
-   
+    <div class="container flex-center">
+      <p id="rotate">
+        Coming soon
+      </p> 
+      <img
+        id="calendarpic"
+        src="@/assets/calendar.svg"
+        alt=""
+      >
+    </div>
   </div>
 </template>
 <script>
@@ -26,14 +30,14 @@
      #rotate {
     position:absolute;
     transform: rotate(-45deg);
-    font-size:26px;
+    font-size:1.625rem;
     font-weight: 600;
-    letter-spacing: 15px;
+    letter-spacing: 1rem;
     opacity: 0.8;
     color:#FFFFFF;
     }
     .container{
-       padding:30px;
+       padding:1.875rem;
     }
     #calendarpic{
       width:100%;

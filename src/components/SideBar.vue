@@ -26,6 +26,9 @@
                     <div class="side-options"> 
                              <div class="flex-center"><img  src="../assets/book.png" alt=""></div>
                              <p class="left-sidetext diffcol">Blog</p>
+                             
+                          <!--t <router-link to="../blog" style="color:#C7C9D0" > <p class="left-sidetext" >Blog</p></router-link> 
+                           o="../blog" style="color:#C7C9D0"-->
                     </div>
 
                     <div id="side-flexend">
@@ -77,20 +80,20 @@ logOut:function(){
     height:100vh; 
 }
 .logoimg{
-    width: 150px;
-    padding: 15% 10% 50px 0;
+    width: 9.375rem;
+    padding: 15% 10% 3.125rem 0;
 }
 .side-options{
 display:flex;
 color:#C7C9D0;
-padding: 10px 0 15px 53px;
+padding: 0.625rem 0 1rem 3.3125rem;
 
 }
 .side-options:hover{
     opacity: 0.7;
 }
 .left-sidetext{
-    padding-left:15px;
+    padding-left:1rem;
     cursor: pointer;
     margin:0
 }
@@ -104,7 +107,7 @@ hr{
 
 }
 #side-flexend{
-    padding-top:30px;
+    padding-top:1.875rem;
     
 
 }
@@ -112,7 +115,7 @@ hr{
 @media only screen and (max-width: 1500px) and (min-width: 500px) {
 .side-options{
 
-padding: 10px 0 15px 33px;
+padding: 0.625rem 0 1rem 2rem;
 }
 
 }
