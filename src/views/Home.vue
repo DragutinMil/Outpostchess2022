@@ -256,10 +256,12 @@ export default {
       admin: false,
       other: false,
       trainer: false,
+      
     };
   },
   methods: {
     agreelogin: function () {
+      
       this.req = "";
       (this.req2 = ""),
         (this.req1 = ""),
@@ -334,10 +336,32 @@ export default {
             },
           }),
         })
-          .then((response) => response.json())
-          .then((data) => console.log(data));
-        this.$router.push("/thanks");
+          .then((response) => response.json()) 
+          .then(data => this.response=data)
+          .then(data => console.log('podaci',data)) 
+        //  .then(function(response){
+        //    console.log(this.response)
+        ////    if(response==200){
+//window.alert("adassddcc")
+      //      }else{
+              
+       //       window.alert("adassdvevevevdcc")
+        //    }
+        //  })
+      //    console.log(this.response.results.status)
+          
+         // .then(response => {
+       //   if ((this.response.results.status=="alreadyexist")) {
+         //   window.alert="trtaw"
+           //this.$router.push("/thanks");
+        //   } else {
+        //   window.alert("trt")
+            
+        //  }
+          
+      //  })
       }
+     
     },
   },
 };
