@@ -1114,7 +1114,7 @@
                                 </div>               
                             </div>    -->
               </div>
-              <div id="middle5-right-startorg">
+              <div id="middle5-right-startorg" style="margin:0">
                 <div
                   v-if="newevent"
                   style="display:flex"
@@ -1157,7 +1157,7 @@
                           class="profile-name2 line2"
                         >
                       </p>
-                    </div>
+                    </div> 
                   </div>
                   <div>
                     <button
@@ -1207,16 +1207,116 @@
 <!-- Trainer -->
             <div
               v-else-if="activetre && user.rola.indexOf('TRAINER')!==-1"
-              style="opacity:0.5"
             >
-              <p class="rotate">
-                Coming soon!
-              </p>
-              <img
-                style="width:100%"
-                src="../assets/coach1.jpg"
-                alt=""
-              >  
+              <div id="middle5-right-startorg" style="background-color: #11C6D1">
+                <div class="middle5-text w700">
+                    <p >Price per lesson</p> 
+                </div>
+                <div v-if="user.trainer_price_lesson==null">
+                  <div id="enter-price-button"
+                    :class="{
+                borderbutton: default_button,
+                borderbutton2: clicked_button
+              }"
+                    class="flex-center " @click="enter_price_tra">
+                    <div v-if="enter_price==false">
+                       <p>Enter price</p>
+                    </div>
+                  
+                  </div>
+                </div>
+                <div v-if="user.trainer_price_lesson!==null && enter_again==false" class="middle5-text w700" id="trainer-price-number">
+                   <p >${{user.trainer_price_lesson}} /1h</p>
+                   <button class="trainer_change_price" @click="enter_price_tra">Change value</button>
+                </div>
+
+                <div v-if="enter_price==true && enter_again==true" id="trainer_input_price">
+                       <input 
+                       type="number"
+                      v-model="trainer_price_lesson"
+                      class="inputcurplay2"
+                      placeholder="Enter price $/1h"
+                      
+                    >
+                    <button @click="confirm_enter_price">Confirm</button>
+                   <div v-if="entered"  >
+                     <p class="text-normal">{{text1}}</p>
+                     <p class="text-normal">{{text2}}</p>
+          
+                  </div>
+                </div>
+               </div> 
+              <div class="middle5-right-grid" >
+                <div class="mid5-padd " style="padding-top:2rem" >
+                  <p class="middle5-text"  >
+                    Looking for new students?
+                  </p>
+                  <div>
+                    <div class="switch-style" style="padding-left:1.125rem;padding-top:0.75rem">
+                      <b-form-checkbox
+                        switch
+                        :checked="user.trainer_looking_for_new_player"
+                        @change="trainer_looking_students"
+                      />                  
+                    </div>
+                  </div>
+                </div>
+               
+                <div class="mid5-padd flex-center">
+                  <div
+                    class="borderbutton flex-center"
+                  
+                  >
+                 
+                    <p>MY TRANSACTIONS</p>
+                  </div>
+                </div>
+                <!--      <div class="mid5-padd flex-center">
+                                <div class="borderbutton flex-center">
+                                    <p style="text-align:center">Interested in this Organizer</p>
+                                </div>               
+                            </div>    -->
+              </div>
+              <div class="middle5-right-grid" style="margin:0">
+                <div class="mid5-padd">
+                   <div @click="student_list" class="middle5-text">
+                    <p >Students</p> 
+                   </div>
+                   <div  class="middle5-text2" v-for="(student,index) in user.trainer_list_of_students" :key="student">
+                      {{index+1}}. {{student}}
+                   </div>  
+                  
+
+                   <div>
+                       <input 
+                       type="text"
+                      v-model="new_student"
+                      class="inputcurplay2"
+                      placeholder="Enter new student"
+                      
+                    >
+                   </div>
+
+                </div>
+                <div class="mid5-padd flex-center">
+                  <div class="borderbutton flex-center" id="trainer-library" >
+                    
+                    <p>MY STUDENTS LIBRARY</p>
+                    <img
+                      src="../assets/arrow-down.png"
+                      alt=""
+                    >
+                  </div>
+                </div>
+                <!--      <div class="mid5-padd flex-center">
+                                <div class="borderbutton flex-center">
+                                    <p style="text-align:center">Interested in this Organizer</p>
+                                </div>               
+                            </div>    -->
+              </div>
+            
+
+
             </div>
 
 
@@ -1230,7 +1330,7 @@
                 <div class="mid5-padd">
                   <div style="height:4rem;display:flex">
                     <img
-                      v-if="user.arbiter_current_event!=null"
+                      v-if="user.arbiter_current_event_uuid!=null"
                       id="plava-kugla2"
                       src="../assets/plavakugla.png"
                       alt=""
@@ -1246,18 +1346,28 @@
                                 </v-app> -->
                  <div>
                    <input
-                      v-if="user.current_event!==''"
-                      v-model="user.current_event"
+                      v-if="user.arbiter_current_event_uuid==''"
                       type="text"
                       class="inputcurplay"
                     >
                      <input
                       v-else
-                    
-                      placeholder="123-45-678"
+                      @click="enter_event=true"
+                      placeholder="Enter event"
                       type="text"
                       class="inputcurplay"
+                      v-model="user.arbiter_current_event_uuid"
                     >
+                    <div>
+                       <button
+                          @click="new_arb_event"
+                          v-if="enter_event"
+                          class="middle2-buttons"
+                          type="button"
+                        >
+                          Confirm changes
+                        </button>
+                    </div>
                  </div>
                 </div>
               </div>   
@@ -1270,13 +1380,13 @@
                     <div class="switch-style">
                       <b-form-checkbox
                         switch
-                        :checked="user.arbiter_looking_for_new_engagement"
-                        @change="lookpart"
+                        :checked="user.arbiter_looking_for_new_eng"
+                        @change="arbiter_engagement"
                       />                  
                     </div>
                   </div>
                 </div>
-                <div class="mid5-padd flex-center">
+            <!--    <div class="mid5-padd flex-center">
                   <div
                     class="borderbutton flex-center"
                     @click="newevent=!newevent"
@@ -1287,7 +1397,7 @@
                     >
                     <p>Create an event</p>
                   </div>
-                </div>  
+                </div>  -->
                  <!--      <div class="mid5-padd flex-center">
                                 <div class="borderbutton flex-center">
                                     <p style="text-align:center">Interested in this Organizer</p>
@@ -1295,7 +1405,7 @@
                             </div>    -->
               
               </div>
-              <div id="middle5-right-startorg">
+           <!--   <div id="middle5-right-startorg" style="margin:0">
                 <div
                   v-if="newevent"
                   style="display:flex"
@@ -1365,7 +1475,7 @@
                     style="display:flex"
                   >
                     <p
-                      v-if="event.organiser_uuid=user.user_uuid"
+                      v-if="event.oß_uuid=user.user_uuid"
                       style="padding-right:8px ;margin-left:0.9375rem"
                     >
                       {{ index+1 }}.
@@ -1383,7 +1493,7 @@
                     </p> 
                   </div>  
                 </div>
-              </div> 
+              </div> -->
             </div>  
 <!-- Other -->
             <div
@@ -1493,6 +1603,10 @@ export default {
                club_current_playing:'',
                club_current_league:'',
                organizer_current_event:{event_name:''},
+               trainer_price_lesson:'',
+               trainer_list_of_students:'',
+               arbiter_current_event_uuid:''
+               
 
          },
          rangeclub:[350,2000],
@@ -1515,8 +1629,19 @@ export default {
          event_list:false,
          my_interested_list:[],
          my_intclub_list:[],
-         title_remove:''
-
+         title_remove:'',
+         enter_price:false,
+         default_button:true,
+         clicked_button:false,
+         entered:false,
+         trainer_price_lesson:'',
+         enter_again:false,
+         text1:'',
+         text2:'',
+         enter_event:false,
+         arbiter_current_event_uuid:'',
+         students:[],
+         new_student:''
       }
 },
    
@@ -1604,6 +1729,16 @@ created () {
     //this.refresh()
   },
 methods:{
+    enter_event_click:function(){
+       this.enter_event=true
+    },
+    enter_price_tra:function(){
+      this.enter_again=true,
+      this.enter_price=true,
+      this.clicked_button=true,
+      this.default_button=false
+      console.log("trt")
+    },
     remove_title: function(erase){
           this.title_remove=(erase)
          fetch(`https://app.outpostchess.com/api/v2/current_user_titule/${this.title_remove}`, {
@@ -1657,7 +1792,76 @@ methods:{
             },
             body: JSON.stringify( { 
               organizer_looking_for_new_participants:this.user.organizer_looking_for_new_participants
-                
+            })
+        },
+               )   
+            .then(response => response.json())
+            .then(data => console.log(data))
+          //  console.log(this.organizer_looking_for_new_participants)
+    },
+
+    student_list:function(){
+       console.log(this.students)
+       this.students=this.user.trainer_list_of_students
+       this.students.push(this.new_student)
+       console.log(this.students)
+       fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+            method:'PATCH',
+            headers: {'Content-Type': 'application/json',
+            "Authorization":`Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify( { 
+              trainer_list_of_students: this.students
+            })
+        },
+               )   
+            .then(response => response.json())
+            .then(data => console.log(data))
+    },
+
+    trainer_looking_students:function(){
+            
+            this.user.trainer_looking_for_new_player=!this.user.trainer_looking_for_new_player
+       fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+            method:'PATCH',
+            headers: {'Content-Type': 'application/json',
+            "Authorization":`Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify( { 
+              trainer_looking_for_new_player:this.user.trainer_looking_for_new_player 
+            })
+        },
+               )   
+            .then(response => response.json())
+            .then(data => console.log(data))
+          //  console.log(this.organizer_looking_for_new_participants)
+    },
+
+    arbiter_engagement:function(){
+       
+            this.user.arbiter_looking_for_new_eng=!this.user.arbiter_looking_for_new_eng
+       fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+            method:'PATCH',
+            headers: {'Content-Type': 'application/json',
+            "Authorization":`Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify( { 
+             arbiter_looking_for_new_eng:this.user.arbiter_looking_for_new_eng 
+            })
+        },
+               )   
+            .then(response => response.json())
+            .then(data => console.log(data))
+          //  console.log(this.organizer_looking_for_new_participants)
+    },
+      new_arb_event:function(){
+       fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+            method:'PATCH',
+            headers: {'Content-Type': 'application/json',
+            "Authorization":`Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify( { 
+             arbiter_current_event_uuid:this.user.arbiter_current_event_uuid
             })
         },
                )   
@@ -1702,6 +1906,29 @@ methods:{
             .then(data => console.log(data))
            // console.log(this.current_playing_bool)
       },
+      confirm_enter_price:function(){
+        this.text1='',
+        this.text2=''
+        if(this.trainer_price_lesson==''){
+          this.text1='Please,enter value!'
+        }else{
+          this.text2='Value is changed!'
+        }
+        this.entered=true
+       fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+            method:'PATCH',
+            headers: {'Content-Type': 'application/json',
+            "Authorization":`Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify( { 
+              trainer_price_lesson:this.trainer_price_lesson, 
+            })
+          },
+               )   
+           .then(response => response.json())
+           .then(data => console.log(data))
+           
+         },  
 
       compensation:function(){
        fetch('https://app.outpostchess.com/api/v2/current_user_info', {
@@ -2271,7 +2498,7 @@ height: 5rem;
     background-color:#202122 ;
  }
  .mid5-padd{
-     padding:0.625rem;
+     padding:0.625rem 0.3rem;
      }
 #list-event{
    padding-left:5%;
@@ -2326,6 +2553,12 @@ height: 5rem;
     line-height: 1.25rem;
     letter-spacing: 0.01rem;
 }
+.middle5-text2{
+    padding-left:0.9375rem;
+    font-weight: normal;
+    letter-spacing: 0.01rem;
+    font-size: 0.875rem;
+}
 #form-middle5{
     color:#F2358D;
     text-align: center;
@@ -2337,6 +2570,16 @@ height: 5rem;
     padding-left:5px;
     border-bottom: 1px solid #5C5E64;
     color:#FFFFFF;
+}
+.inputcurplay2{
+    margin-left:0.25rem;
+    padding-left:5px;
+    border-bottom: 1px solid #FFFFFF;
+    color:#FFFFFF;
+    width:70%;
+}
+.inputcurplay2::placeholder{
+   color:#FFFFFF
 }
 .switch-style{
     padding-left:0.9375rem;
@@ -2441,12 +2684,20 @@ input::-webkit-inner-spin-button {
     margin:0;
 }
 .borderbutton{
-    width: 10.625rem;
+    width: 12rem;
     height: 2.75rem;
     border: 1px solid #2E2E2E;
     box-sizing: border-box;
     border-radius: 6px;
 }
+ .borderbutton2{
+    width: 12rem;
+    height: 2.75rem;
+    border: 0px solid #2E2E2E;
+    box-sizing: border-box;
+    border-radius: 6px;
+}
+
 .borderbutton:hover{
     opacity:0.7;
     cursor: pointer;
@@ -2465,6 +2716,43 @@ input::-webkit-inner-spin-button {
 .slider>p{
     text-align: center;
 }
+
+/*TRAINER*/
+.text-normal{
+  
+  font-size:0.875rem;
+  font-weight: 400;
+  padding-top:1rem;
+  margin:0;
+  
+}
+#trainer-library{
+  width: 14rem;
+}
+#trainer-price-number{
+  padding-top:3rem;
+  font-size: 2.25rem;
+}
+.w700{
+  font-weight: 700;
+}
+#enter-price-button{
+  margin-top:3rem;
+  margin-left:0.9375rem;
+  color:white;
+  border-color: white;
+}
+.trainer_change_price{
+  padding-top:1rem;
+  font-weight: 400;
+  font-size:0.875rem;
+}
+#trainer_input_price{
+  padding-top:3rem;
+  padding-left:1rem;
+  width:60%;
+}
+
 /*ARBITER*/
 .rotate{transform: rotate(-45deg);
 position:relative;

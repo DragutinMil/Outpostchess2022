@@ -715,37 +715,169 @@
                 </div>  
               </div>
             </div>
+<!--TRAINER -->
             <div
               v-if="activetre && user.rola.indexOf('TRAINER')!==-1"
-              style="opacity:0.5"
             >
-              <p class="rotate">
-                Coming soon!
-              </p>
-              <img
-                style="width:100%"
-                src="../assets/coach1.jpg"
-                alt=""
-              >  
+              <div id="middle5-right-startorg" style="background-color: #11C6D1">
+                <div class="middle5-text w700">
+                    <p >Price per lesson</p> 
+                </div>
+                <div class="middle5-text w700" id="trainer-price-number">
+                   <p v-if="price_entered">{{user.trainer_price_lesson}} </p>
+                </div>
+              </div>
+              <div class="middle5-right-grid" >
+                <div class="mid5-padd " style="padding-top:2rem" >
+                  <p class="middle5-text"  >
+                    Looking for new students?
+                  </p>
+                  <div>
+                    <div class="switch-style" style="padding-left:1.125rem;padding-top:0.75rem">
+                      <b-form-checkbox
+                        disabled
+                        switch
+                        :checked="user.arbiter_looking_for_new_engagement"
+                      
+                      />                  
+                    </div>
+                  </div>
+                </div>
+               
+                <div class="mid5-padd flex-center">
+                  <div
+                    class="borderbutton flex-center"
+                    style="border: 1px solid #C8A07D;"
+                  >
+                 
+                    <p >EASY PAY</p>
+                  </div>
+                </div>
+                <!--      <div class="mid5-padd flex-center">
+                                <div class="borderbutton flex-center">
+                                    <p style="text-align:center">Interested in this Organizer</p>
+                                </div>               
+                            </div>    -->
+              </div>
+              <div class="middle5-right-grid" style="margin:0">
+                <div class="mid5-padd">
+                   <div class="middle5-text">
+                    <p>Students</p> 
+                   </div>
+                   <div>
+
+                   </div>
+
+                </div>
+                <div class="mid5-padd flex-center">
+                  <div
+                    class="borderbutton flex-center"
+                     
+                  >  
+                    <p style="text-align:center">
+                      Interested in this Trainer
+                    </p>
+                  </div>               
+                </div>
+                <!--      <div class="mid5-padd flex-center">
+                                <div class="borderbutton flex-center">
+                                    <p style="text-align:center">Interested in this Organizer</p>
+                                </div>               
+                            </div>    -->
+              </div>
+            
+               
+
             </div>
+<!--END TRAINER-->
+<!--ARBITER-->            
             <div
-              v-if="activearb && user.rola.indexOf('ARBITER')!==-1"
-              style="opacity:0.5"
-            >
-              <p class="rotate">
-                Coming soon!
-              </p>
-              <img
-                style="width:100%"
-                src="../assets/arbiter.jpg"
-                alt=""
-              > 
+              v-if="activearb && user.rola.indexOf('ARBITER')!==-1" >
+              <div id="middle5-right-startorg">
+                <p class="middle5-text">
+                  My Event is currently active:
+                </p>
+                <div class="mid5-padd">
+                  <div style="height:4rem;display:flex">
+                    <img
+                      v-if="user.arbiter_current_event!=null"
+                      id="plava-kugla2"
+                      src="../assets/plavakugla.png"
+                      alt=""
+                    >
+                  </div>
+                  <!--      <v-app class="vuetify-switch2"> 
+                                    <v-container class="switch-container"   >
+                                        <v-switch 
+                                        value=switch5
+                                        color="#C8A07D"
+                                        ></v-switch>
+                                    </v-container>  
+                                </v-app> -->
+                 <div>
+                   <input
+                      v-if="user.current_event!==''"
+                      v-model="user.current_event"
+                      type="text"
+                      class="inputcurplay"
+                    >
+                     <input
+                      v-else
+                    
+                      placeholder="123-45-678"
+                      type="text"
+                      class="inputcurplay"
+                    >
+                 </div>
+                </div>
+              </div>   
+              <div class="middle5-right-grid">
+                <div class="mid5-padd flex-center">
+                  <p class="middle5-text">
+                    Looking for new engagement?"
+                  </p>
+                  <div>
+                    <div class="switch-style">
+                      <b-form-checkbox
+                        switch
+                        disabled
+                        :checked="user.arbiter_looking_for_new_engagement"
+                      />                  
+                    </div>
+                  </div>
+                </div>
+                <div class="mid5-padd flex-center">
+                  <div
+                    class="borderbutton flex-center"
+                    @click="interested_event"
+                  >
+                    <p style="text-align:center">
+                      Interested in this Arbiter
+                    </p>
+                  </div>               
+                </div> 
+              </div>
+              <div id="middle5-right-startorg" style="margin:0">
+                
+              </div> 
+
             </div>
+<!--END ARBITER -->
           </div>
         </div>
       </div>    
       <div />
-    </div>  
+    </div> 
+<!--END ROLE -->
+
+
+
+
+
+
+
+
+
     <!--END  RIGHT PROFILE -->
   </div>
 </template>
@@ -851,7 +983,8 @@ export default {
          interested_no:true,
          notif_arr : [],
          connected:false,
-         my_connection_list:[]
+         my_connection_list:[],
+         price_entered:true
          
          
       }
@@ -1402,7 +1535,7 @@ height: 5rem;
     font-weight: normal;
     font-size: 1rem;
     line-height: 1.3125rem;
-    letter-spacing: 0.1rem;
+    letter-spacing: 0.03rem;
 }
 #form-middle5{
     color:#F2358D;
@@ -1482,7 +1615,7 @@ input::-webkit-inner-spin-button {
     margin:0;
 }
 .borderbutton{
-    width: 10.625rem;
+    width: 12rem;
     height: 2.75rem;
     border: 1px solid #2E2E2E;
     box-sizing: border-box;
@@ -1591,6 +1724,19 @@ input::-webkit-inner-spin-button {
 }
 
 /* Hide default HTML checkbox */
+
+/* TRAINER*/
+
+#trainer-library{
+  width: 14rem;
+}
+#trainer-price-number{
+  padding-top:4rem;
+  font-size: 2.25rem;
+}
+.w700{
+  font-weight: 700;
+}
 
 @media only screen and (max-width: 1500px) and (min-width: 500px) {
 .right-profile{
