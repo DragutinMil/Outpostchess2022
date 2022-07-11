@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="profile">
-      <div>
+      <div class="hide">
         <SideBar/>
       </div>
 
@@ -33,61 +33,14 @@
             <div class="header_list">
               Invitation
             </div>
+            <div class="header-list-mobile">
+              Inbox
+            </div>
           </div>
-          <div class="one-chat message-not-seen">
-            <img class="new-message-icon" src="../assets/koverta-new.svg" alt="new message">
-            <div class="divider"></div>
-            <div class="user-profile-avatar">BR</div>
-            <p class="user-name">Brodie Richards</p>
-            <p class="short-message">Hi there, Brodie
-              My name is Melissa from...</p>
-            <p class="message-time">9 : 30 PM</p>
-            <img src="../assets/invitation-icon.svg" alt="invitation icon">
-          </div>
-          <div class="one-chat">
-            <img class="new-message-icon" src="../assets/koverta-new.svg" alt="new message">
-            <div class="divider"></div>
-            <div class="user-profile-avatar">BR</div>
-            <p class="user-name">Brodie Richards</p>
-            <p class="short-message">Hi there, Brodie
-              My name is Melissa from...</p>
-            <p class="message-time">9 : 30 PM</p>
-            <img src="../assets/invitation-icon.svg" alt="invitation icon">
-          </div>
-          <div class="one-chat">
-            <img class="new-message-icon" src="../assets/koverta-new.svg" alt="new message">
-            <div class="divider"></div>
-            <div class="user-profile-avatar">BR</div>
-            <p class="user-name">Brodie Richards</p>
-            <p class="short-message">Hi there, Brodie
-              My name is Melissa from...</p>
-            <p class="message-time">9 : 30 PM</p>
-            <img src="../assets/invitation-icon.svg" alt="invitation icon">
-          </div>
-          <div class="one-chat">
-            <img class="new-message-icon" src="../assets/koverta-new.svg" alt="new message">
-            <div class="divider"></div>
-            <div class="user-profile-avatar">BR</div>
-            <p class="user-name">Brodie Richards</p>
-            <p class="short-message">Hi there, Brodie
-              My name is Melissa from...</p>
-            <p class="message-time">9 : 30 PM</p>
-            <img src="../assets/invitation-icon.svg" alt="invitation icon">
-          </div>
-          <div class="one-chat">
-            <img class="new-message-icon" src="../assets/koverta-new.svg" alt="new message">
-            <div class="divider"></div>
-            <div class="user-profile-avatar">BR</div>
-            <p class="user-name">Brodie Richards</p>
-            <p class="short-message">Hi there, Brodie
-              My name is Melissa from...</p>
-            <p class="message-time">9 : 30 PM</p>
-            <img src="../assets/invitation-icon.svg" alt="invitation icon">
-          </div>
+          <OneChat/>
         </div>
       </div>
       <!-- RIGHT -->
-
     </div>
   </div>
 </template>
@@ -95,10 +48,12 @@
 <script>
 import SideBar from '../components/SideBar.vue'
 import Searchpart from '../components/Searchpart.vue'
+import OneChat from "../components/Chatroom/OneChat";
 
 export default {
   name: 'Chatroom',
   components: {
+    OneChat,
     SideBar,
     Searchpart
   },
@@ -154,7 +109,7 @@ hr {
 .profile {
   display: grid;
   grid-template-columns: 259px auto;
-
+  height: 100vh;
 
 }
 
@@ -171,6 +126,10 @@ hr {
 @media screen and (max-width: 768px) {
   .container-center {
     width: 100%;
+  }
+
+  .hide {
+    display: none;
   }
 
   .profile {
@@ -240,164 +199,40 @@ hr {
   color: #FFFFFF
 }
 
-.one-chat {
-  cursor: pointer;
-  display: flex;
-  width: 92%;
-  height: 3.75rem;
-  margin-inline: auto;
-  align-items: center;
-  background-color: #202122;
-  margin-block: 1.875rem;
-}
-
-.message-not-seen {
-  background-color: #C8A07D;
-}
-
-.new-message-icon {
-  margin-left: 1.875rem;
-}
-
-.divider {
-  height: 1.563rem;
-  width: 1px;
-  background-color: white;
-  margin-left: 2.188rem;
-  margin-right: 6.75rem;
-}
-
-.user-profile-avatar {
-  width: 2.75rem;
-  height: 2.75rem;
-  color: rgba(255, 255, 255, 0.7);;
-  background-color: #513C2A;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 3.75rem;
-}
-
-.user-name, .short-message, .message-time {
-  margin-bottom: 0;
-  font-family: "Red Hat Display", sans-serif;
-  font-weight: bold;
+.header-list-mobile {
+  display: none;
   color: white;
+  font-weight: 500;
 }
 
-.user-name {
-  margin-right: 11rem;
-}
+@media screen and (max-width: 640px) {
+  .center_list_header {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    padding-left: 2.547rem;
+  }
 
-.short-message {
-  width: 10.938rem;
-  text-align: start;
-  margin-right: 12rem;
-}
+  .header_list {
+    display: none;
+  }
 
-.message-time {
-  margin-right: 18.5rem;
+  .header-list-mobile {
+    display: block;
+  }
+
+  .search-filter {
+    display: none;
+  }
 }
 
 /* RIGHT */
-
-
-@media only screen and (max-width: 1500px) and (min-width: 500px) {
+@media only screen and (max-width: 1440px) {
 
   .profile {
     display: grid;
     font-size: 0.875rem;
-  }
-
-  .divider {
-    margin-right: 2.75rem;
-  }
-
-  .user-profile-avatar {
-    width: 3rem;
-    max-height: 4.75rem;
-    margin-right: 3rem;
-  }
-
-  .user-name {
-    margin-right: 4.4rem;
-    width: 9rem;
-  }
-
-  .short-message {
-    width: 13.938rem;
-    margin-right: 3.5rem;
-  }
-
-  .message-time {
-    margin-right: 13rem;
-  }
-
-  @media only screen and (max-width: 1440px) {
-    .user-name {
-      margin-right: 3rem;
-    }
-
-    .short-message {
-      margin-right: 2.5rem;
-    }
-  }
-  @media only screen and (max-width: 1336px) {
-    .user-name {
-      margin-right: 1.5rem;
-    }
-
-    .short-message {
-      margin-right: 1rem;
-    }
-
-    .user-profile-avatar {
-      margin-right: 2rem;
-    }
-
-    .message-time {
-      margin-right: 11rem;
-    }
-  }
-  @media only screen and (max-width: 1280px) {
-    .user-name {
-      width: 7.5rem;
-    }
-
-    .short-message {
-      margin-right: 0.5rem;
-    }
-
-    .message-time {
-      margin-right: 10rem;
-    }
-  }
-  @media only screen and (max-width: 1024px) {
-    .divider {
-      margin-right: 0.75rem;
-      margin-left: 1.18rem;
-    }
-
-    .user-profile-avatar {
-      width: 3rem;
-      margin-right: 1rem;
-    }
-
-    .user-name {
-      text-align: start;
-      margin-right: 2rem;
-      width: 5rem;
-    }
-
-    .short-message {
-      margin-right: 1rem;
-      width: 10rem;
-    }
-
-    .message-time {
-      margin-right: 7rem;
-    }
   }
 }
 </style>

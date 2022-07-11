@@ -151,18 +151,18 @@
                 v-for="titles in titule"
                 :key="titles.titula_uuid"
               >
-                <div  v-if="titles.titula_uuid == usersrc.titula_player">
+                <div v-if="titles.titula_uuid == usersrc.titula_player">
                   {{ titles.titula_short_name }}
                 </div>
                 <div v-if="titles.titula_uuid == usersrc.titula_organizer">
-                    IO&nbsp;&nbsp;
-                  </div>
-                   <div v-if="titles.titula_uuid == usersrc.titula_trainer">
-                    {{ titles.titula_short_name }}&nbsp;&nbsp;
-                  </div>
-                  <div v-if="titles.titula_uuid == usersrc.titula_arbiter">
-                    {{ titles.titula_short_name }}&nbsp;&nbsp;
-                  </div>
+                  IO&nbsp;&nbsp;
+                </div>
+                <div v-if="titles.titula_uuid == usersrc.titula_trainer">
+                  {{ titles.titula_short_name }}&nbsp;&nbsp;
+                </div>
+                <div v-if="titles.titula_uuid == usersrc.titula_arbiter">
+                  {{ titles.titula_short_name }}&nbsp;&nbsp;
+                </div>
               </div>
             </div>
             <div class="search-res">
@@ -181,8 +181,8 @@
               class="search"
             >
               <div class="search-res">
-              {{ index + 1 }}
-            </div>
+                {{ index + 1 }}
+              </div>
               <div class="search-res start">
                 <div class="initials">
                   {{ alluser.inicijali }}
@@ -244,7 +244,6 @@
                 </div>
               </div>
               <div class="search-res2">
-                
                 <div
                   v-for="titles in titule"
                   :key="titles.titula_uuid"
@@ -255,7 +254,7 @@
                   <div v-if="titles.titula_uuid == alluser.titula_organizer">
                     IO&nbsp;&nbsp;
                   </div>
-                   <div v-if="titles.titula_uuid == alluser.titula_trainer">
+                  <div v-if="titles.titula_uuid == alluser.titula_trainer">
                     {{ titles.titula_short_name }}&nbsp;&nbsp;
                   </div>
                   <div v-if="titles.titula_uuid == alluser.titula_arbiter">

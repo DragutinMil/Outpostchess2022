@@ -1,53 +1,154 @@
 <template>
   <div class="side-bar">
-    <router-link to="../Profile"><img class="logoimg" src="../assets/logo2.png" alt=""></router-link>
+    <router-link to="../Profile">
+      <img
+        class="logoimg"
+        src="../assets/logo2.png"
+        alt=""
+      >
+    </router-link>
     <div class="side-options">
-      <div class="flex-center"><img src="../assets/home_24px.png" alt=""></div>
-      <p class="left-sidetext diffcol">Home</p>
+      <div class="flex-center">
+        <img
+          src="../assets/home_24px.png"
+          alt=""
+        >
+      </div>
+      <p class="left-sidetext diffcol">
+        Home
+      </p>
     </div>
     <div class="side-options">
-      <div class="flex-center"><img src="../assets/Vector1.png" alt=""></div>
-      <router-link to="../Profile" style="color:#C7C9D0"><p class="left-sidetext">My profile</p></router-link>
+      <div class="flex-center">
+        <img
+          src="../assets/Vector1.png"
+          alt=""
+        >
+      </div>
+      <router-link
+        to="../Profile"
+        style="color:#C7C9D0"
+      >
+        <p class="left-sidetext">
+          My profile
+        </p>
+      </router-link>
     </div>
     <div class="side-options">
-      <div class="flex-center"><img src="../assets/mail_outline_24px.png" alt=""></div>
-      <router-link to="../chatroom" style="color:#C7C9D0"><p class="left-sidetext">Inbox</p></router-link>
+      <div class="flex-center">
+        <img
+          src="../assets/mail_outline_24px.png"
+          alt=""
+        >
+      </div>
+      <router-link
+        to="../chatroom"
+        style="color:#C7C9D0"
+      >
+        <p class="left-sidetext">
+          Inbox
+        </p>
+      </router-link>
     </div>
     <div class="side-options">
-      <div class="flex-center"><img src="../assets/Vector5.png" alt=""></div>
-      <router-link to="../intsearch" style="color:#C7C9D0"><p class="left-sidetext">Intelligent search</p></router-link>
+      <div class="flex-center">
+        <img
+          src="../assets/Vector5.png"
+          alt=""
+        >
+      </div>
+      <router-link
+        to="../intsearch"
+        style="color:#C7C9D0"
+      >
+        <p class="left-sidetext">
+          Intelligent search
+        </p>
+      </router-link>
     </div>
     <div class="side-options">
-      <div class="flex-center "><img src="../assets/hands.png" alt=""></div>
-      <p class="left-sidetext diffcol">My connections</p>
+      <div class="flex-center ">
+        <img
+          src="../assets/hands.png"
+          alt=""
+        >
+      </div>
+      <p class="left-sidetext diffcol">
+        My connections
+      </p>
     </div>
 
     <hr>
     <div class="side-options">
-      <div class="flex-center"><img src="../assets/book.png" alt=""></div>
-      <p class="left-sidetext diffcol">Blog</p>
+      <div class="flex-center">
+        <img
+          src="../assets/book.png"
+          alt=""
+        >
+      </div>
+      <p class="left-sidetext diffcol">
+        Blog
+      </p>
 
       <!--t <router-link to="../blog" style="color:#C7C9D0" > <p class="left-sidetext" >Blog</p></router-link>
        o="../blog" style="color:#C7C9D0"-->
     </div>
 
     <div id="side-flexend">
-      <div id="side-flexend2">
-      </div>
+      <div id="side-flexend2" />
       <hr>
       <div class="side-options">
-        <div style="opacity:0.4" class="flex-center"><img src="../assets/settings_24px_rounded.svg" alt=""></div>
-        <p class="left-sidetext diffcol">Settings</p>
+        <div
+          style="opacity:0.4"
+          class="flex-center"
+        >
+          <img
+            src="../assets/settings_24px_rounded.svg"
+            alt=""
+          >
+        </div>
+        <p class="left-sidetext diffcol">
+          Settings
+        </p>
       </div>
       <div class="side-options">
-        <div style="opacity:0.4" class="flex-center"><img src="../assets/Vector7.png" alt=""></div>
-        <p class="left-sidetext diffcol">Help</p>
+        <div
+          style="opacity:0.4"
+          class="flex-center"
+        >
+          <img
+            src="../assets/Vector7.png"
+            alt=""
+          >
+        </div>
+        <p class="left-sidetext diffcol">
+          Help
+        </p>
       </div>
-      <div class="side-options" style="margin-bottom:30px">
-        <div style="opacity:0.4" class="flex-center"><img src="../assets/Vector4.png" alt=""></div>
-        <p class="left-sidetext diffcol">Contact Us</p>
+      <div
+        class="side-options"
+        style="margin-bottom:30px"
+      >
+        <div
+          style="opacity:0.4"
+          class="flex-center"
+        >
+          <img
+            src="../assets/Vector4.png"
+            alt=""
+          >
+        </div>
+        <p class="left-sidetext diffcol">
+          Contact Us
+        </p>
       </div>
-      <button class="middle2-buttons" @click="logOut" type="button">Sign Out</button>
+      <button
+        class="middle2-buttons"
+        type="button"
+        @click="logOut"
+      >
+        Sign Out
+      </button>
     </div>
   </div>
 </template>
@@ -78,7 +179,7 @@ export default {
   background-color: #202122;
   position: sticky;
   top: 0;
-  height: 100%;
+  height: 100vh;
 }
 
 @media screen and (max-width: 768px) {

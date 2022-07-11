@@ -10,12 +10,12 @@
 <script>
 
 export default {
-  name: 'App', 
- 
+  name: 'App',
+
   data: () => ({
     //
   }),
-  
+
 };
 </script>
 
@@ -26,14 +26,20 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  
+
 }
 
-body{
-  margin:0;
-  padding:0;
+html, body {
+  min-height: 100vh;
 }
-a{
+
+body {
+  margin: 0;
+  padding: 0;
+
+}
+
+a {
   text-decoration: none;
 }
 
@@ -45,26 +51,32 @@ a{
 #nav a.router-link-exact-active {
   color: #42b983;
 }
-.weight700{
+
+.weight700 {
   font-weight: 700;
 }
-.flex-center{
-       display: flex;
-       justify-content: center;
-       align-items: center;
-     
-  }
-.flex-center p{
-       display: flex;
-       justify-content: center;
-       align-items: center;
-     
-  }
- .v-application--wrap {
-    min-height: 0vh !important;
-  }
-  input:focus, textarea:focus, select:focus{
-        outline: none;}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.flex-center p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.v-application--wrap {
+  min-height: 0vh !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+}
 
 </style>
 

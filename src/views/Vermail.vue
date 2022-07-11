@@ -1,42 +1,65 @@
 <template>
   <div class="home">
-      <div id="left-login">
-              <div id="logo-pic">
-                    <img src="../assets/logo2.png"  alt="">
-              </div>
-              <div style="padding-top:25px;"> 
-                    <div id="welcom-text">
-                        <p class="letter-44" style="padding-bottom:40px;" ></p> 
-                        <p class="letter-44" >Enter email address below,</p>  
-                        <p class="letter-44" style="padding-bottom:10px;" >and request to resend verification mail</p>
-                    </div>  
-              </div>
-              <div id="input-signup">
-                <div>
-                    <input type="email" @keyup.enter="passreset()" name=""  v-bind:class="{mailin:isActive}" placeholder="Email" v-model="emailreset">
-                </div> 
-                <div id="forgot-text" > </div>
-                    <div id="butt1">
-                    <button  type="button"  @click="verreset()"  class="text-join" style=" border: 1px solid #C8A07D; ">
-                    Resend verification mail</button> 
-                    
-                </div>
+    <div id="left-login">
+      <div id="logo-pic">
+        <img
+          src="../assets/logo2.png"
+          alt=""
+        >
+      </div>
+      <div style="padding-top:25px;"> 
+        <div id="welcom-text">
+          <p
+            class="letter-44"
+            style="padding-bottom:40px;"
+          /> 
+          <p class="letter-44">
+            Enter email address below,
+          </p>  
+          <p
+            class="letter-44"
+            style="padding-bottom:10px;"
+          >
+            and request to resend verification mail
+          </p>
+        </div>  
+      </div>
+      <div id="input-signup">
+        <div>
+          <input
+            type="email"
+            v-model="emailreset"
+            name=""
+            :class="{mailin:isActive}"
+            placeholder="Email"
+            @keyup.enter="passreset()"
+          >
+        </div> 
+        <div id="forgot-text" />
+        <div id="butt1">
+          <button
+            type="button"
+            class="text-join"
+            style=" border: 1px solid #C8A07D; "
+            @click="verreset()"
+          >
+            Resend verification mail
+          </button>
+        </div>
                  
                  
-           <!--   <p id="text-or">or</p>
+        <!--   <p id="text-or">or</p>
                 <button type="button" onclick="alert('Hello world!')"   class="text-join"  style="border: 1px solid #E8E8E8;"> <div id="google-cor1"> <div id="google-cor"> <img src="../assets/Group.svg" id="" alt="google"></div><p id="joingoogle">Join with Google</p> </div></button>         
              -->
-             </div>
-             <div id="welcom-text">
-              <p class="letter-34" >{{request}}</p>
-             </div>
-             
-
       </div>
+      <div id="welcom-text">
+        <p class="letter-34">
+          {{ request }}
+        </p>
+      </div>
+    </div>
       
-      <div id="right-login">
-             
-      </div>
+    <div id="right-login" />
   </div>
 </template>
 

@@ -185,14 +185,16 @@
             </div>
           </div>
           <div id="middle2-button-container">
-            <button v-if="clickside"
+            <button
+              v-if="clickside"
               class="middle2-buttons"
               type="button"
               @click="clickside=!clickside"
             >
               Cancel
             </button>
-            <button v-else
+            <button
+              v-else
               class="middle2-buttons"
               type="button"
               @click="clickside=!clickside"
@@ -239,20 +241,23 @@
                   </div>
                 </div>    
               </div>
-              <p  class="remove_click" @click="remove_title('player')">
-                    X
-                  </p> 
-                  <div>
-                    <p class="left-check-text">
-                      Remove title
-                    </p>
-                  </div>
+              <p
+                class="remove_click"
+                @click="remove_title('player')"
+              >
+                X
+              </p> 
+              <div>
+                <p class="left-check-text">
+                  Remove title
+                </p>
+              </div>
             </div> 
             <div
               v-else-if="clickside && rolecolor2"
               class="middle3-1"
             />
-<!-- ORGANIZER CHOOSE  -->
+            <!-- ORGANIZER CHOOSE  -->
             <div
               v-else-if="clickside && rolecolor3"
               class="middle3-1"
@@ -277,13 +282,16 @@
                     </p>
                   </div>
                   
-                 <!--   <input
+                  <!--   <input
                     @click="remove_title()"
                     v-model="pickedorg"
                     type="radio"
                     value="arbiter"
                   >-->
-                   <p  class="remove_click" @click="remove_title('organizer')">
+                  <p
+                    class="remove_click"
+                    @click="remove_title('organizer')"
+                  >
                     X
                   </p> 
                   <div>
@@ -296,7 +304,7 @@
               </div>
             </div>
 
-  <!--ARBITER CHOOSE-->
+            <!--ARBITER CHOOSE-->
             <div
               v-else-if="clickside && rolecolor4"
               class="middle3-1"
@@ -323,16 +331,19 @@
                   </div>
                 </div>    
               </div>
-              <p  class="remove_click" @click="remove_title('arbiter')">
-                    X
-                  </p> 
-                  <div>
-                    <p class="left-check-text">
-                      Remove title
-                    </p>
-                  </div>
+              <p
+                class="remove_click"
+                @click="remove_title('arbiter')"
+              >
+                X
+              </p> 
+              <div>
+                <p class="left-check-text">
+                  Remove title
+                </p>
+              </div>
             </div>
-  <!--TRAINER CHOOSE-->
+            <!--TRAINER CHOOSE-->
             <div
               v-else-if="clickside && rolecolor5"
               class="middle3-1"
@@ -359,17 +370,20 @@
                   </div>
                 </div>    
               </div>
-              <p  class="remove_click" @click="remove_title('trainer')">
-                    X
-                  </p> 
-                  <div>
-                    <p class="left-check-text">
-                      Remove title
-                    </p>
-                  </div>
+              <p
+                class="remove_click"
+                @click="remove_title('trainer')"
+              >
+                X
+              </p> 
+              <div>
+                <p class="left-check-text">
+                  Remove title
+                </p>
+              </div>
             </div>
           
-<!--END TRAINER  -->            
+            <!--END TRAINER  -->            
             <div
               v-else
               class="middle3-1"
@@ -391,7 +405,7 @@
                 >
                   IO <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->  
                 </div>
-                 <div
+                <div
                   v-if="user.titula_trainer!==null && this.user.rola.indexOf('TRAINER')!==-1"
                   class="titles"
                 >
@@ -1204,7 +1218,7 @@
                 </div>
               </div>
             </div>
-<!-- Trainer -->
+            <!-- Trainer -->
             <div
               v-else-if="activetre && user.rola.indexOf('TRAINER')!==-1"
               style="opacity:0.5"
@@ -1221,7 +1235,7 @@
 
 
 
-<!-- Arbiter -->
+            <!-- Arbiter -->
             <div v-else-if="activearb && this.user.rola.indexOf('ARBITER')!==-1">
               <div id="middle5-right-startorg">
                 <p class="middle5-text">
@@ -1244,21 +1258,21 @@
                                         ></v-switch>
                                     </v-container>  
                                 </v-app> -->
-                 <div>
-                   <input
+                  <div>
+                    <input
                       v-if="user.current_event!==''"
                       v-model="user.current_event"
                       type="text"
                       class="inputcurplay"
                     >
-                     <input
+                    <input
                       v-else
                     
                       placeholder="123-45-678"
                       type="text"
                       class="inputcurplay"
                     >
-                 </div>
+                  </div>
                 </div>
               </div>   
               <div class="middle5-right-grid">
@@ -1288,12 +1302,11 @@
                     <p>Create an event</p>
                   </div>
                 </div>  
-                 <!--      <div class="mid5-padd flex-center">
+                <!--      <div class="mid5-padd flex-center">
                                 <div class="borderbutton flex-center">
                                     <p style="text-align:center">Interested in this Organizer</p>
                                 </div>               
                             </div>    -->
-              
               </div>
               <div id="middle5-right-startorg">
                 <div
@@ -1385,7 +1398,7 @@
                 </div>
               </div> 
             </div>  
-<!-- Other -->
+            <!-- Other -->
             <div
               v-else-if="activeoth && user.rola.indexOf('OTHER')!==-1"
               style="opacity:0.5"
@@ -1399,7 +1412,6 @@
                 alt=""
               > 
             </div>
-
           </div>
         </div>
       </div>    

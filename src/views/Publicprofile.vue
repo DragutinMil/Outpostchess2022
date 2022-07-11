@@ -5,7 +5,7 @@
     <div class="right-profile">
       <div />  
       <div id="right-middle">
-        <Searchpart  />
+        <Searchpart />
         <!-- MID 2 -->             
         <div id="middle2">
           <div class="upload-pic">
@@ -95,9 +95,6 @@
               </button>
               </div>
             -->
-           
-              
-            
           </div>
         </div>
         <!--END MID 2 -->     

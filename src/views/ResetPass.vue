@@ -1,37 +1,62 @@
 <template>
   <div class="home">
-      <div id="left-login">
-              <div id="logo-pic">
-                    <img src="../assets/logo2.png"  alt="">
-              </div>
-              <div style="padding-top:25px;"> 
-                    <div id="welcom-text">
-                        <p class="letter-44" style="padding-bottom:40px;" >Forgotten your password?</p> 
-                        <p class="letter-44" > No need to despair - just enter your email </p>  
-                        <p class="letter-44" style="padding-bottom:20px;" >address below to request a password reset.</p>
-                    </div>  
-              </div>
-              <div id="input-signup">
-                <div>
-                     <input type="email" @keyup.enter="passreset()" name=""  v-bind:class="{mailin:isActive}" placeholder="Email" v-model="emailreset">
-                </div> 
-                 <div id="forgot-text" > </div>
-                 <div id="butt1">
-                 <button  type="button"  @click="passreset()"  class="text-join" style=" border: 1px solid #C8A07D; ">
-                  Request password reset</button> 
-                </div>
-          
-             </div>
-             <div id="welcom-text">
-              <p class="letter-34" >{{request}}</p>
-             </div>
-             
-
+    <div id="left-login">
+      <div id="logo-pic">
+        <img
+          src="../assets/logo2.png"
+          alt=""
+        >
       </div>
+      <div style="padding-top:25px;"> 
+        <div id="welcom-text">
+          <p
+            class="letter-44"
+            style="padding-bottom:40px;"
+          >
+            Forgotten your password?
+          </p> 
+          <p class="letter-44">
+            No need to despair - just enter your email
+          </p>  
+          <p
+            class="letter-44"
+            style="padding-bottom:20px;"
+          >
+            address below to request a password reset.
+          </p>
+        </div>  
+      </div>
+      <div id="input-signup">
+        <div>
+          <input
+            type="email"
+            v-model="emailreset"
+            name=""
+            :class="{mailin:isActive}"
+            placeholder="Email"
+            @keyup.enter="passreset()"
+          >
+        </div> 
+        <div id="forgot-text" />
+        <div id="butt1">
+          <button
+            type="button"
+            class="text-join"
+            style=" border: 1px solid #C8A07D; "
+            @click="passreset()"
+          >
+            Request password reset
+          </button> 
+        </div>
+      </div>
+      <div id="welcom-text">
+        <p class="letter-34">
+          {{ request }}
+        </p>
+      </div>
+    </div>
       
-      <div id="right-login">
-             
-      </div>
+    <div id="right-login" />
   </div>
 </template>
 

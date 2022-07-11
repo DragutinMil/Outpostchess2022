@@ -1,23 +1,28 @@
 <template>
-
   <div class="profile">
-       <SideBar />
+    <SideBar />
     <div class="right-profile">
-        <div />
-        <div>
-           <Searchpart />
-           <div class="content" v-for="blog in blog_data.slice().reverse() " :key="blog.blog_post_uuid" >
-             <div class="blog_title">{{blog.title}}</div>
-             <div class="blog_content" v-html="blog.content_html"></div>
-             <hr>
-           </div>
+      <div />
+      <div>
+        <Searchpart />
+        <div
+          v-for="blog in blog_data.slice().reverse() "
+          :key="blog.blog_post_uuid"
+          class="content"
+        >
+          <div class="blog_title">
+            {{ blog.title }}
+          </div>
+          <div
+            class="blog_content"
+            v-html="blog.content_html"
+          />
+          <hr>
         </div>
-        <div />
-
+      </div>
+      <div />
     </div>
-    </div>
-
-    
+  </div>
 </template>
 <script>
 import SideBar from "../components/SideBar.vue";

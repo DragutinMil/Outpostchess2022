@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="parent-container">
-       <div class="name-container">
-     <!--   <input
+      <div class="name-container">
+        <!--   <input
           v-model="not_massage"
           type="text"
           name=""
