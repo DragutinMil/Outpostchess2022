@@ -97,7 +97,7 @@
               <div class="initials">
                 {{ usersrc.inicijali }}
               </div>
-              <div>
+              <div v-if="user.user_uuid !== usersrc.user_uuid">
                 <router-link
                   :user_uuid="usersrc.user_uuid"
                   :to="{
@@ -107,6 +107,13 @@
                 >
                   {{ usersrc.name_first }} {{ usersrc.name_last }}
                 </router-link>
+              </div>
+              <div v-if="user.user_uuid == usersrc.user_uuid" >
+                <router-link
+                    to="../profile"
+                  >
+                    {{ usersrc.name_first }} {{ usersrc.name_last }}
+                  </router-link>
               </div>
             </div>
             <div class="search-res">
