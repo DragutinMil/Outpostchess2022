@@ -2,16 +2,16 @@
   <div class="side-bar">
     <router-link to="../Profile">
       <img
-        class="logoimg"
-        src="../assets/logo2.png"
-        alt=""
+          class="logoimg"
+          src="../assets/logo2.png"
+          alt=""
       >
     </router-link>
     <div class="side-options">
       <div class="flex-center">
         <img
-          src="../assets/home_24px.png"
-          alt=""
+            src="../assets/home_24px.png"
+            alt=""
         >
       </div>
       <p class="left-sidetext diffcol">
@@ -21,13 +21,13 @@
     <div class="side-options">
       <div class="flex-center">
         <img
-          src="../assets/Vector1.png"
-          alt=""
+            src="../assets/Vector1.png"
+            alt=""
         >
       </div>
       <router-link
-        to="../Profile"
-        style="color:#C7C9D0"
+          to="../Profile"
+          style="color:#C7C9D0"
       >
         <p class="left-sidetext">
           My profile
@@ -37,13 +37,13 @@
     <div class="side-options">
       <div class="flex-center">
         <img
-          src="../assets/mail_outline_24px.png"
-          alt=""
+            src="../assets/mail_outline_24px.png"
+            alt=""
         >
       </div>
       <router-link
-        to="../chatroom"
-        style="color:#C7C9D0"
+          to="../chatroom"
+          style="color:#C7C9D0"
       >
         <p class="left-sidetext">
           Inbox
@@ -53,13 +53,13 @@
     <div class="side-options">
       <div class="flex-center">
         <img
-          src="../assets/Vector5.png"
-          alt=""
+            src="../assets/Vector5.png"
+            alt=""
         >
       </div>
       <router-link
-        to="../intsearch"
-        style="color:#C7C9D0"
+          to="../intsearch"
+          style="color:#C7C9D0"
       >
         <p class="left-sidetext">
           Intelligent search
@@ -69,8 +69,8 @@
     <div class="side-options">
       <div class="flex-center ">
         <img
-          src="../assets/hands.png"
-          alt=""
+            src="../assets/hands.png"
+            alt=""
         >
       </div>
       <p class="left-sidetext diffcol">
@@ -82,8 +82,8 @@
     <div class="side-options">
       <div class="flex-center">
         <img
-          src="../assets/book.png"
-          alt=""
+            src="../assets/book.png"
+            alt=""
         >
       </div>
       <p class="left-sidetext diffcol">
@@ -95,16 +95,16 @@
     </div>
 
     <div id="side-flexend">
-      <div id="side-flexend2" />
+      <div id="side-flexend2"/>
       <hr>
       <div class="side-options">
         <div
-          style="opacity:0.4"
-          class="flex-center"
+            style="opacity:0.4"
+            class="flex-center"
         >
           <img
-            src="../assets/settings_24px_rounded.svg"
-            alt=""
+              src="../assets/settings_24px_rounded.svg"
+              alt=""
           >
         </div>
         <p class="left-sidetext diffcol">
@@ -113,12 +113,12 @@
       </div>
       <div class="side-options">
         <div
-          style="opacity:0.4"
-          class="flex-center"
+            style="opacity:0.4"
+            class="flex-center"
         >
           <img
-            src="../assets/Vector7.png"
-            alt=""
+              src="../assets/Vector7.png"
+              alt=""
           >
         </div>
         <p class="left-sidetext diffcol">
@@ -126,16 +126,16 @@
         </p>
       </div>
       <div
-        class="side-options"
-        style="margin-bottom:30px"
+          class="side-options"
+          style="margin-bottom:30px"
       >
         <div
-          style="opacity:0.4"
-          class="flex-center"
+            style="opacity:0.4"
+            class="flex-center"
         >
           <img
-            src="../assets/Vector4.png"
-            alt=""
+              src="../assets/Vector4.png"
+              alt=""
           >
         </div>
         <p class="left-sidetext diffcol">
@@ -143,9 +143,9 @@
         </p>
       </div>
       <button
-        class="middle2-buttons"
-        type="button"
-        @click="logOut"
+          class="middle2-buttons"
+          type="button"
+          @click="logOut"
       >
         Sign Out
       </button>
@@ -180,6 +180,7 @@ export default {
   position: sticky;
   top: 0;
   height: 100vh;
+  width: 16.25rem;
 }
 
 @media screen and (max-width: 768px) {
