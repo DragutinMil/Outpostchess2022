@@ -659,6 +659,7 @@
                     >
                   </div>
                   <b-form-checkbox
+                    class="switch"
                     switch
                     :checked="user.current_playing_bool"
                     style="padding-left:3.4375rem;" 
@@ -928,6 +929,7 @@
                   </div>
                             
                   <b-form-checkbox
+                    class="switch"
                     switch
                     :checked="user.club_current_playing_bool"
                     style="padding-left:3.4375rem;" 
@@ -967,6 +969,7 @@
                   </p>
                   <div class="switch-style">
                     <b-form-checkbox
+                      class="switch"
                       switch
                       :checked="user.club_looking_for_new_player"
                       @change="lookpla"
@@ -1089,6 +1092,7 @@
                   <div>
                     <div class="switch-style">
                       <b-form-checkbox
+                        class="switch"
                         switch
                         :checked="user.organizer_looking_for_new_participants"
                         @change="lookpart"
@@ -1260,6 +1264,7 @@
                   <div>
                     <div class="switch-style" style="padding-left:1.125rem;padding-top:0.75rem">
                       <b-form-checkbox
+                        class="switch"
                         switch
                         :checked="user.trainer_looking_for_new_player"
                         @change="trainer_looking_students"
@@ -1349,6 +1354,7 @@
                     >
                   </div>
                   <b-form-checkbox
+                    class="switch"
                     switch
                     @change="active_arb_cur"
                     :checked="user.arbiter_currently_active"
@@ -1393,6 +1399,7 @@
                   <div>
                     <div class="switch-style">
                       <b-form-checkbox
+                        class="switch"
                         switch
                         :checked="user.arbiter_looking_for_new_eng"
                         @change="arbiter_engagement"
@@ -1619,7 +1626,7 @@ export default {
                club_current_league:'',
                organizer_current_event:{event_name:''},
                trainer_price_lesson:'',
-               trainer_list_of_students:'',
+               trainer_list_of_students:[],
                arbiter_current_event_uuid:''
                
 
@@ -1655,7 +1662,7 @@ export default {
          text2:false,
          enter_event:false,
          arbiter_current_event_uuid:'',
-         students:[],
+         students:{},
          new_student:'',
          new_student_entry:false,
          stud:'',
@@ -1822,9 +1829,8 @@ methods:{
     },
 
     student_list:function(){
-       if(this.new_student!==""){
-         console.log(this.students)
-       this.students=this.user.trainer_list_of_students
+       if(this.new_student==="")return;
+       this.students=this.user.trainer_list_of_students ?? [];
        this.students.push(this.new_student)
        console.log(this.students)
        fetch('https://app.outpostchess.com/api/v2/current_user_info', {
@@ -1840,8 +1846,6 @@ methods:{
             .then(response => response.json())
             .then(data => console.log(data))
             this.new_student=''
-       }
-       
     },
     delete_student:function(stud){
       this.index=this.user.trainer_list_of_students.indexOf(stud)
@@ -2280,6 +2284,9 @@ hr{
     display:grid;
     grid-template-columns: 16.25rem auto;
 }  
+.switch{
+   cursor: pointer;
+}
 
 .right-profile{
     background-color:  #171819;

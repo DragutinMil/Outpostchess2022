@@ -474,8 +474,8 @@
                 </div>  
               </div>
             </div>
-            <!-- END PLAYER PART  --> 
-            <!-- CLUB PART  -->            
+<!-- END PLAYER PART  --> 
+<!-- CLUB PART  -->            
             <div v-else-if="activeclub && user.rola.indexOf('CLUB')!==-1">
               <div class="middle5-right-grid">
                 <div class="mid5-padd">
@@ -684,7 +684,7 @@
                     class="borderbutton flex-center"
                     @click="interested_event"
                   >
-                    <p style="text-align:center">
+                    <p style="text-align:center;font-size:0.75rem">
                       Interested in this Organizer
                     </p>
                   </div>               
@@ -765,66 +765,62 @@
                     <p>Students</p> 
                    </div>
                    <div>
-
+                     <div  class="middle5-text2" style="display:flex" v-for="(student,index) in user.trainer_list_of_students" :key="student">
+                      <p style="color:#FFC796">{{index+1}}.</p>
+                      <div class=" flex_space" style="padding-left:0.375rem">
+                        {{student}}
+                      </div>  
+                      
+                   </div>  
                    </div>
 
                 </div>
 
 
 
-                
-                <div
-                      v-if="interested_no"
-                      style="margin-bottom:0.625rem; "
-                      class="borderbutton flex-center"
-                    >
-                      <p
-                        style="font-size:0.75rem;"
-                        @click="interested_trainer"
-                      >
-                        Interested in this Trainer
-                      </p>
-                    </div>
-                    <div v-if="clicked_interested2">  
-                      <div
-                        v-for="listpla in my_interested_list"
-                        :key="listpla.created_date"
-                      >  
-                        <div
-                          v-if="listpla.target_uuid==user.user_uuid"
+                <div class="mid5-padd flex-center"
+                  >
+                  <div>
+                    <div
+                          v-if="interested_no_trainer"
+                          style="margin-bottom:0.625rem; "
                           class="borderbutton flex-center"
                         >
-                          <div style="font-size:0.75rem;">
-                            <p @click="interested_trainer_del">
-                              Remove from shortlist
-                            </p>
-                          </div>
-                        </div>
-                      </div>
+                          <p
+                            style="font-size:0.75rem;"
+                            @click="interested_trainer"
+                          >
+                            Interested in this Trainer
+                          </p>
                     </div>
-                    <div
-                      v-if="clicked_interested"
-                      style="margin-bottom:0.625rem; "
-                      class="borderbutton flex-center"
-                      @click="interested_trainer_del"
-                    >
-                      <p style="font-size:0.75rem;">
-                        Remove from shortlist
-                      </p>
-                </div>
-                  
-
-
-
-                <div class="mid5-padd flex-center">
-                  <div
-                    class="borderbutton flex-center"
-                    @click="interested_trainer" 
-                  >  
-                    <p style="text-align:center">
-                      Interested in this Trainer
-                    </p>
-                  </div>               
+                    <div v-if="clicked_interested_trainer2">  
+                          <div
+                            v-for="listpla in my_int_trainer_list"
+                            :key="listpla.created_date"
+                          >  
+                            <div
+                              v-if="listpla.target_uuid==user.user_uuid"
+                              class="borderbutton flex-center"
+                            >
+                              <div style="font-size:0.75rem;">
+                                <p @click="interested_trainer_del">
+                                  Remove from shortlist
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                      <div
+                        v-if="clicked_interested_trainer"
+                        style="margin-bottom:0.625rem; "
+                        class="borderbutton flex-center"
+                        @click="interested_trainer_del"
+                      >
+                        <p style="font-size:0.75rem;">
+                          Remove from shortlist
+                        </p>
+                  </div>
+                </div>  
                 </div>
                 <!--      <div class="mid5-padd flex-center">
                                 <div class="borderbutton flex-center">
@@ -890,16 +886,61 @@
                     </div>
                   </div>
                 </div>
-                <div class="mid5-padd flex-center">
-                  <div
-                    class="borderbutton flex-center"
-                    @click="interested_arbiter"
+
+
+
+
+
+                <div class="mid5-padd flex-center"
                   >
-                    <p style="text-align:center">
-                      Interested in this Arbiter
-                    </p>
-                  </div>               
-                </div> 
+                  <div>
+                    <div
+                          v-if="interested_no_arbiter"
+                          style="margin-bottom:0.625rem; "
+                          class="borderbutton flex-center"
+                        >
+                          <p
+                            style="font-size:0.75rem;"
+                            @click="interested_arbiter"
+                          >
+                            Interested in this Arbiter
+                          </p>
+                    </div>
+                    <div v-if="clicked_interested_arbiter2">  
+                          <div
+                            v-for="listpla in my_int_arbiter_list"
+                            :key="listpla.created_date"
+                          >  
+                            <div
+                              v-if="listpla.target_uuid==user.user_uuid"
+                              class="borderbutton flex-center"
+                            >
+                              <div style="font-size:0.75rem;">
+                                <p @click="interested_trainer_del">
+                                  Remove from shortlist
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                      <div
+                        v-if="clicked_interested_arbiter"
+                        style="margin-bottom:0.625rem; "
+                        class="borderbutton flex-center"
+                        @click="interested_arbiter_del"
+                      >
+                        <p style="font-size:0.75rem;">
+                          Remove from shortlist
+                        </p>
+                  </div>
+                </div>  
+                </div>
+
+
+
+
+
+                
               </div>
               <div id="middle5-right-startorg" style="margin:0">
                 
@@ -1026,6 +1067,10 @@ export default {
          clicked_interested2:true,
          clicked_interested4:true,
          clicked_interested3:false,
+         clicked_interested_trainer:false,
+         clicked_interested_trainer2:true,
+         clicked_interested_arbiter:false,
+         clicked_interested_arbiter2:true,
          interested_no:true,
          interested_no_trainer:true,
          interested_no_arbiter:true,
@@ -1099,6 +1144,7 @@ fetch('https://app.outpostchess.com/api/v2/interested_in_arbiter', {
             })
         .then(response => response.json())
         .then(data => this.my_int_arbiter_list=data)  
+        .then(data => console.log('my_int_arbiter_list',data))  
 
 fetch('https://app.outpostchess.com/api/v2/interested_in_trainer', {
         method: 'GET',
@@ -1109,6 +1155,7 @@ fetch('https://app.outpostchess.com/api/v2/interested_in_trainer', {
             })
         .then(response => response.json())
         .then(data => this.my_int_trainer_list=data)  
+        .then(data => console.log('my_int_trainer_list',data))  
 
 fetch('https://app.outpostchess.com/api/v2/interested_in_club', {
         method: 'GET',
@@ -1219,8 +1266,8 @@ methods:{
 
     interested_arbiter(){
            this.interested_no_arbiter=false;
-           this.clicked_interested=true;
-           this.clicked_interested2=false;
+           this.clicked_interested_arbiter=true;
+           this.clicked_interested_arbiter2=false;
            fetch(`https://app.outpostchess.com/api/v2/interested_in_arbiter/${this.idt} `, {
                 method: 'POST',
                 headers: {
@@ -1234,8 +1281,8 @@ methods:{
     },
      interested_arbiter_del:function(){
            this.interested_no_arbiter=true;
-           this.clicked_interested=false;
-           this.clicked_interested2=false;
+           this.clicked_interested_arbiter=false;
+           this.clicked_interested_arbiter2=false;
            fetch(`https://app.outpostchess.com/api/v2/interested_in_arbiter/${this.idt} `, {
                 method: 'DELETE',
                 headers: {
@@ -1249,8 +1296,8 @@ methods:{
     /* INTERESTED TRAINER */
     interested_trainer(){
            this.interested_no_trainer=false;
-           this.clicked_interested=true;
-           this.clicked_interested2=false;
+           this.clicked_interested_trainer=true;
+           this.clicked_interested_trainer2=false;
            fetch(`https://app.outpostchess.com/api/v2/interested_in_trainer/${this.idt} `, {
                 method: 'POST',
                 headers: {
@@ -1264,8 +1311,8 @@ methods:{
     },
      interested_trainer_del:function(){
            this.interested_no_trainer=true;
-           this.clicked_interested=false;
-           this.clicked_interested2=false;
+           this.clicked_interested_trainer=false;
+           this.clicked_interested_trainer2=false;
            fetch(`https://app.outpostchess.com/api/v2/interested_in_trainer/${this.idt} `, {
                 method: 'DELETE',
                 headers: {
