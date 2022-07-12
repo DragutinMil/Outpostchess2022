@@ -34,6 +34,7 @@
             }"
             placeholder="Email"
           >
+           <p style="color:#f2358d" v-if="already_exist" >Email address already exist on Outpost </p>
           <p id="reqpass1">
             {{ req2 }}
           </p>
@@ -54,6 +55,7 @@
             <p class="reqpass">
               {{ req }}
             </p>
+            
           </div>
           <div>
             <input
@@ -175,7 +177,9 @@
               style="width: 150px"
             >
               {{ req4 }}
+              
             </div>
+            
           </div>
         </div>
         <div style="padding: 15px 0 15px 0">
@@ -256,7 +260,7 @@ export default {
       admin: false,
       other: false,
       trainer: false,
-      
+      already_exist:false
     };
   },
   methods: {
@@ -340,26 +344,17 @@ export default {
           .then(data => this.response=data)
           .then(data => console.log('podaci',data)) 
         //  .then(function(response){
-        //    console.log(this.response)
-        ////    if(response==200){
-//window.alert("adassddcc")
-      //      }else{
-              
-       //       window.alert("adassdvevevevdcc")
-        //    }
-        //  })
-      //    console.log(this.response.results.status)
+       //    console.log(...response)})
+           
+         .then(response => {
+          console.log(this.response.results.status)
+         if (this.response.results.status=="alreadyexist") {
+              this.already_exist=true
+
+           console.log(response);
+          } 
           
-         // .then(response => {
-       //   if ((this.response.results.status=="alreadyexist")) {
-         //   window.alert="trtaw"
-           //this.$router.push("/thanks");
-        //   } else {
-        //   window.alert("trt")
-            
-        //  }
-          
-      //  })
+        })
       }
      
     },
