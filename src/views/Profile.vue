@@ -1230,21 +1230,27 @@
                    <button class="trainer_change_price" @click="enter_price_tra">Change value</button>
                 </div>
 
-                <div v-if="enter_price==true && enter_again==true" id="trainer_input_price">
+                <div v-if="enter_price==true && enter_again==true & text2==false" id="trainer_input_price">
                        <input 
                        type="number"
-                      v-model="trainer_price_lesson"
+                      v-model="trainer_price"
                       class="inputcurplay2"
                       placeholder="Enter price $/1h"
                       
                     >
-                    <button @click="confirm_enter_price">Confirm</button>
+                    <button class="buttons" @click="confirm_enter_price">Confirm</button>
                    <div v-if="entered"  >
-                     <p class="text-normal">{{text1}}</p>
-                     <p class="text-normal">{{text2}}</p>
+                     <p class="text-normal">{{text1}} </p>
+
+                    
+
           
                   </div>
                 </div>
+                 <div v-if="text2" class="middle5-text w700" id="trainer-price-number">
+                       <p >${{trainer_price}} /1h</p>
+                       <button class="trainer_change_price" @click="enter_price_tra">Change value</button>
+                     </div>
                </div> 
               <div class="middle5-right-grid" >
                 <div class="mid5-padd " style="padding-top:2rem" >
@@ -1279,22 +1285,28 @@
               </div>
               <div class="middle5-right-grid" style="margin:0">
                 <div class="mid5-padd">
-                   <div @click="student_list" class="middle5-text">
+                   <div  class="middle5-text flex_space">
                     <p >Students</p> 
+                    <p class="tranier_new_student" @click="new_student_entry=!new_student_entry">New + </p>
                    </div>
-                   <div  class="middle5-text2" v-for="(student,index) in user.trainer_list_of_students" :key="student">
-                      {{index+1}}. {{student}}
+                   <div  class="middle5-text2" style="display:flex" v-for="(student,index) in user.trainer_list_of_students" :key="student">
+                      <p style="color:#FFC796">{{index+1}}.</p>
+                      <div class=" flex_space" style="padding-left:0.375rem">
+                        {{student}} 
+                        <p class="tranier_new_student"  v-if="new_student_entry" @click="delete_student(student)" >delete</p>
+                      </div>  
+                      
                    </div>  
                   
 
-                   <div>
+                   <div v-if="new_student_entry">
                        <input 
-                       type="text"
-                      v-model="new_student"
-                      class="inputcurplay2"
-                      placeholder="Enter new student"
-                      
-                    >
+                        type="text"
+                        v-model="new_student"
+                        class="inputcurplay2"
+                        placeholder="Enter new student"
+                        @keyup.enter="student_list"
+                       >
                    </div>
 
                 </div>
@@ -1330,12 +1342,18 @@
                 <div class="mid5-padd">
                   <div style="height:4rem;display:flex">
                     <img
-                      v-if="user.arbiter_current_event_uuid!=null"
+                      v-if="user.arbiter_current_event_name!=null && enter_event==false && user.arbiter_currently_active==true"
                       id="plava-kugla2"
                       src="../assets/plavakugla.png"
                       alt=""
                     >
                   </div>
+                  <b-form-checkbox
+                    switch
+                    @change="active_arb_cur"
+                    :checked="user.arbiter_currently_active"
+                    style="padding-left:3.0375rem;padding-bottom: 1.5rem;"
+                  />  
                   <!--      <v-app class="vuetify-switch2"> 
                                     <v-container class="switch-container"   >
                                         <v-switch 
@@ -1344,25 +1362,21 @@
                                         ></v-switch>
                                     </v-container>  
                                 </v-app> -->
-                 <div>
-                   <input
-                      v-if="user.arbiter_current_event_uuid==''"
-                      type="text"
-                      class="inputcurplay"
-                    >
+                 <div class="flex_space2">
+                   
                      <input
-                      v-else
+                      v-if="user.arbiter_currently_active==true"
                       @click="enter_event=true"
                       placeholder="Enter event"
                       type="text"
-                      class="inputcurplay"
-                      v-model="user.arbiter_current_event_uuid"
+                      class="inputcurplay3"
+                      v-model="user.arbiter_current_event_name"
                     >
                     <div>
                        <button
                           @click="new_arb_event"
                           v-if="enter_event"
-                          class="middle2-buttons"
+                          class="middle2-buttons2"
                           type="button"
                         >
                           Confirm changes
@@ -1587,6 +1601,7 @@ export default {
                club_looking_for_new_player:'',
                current_playing_bool:'',
                club_current_playing_bool:'',
+               arbiter_currently_active:'',
                organizer_looking_for_new_participants:'',
                name_first:'',
                name_last:'',
@@ -1634,14 +1649,17 @@ export default {
          default_button:true,
          clicked_button:false,
          entered:false,
-         trainer_price_lesson:'',
+         trainer_price:'',
          enter_again:false,
          text1:'',
-         text2:'',
+         text2:false,
          enter_event:false,
          arbiter_current_event_uuid:'',
          students:[],
-         new_student:''
+         new_student:'',
+         new_student_entry:false,
+         stud:'',
+         index:''
       }
 },
    
@@ -1733,6 +1751,7 @@ methods:{
        this.enter_event=true
     },
     enter_price_tra:function(){
+      this.text2=false,
       this.enter_again=true,
       this.enter_price=true,
       this.clicked_button=true,
@@ -1765,6 +1784,8 @@ methods:{
     
     // .then(this.$router.go()) 
     },
+    
+
     lookpla:function(){
             this.user.club_looking_for_new_player=!this.user.club_looking_for_new_player
        fetch('https://app.outpostchess.com/api/v2/current_user_info', {
@@ -1801,7 +1822,8 @@ methods:{
     },
 
     student_list:function(){
-       console.log(this.students)
+       if(this.new_student!==""){
+         console.log(this.students)
        this.students=this.user.trainer_list_of_students
        this.students.push(this.new_student)
        console.log(this.students)
@@ -1817,6 +1839,39 @@ methods:{
                )   
             .then(response => response.json())
             .then(data => console.log(data))
+            this.new_student=''
+       }
+       
+    },
+    delete_student:function(stud){
+      this.index=this.user.trainer_list_of_students.indexOf(stud)
+      console.log(this.index)
+      if(this.index !== -1){
+        this.user.trainer_list_of_students.splice(this.index,1)
+        fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+            method:'PATCH',
+            headers: {'Content-Type': 'application/json',
+            "Authorization":`Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify( { 
+              trainer_list_of_students: this.user.trainer_list_of_students
+            })
+        },
+               )   
+            .then(response => response.json())
+            .then(data => console.log(data))
+            this.new_student=''
+
+
+        }
+
+
+
+        // this.new_del_list=this.trainer_list_of_students.filter()
+       // var index = array.indexOf(item);
+//if (index !== -1) {
+ //array.splice(index, 1);
+//}
     },
 
     trainer_looking_students:function(){
@@ -1848,20 +1903,21 @@ methods:{
             body: JSON.stringify( { 
              arbiter_looking_for_new_eng:this.user.arbiter_looking_for_new_eng 
             })
-        },
+        }, 
                )   
             .then(response => response.json())
             .then(data => console.log(data))
           //  console.log(this.organizer_looking_for_new_participants)
     },
       new_arb_event:function(){
+        this.enter_event=false
        fetch('https://app.outpostchess.com/api/v2/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify( { 
-             arbiter_current_event_uuid:this.user.arbiter_current_event_uuid
+             arbiter_current_event_name:this.user.arbiter_current_event_name
             })
         },
                )   
@@ -1869,6 +1925,27 @@ methods:{
             .then(data => console.log(data))
           //  console.log(this.organizer_looking_for_new_participants)
     },
+       active_arb_cur: function(){
+          
+            this.user.arbiter_currently_active=!this.user.arbiter_currently_active
+            console.log(this.user.arbiter_currently_active)
+           fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+            method:'PATCH',
+            headers: {'Content-Type': 'application/json',
+            "Authorization":`Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify( { 
+             arbiter_currently_active:this.user.arbiter_currently_active
+                
+            })
+        },
+               )   
+            .then(response => response.json())
+            .then(data => console.log(data))
+            
+      },
+
+
 
       activeplayercur: function(){
           
@@ -1909,10 +1986,10 @@ methods:{
       confirm_enter_price:function(){
         this.text1='',
         this.text2=''
-        if(this.trainer_price_lesson==''){
+        if(this.trainer_price==''){
           this.text1='Please,enter value!'
         }else{
-          this.text2='Value is changed!'
+          this.text2=true
         }
         this.entered=true
        fetch('https://app.outpostchess.com/api/v2/current_user_info', {
@@ -1921,7 +1998,7 @@ methods:{
             "Authorization":`Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify( { 
-              trainer_price_lesson:this.trainer_price_lesson, 
+              trainer_price_lesson:this.trainer_price, 
             })
           },
                )   
@@ -2359,6 +2436,17 @@ hr{
   margin-top:3.125rem;
    
 }
+.middle2-buttons2{
+  border: 0.5px solid #5C5E64;
+  box-sizing: border-box; 
+  background-color:#202122 3;
+  color:#FFFFFF;
+  font-size: 0.875rem;
+  width: 9.875rem;
+  height: 2.275rem;
+  margin:1rem 0.9375rem 0 0.9375rem;
+
+}
 .middle2-buttons:hover{
     opacity: 0.7;
 }
@@ -2573,13 +2661,20 @@ height: 5rem;
 }
 .inputcurplay2{
     margin-left:0.25rem;
+    padding-left:0.935rem;
+    border-bottom: 0.5px solid #FFFFFF;
+    color:#6F7381;
+    width:65%;
+}
+.inputcurplay3{
+    margin-top:2em;
+    margin-left:0.935rem;
     padding-left:5px;
-    border-bottom: 1px solid #FFFFFF;
+    border-bottom: 1px solid #5C5E64;
     color:#FFFFFF;
-    width:70%;
 }
 .inputcurplay2::placeholder{
-   color:#FFFFFF
+   color:#6F7381
 }
 .switch-style{
     padding-left:0.9375rem;
@@ -2746,6 +2841,30 @@ input::-webkit-inner-spin-button {
   padding-top:1rem;
   font-weight: 400;
   font-size:0.875rem;
+ 
+}
+.trainer_change_price:hover{
+   opacity: 0.5;
+}
+.tranier_new_student{
+  font-size:0.75rem;
+}
+.flex_space{
+  display:flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-right:0.625rem;
+}
+.flex_space2{
+   display:flex;
+  justify-content: space-between;
+}
+.tranier_new_student:hover{
+  opacity:0.5;
+  cursor:pointer;
+}
+.buttons:hover{
+  opacity: 0.5;
 }
 #trainer_input_price{
   padding-top:3rem;
@@ -2774,7 +2893,6 @@ top:18.75rem;
 #plava-kugla2{
     height: 6.25em;
     padding-left:80%;
-   
 }
 .line2{
     width:9.375rem;
@@ -2826,7 +2944,7 @@ font-size:0.75rem
   -webkit-transition: .4s;
   transition: .4s;
 }
-
+/*
 .slider1:before {
   position: absolute;
   content: "";
@@ -2853,7 +2971,7 @@ input:checked + .slider1:before {
   transform: translateX(1.625rem);
 }
 
-/* Rounded sliders */
+ Rounded sliders 
 .slider1.round {
   border-radius: 2.125rem;
 }
@@ -2861,10 +2979,10 @@ input:checked + .slider1:before {
 .slider1.round:before {
   border-radius: 50%;
 }
-
+*/
 .button-range{
   border: 0.5px solid #5C5E64;
-  box-sizing: border-box; 
+  box-sizing: border-box;  
   background-color:#202122 ;
   color:#FFFFFF;
   font-size: 0.875rem;

@@ -26,12 +26,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  
 }
+
 
 body{
   margin:0;
   padding:0;
+   background-color: #1b1c1d;
 }
 a{
   text-decoration: none;
