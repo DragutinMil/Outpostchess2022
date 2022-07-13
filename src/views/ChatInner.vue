@@ -41,9 +41,7 @@
         <OneMessage message-type="sent"/>
         <OneMessage message-type="received"/>
       </div>
-      <!--      <div class="send-message">-->
-      <!--        -->
-      <!--      </div>-->
+      <SendMessage/>
     </div>
     <ChatInnerContact/>
   </div>
@@ -54,10 +52,11 @@ import SideBar from "@/components/SideBar";
 import ChatInnerHeader from "@/components/Chatroom/ChatInnerHeader";
 import ChatInnerContact from "@/components/Chatroom/ChatInnerContact";
 import OneMessage from "@/components/Chatroom/OneMessage";
+import SendMessage from "@/components/Chatroom/SendMessage";
 
 export default {
   name: "ChatInner",
-  components: {OneMessage, ChatInnerContact, ChatInnerHeader, SideBar}
+  components: {SendMessage, OneMessage, ChatInnerContact, ChatInnerHeader, SideBar}
 }
 </script>
 
