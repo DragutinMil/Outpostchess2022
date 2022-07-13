@@ -1,63 +1,65 @@
 <template>
-  <div>
-    <div class="one-chat message-not-seen">
-      <img
-          class="new-message-icon"
-          src="../../assets/koverta-new.svg"
-          alt="new message"
-      >
-      <div class="divider"/>
-      <div class="user-profile-avatar">
-        BR
-      </div>
-      <p class="user-name">
-        Brodie Richards
-      </p>
-      <p class="short-message">
-        Hi there, Brodie
-        My name is Melissa from...
-      </p>
-      <p class="message-time">
-        9 : 30 PM
-      </p>
-      <img
-          class="invitation-icon"
-          src="../../assets/invitation-icon.svg"
-          alt="invitation icon"
-      >
-      <div class="short-message-mobile">
-        <p class="short-message ">
+  <router-link to="/ChatInner">
+    <div>
+      <div class="one-chat message-not-seen">
+        <img
+            class="new-message-icon"
+            src="../../assets/koverta-new.svg"
+            alt="new message"
+        >
+        <div class="divider"/>
+        <div class="user-profile-avatar">
+          BR
+        </div>
+        <p class="user-name">
+          Brodie Richards
+        </p>
+        <p class="short-message">
           Hi there, Brodie
           My name is Melissa from...
         </p>
+        <p class="message-time">
+          9 : 30 PM
+        </p>
+        <img
+            class="invitation-icon"
+            src="../../assets/invitation-icon.svg"
+            alt="invitation icon"
+        >
+        <div class="short-message-mobile">
+          <p class="short-message ">
+            Hi there, Brodie
+            My name is Melissa from...
+          </p>
+        </div>
+      </div>
+      <div class="one-chat">
+        <img
+            class="new-message-icon"
+            src="../../assets/koverta-new.svg"
+            alt="new message"
+        >
+        <div class="divider"/>
+        <div class="user-profile-avatar">
+          BR
+        </div>
+        <p class="user-name">
+          Brodie Richards
+        </p>
+        <p class="short-message">
+          Hi there, Brodie
+          My name is Melissa from...
+        </p>
+        <p class="message-time">
+          9 : 30 PM
+        </p>
+        <img class="invitation-icon"
+             src="../../assets/invitation-icon.svg"
+             alt="invitation icon"
+        >
       </div>
     </div>
-    <div class="one-chat">
-      <img
-          class="new-message-icon"
-          src="../../assets/koverta-new.svg"
-          alt="new message"
-      >
-      <div class="divider"/>
-      <div class="user-profile-avatar">
-        BR
-      </div>
-      <p class="user-name">
-        Brodie Richards
-      </p>
-      <p class="short-message">
-        Hi there, Brodie
-        My name is Melissa from...
-      </p>
-      <p class="message-time">
-        9 : 30 PM
-      </p>
-      <img class="invitation-icon"
-           src="../../assets/invitation-icon.svg"
-           alt="invitation icon"
-      >
-    </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -69,6 +71,10 @@ export default {
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+}
+
 .one-chat {
   cursor: pointer;
   display: flex;

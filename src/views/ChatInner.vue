@@ -2,13 +2,18 @@
   <div class="parent">
     <SideBar/>
     <div class="main-div">
-      <ChatInnerHeader/>
-      <div class="user-details">
-        <div class="left">
-          <p>Title: </p>
-          <div class="pill">
+      <div class="chat">
+        <ChatInnerHeader/>
+        <div class="user-details">
+          <div class="left">
+            <p>Title: </p>
+            <div class="pill">
+            </div>
           </div>
         </div>
+        <OneMessage message-type="received" />
+        <OneMessage message-type="sent" />
+        <OneMessage message-type="received" />
       </div>
     </div>
     <ChatInnerContact/>
@@ -19,10 +24,11 @@
 import SideBar from "@/components/SideBar";
 import ChatInnerHeader from "@/components/Chatroom/ChatInnerHeader";
 import ChatInnerContact from "@/components/Chatroom/ChatInnerContact";
+import OneMessage from "@/components/Chatroom/OneMessage";
 
 export default {
   name: "ChatInner",
-  components: {ChatInnerContact, ChatInnerHeader, SideBar}
+  components: {OneMessage, ChatInnerContact, ChatInnerHeader, SideBar}
 }
 </script>
 
@@ -31,12 +37,19 @@ export default {
   display: flex;
   background-color: #171819;
   justify-content: space-between;
+  overflow-y: clip;
+  height: 100vh;
 }
 
 .main-div {
   width: 61rem;
   margin-left: 10.563rem;
   margin-right: 9.313rem;
+}
+
+.chat {
+  height: 80vh;
+  overflow-y: scroll;
 }
 
 .user-details {

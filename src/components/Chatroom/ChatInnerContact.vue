@@ -50,6 +50,32 @@
       <img src="../../assets/unopened-message-icon.svg" alt="unopened message icon">
     </div>
     <div class="divider"></div>
+    <div class="one-contact">
+      <div class="user-profile-avatar">
+        BR
+      </div>
+      <div class="user-name">
+        <p> Brodie Richards</p>
+      </div>
+      <div class="user-country">
+        <p>Serbia</p>
+      </div>
+      <img src="../../assets/unopened-message-icon.svg" alt="unopened message icon">
+    </div>
+    <div class="divider"></div>
+    <div class="one-contact">
+      <div class="user-profile-avatar">
+        BR
+      </div>
+      <div class="user-name">
+        <p> Brodie Richards</p>
+      </div>
+      <div class="user-country">
+        <p>Serbia</p>
+      </div>
+      <img src="../../assets/unopened-message-icon.svg" alt="unopened message icon">
+    </div>
+    <div class="divider"></div>
   </div>
 </template>
 
@@ -94,6 +120,7 @@ p {
   background-color: #202122;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 }
 
 .header {
