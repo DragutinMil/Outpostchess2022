@@ -87,7 +87,7 @@ import NotifList from './NotifList.vue';
          this.lastId=this.$store.state.notif_arr[0].n_id
          this.$store.commit('seen_notification')
          console.log(this.$store.state.notif_arr)
-          fetch( `https://app.outpostchess.com/api/v2/notification_last_read_set/${this.lastId} `, {
+          fetch( `https://api.outpostchess.com/api/v2/notification_last_read_set/${this.lastId} `, {
           method:'POST',
           headers: {
             'Content-Type': 'application/json',

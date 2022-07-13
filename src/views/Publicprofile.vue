@@ -996,7 +996,7 @@ export default {
 
 mounted(){
    this.$store.dispatch('getNotification');
-   fetch('https://app.outpostchess.com/api/v2/organiser_events', {
+   fetch('https://api.outpostchess.com/api/v2/organiser_events', {
         method: 'GET',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1008,7 +1008,7 @@ mounted(){
         //.then(data => console.log('events',data))       
             
 
-  fetch( `https://app.outpostchess.com/api/v2/public_user_info/${this.idt} `, {
+  fetch( `https://api.outpostchess.com/api/v2/public_user_info/${this.idt} `, {
   method:'GET',
   headers: {
     'Content-Type': 'application/json'
@@ -1019,7 +1019,7 @@ mounted(){
 .then(data => this.user=data)
 //.then(data => console.log('public',data))  
 
- fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+ fetch('https://api.outpostchess.com/api/v2/current_user_info', {
   method:'GET',
   headers: {
     'Content-Type': 'application/json',
@@ -1031,7 +1031,7 @@ mounted(){
 .then(response => response.json())
 .then(data => this.userinitiator=data)
 //.then(data => console.log('initiator',data)) 
-fetch('https://app.outpostchess.com/api/v2/interested_in_player', {
+fetch('https://api.outpostchess.com/api/v2/interested_in_player', {
         method: 'GET',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1042,7 +1042,7 @@ fetch('https://app.outpostchess.com/api/v2/interested_in_player', {
         .then(data => this.my_interested_list=data)   
        // .then(data => console.log('my_list',data))
 
-fetch('https://app.outpostchess.com/api/v2/interested_in_club', {
+fetch('https://api.outpostchess.com/api/v2/interested_in_club', {
         method: 'GET',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1052,7 +1052,7 @@ fetch('https://app.outpostchess.com/api/v2/interested_in_club', {
         .then(response => response.json())
         .then(data => this.my_intclub_list=data)   
      //   .then(data => console.log('my_clublist',data))      
-fetch('https://app.outpostchess.com/api/v2/connection_list',{
+fetch('https://api.outpostchess.com/api/v2/connection_list',{
         method: 'GET',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1091,7 +1091,7 @@ methods:{
     interested_club_del(){
         this.clicked_interested4=false;
         this.clicked_interested3=false;
-         fetch(`https://app.outpostchess.com/api/v2/interested_in_club/${this.idt} `, {
+         fetch(`https://api.outpostchess.com/api/v2/interested_in_club/${this.idt} `, {
                       method: 'DELETE',
                       headers: {
                           'Content-Type': 'application/json',
@@ -1106,7 +1106,7 @@ methods:{
     interested_club(){
         this.clicked_interested4=false;
         this.clicked_interested3=true;
-          fetch(`https://app.outpostchess.com/api/v2/interested_in_club/${this.idt} `, {
+          fetch(`https://api.outpostchess.com/api/v2/interested_in_club/${this.idt} `, {
                       method: 'POST',
                       headers: {
                           'Content-Type': 'application/json',
@@ -1122,7 +1122,7 @@ methods:{
            this.interested_no=false;
            this.clicked_interested=true;
            this.clicked_interested2=false;
-           fetch(`https://app.outpostchess.com/api/v2/interested_in_player/${this.idt} `, {
+           fetch(`https://api.outpostchess.com/api/v2/interested_in_player/${this.idt} `, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1137,7 +1137,7 @@ methods:{
            this.interested_no=true;
            this.clicked_interested=false;
            this.clicked_interested2=false;
-           fetch(`https://app.outpostchess.com/api/v2/interested_in_player/${this.idt} `, {
+           fetch(`https://api.outpostchess.com/api/v2/interested_in_player/${this.idt} `, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1150,7 +1150,7 @@ methods:{
   /* INTERESTED EVENT */
 
     interested_event:function(){
-           fetch(`https://app.outpostchess.com/api/v2/interested_in_event/${this.idt} `, {
+           fetch(`https://api.outpostchess.com/api/v2/interested_in_event/${this.idt} `, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1160,7 +1160,7 @@ methods:{
     },
    
     interested_event_del:function(){
-           fetch(`https://app.outpostchess.com/api/v2/interested_in_event/${this.idt} `, {
+           fetch(`https://api.outpostchess.com/api/v2/interested_in_event/${this.idt} `, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1220,7 +1220,7 @@ methods:{
       
       this.connected=true
       console.log(this.connected)
-    fetch( ` https://app.outpostchess.com/api/v2/connection_initiate/${this.idt} `, {
+    fetch( ` https://api.outpostchess.com/api/v2/connection_initiate/${this.idt} `, {
         method: 'POST',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1234,7 +1234,7 @@ methods:{
      },
      disconnection_people:function(){
        this.connected=false
-    fetch( ` https://app.outpostchess.com/api/v2/connection_initiator_delete/${this.idt} `, {
+    fetch( ` https://api.outpostchess.com/api/v2/connection_initiator_delete/${this.idt} `, {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`

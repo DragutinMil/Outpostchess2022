@@ -111,7 +111,7 @@ export default {
         this.req="*Enter at least 6 character";
         }
         if(this.newpassword == this.newpassword1 && this.newpassword !=="" && this.newpassword1 !=="" && this.newpassword.length > 6){
-        fetch('https://app.outpostchess.com/api/v2/public_reset_forgotten_password', {
+        fetch('https://api.outpostchess.com/api/v2/public_reset_forgotten_password', {
         method:'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify( { password: this.newpassword,
