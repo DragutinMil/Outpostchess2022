@@ -474,8 +474,8 @@
                 </div>  
               </div>
             </div>
-            <!-- END PLAYER PART  --> 
-            <!-- CLUB PART  -->            
+<!-- END PLAYER PART  --> 
+<!-- CLUB PART  -->            
             <div v-else-if="activeclub && user.rola.indexOf('CLUB')!==-1">
               <div class="middle5-right-grid">
                 <div class="mid5-padd">
@@ -684,7 +684,7 @@
                     class="borderbutton flex-center"
                     @click="interested_event"
                   >
-                    <p style="text-align:center">
+                    <p style="text-align:center;font-size:0.75rem">
                       Interested in this Organizer
                     </p>
                   </div>               
@@ -724,7 +724,7 @@
                     <p >Price per lesson</p> 
                 </div>
                 <div class="middle5-text w700" id="trainer-price-number">
-                   <p v-if="price_entered">{{user.trainer_price_lesson}} </p>
+                   <p v-if="price_entered">${{user.trainer_price_lesson}} /1h</p>
                 </div>
               </div>
               <div class="middle5-right-grid" >
@@ -737,7 +737,7 @@
                       <b-form-checkbox
                         disabled
                         switch
-                        :checked="user.arbiter_looking_for_new_engagement"
+                        :checked="user.trainer_looking_for_new_player"
                       
                       />                  
                     </div>
@@ -765,19 +765,62 @@
                     <p>Students</p> 
                    </div>
                    <div>
-
+                     <div  class="middle5-text2" style="display:flex" v-for="(student,index) in user.trainer_list_of_students" :key="student">
+                      <p style="color:#FFC796">{{index+1}}.</p>
+                      <div class=" flex_space" style="padding-left:0.375rem">
+                        {{student}}
+                      </div>  
+                      
+                   </div>  
                    </div>
 
                 </div>
-                <div class="mid5-padd flex-center">
-                  <div
-                    class="borderbutton flex-center"
-                     
-                  >  
-                    <p style="text-align:center">
-                      Interested in this Trainer
-                    </p>
-                  </div>               
+
+
+
+                <div class="mid5-padd flex-center"
+                  >
+                  <div>
+                    <div
+                          v-if="interested_no_trainer"
+                          style="margin-bottom:0.625rem; "
+                          class="borderbutton flex-center"
+                        >
+                          <p
+                            style="font-size:0.75rem;"
+                            @click="interested_trainer"
+                          >
+                            Interested in this Trainer
+                          </p>
+                    </div>
+                    <div v-if="clicked_interested_trainer2">  
+                          <div
+                            v-for="listpla in my_int_trainer_list"
+                            :key="listpla.created_date"
+                          >  
+                            <div
+                              v-if="listpla.target_uuid==user.user_uuid"
+                              class="borderbutton flex-center"
+                            >
+                              <div style="font-size:0.75rem;">
+                                <p @click="interested_trainer_del">
+                                  Remove from shortlist
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                      <div
+                        v-if="clicked_interested_trainer"
+                        style="margin-bottom:0.625rem; "
+                        class="borderbutton flex-center"
+                        @click="interested_trainer_del"
+                      >
+                        <p style="font-size:0.75rem;">
+                          Remove from shortlist
+                        </p>
+                  </div>
+                </div>  
                 </div>
                 <!--      <div class="mid5-padd flex-center">
                                 <div class="borderbutton flex-center">
@@ -798,14 +841,20 @@
                   My Event is currently active:
                 </p>
                 <div class="mid5-padd">
-                  <div style="height:4rem;display:flex">
-                    <img
-                      v-if="user.arbiter_current_event!=null"
-                      id="plava-kugla2"
+                  <div style="height:4rem;display:flex;padding-left:80%">
+                 <img
+                      v-if="user.arbiter_currently_active"
+                      id="plava-kugla"
                       src="../assets/plavakugla.png"
                       alt=""
                     >
-                  </div>
+                    </div>
+                  <b-form-checkbox
+                    switch
+                    disabled
+                    :checked="user.arbiter_currently_active"
+                    style="padding-left:3.0375rem;padding-bottom: 1rem;"
+                  />  
                   <!--      <v-app class="vuetify-switch2"> 
                                     <v-container class="switch-container"   >
                                         <v-switch 
@@ -815,19 +864,10 @@
                                     </v-container>  
                                 </v-app> -->
                  <div>
-                   <input
-                      v-if="user.current_event!==''"
-                      v-model="user.current_event"
-                      type="text"
-                      class="inputcurplay"
-                    >
-                     <input
-                      v-else
-                    
-                      placeholder="123-45-678"
-                      type="text"
-                      class="inputcurplay"
-                    >
+                   
+                     <div v-if="user.arbiter_currently_active==true" style="padding-left:0.625rem;color: #FFC796;" >
+                       {{user.arbiter_current_event_name}}
+                     </div>
                  </div>
                 </div>
               </div>   
@@ -841,21 +881,66 @@
                       <b-form-checkbox
                         switch
                         disabled
-                        :checked="user.arbiter_looking_for_new_engagement"
+                        :checked="user.arbiter_looking_for_new_eng"
                       />                  
                     </div>
                   </div>
                 </div>
-                <div class="mid5-padd flex-center">
-                  <div
-                    class="borderbutton flex-center"
-                    @click="interested_event"
+
+
+
+
+
+                <div class="mid5-padd flex-center"
                   >
-                    <p style="text-align:center">
-                      Interested in this Arbiter
-                    </p>
-                  </div>               
-                </div> 
+                  <div>
+                    <div
+                          v-if="interested_no_arbiter"
+                          style="margin-bottom:0.625rem; "
+                          class="borderbutton flex-center"
+                        >
+                          <p
+                            style="font-size:0.75rem;"
+                            @click="interested_arbiter"
+                          >
+                            Interested in this Arbiter
+                          </p>
+                    </div>
+                    <div v-if="clicked_interested_arbiter2">  
+                          <div
+                            v-for="listpla in my_int_arbiter_list"
+                            :key="listpla.created_date"
+                          >  
+                            <div
+                              v-if="listpla.target_uuid==user.user_uuid"
+                              class="borderbutton flex-center"
+                            >
+                              <div style="font-size:0.75rem;">
+                                <p @click="interested_trainer_del">
+                                  Remove from shortlist
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                      <div
+                        v-if="clicked_interested_arbiter"
+                        style="margin-bottom:0.625rem; "
+                        class="borderbutton flex-center"
+                        @click="interested_arbiter_del"
+                      >
+                        <p style="font-size:0.75rem;">
+                          Remove from shortlist
+                        </p>
+                  </div>
+                </div>  
+                </div>
+
+
+
+
+
+                
               </div>
               <div id="middle5-right-startorg" style="margin:0">
                 
@@ -975,12 +1060,20 @@ export default {
          idt:'',
          my_interested_list:[],
          my_intclub_list:[],
+         my_int_trainer_list:[],
+         my_int_arbiter_list:[],
          listpla:{target_uuid:''},
          clicked_interested:false,
          clicked_interested2:true,
          clicked_interested4:true,
          clicked_interested3:false,
+         clicked_interested_trainer:false,
+         clicked_interested_trainer2:true,
+         clicked_interested_arbiter:false,
+         clicked_interested_arbiter2:true,
          interested_no:true,
+         interested_no_trainer:true,
+         interested_no_arbiter:true,
          notif_arr : [],
          connected:false,
          my_connection_list:[],
@@ -1042,6 +1135,28 @@ fetch('https://api.outpostchess.com/api/v2/interested_in_player', {
         .then(data => this.my_interested_list=data)   
        // .then(data => console.log('my_list',data))
 
+fetch('https://api.outpostchess.com/api/v2/interested_in_arbiter', {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json',
+                "Authorization":`Bearer ${localStorage.getItem('token')}`
+                },		
+               
+            })
+        .then(response => response.json())
+        .then(data => this.my_int_arbiter_list=data)  
+        .then(data => console.log('my_int_arbiter_list',data))  
+
+fetch('https://api.outpostchess.com/api/v2/interested_in_trainer', {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json',
+                "Authorization":`Bearer ${localStorage.getItem('token')}`
+                },		
+               
+            })
+        .then(response => response.json())
+        .then(data => this.my_int_trainer_list=data)  
+        .then(data => console.log('my_int_trainer_list',data))  
+
 fetch('https://api.outpostchess.com/api/v2/interested_in_club', {
         method: 'GET',
         headers: {'Content-Type': 'application/json',
@@ -1062,8 +1177,6 @@ fetch('https://api.outpostchess.com/api/v2/connection_list',{
         .then(response => response.json())
         .then(data => this.my_connection_list=data)   
        .then(data => console.log('my_connection_list',data))      
-
-
 
 },
 
@@ -1146,7 +1259,66 @@ methods:{
             })
             
     },
-  
+   /* INTERESTED ARBITER*/
+
+    interested_arbiter(){
+           this.interested_no_arbiter=false;
+           this.clicked_interested_arbiter=true;
+           this.clicked_interested_arbiter2=false;
+           fetch(`https://app.outpostchess.com/api/v2/interested_in_arbiter/${this.idt} `, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                     "authorization":`Bearer ${localStorage.getItem('token')}`
+                },
+            })
+         
+            
+           
+    },
+     interested_arbiter_del:function(){
+           this.interested_no_arbiter=true;
+           this.clicked_interested_arbiter=false;
+           this.clicked_interested_arbiter2=false;
+           fetch(`https://app.outpostchess.com/api/v2/interested_in_arbiter/${this.idt} `, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                     "authorization":`Bearer ${localStorage.getItem('token')}`
+                },
+            })
+            
+    },
+
+    /* INTERESTED TRAINER */
+    interested_trainer(){
+           this.interested_no_trainer=false;
+           this.clicked_interested_trainer=true;
+           this.clicked_interested_trainer2=false;
+           fetch(`https://app.outpostchess.com/api/v2/interested_in_trainer/${this.idt} `, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                     "authorization":`Bearer ${localStorage.getItem('token')}`
+                },
+            })
+         
+            
+           
+    },
+     interested_trainer_del:function(){
+           this.interested_no_trainer=true;
+           this.clicked_interested_trainer=false;
+           this.clicked_interested_trainer2=false;
+           fetch(`https://app.outpostchess.com/api/v2/interested_in_trainer/${this.idt} `, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                     "authorization":`Bearer ${localStorage.getItem('token')}`
+                },
+            })
+            
+    },
   /* INTERESTED EVENT */
 
     interested_event:function(){

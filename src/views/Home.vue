@@ -34,6 +34,7 @@
             }"
             placeholder="Email"
           >
+           <p style="color:#f2358d" v-if="already_exist" >Email address already exist on Outpost </p>
           <p id="reqpass1">
             {{ req2 }}
           </p>
@@ -54,6 +55,7 @@
             <p class="reqpass">
               {{ req }}
             </p>
+            
           </div>
           <div>
             <input
@@ -175,7 +177,9 @@
               style="width: 150px"
             >
               {{ req4 }}
+              
             </div>
+            
           </div>
         </div>
         <div style="padding: 15px 0 15px 0">
@@ -215,13 +219,19 @@
           Already on Outpost?
         </p>
         &nbsp;
-        <router-link
+        
+      </div>
+      <div class="home-p blue signin">
+       <router-link
           to="/login"
           class="home-p blue"
         >
-          Sign in
+            <button type="button" class="text-join"  style="border: 1px solid #E8E8E8;width: 70%;"> <p id="joingoogle">Sign in</p> </button>   
+      
+        
+          
         </router-link>
-      </div>
+        </div>
     </div>
     <div id="right-login" />
   </div>
@@ -256,7 +266,7 @@ export default {
       admin: false,
       other: false,
       trainer: false,
-      
+      already_exist:false
     };
   },
   methods: {
@@ -340,26 +350,17 @@ export default {
           .then(data => this.response=data)
           .then(data => console.log('podaci',data)) 
         //  .then(function(response){
-        //    console.log(this.response)
-        ////    if(response==200){
-//window.alert("adassddcc")
-      //      }else{
-              
-       //       window.alert("adassdvevevevdcc")
-        //    }
-        //  })
-      //    console.log(this.response.results.status)
+       //    console.log(...response)})
+           
+         .then(response => {
+          console.log(this.response.results.status)
+         if (this.response.results.status=="alreadyexist") {
+              this.already_exist=true
+
+           console.log(response);
+          } 
           
-         // .then(response => {
-       //   if ((this.response.results.status=="alreadyexist")) {
-         //   window.alert="trtaw"
-           //this.$router.push("/thanks");
-        //   } else {
-        //   window.alert("trt")
-            
-        //  }
-          
-      //  })
+        })
       }
      
     },
@@ -482,7 +483,7 @@ hr {
 #input-signup {
   background-color: #1b1c1d;
   width: 70%;
-  padding: 35px 0 35px 0;
+  padding: 35px 0 0 0;
   margin: 20px auto;
   border-radius: 11px;
 }
@@ -589,7 +590,10 @@ hr {
   margin: 0;
   padding-left: 15px;
 }
-
+.signin{
+  width:65%;
+  margin:auto
+}
 @media only screen and (max-width: 1500px) and (min-width: 500px) {
 }
 @media only screen and (min-width: 499px) {
@@ -603,7 +607,11 @@ hr {
   #right-login {
     display: none;
   }
-  .home {
+.signin{
+  width:80%;
+  margin:auto
+}
+.home {
     display: flex;
     height: 100%;
   }
