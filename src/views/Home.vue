@@ -219,13 +219,19 @@
           Already on Outpost?
         </p>
         &nbsp;
-        <router-link
+        
+      </div>
+      <div class="home-p blue signin">
+       <router-link
           to="/login"
           class="home-p blue"
         >
-          Sign in
+            <button type="button" class="text-join"  style="border: 1px solid #E8E8E8;width: 70%;"> <p id="joingoogle">Sign in</p> </button>   
+      
+        
+          
         </router-link>
-      </div>
+        </div>
     </div>
     <div id="right-login" />
   </div>
@@ -477,7 +483,7 @@ hr {
 #input-signup {
   background-color: #1b1c1d;
   width: 70%;
-  padding: 35px 0 35px 0;
+  padding: 35px 0 0 0;
   margin: 20px auto;
   border-radius: 11px;
 }
@@ -584,7 +590,10 @@ hr {
   margin: 0;
   padding-left: 15px;
 }
-
+.signin{
+  width:65%;
+  margin:auto
+}
 @media only screen and (max-width: 1500px) and (min-width: 500px) {
 }
 @media only screen and (min-width: 499px) {
@@ -598,7 +607,11 @@ hr {
   #right-login {
     display: none;
   }
-  .home {
+.signin{
+  width:80%;
+  margin:auto
+}
+.home {
     display: flex;
     height: 100%;
   }

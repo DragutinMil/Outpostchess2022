@@ -409,6 +409,7 @@
           <div
             v-if="clickside"
             class="middle3-1 "
+            style="justify-content:flex-start"
           >
             <p style="color:#6F7381">
               Rating:
@@ -472,7 +473,7 @@
         <div id="middle4">
           <div
             class="middle3-1"
-            style="justify-content:space-evenly "
+            
           >
             <p
               :class="{'middle4-1':isActive,'ratingsi':clickActive1,}"
@@ -2470,7 +2471,7 @@ grid-template-columns: 58% 42%;
 height: 5rem;
 }
 ::placeholder{
-    color:#C7C9D0;
+    color:#FFFFFF;
     font-weight: 300;
     font-size: 0.875rem;
 }
@@ -2494,6 +2495,7 @@ height: 5rem;
 .middle3-1{
     display:flex;
     align-items: center;
+    justify-content: space-around;
 }
 .ratings{
     border-radius: 1.25rem;
@@ -2525,7 +2527,6 @@ height: 5rem;
     border-radius: 1.25rem;
     width:5rem;
     height: 2rem;
-    margin-left:1.25rem;
     display:flex;
     align-items: center;
     justify-content: center;
@@ -2547,8 +2548,8 @@ height: 5rem;
 }
 .middle4-1  {
    color:#6F7381;
-   padding:0 0.625rem 0 0.625rem;
    font-size:0.875rem;
+   margin:auto;
 }
 .middle4-1:hover{
     cursor: pointer;
@@ -2670,9 +2671,10 @@ height: 5rem;
     margin-left:0.25rem;
     padding-left:0.935rem;
     border-bottom: 0.5px solid #FFFFFF;
-    color:#6F7381;
+    color:#FFFFFF;
     width:65%;
 }
+
 .inputcurplay3{
     margin-top:2em;
     margin-left:0.935rem;
@@ -2680,9 +2682,7 @@ height: 5rem;
     border-bottom: 1px solid #5C5E64;
     color:#FFFFFF;
 }
-.inputcurplay2::placeholder{
-   color:#6F7381
-}
+
 .switch-style{
     padding-left:0.9375rem;
 }
