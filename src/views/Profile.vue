@@ -499,7 +499,7 @@
               v-if="user.rola.indexOf('PLAYER')!==-1"
               style="margin-left:1.5625rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor1}"
-              @click="rolecol1"
+              @click="rolecol1(user.rola)"
             >
               Player
             </div>
@@ -690,7 +690,7 @@
                   <div id="form-middle5">
                     <img
                       style="height:1.5625rem"
-                      src="../assets/form.svg"
+                      src="../assets/player-form-unkown-icon.svg"
                       alt=""
                     >
                     <p style="margin:0;padding:8px 0 0 0">
@@ -1427,95 +1427,7 @@
                             </div>    -->
               
               </div>
-           <!--   <div id="middle5-right-startorg" style="margin:0">
-                <div
-                  v-if="newevent"
-                  style="display:flex"
-                >
-                  <div style="height:4rem;">
-                    <p class="middle5-text">
-                      My new event:
-                    </p>
-                    <div class="list-events">
-                      <p class="gold-event">
-                        Enter name:
-                      </p>
-                      <input
-                        v-model="new_event_name"
-                        type="text"
-                        required
-                        class="profile-name2 line2"
-                      >
-                    </div>
-                    <div class="list-events">
-                      <p class="gold-event">
-                        Date from:
-                      </p>
-                      <p>
-                        <input
-                          v-model="new_event_from"
-                          type="date"
-                          class="profile-name2 line2"
-                        >
-                      </p>
-                    </div>
-                    <div class="list-events">
-                      <p class="gold-event">
-                        Date to:
-                      </p>
-                      <p>
-                        <input
-                          v-model="new_event_to"
-                          type="date"
-                          class="profile-name2 line2"
-                        >
-                      </p>
-                    </div>
-                  </div>
-                  <div>
-                    <button
-                      class="middle2-buttons"
-                      style="margin-left:40%"
-                      type="submit"
-                      @click="post_event"
-                    >
-                      Create
-                    </button>
-                  </div>
-                </div>
-                <div
-                  v-else
-                  class="mid5-padd listevent"
-                  style="background-color: #202122;padding:0.625rem;"
-                >
-                  <p class="middle5-text">
-                    My events:
-                  </p>
-                  <div
-                    v-for="(event,index) in events"
-                    :key="event.event_uuid"
-                    style="display:flex"
-                  >
-                    <p
-                      v-if="event.oß_uuid=user.user_uuid"
-                      style="padding-right:8px ;margin-left:0.9375rem"
-                    >
-                      {{ index+1 }}.
-                    </p>   
-                    <p
-                      style="cursor:pointer"
-                      class="gold-event"
-                    >
-                      {{ event.event_name }}
-                    </p> <p
-                      style="cursor:pointer"
-                      @click="delete_event(event)"
-                    >
-                      x
-                    </p> 
-                  </div>  
-                </div>
-              </div> -->
+           
             </div>  
 <!-- Other -->
             <div
@@ -2655,7 +2567,7 @@ height: 5rem;
     font-size: 0.875rem;
 }
 #form-middle5{
-    color:#F2358D;
+    color:#c8a07d;
     text-align: center;
     padding-top:1.875rem;
 }

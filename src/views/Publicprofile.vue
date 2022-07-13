@@ -308,7 +308,7 @@
                   <div id="form-middle5">
                     <img
                       style="height:1.5625rem"
-                      src="../assets/form.svg"
+                      src="../assets/player-form-unkown-icon.svg"
                       alt=""
                     >
                     <p style="margin:0;padding:0.5rem 0 0 0">
@@ -1710,7 +1710,7 @@ height: 5rem;
     letter-spacing: 0.03rem;
 }
 #form-middle5{
-    color:#F2358D;
+    color:#c8a07d;
     text-align: center;
     padding-top:1.875rem;
 }

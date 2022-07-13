@@ -358,6 +358,8 @@ export default {
               this.already_exist=true
 
            console.log(response);
+          }else{
+            this.$router.push('/Thanks');
           } 
           
         })
