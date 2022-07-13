@@ -78,7 +78,7 @@ export default {
           return this.request='*Enter email adress'
         }
         if(this.emailreset !==""  ){
-        fetch('https://app.outpostchess.com/api/v2/public_forgot_password', {
+        fetch('https://api.outpostchess.com/api/v2/public_forgot_password', {
         method:'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify( { email: this.emailreset})

@@ -143,7 +143,7 @@ export default {
       }
       if(this.emailsignin!=="" && this.passsignin!==""){
         
-        fetch('https://app.outpostchess.com/api/v2/auth', {
+        fetch('https://api.outpostchess.com/api/v2/auth', {
         method:'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify( { email: this.emailsignin, password: this.passsignin } )

@@ -598,7 +598,7 @@ export default {
     };
   },
   mounted() {
-    fetch("https://app.outpostchess.com/api/v2/titule", {
+    fetch("https://api.outpostchess.com/api/v2/titule", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -608,7 +608,7 @@ export default {
       .then((response) => response.json())
       .then((data) => (this.titule = data));
 
-    fetch("https://app.outpostchess.com/api/v2/countries", {
+    fetch("https://api.outpostchess.com/api/v2/countries", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -619,7 +619,7 @@ export default {
         .then((data) => (this.flags = data))
 
     fetch(
-      "https://app.outpostchess.com/api/v2/users_search", {
+      "https://api.outpostchess.com/api/v2/users_search", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -646,7 +646,7 @@ export default {
 
     //.then(data => console.log(data)),
 
-    fetch("https://app.outpostchess.com/api/v2/current_user_info", {
+    fetch("https://api.outpostchess.com/api/v2/current_user_info", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -665,7 +665,7 @@ export default {
         this.titleselected = [];
       }
       console.log(this.interestedclub);
-      fetch("https://app.outpostchess.com/api/v2/users_search", {
+      fetch("https://api.outpostchess.com/api/v2/users_search", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
