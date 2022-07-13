@@ -1,5 +1,8 @@
 <template>
-  <div class="message">
+  <div class="message"
+       :class="[
+         messageType === 'sent' && 'sent',
+       ]">
     <div class="top">
       <div class="left">
         <div class="user-avatar"></div>
@@ -7,7 +10,10 @@
           Hi there, Magnus Carlsen
         </p>
       </div>
-      <div class="message-time">
+      <div class="message-time"
+           :class="[
+             messageType === 'sent' && 'time-sent',
+           ]">
         <p>10:15 AM</p>
       </div>
     </div>
@@ -42,6 +48,16 @@ export default {
   margin-block: 2.688rem;
   background-color: #202122;
   padding: 0.625rem 1.375rem 2.875rem 1.313rem;
+}
+
+.sent {
+  background-color: #C8A07D;
+  width: 41.813rem;
+  margin-left: auto;
+}
+
+.time-sent {
+  color: white !important;
 }
 
 .top {
@@ -79,5 +95,9 @@ export default {
   width: 32.563rem;
   margin-top: 0.875rem;
   margin-left: 4rem;
+}
+
+.bottom p {
+  width: 32.563rem;
 }
 </style>
