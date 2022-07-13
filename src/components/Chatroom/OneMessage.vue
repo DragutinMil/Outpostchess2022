@@ -28,7 +28,7 @@ export default {
     }
   }
 }
-console.log(this.messageType)
+
 </script>
 
 <style scoped>
