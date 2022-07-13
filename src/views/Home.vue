@@ -330,7 +330,7 @@ export default {
         this.pass1 == this.pass1repeat &&
         this.chooserole == true
       ) {
-        fetch("https://app.outpostchess.com/api/v2/signup", {
+        fetch("https://api.outpostchess.com/api/v2/signup", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

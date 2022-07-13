@@ -35,7 +35,7 @@ export default {
   },
   
 mounted(){
-fetch('https://app.outpostchess.com/api/v2/public_blog_list',{
+fetch('https://api.outpostchess.com/api/v2/public_blog_list',{
      method:'GET',
             headers: {'Content-Type': 'application/json'},
 })

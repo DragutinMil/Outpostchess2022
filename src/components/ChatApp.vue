@@ -38,7 +38,7 @@
   //      },
  //   methods: {
 //sendNotif(payload){
-     //       fetch(`https://app.outpostchess.com/api/v2/create_fake_notification `, {
+     //       fetch(`https://api.outpostchess.com/api/v2/create_fake_notification `, {
         //        method: 'POST',
         //        headers: {
          //           'Content-Type': 'application/json',
