@@ -141,4 +141,10 @@ export default {
     margin-left: 1rem;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .main-div {
+    margin-right: 1rem;
+  }
+}
 </style>
