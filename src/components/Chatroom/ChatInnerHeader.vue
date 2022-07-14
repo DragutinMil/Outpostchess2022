@@ -150,4 +150,31 @@ p {
     padding-left: 3.5rem;
   }
 }
+
+@media screen and (max-width: 640px) {
+  .header {
+    background-color: unset;
+    justify-content: center;
+  }
+
+  .right {
+    display: none;
+  }
+
+  .left {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .avatar-big {
+    margin-right: 0;
+    margin-bottom: 1.5rem;
+  }
+  .left-text{
+    align-items: center;
+  }
+  .user-name{
+    margin-bottom: 1.25rem;
+  }
+}
 </style>

@@ -9,16 +9,16 @@
             <p class="details-title">
               Title:
             </p>
-            <div class="pill">
+            <div class="pill pill-small">
               <p>GM</p>
             </div>
-            <div class="pill">
+            <div class="pill pill-small">
               <p>IO</p>
             </div>
-            <div class="pill">
+            <div class="pill pill-small">
               <p>FA</p>
             </div>
-            <div class="pill">
+            <div class="pill pill-small">
               <p>FI</p>
             </div>
           </div>
@@ -117,6 +117,12 @@ export default {
   margin-right: 0.875rem;
 }
 
+.pill-small {
+  width: 4.25rem;
+  display: flex;
+  justify-content: center;
+}
+
 @media screen and (max-width: 1440px) {
   .main-div {
     width: 50rem;
@@ -127,18 +133,34 @@ export default {
   .chat {
     height: 78vh;
   }
+
+  .details-title {
+    margin-right: 0.5rem;
+  }
 }
 
 @media screen and (max-width: 1366px) {
   .details-title {
     margin-right: 0.5rem;
   }
+
+  .pill-small {
+    width: 3.25rem;
+  }
 }
 
 @media screen and (max-width: 1280px) {
   .main-div {
-    width: 50rem;
+    width: 60rem;
     margin-left: 1rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .main-div {
+    width: 65rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
 }
 
