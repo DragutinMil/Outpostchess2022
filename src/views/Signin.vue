@@ -24,12 +24,12 @@
       <div id="input-signup">
         <div>
           <input
-            v-model="emailsignin"
+            v-model="emailSignin"
             type="email"
             name=""
             :class="{mailin:isActive,'text-danger':hasError}"
             placeholder="Email"
-            @keyup.enter="signin()"
+            @keyup.enter="signIn()"
           >
           <p class="reqpass">
             {{ req1 }}
@@ -38,12 +38,12 @@
              
         <div style="padding:20px 0 20px 0;"> 
           <input
-            v-model="passsignin"
+            v-model="passSignin"
             type="password"
             name=""
             :class="{mailin:isActive,'text-danger':hasError2,}"
             placeholder="Password"
-            @keyup.enter="signin()"
+            @keyup.enter="signIn()"
           >
           <p class="reqpass">
             {{ req }}
@@ -74,7 +74,7 @@
             type="button"
             class="text-join"
             style=" border: 1px solid #C8A07D; "
-            @click="signin()"
+            @click="signIn()"
           >
             Sign in
           </button>
@@ -107,8 +107,8 @@ export default {
   name: "Signin",
    data () {
       return {
-         passsignin:"",
-         emailsignin:"",
+         passSignin:"",
+         emailSignin:"",
          req:"",
          req1:"",
          image1:"",
@@ -121,32 +121,32 @@ export default {
       
     },
     mounted() {
-    this.emailsignin= this.$route.query.email;
+    this.emailSignin= this.$route.query.email;
   },
     methods:{
     back:function(){
       this.$router.push('/');
     },
-    signin: function(){
+    signIn: function(){
       this.req="",
       this.req1="",
       this.hasError2=false,
       this.hasError=false,
       this.request=""
-      if(this.passsignin==""){
+      if(this.passSignin==""){
         this.req="Enter Password";
         this.hasError2=true;
       }
-      if(this.emailsignin==""){
+      if(this.emailSignin==""){
         this.req1=" Enter Email" ;
         this.hasError=true;
       }
-      if(this.emailsignin!=="" && this.passsignin!==""){
+      if(this.emailSignin!=="" && this.passSignin!==""){
         
         fetch('https://api.outpostchess.com/api/v2/auth', {
         method:'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify( { email: this.emailsignin, password: this.passsignin } )
+        body: JSON.stringify( { email: this.emailSignin, password: this.passSignin } )
         })
         .then(response => {
           if (response.ok) {

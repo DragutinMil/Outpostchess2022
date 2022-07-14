@@ -13,7 +13,7 @@
               id="imgsearch"
               src="../assets/search_24px.png"
               alt=""
-              @click="confirmsearch()"
+              @click="confirmSearch()"
             >
           </div>
           <input
@@ -22,7 +22,7 @@
             name=""
             class="intelegent-filter"
             placeholder="INTELEGENT FILTER"
-            @keyup.enter="confirmsearch()"
+            @keyup.enter="confirmSearch()"
           >
           <div
             :class="{
@@ -86,7 +86,7 @@
         <!--SEARCH RESULTS -->
         <div v-if="searchresults">
           <div
-            v-for="(usersrc, index) in usersearchreact.slice(0,100)"
+            v-for="(usersrc, index) in usersearchreact"
             :key="usersrc.user_uuid"
             class="search"
           >
@@ -159,7 +159,7 @@
                 :key="titles.titula_uuid"
               >
                 <div  v-if="titles.titula_uuid == usersrc.titula_player">
-                  {{ titles.titula_short_name }}
+                  {{ titles.titula_short_name }}&nbsp;&nbsp;
                 </div>
                 <div v-if="titles.titula_uuid == usersrc.titula_organizer">
                     IO&nbsp;&nbsp;
@@ -180,7 +180,7 @@
         <!--ALL USERS -->
         <div v-else>
           <div
-            v-for="(alluser, index) in usersearch.slice(0,50)"
+            v-for="(alluser, index) in usersearch"    
             :key="alluser.user_uuid"
           >
             <div
@@ -308,7 +308,7 @@
             inputmode="numeric"
             placeholder="From"
             name=""
-            @keyup.enter="confirmsearch()"
+            @keyup.enter="confirmSearch()"
           >
           &nbsp;&nbsp; - &nbsp;&nbsp;
           <input
@@ -318,7 +318,7 @@
             inputmode="numeric"
             placeholder="To"
             name=""
-            @keyup.enter="confirmsearch()"
+            @keyup.enter="confirmSearch()"
           >
         </div>
         <div
@@ -373,7 +373,7 @@
             inputmode="numeric"
             placeholder="From"
             name=""
-            @keyup.enter="confirmsearch()"
+            @keyup.enter="confirmSearch()"
           >
           &nbsp;&nbsp; - &nbsp;&nbsp;
           <input
@@ -383,7 +383,7 @@
             inputmode="numeric"
             placeholder="To"
             name=""
-            @keyup.enter="confirmsearch()"
+            @keyup.enter="confirmSearch()"
           >
         </div>
         <div
@@ -478,7 +478,7 @@
             type="text"
             name=""
             placeholder="Enter town"
-            @keyup.enter="confirmsearch()"
+            @keyup.enter="confirmSearch()"
           >
         </div>
         <div
@@ -531,7 +531,8 @@
           <button
             class="middle2-buttons"
             type="button"
-            @click="confirmsearch"
+            style="margin-top:2rem"
+            @click="confirmSearch"
           >
             Search
           </button>
@@ -659,12 +660,13 @@ export default {
   },
 
   methods: {
-    confirmsearch: function () {
+    confirmSearch: function () {
       this.searchresults = true;
+      console.log(this.titleselected)
       if (this.titleselected == "") {
         this.titleselected = [];
       }
-      console.log(this.interestedclub);
+     // console.log(this.interestedclub);
       fetch("https://api.outpostchess.com/api/v2/users_search", {
         method: "POST",
         headers: {
@@ -688,7 +690,8 @@ export default {
       })
         .then((response) => response.json())
         .then((data) => (this.usersearchreact = data))
-        .then((data) => console.log(data));
+        //.then((data) => console.log(data));
+        console.log(this.titule)
     },
 
     clickside: function () {

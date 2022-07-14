@@ -22,7 +22,7 @@
       <div id="input-signup">
         <div style="padding-bottom:1rem;">
           <input
-            v-model="newpassword"
+            v-model="newPassword"
             type="password"
             name=""
             :class="{mailin:isActive}"
@@ -31,7 +31,7 @@
         </div> 
         <div style="padding-bottom:1.25rem;">
           <input
-            v-model="newpassword1"
+            v-model="newPassword1"
             type="password"
             name=""
             :class="{mailin:isActive}"
@@ -75,7 +75,7 @@
 
 <script>
 export default {
-  name: "Resettoken",
+  name: "resetToken",
    data () {
       return {
          emailreset:"",
@@ -83,16 +83,16 @@ export default {
          req1:'',
          req2:'',
          isActive:true,
-         newpassword:'',
-         newpassword1:'',
+         newPassword:'',
+         newPassword1:'',
          last_segment : '',
-         resettoken2:window.location.href.split('/').pop()
+         resetToken2:window.location.href.split('/').pop()
       }
       
     },
    //  created() {
-   // this.newpassword= this.$route.query.password;
- //   this.resettoken2= window.location.pathname.split('/').pop();
+   // this.newPassword= this.$route.query.password;
+ //   this.resetToken2= window.location.pathname.split('/').pop();
     
   //},
     methods:{
@@ -101,21 +101,21 @@ export default {
         this.req='';
         this.req1='';
         this.req2='';
-        if(this.newpassword !== this.newpassword1){
+        if(this.newPassword !== this.newPassword1){
         this.req="*Password doesn't match";
         }
-        if(this.newpassword==""){
+        if(this.newPassword==""){
         this.req1="*Enter new Password ";
         }
-        if(this.newpassword !=="" && this.newpassword.length < 6){
+        if(this.newPassword !=="" && this.newPassword.length < 6){
         this.req="*Enter at least 6 character";
         }
-        if(this.newpassword == this.newpassword1 && this.newpassword !=="" && this.newpassword1 !=="" && this.newpassword.length > 6){
+        if(this.newPassword == this.newPassword1 && this.newPassword !=="" && this.newPassword1 !=="" && this.newPassword.length > 6){
         fetch('https://api.outpostchess.com/api/v2/public_reset_forgotten_password', {
         method:'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify( { password: this.newpassword,
-                                resettoken:this.resettoken2
+        body: JSON.stringify( { password: this.newPassword,
+                                resetToken:this.resetToken2
         })
         })
         .then(response => {
