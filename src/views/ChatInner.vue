@@ -134,4 +134,11 @@ export default {
     margin-right: 0.5rem;
   }
 }
+
+@media screen and (max-width: 1280px) {
+  .main-div {
+    width: 50rem;
+    margin-left: 1rem;
+  }
+}
 </style>

@@ -164,9 +164,16 @@ p {
 .one-contact p {
   color: white;
 }
+
 @media screen and (max-width: 1440px) {
-  .contact{
+  .contact {
     width: 27rem;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .contact {
+    display: none;
   }
 }
 </style>
