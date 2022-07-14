@@ -32,7 +32,7 @@
             name=""
             :class="{mailin:isActive}"
             placeholder="Email"
-            @keyup.enter="passreset()"
+            @keyup.enter="passReset()"
           >
         </div> 
         <div id="forgot-text" />
@@ -41,7 +41,7 @@
             type="button"
             class="text-join"
             style=" border: 1px solid #C8A07D; "
-            @click="verreset()"
+            @click="verReset()"
           >
             Resend verification mail
           </button>
@@ -77,7 +77,7 @@ export default {
     },
     methods:{
    
-     verreset: function(){
+     verReset: function(){
         if(this.emailreset==""){
           return this.request='*Enter email adress'
         }

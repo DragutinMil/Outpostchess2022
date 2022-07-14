@@ -29,12 +29,12 @@
       <div id="input-signup">
         <div>
           <input
-            v-model="emailreset"
+            v-model="emailReset"
             type="email"
             name=""
             :class="{mailin:isActive}"
             placeholder="Email"
-            @keyup.enter="passreset()"
+            @keyup.enter="passReset()"
           >
         </div> 
         <div id="forgot-text" />
@@ -43,7 +43,7 @@
             type="button"
             class="text-join"
             style=" border: 1px solid #C8A07D; "
-            @click="passreset()"
+            @click="passReset()"
           >
             Request password reset
           </button> 
@@ -65,7 +65,7 @@ export default {
   name: "Signin",
    data () {
       return {
-         emailreset:'',
+         emailReset:'',
          request:'',
          isActive:true,
        
@@ -73,15 +73,15 @@ export default {
       
     },
     methods:{
-    passreset: function(){
-        if(this.emailreset==""){
+    passReset: function(){
+        if(this.emailReset==""){
           return this.request='*Enter email adress'
         }
-        if(this.emailreset !==""  ){
+        if(this.emailReset !==""  ){
         fetch('https://api.outpostchess.com/api/v2/public_forgot_password', {
         method:'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify( { email: this.emailreset})
+        body: JSON.stringify( { email: this.emailReset})
         })
         .then(response => {
           if (response.ok) {

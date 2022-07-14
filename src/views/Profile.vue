@@ -372,7 +372,7 @@
 <!--END TRAINER  -->            
             <div
               v-else
-              class="middle3-1"
+              class="middle3-1-1"
             >
               <p style="color:#6F7381">
                 Title:
@@ -499,7 +499,7 @@
               v-if="user.rola.indexOf('PLAYER')!==-1"
               style="margin-left:1.5625rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor1}"
-              @click="rolecol1(user.rola)"
+              @click="role_indicator(1)"
             >
               Player
             </div>
@@ -507,7 +507,7 @@
               v-if="user.rola.indexOf('CLUBADMIN') !==-1"
               style="margin-left:2.25rem;text-overflow: ellipsis;overflow: hidden;white-space: nowrap; "
               :class="{'middle4-1':isActive,'rola-text':rolecolor2}"
-              @click="rolecol2"
+              @click="role_indicator(2)"
             >
               Club Admin
             </div> 
@@ -515,7 +515,7 @@
               v-if="user.rola.indexOf('ORGANIZER')!==-1"
               style="margin-left:2.25rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor3}"
-              @click="rolecol3"
+              @click="role_indicator(3)"
             >
               Organizer
             </div>
@@ -523,7 +523,7 @@
               v-if="user.rola.indexOf('ARBITER')!==-1"
               style="margin-left:2.25rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor4}"
-              @click="rolecol4"
+              @click="role_indicator(4)"
             >
               Arbiter
             </div>
@@ -531,7 +531,7 @@
               v-if="user.rola.indexOf('TRAINER')!==-1"
               style="margin-left:2.25rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor5}"
-              @click="rolecol5"
+              @click="role_indicator(5)"
             >
               Trainer
             </div>
@@ -539,7 +539,7 @@
               v-if="user.rola.indexOf('OTHER')!==-1"
               style="margin-left:2.25rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor6}"
-              @click="rolecol6"
+              @click="role_indicator(6)"
             >
               Other
             </div>
@@ -605,7 +605,7 @@
           </div>
           <div>
             <!--PLAYER PART -->      
-            <div v-if="activeplayer && user.rola.indexOf('PLAYER')!==-1">
+            <div v-if="activePlayer && user.rola.indexOf('PLAYER')!==-1">
               <div class="middle5-right-grid">
                 <div class="mid5-padd">
                   <p class="middle5-text">
@@ -648,13 +648,13 @@
               </div>
               <div class="middle5-right-grid">
                 <div class="mid5-padd">
-                  <div style="height:4rem;display:flex">
+                  <div style="height:4rem;position:relative;padding:0;margin:0">
                     <p class="middle5-text">
                       Currently active:
                     </p>
                     <img
                       v-if="user.current_playing_bool"
-                      id="plava-kugla"
+                      class="plava-kugla"
                       src="../assets/plavakugla.png"
                       alt=""
                     >
@@ -664,7 +664,7 @@
                     switch
                     :checked="user.current_playing_bool"
                     style="padding-left:3.4375rem;" 
-                    @change="activeplayercur"
+                    @change="activePlayercur"
                   /> 
                   <div>
                     <input
@@ -874,7 +874,7 @@
             </div>
             <!-- END PLAYER PART  --> 
             <!-- CLUB PART  -->            
-            <div v-else-if="activeclub && user.rola.indexOf('CLUB')!==-1">
+            <div v-else-if="activeClub && user.rola.indexOf('CLUB')!==-1">
               <div class="middle5-right-grid">
                 <div class="mid5-padd">
                   <p class="middle5-text">
@@ -923,7 +923,7 @@
                     </p>
                     <img
                       v-if="switch3"
-                      id="plava-kugla"
+                      class="plava-kugla"
                       src="../assets/plavakugla.png"
                       alt=""
                     >
@@ -934,7 +934,7 @@
                     switch
                     :checked="user.club_current_playing_bool"
                     style="padding-left:3.4375rem;" 
-                    @change="activeclubcur"
+                    @change="activeClubcur"
                   /> 
                   <!--  <v-app class="vuetify-switch"> 
                                     <v-container class="switch-container"   >  
@@ -1046,16 +1046,16 @@
             </div>
             <!--END CLUB PART  -->
             <!-- ORGANIZER PART  -->            
-            <div v-else-if="activeorg && this.user.rola.indexOf('ORGANIZER')!==-1">
+            <div v-else-if="activeOrg && this.user.rola.indexOf('ORGANIZER')!==-1">
               <div id="middle5-right-startorg">
                 <p class="middle5-text">
                   My Event is currently active:
                 </p>
                 <div class="mid5-padd">
-                  <div style="height:4rem;display:flex">
+                  <div style="height:4rem;display:flex;position:relative;">
                     <img
                       v-if="user.organizer_current_event!=null"
-                      id="plava-kugla2"
+                      class="plava-kugla2"
                       src="../assets/plavakugla.png"
                       alt=""
                     >
@@ -1211,7 +1211,7 @@
             </div>
 <!-- Trainer -->
             <div
-              v-else-if="activetre && user.rola.indexOf('TRAINER')!==-1"
+              v-else-if="activeTre && user.rola.indexOf('TRAINER')!==-1"
             >
               <div id="middle5-right-startorg" style="background-color: #11C6D1">
                 <div class="middle5-text w700">
@@ -1340,16 +1340,16 @@
 
 
 <!-- Arbiter -->
-            <div v-else-if="activearb && this.user.rola.indexOf('ARBITER')!==-1">
+            <div v-else-if="activeArb && this.user.rola.indexOf('ARBITER')!==-1">
               <div id="middle5-right-startorg">
                 <p class="middle5-text">
                   My Event is currently active:
                 </p>
                 <div class="mid5-padd">
-                  <div style="height:4rem;display:flex">
+                  <div style="height:4rem;display:flex;position:relative;">
                     <img
                       v-if="user.arbiter_current_event_name!=null && enter_event==false && user.arbiter_currently_active==true"
-                      id="plava-kugla2"
+                      class="plava-kugla2"
                       src="../assets/plavakugla.png"
                       alt=""
                     >
@@ -1431,7 +1431,7 @@
             </div>  
 <!-- Other -->
             <div
-              v-else-if="activeoth && user.rola.indexOf('OTHER')!==-1"
+              v-else-if="activeOth && user.rola.indexOf('OTHER')!==-1"
               style="opacity:0.5"
             >
               <p class="rotate">
@@ -1496,12 +1496,12 @@ export default {
          rolecolor4:false,
          rolecolor5:false,
          rolecolor6:false,
-         activeplayer:true,
-         activeclub:true,
-         activeorg:true,
-         activearb:true,
-         activetre:true,
-         activeoth:true,
+         activePlayer:true,
+         activeClub:true,
+         activeOrg:true,
+         activeArb:true,
+         activeTre:true,
+         activeOth:true,
          switch1:'',
          switch2:'',
          titule:[],
@@ -1765,7 +1765,7 @@ methods:{
       console.log(this.index)
       if(this.index !== -1){
         this.user.trainer_list_of_students.splice(this.index,1)
-        fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+        fetch('https://api.outpostchess.com/api/v2/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1845,7 +1845,7 @@ methods:{
           
             this.user.arbiter_currently_active=!this.user.arbiter_currently_active
             console.log(this.user.arbiter_currently_active)
-           fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+           fetch('https://api.outpostchess.com/api/v2/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1863,7 +1863,7 @@ methods:{
 
 
 
-      activeplayercur: function(){
+      activePlayercur: function(){
           
             this.user.current_playing_bool=!this.user.current_playing_bool 
             console.log(this.user.current_playing_bool )
@@ -1882,7 +1882,7 @@ methods:{
             .then(data => console.log(data))
             
       },
-      activeclubcur: function(){
+      activeClubcur: function(){
             this.user.club_current_playing_bool=!this.user.club_current_playing_bool
              fetch('https://api.outpostchess.com/api/v2/current_user_info', {
             method:'PATCH',
@@ -1998,47 +1998,72 @@ methods:{
       
     } ,
      cvdairycal2: function(){
-      this.clickActive1=false;  this.clickActive2=true;  this.clickActive3=false;
+      this.clickActive1=false;  
+      this.clickActive2=true;  
+      this.clickActive3=false;
     } ,
     cvdairycal3: function(){
-      this.clickActive1=false;this.clickActive2=false;  this.clickActive3=true;
+      this.clickActive1=false;
+      this.clickActive2=false;  
+      this.clickActive3=true;
     } ,
-    rolecol1:function(){
-      this.activeplayer=true;this.activeclub=false; this.activeorg=false; 
-      this.activetre=false;  this.activearb=false;this.activeoth=false;
+    role_indicator:function(rola){
+      this.activePlayer=false;this.activeClub=false; this.activeOrg=false; 
+      this.activeTre=false;  this.activeArb=false;this.activeOth=false;
+      this.rolecolor1=false; this.rolecolor2=false;this.rolecolor3=false;
+      this.rolecolor4=false;this.rolecolor5=false;this.rolecolor6=false; 
+    //  const roleColors = ["red", "blue", "green"];
+   //   this.roleColor = roleColors[rola -1];
+    //  this.activePage = rolePages[rola-1];
+      switch(rola){
+        case 1: this.activePlayer=true;this.rolecolor1=true;break
+        case 2: this.activeClub=true;this.rolecolor2=true;break
+        case 3: this.activeOrg=true;this.rolecolor3=true;break
+        case 4: this.activeArb=true;this.rolecolor4=true;break
+        case 5: this.activeTre=true;this.rolecolor5=true;break
+        case 6: this.activeOth=true;this.rolecolor6=true;break
+      }
+    },
+
+
+   /* rolecol1:function(){
+      
+      this.activePlayer=true;this.activeClub=false;this.activeOrg=false; 
+      this.activeTre=false;  this.activeArb=false;this.activeOth=false;
       this.rolecolor1=true; this.rolecolor2=false;this.rolecolor3=false;
       this.rolecolor4=false;this.rolecolor5=false;this.rolecolor6=false;   
     },
     rolecol2:function(){
-      this.activeclub=true; this.activeplayer=false;this.activeorg=false;
-      this.activetre=false;  this.activearb=false;this.activeoth=false;
+      this.activeClub=true; this.activePlayer=false;this.activeOrg=false;
+      this.activeTre=false;  this.activeArb=false;this.activeOth=false;
       this.rolecolor1=false; this.rolecolor2=true; this.rolecolor3=false; 
       this.rolecolor4=false;   this.rolecolor5=false; this.rolecolor6=false;   
     },
     rolecol3:function(){
       this.rolecolor1=false;  this.rolecolor2=false; this.rolecolor3=true;  
       this.rolecolor4=false;  this.rolecolor5=false; this.rolecolor6=false;  
-      this.activeorg=true;   this.activeplayer=false; this.activeclub=false; 
-      this.activetre=false; this.activearb=false;this.activeoth=false;
+      this.activeOrg=true;   this.activePlayer=false; this.activeClub=false; 
+      this.activeTre=false; this.activeArb=false;this.activeOth=false;
     },
     rolecol4:function(){
-      this.activeorg=false;   this.activeplayer=false; this.activeclub=false;  
-      this.activetre=false;    this.activearb=true;
+      this.activeOrg=false;   this.activePlayer=false; this.activeClub=false;  
+      this.activeTre=false;    this.activeArb=true;
       this.rolecolor1=false; this.rolecolor2=false; this.rolecolor3=false;   
       this.rolecolor4=true; this.rolecolor5=false; this.rolecolor6=false;   
     },
     rolecol5:function(){
-      this.activeorg=false;this.activeplayer=false;   this.activeclub=false;  
-      this.activetre=true;  this.activearb=false;  this.activeoth=false;
+      this.activeOrg=false;this.activePlayer=false;   this.activeClub=false;  
+      this.activeTre=true;  this.activeArb=false;  this.activeOth=false;
       this.rolecolor1=false;  this.rolecolor2=false;  this.rolecolor3=false;  
       this.rolecolor4=false; this.rolecolor5=true;  this.rolecolor6=false;   
     },
     rolecol6:function(){
       this.rolecolor1=false; this.rolecolor2=false;   this.rolecolor3=false;   
       this.rolecolor4=false;  this.rolecolor5=false;   this.rolecolor6=true;   
-      this.activeorg=false;   this.activeplayer=false; this.activeclub=false;  
-      this.activetre=false;    this.activearb=false; this.activeoth=true;
-    },
+      this.activeOrg=false;   this.activePlayer=false; this.activeClub=false;  
+      this.activeTre=false;    this.activeArb=false; this.activeOth=true;
+    } */
+    
  //--------------USER PATCH----------------------// 
 
 //async created() {
@@ -2378,7 +2403,7 @@ hr{
 /*--------------------------MIDDLE3-------------------------------------- */
 #middle3{
 display:grid;
-grid-template-columns: 58% 42%;
+grid-template-columns: 56% 44%;
 height: 5rem;
 }
 ::placeholder{
@@ -2388,7 +2413,7 @@ height: 5rem;
 }
 .titles{
     cursor: pointer;
-    outline: #C8A07D solid 2px;
+    outline: #C8A07D solid 1px;
     border-radius: 1.25rem;
     width:5.125rem;
     height: 2rem;
@@ -2406,7 +2431,11 @@ height: 5rem;
 .middle3-1{
     display:flex;
     align-items: center;
-    justify-content: space-around;
+}
+.middle3-1-1{
+  display:flex;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 .ratings{
     border-radius: 1.25rem;
@@ -2418,7 +2447,7 @@ height: 5rem;
     justify-content: center;
     color:#FFFFFF; 
     font-size: 0.875rem;
-    outline: #C8A07D solid 2px;
+    outline: #C8A07D solid 1px;
 }
 .ratingsi{
     background: #C8A07D;
@@ -2808,17 +2837,21 @@ top:18.75rem;
 .listevent{
     min-height: 12.8125rem;
 }
-#plava-kugla2{
-    height: 6.25em;
-    padding-left:80%;
+.plava-kugla2{
+  position:absolute;
+    height: 8.25em;
+    top:-4.8rem;
+    right:-2.3rem
+
 }
 .line2{
     width:9.375rem;
 }
 
-#plava-kugla{
-   position: relative;
-   left:10%
+.plava-kugla{
+   position: absolute;
+   top:-1.6rem;
+   right:-1.5rem;
 }
 /*.vuetify-switch2{
     height: 0px;
