@@ -158,7 +158,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  margin-block: 3.75rem;
+  margin-block: 1.75rem;
 }
 
 .one-contact p {

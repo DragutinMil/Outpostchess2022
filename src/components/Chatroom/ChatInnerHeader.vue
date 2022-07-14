@@ -144,4 +144,10 @@ p {
   line-height: 2.125rem;
   border: solid #5C5E64 1px;
 }
+
+@media screen and (max-width: 1440px) {
+  .header {
+    padding-left: 3.5rem;
+  }
+}
 </style>
