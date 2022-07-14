@@ -108,17 +108,31 @@
               <p style="color:#6F7381">
                 Title:
               </p>
-              <div style="display:flex">
+                 <div style="display:flex">
                 <div
-                  v-if="user.titula_player!==null && user.rola.indexOf('PLAYER')!==-1"
+                  v-if="user.titula_player!==null && this.user.rola.indexOf('PLAYER')!==-1"
                   class="titles"
                 >
                   {{ user.titula_player_details.titula_short_name }} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->
                 </div>
-                <div v-if="user.titula_organizer!==null && user.rola.indexOf('ORGANIZER')!==-1 ">
-                  <div class="titles">
-                    IO <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->
-                  </div>
+                      
+                <div
+                  v-if="user.titula_organizer!==null && this.user.rola.indexOf('ORGANIZER')!==-1 "
+                  class="titles"
+                >
+                  IO <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->  
+                </div>
+                 <div
+                  v-if="user.titula_trainer!==null && this.user.rola.indexOf('TRAINER')!==-1"
+                  class="titles"
+                >
+                  {{ user.titula_trainer_details.titula_short_name }} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->
+                </div>
+                <div
+                  v-if="user.titula_arbiter!==null && this.user.rola.indexOf('ARBITER')!==-1"
+                  class="titles"
+                >
+                  {{ user.titula_arbiter_details.titula_short_name }} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->
                 </div>
               </div>
             </div> 
@@ -174,7 +188,7 @@
               v-if="user.rola.indexOf('PLAYER')!==-1"
               style="margin-left:1.5625rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor1}"
-              @click="rolecol1()"
+              @click="role_indicator(1)"
             >
               Player
             </div>
@@ -182,7 +196,7 @@
               v-if="user.rola.indexOf('CLUBADMIN') !==-1"
               style="margin-left:2.25rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor2}"
-              @click="rolecol2()"
+              @click="role_indicator(2)"
             >
               Club Admin
             </div> 
@@ -190,7 +204,7 @@
               v-if="user.rola.indexOf('ORGANIZER')!==-1"
               style="margin-left:2.25rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor3}"
-              @click="rolecol3()"
+              @click="role_indicator(3)"
             >
               Organizer
             </div>
@@ -198,7 +212,7 @@
               v-if="user.rola.indexOf('ARBITER')!==-1"
               style="margin-left:2.25rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor4}"
-              @click="rolecol4()"
+              @click="role_indicator(5)"
             >
               Arbiter
             </div>
@@ -206,7 +220,7 @@
               v-if="user.rola.indexOf('TRAINER')!==-1"
               style="margin-left:2.25rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor5}"
-              @click="rolecol5()"
+              @click="role_indicator(4)"
             >
               Trainer
             </div>
@@ -214,7 +228,7 @@
               v-if="user.rola.indexOf('OTHER')!==-1"
               style="margin-left:2.25rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor6}"
-              @click="rolecol6()"
+              @click="role_indicator(6)"
             >
               Other
             </div>
@@ -245,7 +259,7 @@
           </div>
           <div>
             <!--PLAYER PART -->      
-            <div v-if="activeplayer && user.rola.indexOf('PLAYER')!==-1">
+            <div v-if="activePlayer && user.rola.indexOf('PLAYER')!==-1">
               <div class="middle5-right-grid">
                 <div class="mid5-padd">
                   <p class="middle5-text">
@@ -274,7 +288,7 @@
               </div>
               <div class="middle5-right-grid">
                 <div class="mid5-padd">
-                  <div style="height:4.0625rem;display:flex">
+                  <div style="height:4.0625rem;display:flex;position:relative">
                     <p class="middle5-text">
                       Currently active:
                     </p>
@@ -476,7 +490,7 @@
             </div>
 <!-- END PLAYER PART  --> 
 <!-- CLUB PART  -->            
-            <div v-else-if="activeclub && user.rola.indexOf('CLUB')!==-1">
+            <div v-else-if="activeClub && user.rola.indexOf('CLUB')!==-1">
               <div class="middle5-right-grid">
                 <div class="mid5-padd">
                   <p class="middle5-text">
@@ -505,7 +519,7 @@
               </div>
               <div class="middle5-right-grid">
                 <div class="mid5-padd">
-                  <div style="height:4.0625rem;display:flex">
+                  <div style="height:4.0625rem;display:flex;position:relative">
                     <p class="middle5-text">
                       My team is currently active:
                     </p>
@@ -625,13 +639,13 @@
             </div>
             <!--END CLUB PART  -->
             <!-- ORGANIZER PART  -->            
-            <div v-if="activeorg && user.rola.indexOf('ORGANIZER')!==-1">
+            <div v-if="activeOrg && user.rola.indexOf('ORGANIZER')!==-1">
               <div id="middle5-right-startorg">
                 <p class="middle5-text">
                   My Event is currently active:
                 </p>
                 <div class="mid5-padd">
-                  <div style="height:4.0625rem;display:flex">
+                  <div style="height:4.0625rem;display:flex;position:relative;">
                     <div v-if="user.organizer_current_event!=null">
                       <img
                         v-if="user.organizer_current_event.event_name!=null"
@@ -641,7 +655,7 @@
                       >
                     </div>
                   </div>
-                  <v-app class="vuetify-switch2"> 
+               <!--   <v-app class="vuetify-switch2"> 
                     <v-container class="switch-container">
                       <v-switch 
                         v-model="switch5"
@@ -649,7 +663,7 @@
                         color="#C8A07D"
                       />
                     </v-container>  
-                  </v-app>
+                  </v-app>-->
                   <div>
                     <div v-if="user.organizer_current_event!=null">
                       <p
@@ -717,7 +731,7 @@
             </div>
 <!--TRAINER -->
             <div
-              v-if="activetre && user.rola.indexOf('TRAINER')!==-1"
+              v-if="activeTre && user.rola.indexOf('TRAINER')!==-1"
             >
               <div id="middle5-right-startorg" style="background-color: #11C6D1">
                 <div class="middle5-text w700">
@@ -835,16 +849,16 @@
 <!--END TRAINER-->
 <!--ARBITER-->            
             <div
-              v-if="activearb && user.rola.indexOf('ARBITER')!==-1" >
+              v-if="activeArb && user.rola.indexOf('ARBITER')!==-1" >
               <div id="middle5-right-startorg">
                 <p class="middle5-text">
                   My Event is currently active:
                 </p>
                 <div class="mid5-padd">
-                  <div style="height:4rem;display:flex;padding-left:80%">
+                  <div style="height:4rem;display:flex;padding-left:80%;position: relative;">
                  <img
                       v-if="user.arbiter_currently_active"
-                      id="plava-kugla"
+                      id="plava-kugla2"
                       src="../assets/plavakugla.png"
                       alt=""
                     >
@@ -1027,11 +1041,11 @@ export default {
          rolecolor4:false,
          rolecolor5:false,
          rolecolor6:false,
-         activeplayer:true,
-         activeclub:false,
-         activeorg:false,
-         activearb:false,
-         activetre:false,
+         activePlayer:true,
+         activeClub:false,
+         activeOrg:false,
+         activeArb:false,
+         activeTre:false,
          switch1:'',
          switch2:'',
          min: 0,
@@ -1265,7 +1279,7 @@ methods:{
            this.interested_no_arbiter=false;
            this.clicked_interested_arbiter=true;
            this.clicked_interested_arbiter2=false;
-           fetch(`https://app.outpostchess.com/api/v2/interested_in_arbiter/${this.idt} `, {
+           fetch(`https://api.outpostchess.com/api/v2/interested_in_arbiter/${this.idt} `, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1280,7 +1294,7 @@ methods:{
            this.interested_no_arbiter=true;
            this.clicked_interested_arbiter=false;
            this.clicked_interested_arbiter2=false;
-           fetch(`https://app.outpostchess.com/api/v2/interested_in_arbiter/${this.idt} `, {
+           fetch(`https://api.outpostchess.com/api/v2/interested_in_arbiter/${this.idt} `, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1295,7 +1309,7 @@ methods:{
            this.interested_no_trainer=false;
            this.clicked_interested_trainer=true;
            this.clicked_interested_trainer2=false;
-           fetch(`https://app.outpostchess.com/api/v2/interested_in_trainer/${this.idt} `, {
+           fetch(`https://api.outpostchess.com/api/v2/interested_in_trainer/${this.idt} `, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1310,7 +1324,7 @@ methods:{
            this.interested_no_trainer=true;
            this.clicked_interested_trainer=false;
            this.clicked_interested_trainer2=false;
-           fetch(`https://app.outpostchess.com/api/v2/interested_in_trainer/${this.idt} `, {
+           fetch(`https://api.outpostchess.com/api/v2/interested_in_trainer/${this.idt} `, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1342,51 +1356,35 @@ methods:{
     },
 
     cvdairycal1: function(){
-
-      this.clickActive1=true; this.clickActive2=false;  this.clickActive3=false;
-      
+      this.clickActive1=true; 
+      this.clickActive2=false;  
+      this.clickActive3=false;
     } ,
      cvdairycal2: function(){
-      this.clickActive1=false;  this.clickActive2=true;  this.clickActive3=false;
+      this.clickActive1=false;  
+      this.clickActive2=true;  
+      this.clickActive3=false;
     } ,
     cvdairycal3: function(){
-      this.clickActive1=false;this.clickActive2=false;  this.clickActive3=true;
+      this.clickActive1=false;
+      this.clickActive2=false;  
+      this.clickActive3=true;
     } ,
-    rolecol1:function(){
-      
-      this.activeplayer=true;this.activeclub=false; this.activeorg=false; 
-      this.activetre=false;  this.activearb=false;
-      this.rolecolor1=true; this.rolecolor2=false;this.rolecolor3=false;
-      this.rolecolor4=false;this.rolecolor5=false;this.rolecolor6=false;   
+     role_indicator:function(rola){
+      this.activePlayer=false;this.activeClub=false; this.activeOrg=false; 
+      this.activeTre=false;  this.activeArb=false;this.activeOth=false;
+      this.rolecolor1=false; this.rolecolor2=false;this.rolecolor3=false;
+      this.rolecolor4=false;this.rolecolor5=false;this.rolecolor6=false; 
+      switch(rola){
+        case 1: this.activePlayer=true;this.rolecolor1=true;break
+        case 2: this.activeClub=true;this.rolecolor2=true;break
+        case 3: this.activeOrg=true;this.rolecolor3=true;break
+        case 4: this.activeTre=true;this.rolecolor5=true;break
+        case 5: this.activeArb=true;this.rolecolor4=true;break
+        case 6: this.activeOth=true;this.rolecolor6=true;break
+      }
     },
-    rolecol2:function(){
-      this.activeclub=true; this.activeplayer=false;this.activeorg=false;
-      this.activetre=false;  this.activearb=false;
-      this.rolecolor1=false; this.rolecolor2=true; this.rolecolor3=false; 
-      this.rolecolor4=false;   this.rolecolor5=false; this.rolecolor6=false;   
-    },
-    rolecol3:function(){
-      this.rolecolor1=false;  this.rolecolor2=false; this.rolecolor3=true;  
-      this.rolecolor4=false;  this.rolecolor5=false; this.rolecolor6=false;  
-      this.activeorg=true;   this.activeplayer=false; this.activeclub=false; 
-      this.activetre=false; this.activearb=false;
-    },
-    rolecol4:function(){
-      this.activeorg=false;   this.activeplayer=false; this.activeclub=false;  
-      this.activetre=false;    this.activearb=true;
-      this.rolecolor1=false; this.rolecolor2=false; this.rolecolor3=false;   
-      this.rolecolor4=true; this.rolecolor5=false; this.rolecolor6=false;   
-    },
-    rolecol5:function(){
-      this.activeorg=false;this.activeplayer=false;   this.activeclub=false;  
-      this.activetre=true;  this.activearb=false;
-      this.rolecolor1=false;  this.rolecolor2=false;  this.rolecolor3=false;  
-      this.rolecolor4=false; this.rolecolor5=true;  this.rolecolor6=false;   
-    },
-    rolecol6:function(){
-      this.rolecolor1=false; this.rolecolor2=false;   this.rolecolor3=false;   
-      this.rolecolor4=false;  this.rolecolor5=false;   this.rolecolor6=true; 
-    },
+    
 
     connection_people:function(){
       
@@ -1555,7 +1553,7 @@ height: 5rem;
 }
 .titles{
     cursor: pointer;
-    outline: #C8A07D solid 2px;
+    outline: #C8A07D solid 1px;
     border-radius: 1.25rem;
     width:5.375rem;
     height: 2rem;
@@ -1823,14 +1821,15 @@ input::-webkit-inner-spin-button {
 }
 
 #plava-kugla2{
-    position: relative;
-    height: 6.25rem;
-    left:340%;
-    bottom: 3.125rem;
+    position:absolute;
+    height: 8.25em;
+    top:-5.1rem;
+    right:-2.8rem
 }
 #plava-kugla{
-   position: relative;
-   left:10%
+   position: absolute;
+   top:-1.7rem;
+   right:-1.9rem;
 }
 .vuetify-switch2{
     height: 0px;
