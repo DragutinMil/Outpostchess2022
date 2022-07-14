@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/" />
+      <router-link to="/"/>
     </div>
-    <router-view />
+    <router-view/>
   </div>
 </template>
 
@@ -26,7 +26,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-
 }
 
 html, body {
@@ -78,6 +77,11 @@ input:focus, textarea:focus, select:focus {
   outline: none;
 }
 
+@media screen and (max-width: 1440px) {
+  #app {
+    font-size: 12px;
+  }
+}
 </style>
 
 

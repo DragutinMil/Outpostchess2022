@@ -37,7 +37,7 @@ export default {
 }
 
 .send-message {
-  width: 60.938rem;
+  width: 100%;
   position: relative;
 }
 

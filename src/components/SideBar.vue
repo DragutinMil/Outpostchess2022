@@ -181,6 +181,7 @@ export default {
   top: 0;
   height: 100vh;
   width: 16.25rem;
+  flex: 0 0 16.25rem;
 }
 
 @media screen and (max-width: 768px) {

@@ -68,7 +68,7 @@ p {
   padding-left: 5.063rem;
   padding-right: 4.875rem;
   background-color: #202122;
-  width: 61rem;
+  width: 100%;
   height: 10.75rem;
   margin-top: 2.875rem;
   align-items: center;

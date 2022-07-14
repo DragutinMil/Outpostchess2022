@@ -73,6 +73,7 @@ export default {
   justify-content: space-between;
   overflow-y: clip;
   height: 100vh;
+
 }
 
 .main-div {
@@ -87,7 +88,7 @@ export default {
 }
 
 .user-details {
-  width: 60.938rem;
+  width: 100%;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   padding-bottom: 2.938rem;
   margin-top: 2.438rem;
@@ -116,4 +117,21 @@ export default {
   margin-right: 0.875rem;
 }
 
+@media screen and (max-width: 1440px) {
+  .main-div {
+    width: 50rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+
+  .chat {
+    height: 78vh;
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  .details-title {
+    margin-right: 0.5rem;
+  }
+}
 </style>

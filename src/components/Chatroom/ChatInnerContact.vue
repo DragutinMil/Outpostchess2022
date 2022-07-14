@@ -164,4 +164,9 @@ p {
 .one-contact p {
   color: white;
 }
+@media screen and (max-width: 1440px) {
+  .contact{
+    width: 27rem;
+  }
+}
 </style>
