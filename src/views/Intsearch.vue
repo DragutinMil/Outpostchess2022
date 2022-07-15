@@ -13,7 +13,7 @@
               id="imgsearch"
               src="../assets/search_24px.png"
               alt=""
-              @click="confirmsearch()"
+              @click="confirmSearch()"
             >
           </div>
           <input
@@ -22,7 +22,7 @@
             name=""
             class="intelegent-filter"
             placeholder="INTELEGENT FILTER"
-            @keyup.enter="confirmsearch()"
+            @keyup.enter="confirmSearch()"
           >
           <div
             :class="{
@@ -86,7 +86,7 @@
         <!--SEARCH RESULTS -->
         <div v-if="searchresults">
           <div
-            v-for="(usersrc, index) in usersearchreact.slice(0,100)"
+            v-for="(usersrc, index) in usersearchreact"
             :key="usersrc.user_uuid"
             class="search"
           >
@@ -97,7 +97,7 @@
               <div class="initials">
                 {{ usersrc.inicijali }}
               </div>
-              <div>
+              <div v-if="user.user_uuid !== usersrc.user_uuid">
                 <router-link
                   :user_uuid="usersrc.user_uuid"
                   :to="{
@@ -107,6 +107,13 @@
                 >
                   {{ usersrc.name_first }} {{ usersrc.name_last }}
                 </router-link>
+              </div>
+              <div v-if="user.user_uuid == usersrc.user_uuid" >
+                <router-link
+                    to="../profile"
+                  >
+                    {{ usersrc.name_first }} {{ usersrc.name_last }}
+                  </router-link>
               </div>
             </div>
             <div class="search-res">
@@ -151,18 +158,18 @@
                 v-for="titles in titule"
                 :key="titles.titula_uuid"
               >
-                <div v-if="titles.titula_uuid == usersrc.titula_player">
-                  {{ titles.titula_short_name }}
+                <div  v-if="titles.titula_uuid == usersrc.titula_player">
+                  {{ titles.titula_short_name }}&nbsp;&nbsp;
                 </div>
                 <div v-if="titles.titula_uuid == usersrc.titula_organizer">
-                  IO&nbsp;&nbsp;
-                </div>
-                <div v-if="titles.titula_uuid == usersrc.titula_trainer">
-                  {{ titles.titula_short_name }}&nbsp;&nbsp;
-                </div>
-                <div v-if="titles.titula_uuid == usersrc.titula_arbiter">
-                  {{ titles.titula_short_name }}&nbsp;&nbsp;
-                </div>
+                    IO&nbsp;&nbsp;
+                  </div>
+                   <div v-if="titles.titula_uuid == usersrc.titula_trainer">
+                    {{ titles.titula_short_name }}&nbsp;&nbsp;
+                  </div>
+                  <div v-if="titles.titula_uuid == usersrc.titula_arbiter">
+                    {{ titles.titula_short_name }}&nbsp;&nbsp;
+                  </div>
               </div>
             </div>
             <div class="search-res">
@@ -173,7 +180,7 @@
         <!--ALL USERS -->
         <div v-else>
           <div
-            v-for="(alluser, index) in usersearch.slice(0,50)"
+            v-for="(alluser, index) in usersearch"    
             :key="alluser.user_uuid"
           >
             <div
@@ -181,8 +188,8 @@
               class="search"
             >
               <div class="search-res">
-                {{ index + 1 }}
-              </div>
+              {{ index + 1 }}
+            </div>
               <div class="search-res start">
                 <div class="initials">
                   {{ alluser.inicijali }}
@@ -244,6 +251,7 @@
                 </div>
               </div>
               <div class="search-res2">
+                
                 <div
                   v-for="titles in titule"
                   :key="titles.titula_uuid"
@@ -254,7 +262,7 @@
                   <div v-if="titles.titula_uuid == alluser.titula_organizer">
                     IO&nbsp;&nbsp;
                   </div>
-                  <div v-if="titles.titula_uuid == alluser.titula_trainer">
+                   <div v-if="titles.titula_uuid == alluser.titula_trainer">
                     {{ titles.titula_short_name }}&nbsp;&nbsp;
                   </div>
                   <div v-if="titles.titula_uuid == alluser.titula_arbiter">
@@ -300,7 +308,7 @@
             inputmode="numeric"
             placeholder="From"
             name=""
-            @keyup.enter="confirmsearch()"
+            @keyup.enter="confirmSearch()"
           >
           &nbsp;&nbsp; - &nbsp;&nbsp;
           <input
@@ -310,7 +318,7 @@
             inputmode="numeric"
             placeholder="To"
             name=""
-            @keyup.enter="confirmsearch()"
+            @keyup.enter="confirmSearch()"
           >
         </div>
         <div
@@ -365,7 +373,7 @@
             inputmode="numeric"
             placeholder="From"
             name=""
-            @keyup.enter="confirmsearch()"
+            @keyup.enter="confirmSearch()"
           >
           &nbsp;&nbsp; - &nbsp;&nbsp;
           <input
@@ -375,7 +383,7 @@
             inputmode="numeric"
             placeholder="To"
             name=""
-            @keyup.enter="confirmsearch()"
+            @keyup.enter="confirmSearch()"
           >
         </div>
         <div
@@ -470,7 +478,7 @@
             type="text"
             name=""
             placeholder="Enter town"
-            @keyup.enter="confirmsearch()"
+            @keyup.enter="confirmSearch()"
           >
         </div>
         <div
@@ -523,7 +531,8 @@
           <button
             class="middle2-buttons"
             type="button"
-            @click="confirmsearch"
+            style="margin-top:2rem"
+            @click="confirmSearch"
           >
             Search
           </button>
@@ -590,7 +599,7 @@ export default {
     };
   },
   mounted() {
-    fetch("https://app.outpostchess.com/api/v2/titule", {
+    fetch("https://api.outpostchess.com/api/v2/titule", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -600,7 +609,7 @@ export default {
       .then((response) => response.json())
       .then((data) => (this.titule = data));
 
-    fetch("https://app.outpostchess.com/api/v2/countries", {
+    fetch("https://api.outpostchess.com/api/v2/countries", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -611,7 +620,7 @@ export default {
         .then((data) => (this.flags = data))
 
     fetch(
-      "https://app.outpostchess.com/api/v2/users_search", {
+      "https://api.outpostchess.com/api/v2/users_search", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -638,7 +647,7 @@ export default {
 
     //.then(data => console.log(data)),
 
-    fetch("https://app.outpostchess.com/api/v2/current_user_info", {
+    fetch("https://api.outpostchess.com/api/v2/current_user_info", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -651,13 +660,14 @@ export default {
   },
 
   methods: {
-    confirmsearch: function () {
+    confirmSearch: function () {
       this.searchresults = true;
+      console.log(this.titleselected)
       if (this.titleselected == "") {
         this.titleselected = [];
       }
-      console.log(this.interestedclub);
-      fetch("https://app.outpostchess.com/api/v2/users_search", {
+     // console.log(this.interestedclub);
+      fetch("https://api.outpostchess.com/api/v2/users_search", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -680,7 +690,8 @@ export default {
       })
         .then((response) => response.json())
         .then((data) => (this.usersearchreact = data))
-        .then((data) => console.log(data));
+        //.then((data) => console.log(data));
+        console.log(this.titule)
     },
 
     clickside: function () {

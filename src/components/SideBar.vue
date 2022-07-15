@@ -166,7 +166,6 @@ export default {
     },
   }
 }
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -184,11 +183,6 @@ export default {
   flex: 0 0 16.25rem;
 }
 
-@media screen and (max-width: 768px) {
-  .side-bar {
-    display: none;
-  }
-}
 
 .logoimg {
   width: 9.375rem;
@@ -199,7 +193,6 @@ export default {
   display: flex;
   color: #C7C9D0;
   padding: 0.625rem 0 1rem 3.3125rem;
-
 }
 
 .side-options:hover {
@@ -220,18 +213,22 @@ hr {
   border: 0.5px solid rgba(199, 201, 208, 0.2);
   width: 80%;
   margin: 5px auto;
-
 }
 
 #side-flexend {
   padding-top: 1.875rem;
 }
 
-@media only screen and (max-width: 1500px) and (min-width: 500px) {
+@media only screen and (max-width: 1500px) {
   .side-options {
-
     padding: 0.625rem 0 1rem 2rem;
   }
+}
 
+@media screen and (max-width: 1024px) {
+  .side-bar {
+    display: none;
+  }
 }
 </style>
+

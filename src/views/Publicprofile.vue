@@ -5,7 +5,7 @@
     <div class="right-profile">
       <div />  
       <div id="right-middle">
-        <Searchpart />
+        <Searchpart  />
         <!-- MID 2 -->             
         <div id="middle2">
           <div class="upload-pic">
@@ -95,6 +95,9 @@
               </button>
               </div>
             -->
+           
+              
+            
           </div>
         </div>
         <!--END MID 2 -->     
@@ -105,17 +108,31 @@
               <p style="color:#6F7381">
                 Title:
               </p>
-              <div style="display:flex">
+                 <div style="display:flex">
                 <div
-                  v-if="user.titula_player!==null && user.rola.indexOf('PLAYER')!==-1"
+                  v-if="user.titula_player!==null && this.user.rola.indexOf('PLAYER')!==-1"
                   class="titles"
                 >
                   {{ user.titula_player_details.titula_short_name }} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->
                 </div>
-                <div v-if="user.titula_organizer!==null && user.rola.indexOf('ORGANIZER')!==-1 ">
-                  <div class="titles">
-                    IO <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->
-                  </div>
+                      
+                <div
+                  v-if="user.titula_organizer!==null && this.user.rola.indexOf('ORGANIZER')!==-1 "
+                  class="titles"
+                >
+                  IO <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->  
+                </div>
+                 <div
+                  v-if="user.titula_trainer!==null && this.user.rola.indexOf('TRAINER')!==-1"
+                  class="titles"
+                >
+                  {{ user.titula_trainer_details.titula_short_name }} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->
+                </div>
+                <div
+                  v-if="user.titula_arbiter!==null && this.user.rola.indexOf('ARBITER')!==-1"
+                  class="titles"
+                >
+                  {{ user.titula_arbiter_details.titula_short_name }} <!-- <img class="title-arrow" src="../assets/arrow_down.png" alt="">  -->
                 </div>
               </div>
             </div> 
@@ -171,7 +188,7 @@
               v-if="user.rola.indexOf('PLAYER')!==-1"
               style="margin-left:1.5625rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor1}"
-              @click="rolecol1()"
+              @click="role_indicator(1)"
             >
               Player
             </div>
@@ -179,7 +196,7 @@
               v-if="user.rola.indexOf('CLUBADMIN') !==-1"
               style="margin-left:2.25rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor2}"
-              @click="rolecol2()"
+              @click="role_indicator(2)"
             >
               Club Admin
             </div> 
@@ -187,7 +204,7 @@
               v-if="user.rola.indexOf('ORGANIZER')!==-1"
               style="margin-left:2.25rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor3}"
-              @click="rolecol3()"
+              @click="role_indicator(3)"
             >
               Organizer
             </div>
@@ -195,7 +212,7 @@
               v-if="user.rola.indexOf('ARBITER')!==-1"
               style="margin-left:2.25rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor4}"
-              @click="rolecol4()"
+              @click="role_indicator(5)"
             >
               Arbiter
             </div>
@@ -203,7 +220,7 @@
               v-if="user.rola.indexOf('TRAINER')!==-1"
               style="margin-left:2.25rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor5}"
-              @click="rolecol5()"
+              @click="role_indicator(4)"
             >
               Trainer
             </div>
@@ -211,7 +228,7 @@
               v-if="user.rola.indexOf('OTHER')!==-1"
               style="margin-left:2.25rem"
               :class="{'middle4-1':isActive,'rola-text':rolecolor6}"
-              @click="rolecol6()"
+              @click="role_indicator(6)"
             >
               Other
             </div>
@@ -242,7 +259,7 @@
           </div>
           <div>
             <!--PLAYER PART -->      
-            <div v-if="activeplayer && user.rola.indexOf('PLAYER')!==-1">
+            <div v-if="activePlayer && user.rola.indexOf('PLAYER')!==-1">
               <div class="middle5-right-grid">
                 <div class="mid5-padd">
                   <p class="middle5-text">
@@ -271,7 +288,7 @@
               </div>
               <div class="middle5-right-grid">
                 <div class="mid5-padd">
-                  <div style="height:4.0625rem;display:flex">
+                  <div style="height:4.0625rem;display:flex;position:relative">
                     <p class="middle5-text">
                       Currently active:
                     </p>
@@ -305,7 +322,7 @@
                   <div id="form-middle5">
                     <img
                       style="height:1.5625rem"
-                      src="../assets/form.svg"
+                      src="../assets/player-form-unkown-icon.svg"
                       alt=""
                     >
                     <p style="margin:0;padding:0.5rem 0 0 0">
@@ -471,9 +488,9 @@
                 </div>  
               </div>
             </div>
-            <!-- END PLAYER PART  --> 
-            <!-- CLUB PART  -->            
-            <div v-else-if="activeclub && user.rola.indexOf('CLUB')!==-1">
+<!-- END PLAYER PART  --> 
+<!-- CLUB PART  -->            
+            <div v-else-if="activeClub && user.rola.indexOf('CLUB')!==-1">
               <div class="middle5-right-grid">
                 <div class="mid5-padd">
                   <p class="middle5-text">
@@ -502,7 +519,7 @@
               </div>
               <div class="middle5-right-grid">
                 <div class="mid5-padd">
-                  <div style="height:4.0625rem;display:flex">
+                  <div style="height:4.0625rem;display:flex;position:relative">
                     <p class="middle5-text">
                       My team is currently active:
                     </p>
@@ -622,13 +639,13 @@
             </div>
             <!--END CLUB PART  -->
             <!-- ORGANIZER PART  -->            
-            <div v-if="activeorg && user.rola.indexOf('ORGANIZER')!==-1">
+            <div v-if="activeOrg && user.rola.indexOf('ORGANIZER')!==-1">
               <div id="middle5-right-startorg">
                 <p class="middle5-text">
                   My Event is currently active:
                 </p>
                 <div class="mid5-padd">
-                  <div style="height:4.0625rem;display:flex">
+                  <div style="height:4.0625rem;display:flex;position:relative;">
                     <div v-if="user.organizer_current_event!=null">
                       <img
                         v-if="user.organizer_current_event.event_name!=null"
@@ -638,7 +655,7 @@
                       >
                     </div>
                   </div>
-                  <v-app class="vuetify-switch2"> 
+               <!--   <v-app class="vuetify-switch2"> 
                     <v-container class="switch-container">
                       <v-switch 
                         v-model="switch5"
@@ -646,7 +663,7 @@
                         color="#C8A07D"
                       />
                     </v-container>  
-                  </v-app>
+                  </v-app>-->
                   <div>
                     <div v-if="user.organizer_current_event!=null">
                       <p
@@ -681,7 +698,7 @@
                     class="borderbutton flex-center"
                     @click="interested_event"
                   >
-                    <p style="text-align:center">
+                    <p style="text-align:center;font-size:0.75rem">
                       Interested in this Organizer
                     </p>
                   </div>               
@@ -712,37 +729,254 @@
                 </div>  
               </div>
             </div>
+<!--TRAINER -->
             <div
-              v-if="activetre && user.rola.indexOf('TRAINER')!==-1"
-              style="opacity:0.5"
+              v-if="activeTre && user.rola.indexOf('TRAINER')!==-1"
             >
-              <p class="rotate">
-                Coming soon!
-              </p>
-              <img
-                style="width:100%"
-                src="../assets/coach1.jpg"
-                alt=""
-              >  
+              <div id="middle5-right-startorg" style="background-color: #11C6D1">
+                <div class="middle5-text w700">
+                    <p >Price per lesson</p> 
+                </div>
+                <div class="middle5-text w700" id="trainer-price-number">
+                   <p v-if="price_entered">${{user.trainer_price_lesson}} /1h</p>
+                </div>
+              </div>
+              <div class="middle5-right-grid" >
+                <div class="mid5-padd " style="padding-top:2rem" >
+                  <p class="middle5-text"  >
+                    Looking for new students?
+                  </p>
+                  <div>
+                    <div class="switch-style" style="padding-left:1.125rem;padding-top:0.75rem">
+                      <b-form-checkbox
+                        disabled
+                        switch
+                        :checked="user.trainer_looking_for_new_player"
+                      
+                      />                  
+                    </div>
+                  </div>
+                </div>
+               
+                <div class="mid5-padd flex-center">
+                  <div
+                    class="borderbutton flex-center"
+                    style="border: 1px solid #C8A07D;"
+                  >
+                 
+                    <p >EASY PAY</p>
+                  </div>
+                </div>
+                <!--      <div class="mid5-padd flex-center">
+                                <div class="borderbutton flex-center">
+                                    <p style="text-align:center">Interested in this Organizer</p>
+                                </div>               
+                            </div>    -->
+              </div>
+              <div class="middle5-right-grid" style="margin:0">
+                <div class="mid5-padd">
+                   <div class="middle5-text">
+                    <p>Students</p> 
+                   </div>
+                   <div>
+                     <div  class="middle5-text2" style="display:flex" v-for="(student,index) in user.trainer_list_of_students" :key="student">
+                      <p style="color:#FFC796">{{index+1}}.</p>
+                      <div class=" flex_space" style="padding-left:0.375rem">
+                        {{student}}
+                      </div>  
+                      
+                   </div>  
+                   </div>
+
+                </div>
+
+
+
+                <div class="mid5-padd flex-center"
+                  >
+                  <div>
+                    <div
+                          v-if="interested_no_trainer"
+                          style="margin-bottom:0.625rem; "
+                          class="borderbutton flex-center"
+                        >
+                          <p
+                            style="font-size:0.75rem;"
+                            @click="interested_trainer"
+                          >
+                            Interested in this Trainer
+                          </p>
+                    </div>
+                    <div v-if="clicked_interested_trainer2">  
+                          <div
+                            v-for="listpla in my_int_trainer_list"
+                            :key="listpla.created_date"
+                          >  
+                            <div
+                              v-if="listpla.target_uuid==user.user_uuid"
+                              class="borderbutton flex-center"
+                            >
+                              <div style="font-size:0.75rem;">
+                                <p @click="interested_trainer_del">
+                                  Remove from shortlist
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                      <div
+                        v-if="clicked_interested_trainer"
+                        style="margin-bottom:0.625rem; "
+                        class="borderbutton flex-center"
+                        @click="interested_trainer_del"
+                      >
+                        <p style="font-size:0.75rem;">
+                          Remove from shortlist
+                        </p>
+                  </div>
+                </div>  
+                </div>
+                <!--      <div class="mid5-padd flex-center">
+                                <div class="borderbutton flex-center">
+                                    <p style="text-align:center">Interested in this Organizer</p>
+                                </div>               
+                            </div>    -->
+              </div>
+            
+               
+
             </div>
+<!--END TRAINER-->
+<!--ARBITER-->            
             <div
-              v-if="activearb && user.rola.indexOf('ARBITER')!==-1"
-              style="opacity:0.5"
-            >
-              <p class="rotate">
-                Coming soon!
-              </p>
-              <img
-                style="width:100%"
-                src="../assets/arbiter.jpg"
-                alt=""
-              > 
+              v-if="activeArb && user.rola.indexOf('ARBITER')!==-1" >
+              <div id="middle5-right-startorg">
+                <p class="middle5-text">
+                  My Event is currently active:
+                </p>
+                <div class="mid5-padd">
+                  <div style="height:4rem;display:flex;padding-left:80%;position: relative;">
+                 <img
+                      v-if="user.arbiter_currently_active"
+                      id="plava-kugla2"
+                      src="../assets/plavakugla.png"
+                      alt=""
+                    >
+                    </div>
+                  <b-form-checkbox
+                    switch
+                    disabled
+                    :checked="user.arbiter_currently_active"
+                    style="padding-left:3.0375rem;padding-bottom: 1rem;"
+                  />  
+                  <!--      <v-app class="vuetify-switch2"> 
+                                    <v-container class="switch-container"   >
+                                        <v-switch 
+                                        value=switch5
+                                        color="#C8A07D"
+                                        ></v-switch>
+                                    </v-container>  
+                                </v-app> -->
+                 <div>
+                   
+                     <div v-if="user.arbiter_currently_active==true" style="padding-left:0.625rem;color: #FFC796;" >
+                       {{user.arbiter_current_event_name}}
+                     </div>
+                 </div>
+                </div>
+              </div>   
+              <div class="middle5-right-grid">
+                <div class="mid5-padd flex-center">
+                  <p class="middle5-text">
+                    Looking for new engagement?"
+                  </p>
+                  <div>
+                    <div class="switch-style">
+                      <b-form-checkbox
+                        switch
+                        disabled
+                        :checked="user.arbiter_looking_for_new_eng"
+                      />                  
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+
+                <div class="mid5-padd flex-center"
+                  >
+                  <div>
+                    <div
+                          v-if="interested_no_arbiter"
+                          style="margin-bottom:0.625rem; "
+                          class="borderbutton flex-center"
+                        >
+                          <p
+                            style="font-size:0.75rem;"
+                            @click="interested_arbiter"
+                          >
+                            Interested in this Arbiter
+                          </p>
+                    </div>
+                    <div v-if="clicked_interested_arbiter2">  
+                          <div
+                            v-for="listpla in my_int_arbiter_list"
+                            :key="listpla.created_date"
+                          >  
+                            <div
+                              v-if="listpla.target_uuid==user.user_uuid"
+                              class="borderbutton flex-center"
+                            >
+                              <div style="font-size:0.75rem;">
+                                <p @click="interested_trainer_del">
+                                  Remove from shortlist
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                      <div
+                        v-if="clicked_interested_arbiter"
+                        style="margin-bottom:0.625rem; "
+                        class="borderbutton flex-center"
+                        @click="interested_arbiter_del"
+                      >
+                        <p style="font-size:0.75rem;">
+                          Remove from shortlist
+                        </p>
+                  </div>
+                </div>  
+                </div>
+
+
+
+
+
+                
+              </div>
+              <div id="middle5-right-startorg" style="margin:0">
+                
+              </div> 
+
             </div>
+<!--END ARBITER -->
           </div>
         </div>
       </div>    
       <div />
-    </div>  
+    </div> 
+<!--END ROLE -->
+
+
+
+
+
+
+
+
+
     <!--END  RIGHT PROFILE -->
   </div>
 </template>
@@ -807,11 +1041,11 @@ export default {
          rolecolor4:false,
          rolecolor5:false,
          rolecolor6:false,
-         activeplayer:true,
-         activeclub:false,
-         activeorg:false,
-         activearb:false,
-         activetre:false,
+         activePlayer:true,
+         activeClub:false,
+         activeOrg:false,
+         activeArb:false,
+         activeTre:false,
          switch1:'',
          switch2:'',
          min: 0,
@@ -840,15 +1074,24 @@ export default {
          idt:'',
          my_interested_list:[],
          my_intclub_list:[],
+         my_int_trainer_list:[],
+         my_int_arbiter_list:[],
          listpla:{target_uuid:''},
          clicked_interested:false,
          clicked_interested2:true,
          clicked_interested4:true,
          clicked_interested3:false,
+         clicked_interested_trainer:false,
+         clicked_interested_trainer2:true,
+         clicked_interested_arbiter:false,
+         clicked_interested_arbiter2:true,
          interested_no:true,
+         interested_no_trainer:true,
+         interested_no_arbiter:true,
          notif_arr : [],
          connected:false,
-         my_connection_list:[]
+         my_connection_list:[],
+         price_entered:true
          
          
       }
@@ -860,7 +1103,7 @@ export default {
 
 mounted(){
    this.$store.dispatch('getNotification');
-   fetch('https://app.outpostchess.com/api/v2/organiser_events', {
+   fetch('https://api.outpostchess.com/api/v2/organiser_events', {
         method: 'GET',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -872,7 +1115,7 @@ mounted(){
         //.then(data => console.log('events',data))       
             
 
-  fetch( `https://app.outpostchess.com/api/v2/public_user_info/${this.idt} `, {
+  fetch( `https://api.outpostchess.com/api/v2/public_user_info/${this.idt} `, {
   method:'GET',
   headers: {
     'Content-Type': 'application/json'
@@ -883,7 +1126,7 @@ mounted(){
 .then(data => this.user=data)
 //.then(data => console.log('public',data))  
 
- fetch('https://app.outpostchess.com/api/v2/current_user_info', {
+ fetch('https://api.outpostchess.com/api/v2/current_user_info', {
   method:'GET',
   headers: {
     'Content-Type': 'application/json',
@@ -895,7 +1138,7 @@ mounted(){
 .then(response => response.json())
 .then(data => this.userinitiator=data)
 //.then(data => console.log('initiator',data)) 
-fetch('https://app.outpostchess.com/api/v2/interested_in_player', {
+fetch('https://api.outpostchess.com/api/v2/interested_in_player', {
         method: 'GET',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -906,7 +1149,29 @@ fetch('https://app.outpostchess.com/api/v2/interested_in_player', {
         .then(data => this.my_interested_list=data)   
        // .then(data => console.log('my_list',data))
 
-fetch('https://app.outpostchess.com/api/v2/interested_in_club', {
+fetch('https://api.outpostchess.com/api/v2/interested_in_arbiter', {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json',
+                "Authorization":`Bearer ${localStorage.getItem('token')}`
+                },		
+               
+            })
+        .then(response => response.json())
+        .then(data => this.my_int_arbiter_list=data)  
+        .then(data => console.log('my_int_arbiter_list',data))  
+
+fetch('https://api.outpostchess.com/api/v2/interested_in_trainer', {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json',
+                "Authorization":`Bearer ${localStorage.getItem('token')}`
+                },		
+               
+            })
+        .then(response => response.json())
+        .then(data => this.my_int_trainer_list=data)  
+        .then(data => console.log('my_int_trainer_list',data))  
+
+fetch('https://api.outpostchess.com/api/v2/interested_in_club', {
         method: 'GET',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -916,7 +1181,7 @@ fetch('https://app.outpostchess.com/api/v2/interested_in_club', {
         .then(response => response.json())
         .then(data => this.my_intclub_list=data)   
      //   .then(data => console.log('my_clublist',data))      
-fetch('https://app.outpostchess.com/api/v2/connection_list',{
+fetch('https://api.outpostchess.com/api/v2/connection_list',{
         method: 'GET',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -926,8 +1191,6 @@ fetch('https://app.outpostchess.com/api/v2/connection_list',{
         .then(response => response.json())
         .then(data => this.my_connection_list=data)   
        .then(data => console.log('my_connection_list',data))      
-
-
 
 },
 
@@ -955,7 +1218,7 @@ methods:{
     interested_club_del(){
         this.clicked_interested4=false;
         this.clicked_interested3=false;
-         fetch(`https://app.outpostchess.com/api/v2/interested_in_club/${this.idt} `, {
+         fetch(`https://api.outpostchess.com/api/v2/interested_in_club/${this.idt} `, {
                       method: 'DELETE',
                       headers: {
                           'Content-Type': 'application/json',
@@ -970,7 +1233,7 @@ methods:{
     interested_club(){
         this.clicked_interested4=false;
         this.clicked_interested3=true;
-          fetch(`https://app.outpostchess.com/api/v2/interested_in_club/${this.idt} `, {
+          fetch(`https://api.outpostchess.com/api/v2/interested_in_club/${this.idt} `, {
                       method: 'POST',
                       headers: {
                           'Content-Type': 'application/json',
@@ -986,7 +1249,7 @@ methods:{
            this.interested_no=false;
            this.clicked_interested=true;
            this.clicked_interested2=false;
-           fetch(`https://app.outpostchess.com/api/v2/interested_in_player/${this.idt} `, {
+           fetch(`https://api.outpostchess.com/api/v2/interested_in_player/${this.idt} `, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1001,7 +1264,7 @@ methods:{
            this.interested_no=true;
            this.clicked_interested=false;
            this.clicked_interested2=false;
-           fetch(`https://app.outpostchess.com/api/v2/interested_in_player/${this.idt} `, {
+           fetch(`https://api.outpostchess.com/api/v2/interested_in_player/${this.idt} `, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1010,11 +1273,70 @@ methods:{
             })
             
     },
-  
+   /* INTERESTED ARBITER*/
+
+    interested_arbiter(){
+           this.interested_no_arbiter=false;
+           this.clicked_interested_arbiter=true;
+           this.clicked_interested_arbiter2=false;
+           fetch(`https://api.outpostchess.com/api/v2/interested_in_arbiter/${this.idt} `, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                     "authorization":`Bearer ${localStorage.getItem('token')}`
+                },
+            })
+         
+            
+           
+    },
+     interested_arbiter_del:function(){
+           this.interested_no_arbiter=true;
+           this.clicked_interested_arbiter=false;
+           this.clicked_interested_arbiter2=false;
+           fetch(`https://api.outpostchess.com/api/v2/interested_in_arbiter/${this.idt} `, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                     "authorization":`Bearer ${localStorage.getItem('token')}`
+                },
+            })
+            
+    },
+
+    /* INTERESTED TRAINER */
+    interested_trainer(){
+           this.interested_no_trainer=false;
+           this.clicked_interested_trainer=true;
+           this.clicked_interested_trainer2=false;
+           fetch(`https://api.outpostchess.com/api/v2/interested_in_trainer/${this.idt} `, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                     "authorization":`Bearer ${localStorage.getItem('token')}`
+                },
+            })
+         
+            
+           
+    },
+     interested_trainer_del:function(){
+           this.interested_no_trainer=true;
+           this.clicked_interested_trainer=false;
+           this.clicked_interested_trainer2=false;
+           fetch(`https://api.outpostchess.com/api/v2/interested_in_trainer/${this.idt} `, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                     "authorization":`Bearer ${localStorage.getItem('token')}`
+                },
+            })
+            
+    },
   /* INTERESTED EVENT */
 
     interested_event:function(){
-           fetch(`https://app.outpostchess.com/api/v2/interested_in_event/${this.idt} `, {
+           fetch(`https://api.outpostchess.com/api/v2/interested_in_event/${this.idt} `, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1024,7 +1346,7 @@ methods:{
     },
    
     interested_event_del:function(){
-           fetch(`https://app.outpostchess.com/api/v2/interested_in_event/${this.idt} `, {
+           fetch(`https://api.outpostchess.com/api/v2/interested_in_event/${this.idt} `, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1034,57 +1356,41 @@ methods:{
     },
 
     cvdairycal1: function(){
-
-      this.clickActive1=true; this.clickActive2=false;  this.clickActive3=false;
-      
+      this.clickActive1=true; 
+      this.clickActive2=false;  
+      this.clickActive3=false;
     } ,
      cvdairycal2: function(){
-      this.clickActive1=false;  this.clickActive2=true;  this.clickActive3=false;
+      this.clickActive1=false;  
+      this.clickActive2=true;  
+      this.clickActive3=false;
     } ,
     cvdairycal3: function(){
-      this.clickActive1=false;this.clickActive2=false;  this.clickActive3=true;
+      this.clickActive1=false;
+      this.clickActive2=false;  
+      this.clickActive3=true;
     } ,
-    rolecol1:function(){
-      
-      this.activeplayer=true;this.activeclub=false; this.activeorg=false; 
-      this.activetre=false;  this.activearb=false;
-      this.rolecolor1=true; this.rolecolor2=false;this.rolecolor3=false;
-      this.rolecolor4=false;this.rolecolor5=false;this.rolecolor6=false;   
+     role_indicator:function(rola){
+      this.activePlayer=false;this.activeClub=false; this.activeOrg=false; 
+      this.activeTre=false;  this.activeArb=false;this.activeOth=false;
+      this.rolecolor1=false; this.rolecolor2=false;this.rolecolor3=false;
+      this.rolecolor4=false;this.rolecolor5=false;this.rolecolor6=false; 
+      switch(rola){
+        case 1: this.activePlayer=true;this.rolecolor1=true;break
+        case 2: this.activeClub=true;this.rolecolor2=true;break
+        case 3: this.activeOrg=true;this.rolecolor3=true;break
+        case 4: this.activeTre=true;this.rolecolor5=true;break
+        case 5: this.activeArb=true;this.rolecolor4=true;break
+        case 6: this.activeOth=true;this.rolecolor6=true;break
+      }
     },
-    rolecol2:function(){
-      this.activeclub=true; this.activeplayer=false;this.activeorg=false;
-      this.activetre=false;  this.activearb=false;
-      this.rolecolor1=false; this.rolecolor2=true; this.rolecolor3=false; 
-      this.rolecolor4=false;   this.rolecolor5=false; this.rolecolor6=false;   
-    },
-    rolecol3:function(){
-      this.rolecolor1=false;  this.rolecolor2=false; this.rolecolor3=true;  
-      this.rolecolor4=false;  this.rolecolor5=false; this.rolecolor6=false;  
-      this.activeorg=true;   this.activeplayer=false; this.activeclub=false; 
-      this.activetre=false; this.activearb=false;
-    },
-    rolecol4:function(){
-      this.activeorg=false;   this.activeplayer=false; this.activeclub=false;  
-      this.activetre=false;    this.activearb=true;
-      this.rolecolor1=false; this.rolecolor2=false; this.rolecolor3=false;   
-      this.rolecolor4=true; this.rolecolor5=false; this.rolecolor6=false;   
-    },
-    rolecol5:function(){
-      this.activeorg=false;this.activeplayer=false;   this.activeclub=false;  
-      this.activetre=true;  this.activearb=false;
-      this.rolecolor1=false;  this.rolecolor2=false;  this.rolecolor3=false;  
-      this.rolecolor4=false; this.rolecolor5=true;  this.rolecolor6=false;   
-    },
-    rolecol6:function(){
-      this.rolecolor1=false; this.rolecolor2=false;   this.rolecolor3=false;   
-      this.rolecolor4=false;  this.rolecolor5=false;   this.rolecolor6=true; 
-    },
+    
 
     connection_people:function(){
       
       this.connected=true
       console.log(this.connected)
-    fetch( ` https://app.outpostchess.com/api/v2/connection_initiate/${this.idt} `, {
+    fetch( ` https://api.outpostchess.com/api/v2/connection_initiate/${this.idt} `, {
         method: 'POST',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1098,7 +1404,7 @@ methods:{
      },
      disconnection_people:function(){
        this.connected=false
-    fetch( ` https://app.outpostchess.com/api/v2/connection_initiator_delete/${this.idt} `, {
+    fetch( ` https://api.outpostchess.com/api/v2/connection_initiator_delete/${this.idt} `, {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1247,7 +1553,7 @@ height: 5rem;
 }
 .titles{
     cursor: pointer;
-    outline: #C8A07D solid 2px;
+    outline: #C8A07D solid 1px;
     border-radius: 1.25rem;
     width:5.375rem;
     height: 2rem;
@@ -1399,10 +1705,10 @@ height: 5rem;
     font-weight: normal;
     font-size: 1rem;
     line-height: 1.3125rem;
-    letter-spacing: 0.1rem;
+    letter-spacing: 0.03rem;
 }
 #form-middle5{
-    color:#F2358D;
+    color:#c8a07d;
     text-align: center;
     padding-top:1.875rem;
 }
@@ -1479,7 +1785,7 @@ input::-webkit-inner-spin-button {
     margin:0;
 }
 .borderbutton{
-    width: 10.625rem;
+    width: 12rem;
     height: 2.75rem;
     border: 1px solid #2E2E2E;
     box-sizing: border-box;
@@ -1515,14 +1821,15 @@ input::-webkit-inner-spin-button {
 }
 
 #plava-kugla2{
-    position: relative;
-    height: 6.25rem;
-    left:340%;
-    bottom: 3.125rem;
+    position:absolute;
+    height: 8.25em;
+    top:-5.1rem;
+    right:-2.8rem
 }
 #plava-kugla{
-   position: relative;
-   left:10%
+   position: absolute;
+   top:-1.7rem;
+   right:-1.9rem;
 }
 .vuetify-switch2{
     height: 0px;
@@ -1588,6 +1895,19 @@ input::-webkit-inner-spin-button {
 }
 
 /* Hide default HTML checkbox */
+
+/* TRAINER*/
+
+#trainer-library{
+  width: 14rem;
+}
+#trainer-price-number{
+  padding-top:4rem;
+  font-size: 2.25rem;
+}
+.w700{
+  font-weight: 700;
+}
 
 @media only screen and (max-width: 1500px) and (min-width: 500px) {
 .right-profile{
