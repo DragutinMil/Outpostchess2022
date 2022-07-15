@@ -149,4 +149,10 @@ export default {
   }
 
 }
+
+@media screen and (max-width: 320px) {
+  .message .bottom p {
+    width: 13.417rem;
+  }
+}
 </style>
