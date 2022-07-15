@@ -3,7 +3,7 @@ import axios from "axios"
 export const getNotification = ({commit}) => {
      
       
-        axios.get('https://api.outpostchess.com/api/v2/notifications', {
+        axios.get('https://app.outpostchess.com/api/v2/notifications', {
           headers: {
             'Content-Type': 'application/json',
             'Authorization':`Bearer ${localStorage.getItem('token')}`

@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="parent-container">
-       <div class="name-container">
-     <!--   <input
+      <div class="name-container">
+        <!--   <input
           v-model="not_massage"
           type="text"
           name=""
@@ -38,7 +38,7 @@
   //      },
  //   methods: {
 //sendNotif(payload){
-     //       fetch(`https://api.outpostchess.com/api/v2/create_fake_notification `, {
+     //       fetch(`https://app.outpostchess.com/api/v2/create_fake_notification `, {
         //        method: 'POST',
         //        headers: {
          //           'Content-Type': 'application/json',

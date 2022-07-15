@@ -9,77 +9,121 @@
       <div class="container-center">
         <div />
         <div>
-            <Searchpart  />
-            <!-- CENTER/LIST -->
-            <div id="center_list ">
-              <div class="center_list_header ">
-                  <div class="header_list underline">
-                  Name & Surname
-                  </div>
-                  <div class="header_list underline">
-                  Notification
-                  </div>
-                  <div class="header_list underline">
-                  Time
-                  </div>
+          <Searchpart />
+          <!-- CENTER/LIST -->
+          <div id="center_list ">
+            <div class="center_list_header ">
+              <div class="header_list underline">
+                Name & Surname
+              </div>
+              <div class="header_list underline">
+                Notification
+              </div>
+              <div class="header_list underline">
+                Time
               </div>
             </div>
-            <div v-if='all'>
-              <div  id="center_list" v-for="allnotif in not_all" :key="allnotif.n_id">
-                <div class="center_list_header">
-                    <div class="header_list">
-                    {{allnotif.name_first}} {{allnotif.name_last}}
-                    </div>
-                    <div class="flex-center">
-                      <div class="header_list " v-if="allnotif.n_type=='interested_in_player'">
-                      Interested in
-                      </div>
-                      <div class="header_list " v-if="allnotif.n_type=='interested_in_player_cancel'">
-                      No more interested in
-                      </div>
-                      <div class="header_list " v-if="allnotif.n_type=='interested_in_club'">
-                      Interested in club
-                      </div>
-                      <div class="header_list " v-if="allnotif.n_type=='interested_in_club_cancel'">
-                      No more interested in club
-                      </div>
-                    </div>
-                    <div class="header_list" >
-                      {{allnotif.created_date.slice(2,4)}}.{{allnotif.created_date.slice(5,7)}}.{{allnotif.created_date.slice(0,4)}}.  
-                      -  {{allnotif.created_date.slice(11,13)}}:{{allnotif.created_date.slice(14,16)}}
-                    </div>
+          </div>
+          <div v-if="all">
+            <div
+              v-for="allnotif in not_all"
+              id="center_list"
+              :key="allnotif.n_id"
+            >
+              <div class="center_list_header">
+                <div class="header_list">
+                  {{ allnotif.name_first }} {{ allnotif.name_last }}
+                </div>
+                <div class="flex-center">
+                  <div
+                    v-if="allnotif.n_type=='interested_in_player'"
+                    class="header_list "
+                  >
+                    Interested in
+                  </div>
+                  <div
+                    v-if="allnotif.n_type=='interested_in_player_cancel'"
+                    class="header_list "
+                  >
+                    No more interested in
+                  </div>
+                  <div
+                    v-if="allnotif.n_type=='interested_in_club'"
+                    class="header_list "
+                  >
+                    Interested in club
+                  </div>
+                  <div
+                    v-if="allnotif.n_type=='interested_in_club_cancel'"
+                    class="header_list "
+                  >
+                    No more interested in club
+                  </div>
+                </div>
+                <div class="header_list">
+                  {{ allnotif.created_date.slice(2,4) }}.{{ allnotif.created_date.slice(5,7) }}.{{ allnotif.created_date.slice(0,4) }}.  
+                  -  {{ allnotif.created_date.slice(11,13) }}:{{ allnotif.created_date.slice(14,16) }}
                 </div>
               </div>
             </div>
-            <div v-else>
-              <div id="center_list" v-for="allnotif in not_all.slice(0,20)" :key="allnotif.n_id">
-                <div class="center_list_header">
-                    <div class="header_list">
-                    {{allnotif.name_first}} {{allnotif.name_last}}
-                    </div>
-                    <div class="flex-center">
-                      <div class="header_list " v-if="allnotif.n_type=='interested_in_player'">
-                      Interested in
-                      </div>
-                      <div class="header_list " v-if="allnotif.n_type=='interested_in_player_cancel'">
-                      No more interested in
-                      </div>
-                      <div class="header_list " v-if="allnotif.n_type=='interested_in_club'">
-                      Interested in club
-                      </div>
-                      <div class="header_list " v-if="allnotif.n_type=='interested_in_club_cancel'">
-                      No more interested in club
-                      </div>
-                    </div>
-                    <div class="header_list" >
-                      {{allnotif.created_date.slice(8,10)}}.{{allnotif.created_date.slice(5,7)}}.{{allnotif.created_date.slice(0,4)}}.  
-                      -  {{allnotif.created_date.slice(11,13)}}:{{allnotif.created_date.slice(14,16)}}
-                    </div>
+          </div>
+          <div v-else>
+            <div
+              v-for="allnotif in not_all.slice(0,20)"
+              id="center_list"
+              :key="allnotif.n_id"
+            >
+              <div class="center_list_header">
+                <div class="header_list">
+                  {{ allnotif.name_first }} {{ allnotif.name_last }}
+                </div>
+                <div class="flex-center">
+                  <div
+                    v-if="allnotif.n_type=='interested_in_player'"
+                    class="header_list "
+                  >
+                    Interested in
+                  </div>
+                  <div
+                    v-if="allnotif.n_type=='interested_in_player_cancel'"
+                    class="header_list "
+                  >
+                    No more interested in
+                  </div>
+                  <div
+                    v-if="allnotif.n_type=='interested_in_club'"
+                    class="header_list "
+                  >
+                    Interested in club
+                  </div>
+                  <div
+                    v-if="allnotif.n_type=='interested_in_club_cancel'"
+                    class="header_list "
+                  >
+                    No more interested in club
+                  </div>
+                </div>
+                <div class="header_list">
+                  {{ allnotif.created_date.slice(8,10) }}.{{ allnotif.created_date.slice(5,7) }}.{{ allnotif.created_date.slice(0,4) }}.  
+                  -  {{ allnotif.created_date.slice(11,13) }}:{{ allnotif.created_date.slice(14,16) }}
                 </div>
               </div>
             </div>
-            <p v-if="all" class="p_more" @click="see_all">less...</p>
-            <p v-else class="p_more" @click="see_all">more...</p>
+          </div>
+          <p
+            v-if="all"
+            class="p_more"
+            @click="see_all"
+          >
+            less...
+          </p>
+          <p
+            v-else
+            class="p_more"
+            @click="see_all"
+          >
+            more...
+          </p>
         </div>
         <!--END  CENTER/LIST -->
         <div />
@@ -107,7 +151,7 @@ export default {
 
 mounted(){
  
- fetch('https://api.outpostchess.com/api/v2/notifications_all', {
+ fetch('https://app.outpostchess.com/api/v2/notifications_all', {
   method:'GET',
   headers: {
     'Content-Type': 'application/json',

@@ -34,7 +34,6 @@
             }"
             placeholder="Email"
           >
-           <p style="color:#f2358d" v-if="already_exist" >Email address already exist on Outpost </p>
           <p id="reqpass1">
             {{ req2 }}
           </p>
@@ -55,7 +54,6 @@
             <p class="reqpass">
               {{ req }}
             </p>
-            
           </div>
           <div>
             <input
@@ -177,9 +175,7 @@
               style="width: 150px"
             >
               {{ req4 }}
-              
             </div>
-            
           </div>
         </div>
         <div style="padding: 15px 0 15px 0">
@@ -219,19 +215,13 @@
           Already on Outpost?
         </p>
         &nbsp;
-        
-      </div>
-      <div class="home-p blue signin">
-       <router-link
+        <router-link
           to="/login"
           class="home-p blue"
         >
-            <button type="button" class="text-join"  style="border: 1px solid #E8E8E8;width: 70%;"> <p id="joingoogle">Sign in</p> </button>   
-      
-        
-          
+          Sign in
         </router-link>
-        </div>
+      </div>
     </div>
     <div id="right-login" />
   </div>
@@ -266,12 +256,10 @@ export default {
       admin: false,
       other: false,
       trainer: false,
-      already_exist:false
     };
   },
   methods: {
     agreelogin: function () {
-      
       this.req = "";
       (this.req2 = ""),
         (this.req1 = ""),
@@ -346,25 +334,10 @@ export default {
             },
           }),
         })
-          .then((response) => response.json()) 
-          .then(data => this.response=data)
-          .then(data => console.log('podaci',data)) 
-        //  .then(function(response){
-       //    console.log(...response)})
-           
-         .then(response => {
-          console.log(this.response.results.status)
-         if (this.response.results.status=="alreadyexist") {
-              this.already_exist=true
-
-           console.log(response);
-          }else{
-            this.$router.push('/Thanks');
-          } 
-          
-        })
+          .then((response) => response.json())
+          .then((data) => console.log(data));
+        this.$router.push("/thanks");
       }
-     
     },
   },
 };
@@ -485,7 +458,7 @@ hr {
 #input-signup {
   background-color: #1b1c1d;
   width: 70%;
-  padding: 35px 0 0 0;
+  padding: 35px 0 35px 0;
   margin: 20px auto;
   border-radius: 11px;
 }
@@ -592,10 +565,7 @@ hr {
   margin: 0;
   padding-left: 15px;
 }
-.signin{
-  width:65%;
-  margin:auto
-}
+
 @media only screen and (max-width: 1500px) and (min-width: 500px) {
 }
 @media only screen and (min-width: 499px) {
@@ -609,11 +579,7 @@ hr {
   #right-login {
     display: none;
   }
-.signin{
-  width:80%;
-  margin:auto
-}
-.home {
+  .home {
     display: flex;
     height: 100%;
   }

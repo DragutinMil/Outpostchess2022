@@ -7,105 +7,55 @@
           alt=""
         >
       </div>
-               
-      <div> 
+      <div style="padding-top:25px;"> 
         <div id="welcom-text">
+          <p
+            class="letter-44"
+            style="padding-bottom:40px;"
+          /> 
           <p class="letter-44">
-            Welcome to your
-          </p> 
-          <p class="letter-44 weight700">
-            professional chess
-          </p> 
-          <p class="letter-44 weight700">
-            community.
-          </p>                        
-        </div>
+            Enter email address below,
+          </p>  
+          <p
+            class="letter-44"
+            style="padding-bottom:10px;"
+          >
+            and request to resend verification mail
+          </p>
+        </div>  
       </div>
       <div id="input-signup">
         <div>
           <input
-            v-model="emailSignin"
             type="email"
+            v-model="emailreset"
             name=""
-            :class="{mailin:isActive,'text-danger':hasError}"
+            :class="{mailin:isActive}"
             placeholder="Email"
-            @keyup.enter="signIn()"
+            @keyup.enter="passreset()"
           >
-          <p class="reqpass">
-            {{ req1 }}
-          </p>
         </div> 
-             
-        <div style="padding:20px 0 20px 0;"> 
-          <input
-            v-model="passSignin"
-            type="password"
-            name=""
-            :class="{mailin:isActive,'text-danger':hasError2,}"
-            placeholder="Password"
-            @keyup.enter="signIn()"
-          >
-          <p class="reqpass">
-            {{ req }}
-          </p>
-          <p class="reqpass">
-            {{ request }}
-          </p>
-        </div>
-                
-
-        <div id="forgot-text">
-          <router-link to="/reset-password">
-            <p class="home-p blue">
-              Forgot password?
-            </p>
-          </router-link>
-          <router-link
-            v-if="pojava"
-            to="/verification-mail"
-          >
-            <p class="home-p blue">
-              You didn't verify the email?
-            </p>
-          </router-link>
-        </div>
+        <div id="forgot-text" />
         <div id="butt1">
           <button
             type="button"
             class="text-join"
             style=" border: 1px solid #C8A07D; "
-            @click="signIn()"
+            @click="verreset()"
           >
-            Sign in
+            Resend verification mail
           </button>
         </div>
+                 
+                 
         <!--   <p id="text-or">or</p>
                 <button type="button" onclick="alert('Hello world!')"   class="text-join"  style="border: 1px solid #E8E8E8;"> <div id="google-cor1"> <div id="google-cor"> <img src="../assets/Group.svg" id="" alt="google"></div><p id="joingoogle">Join with Google</p> </div></button>         
              -->
-        <div id="policy">
-          <p id="text-or">
-            or
-          </p>
-          <button
-            type="button"
-            class="text-join"
-            style="border: 1px solid #E8E8E8;"
-            @click="back"
-          >
-            <p id="joingoogle">
-              Sign up
-            </p>
-          </button>   
-        &nbsp;
-          <!--  <div id="forgot-text">
-          <router-link
-            to="/"
-            class="home-p blue"
-          >
-            Sign up
-          </router-link>
-        </div>-->
-        </div>
+      </div>
+      <div id="welcom-text">
+        <p class="letter-34">
+          {{ request }}
+        </p>
       </div>
     </div>
       
@@ -118,74 +68,35 @@ export default {
   name: "Signin",
    data () {
       return {
-         passSignin:"",
-         emailSignin:"",
-         req:"",
-         req1:"",
-         image1:"",
+         emailreset:'',
+         request:'',
          isActive:true,
-         hasError:false,
-         hasError2:false,
-         request:"",
-         pojava:false
+       
       }
       
     },
-    mounted() {
-    this.emailSignin= this.$route.query.email;
-  },
     methods:{
-    back:function(){
-      this.$router.push('/');
-    },
-    signIn: function(){
-      this.req="",
-      this.req1="",
-      this.hasError2=false,
-      this.hasError=false,
-      this.request=""
-      if(this.passSignin==""){
-        this.req="Enter Password";
-        this.hasError2=true;
-      }
-      if(this.emailSignin==""){
-        this.req1=" Enter Email" ;
-        this.hasError=true;
-      }
-      if(this.emailSignin!=="" && this.passSignin!==""){
-        
-        fetch('https://api.outpostchess.com/api/v2/auth', {
+   
+     verreset: function(){
+        if(this.emailreset==""){
+          return this.request='*Enter email adress'
+        }
+        if(this.emailreset !==""  ){
+        fetch('https://app.outpostchess.com/api/v2/public_resend_activation_email', {
         method:'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify( { email: this.emailSignin, password: this.passSignin } )
+        body: JSON.stringify( { email: this.emailreset})
         })
         .then(response => {
           if (response.ok) {
-            return response.json();
+             console.log('ok');
           } else {
-            throw new Error('Something went wrong')
-            
-          }
-          
+            throw new Error('Something went wrong') }
         })
-        
-        .then((data) => {
-          console.log("ok");
-          // Do something with the response
-          localStorage.setItem('token',  data?.token);
-          this.$router.push('/profile');
-        })
-        
-        .catch((error) => {
-          console.log("error");
-          console.log(error);
-          this.request='Login failed.'
-          this.pojava=true
-        })
-     
-      }
-
-    } ,
+          this.request='*Please check your email'
+       } 
+       
+     }
   },
 }
 </script>
@@ -213,7 +124,7 @@ a{
     .letter-44{
           display:flex;
           color:#FFFFFF;
-          font-size:44px;
+          font-size:16px;
     }
     
     .home-p{
@@ -236,7 +147,11 @@ a{
       color:#FFFFFF;
      
     }
-    
+   
+    .letter-34{
+        font-size:14px;
+        color:#FFFFFF;
+    }
       .text-join{
     font-size: 14px;
     color:#FFFFFF;
@@ -259,21 +174,21 @@ a{
       background-position: center;
       color:#707070;
 
-  }
+  } 
   #forgot-text{
-    width:80%;
+    width:65%;
     padding-left:18%;
     padding-top:5px;
-    text-align: left;
+    display:flex;
 
     }
-   
 #welcom-text>p{
    margin:0;
    padding-left:29%;
 }
 #welcom-text{
-  margin:30px 0 30px 0;
+  margin:30px;
+  text-align: left;
 }
   #left-login{
     background-color: #1B1B1C;
@@ -289,7 +204,7 @@ a{
   #input-signup{
     background-color: #1B1C1D;
     width: 65%;
-    padding: 20px 0 20px 0;
+    padding: 35px 0 35px 0;
     margin:auto;
     border-radius: 11px;
   }  
@@ -343,7 +258,7 @@ a{
      margin:auto 0 auto 0;
      padding-right:7px;
    }
-   .reqpass{
+   #reqpass{
      color:#F2358D;
      text-align: left;
      padding-left:17.5%;
@@ -353,35 +268,4 @@ a{
       margin:0;
    padding-left:15px;
    }
-   #signup{
-     text-align: left;
-
-     padding-right:50%
-   }
- 
-
-@media only screen and (max-width: 499px){
-  #right-login{
-    display:none;
-  } 
-  .home{
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    
-  }
-  .letter-44{
-    font-size:20px;
-    }
-    #left-login{
-    width:100%
-    }
-   
-  #logo-pic{
-    padding:50px 35px 0px 35px;
-    display:flex;
-    width:55%;
-    margin-left:10%;
-  }
-}
 </style>

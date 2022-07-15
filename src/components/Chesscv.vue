@@ -100,7 +100,7 @@ export default {
 
    editconfirm:function(){
        this.editable=false;
-      fetch('https://api.outpostchess.com/api/v2/current_user_info', {
+      fetch('https://app.outpostchess.com/api/v2/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -126,7 +126,7 @@ export default {
     this.formData.append('file', this.selectedCV)
     this.formData.append('fileCategory', 'CV' )
 	
-  fetch('https://api.outpostchess.com/api/v2/fileupload', {
+  fetch('https://app.outpostchess.com/api/v2/fileupload', {
     method: 'POST',
 		headers: {//'Content-Type': 'application/x-www-form-urlencoded',
 		"Authorization":`Bearer ${localStorage.getItem('token')}`
