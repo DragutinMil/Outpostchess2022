@@ -3,16 +3,18 @@
        :class="[
          messageType === 'sent' && 'sent',
        ]">
-    <div class="top">
+    <div class="top" :class="[messageType === 'sent' && 'my-top']">
       <div class="left">
-        <div class="user-avatar"></div>
+        <div class="user-avatar"
+             :class="[messageType === 'sent' && 'my-avatar']"
+        ></div>
         <p class="receiver-name">
           Hi there, Magnus Carlsen
         </p>
       </div>
       <div class="message-time"
            :class="[
-             messageType === 'sent' && 'time-sent',
+             messageType === 'sent' ? 'time-sent' : 'time-received',
            ]">
         <p>10:15 AM</p>
       </div>
@@ -114,6 +116,36 @@ export default {
   .message .bottom p {
     width: 21.417rem;
     margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .my-avatar {
+    display: none;
+  }
+
+  .message {
+    margin-block: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .message .bottom p {
+    width: 15.417rem;
+    margin-right: 0;
+  }
+
+  .top {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .sent {
+    padding-right: 0;
+    width: 23rem;
+  }
+
+  .my-top, .time-received {
+    margin-left: 4rem;
   }
 
 }

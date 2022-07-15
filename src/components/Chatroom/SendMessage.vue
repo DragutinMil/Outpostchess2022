@@ -16,7 +16,12 @@
           </div>
         </router-link>
         <div class="right">
-          <button>Send <img src="../../assets/send.svg" alt="send message"></button>
+          <button>
+            <p>Send</p>
+            <img
+                src="../../assets/send.svg"
+                alt="send message"/>
+          </button>
         </div>
       </div>
     </div>
@@ -92,5 +97,51 @@ export default {
 
 .right button img {
   margin-left: 0.969rem;
+}
+
+@media screen and (max-width: 640px) {
+  .send-message {
+    height: 7.833rem;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .right button {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100%;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .right button img {
+    margin-left: 0;
+  }
+
+  .right button p {
+    display: none;
+  }
+
+  .left, .arrow-up {
+    display: none;
+  }
+
+  form {
+    width: 90%;
+  }
+
+  .input {
+    border: none;
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .send-message {
+    margin-inline: auto;
+    width: 90%;
+  }
 }
 </style>

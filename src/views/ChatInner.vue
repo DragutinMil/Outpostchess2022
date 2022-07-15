@@ -22,7 +22,7 @@
               <p>FI</p>
             </div>
           </div>
-          <div>
+          <div class="second-div">
             <p class="details-title">
               Rating :
             </p>
@@ -194,6 +194,7 @@ export default {
   .chat {
     width: 100%;
     overflow-x: hidden;
+    height: 84vh;
   }
 
   .pill {
@@ -211,6 +212,21 @@ export default {
     width: 7rem;
     flex: 0 0 7rem;
   }
+}
 
+@media screen and (max-width: 425px) {
+  .main-div {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .user-details {
+    width: auto;
+  }
+
+  .second-div {
+    padding-right: 3rem;
+    margin-right: 3rem;
+  }
 }
 </style>
