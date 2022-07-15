@@ -170,11 +170,24 @@ p {
     margin-right: 0;
     margin-bottom: 1.5rem;
   }
-  .left-text{
+
+  .left-text {
     align-items: center;
   }
-  .user-name{
+
+  .user-name {
     margin-bottom: 1.25rem;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .header {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .fide-id {
+    margin-right: 0;
   }
 }
 </style>
