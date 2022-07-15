@@ -5,7 +5,7 @@
       <div class="chat">
         <ChatInnerHeader/>
         <div class="user-details">
-          <div>
+          <div class="first-div">
             <p class="details-title">
               Title:
             </p>
@@ -26,13 +26,13 @@
             <p class="details-title">
               Rating :
             </p>
-            <div class="pill">
+            <div class="pill pill-long">
               <p><span>Standard:</span> 2100</p>
             </div>
-            <div class="pill">
+            <div class="pill pill-long">
               <p><span>Rapid :</span> 2100</p>
             </div>
-            <div class="pill">
+            <div class="pill pill-long">
               <p><span>Blitz :</span> 2100</p>
             </div>
           </div>
@@ -168,5 +168,49 @@ export default {
   .main-div {
     margin-right: 1rem;
   }
+}
+
+@media screen and (max-width: 640px) {
+  .main-div {
+    width: 38rem;
+  }
+
+  .user-details {
+    overflow-x: scroll;
+  }
+
+  .user-details div {
+    width: max-content;
+  }
+
+  .details-title {
+    flex: 0 0 5rem;
+  }
+
+  .first-div {
+    margin-right: 5rem;
+  }
+
+  .chat {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .pill {
+    width: 10rem;
+  }
+
+  .pill-small {
+    width: 3.25rem;
+    flex: 0 0 3.25rem;
+  }
+
+  .pill-long {
+    display: flex;
+    justify-content: center;
+    width: 7rem;
+    flex: 0 0 7rem;
+  }
+
 }
 </style>

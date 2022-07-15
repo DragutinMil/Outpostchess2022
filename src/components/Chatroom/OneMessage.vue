@@ -100,4 +100,21 @@ export default {
 .bottom p {
   width: 32.563rem;
 }
+
+@media screen and (max-width: 640px) {
+  .message {
+    background-color: unset;
+    width: 25.333rem;
+  }
+
+  .message .bottom {
+    width: 100%;
+  }
+
+  .message .bottom p {
+    width: 21.417rem;
+    margin-right: 0;
+  }
+
+}
 </style>
