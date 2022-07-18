@@ -1,10 +1,7 @@
 <template>
   <div>
     <div class="profile">
-      <div class="hide">
-        <SideBar/>
-      </div>
-
+      <SideBar/>
       <!-- CENTER -->
       <div class="container-center">
         <div id="searchpart-chat">
@@ -107,8 +104,9 @@ hr {
 }
 
 .profile {
-  display: grid;
-  grid-template-columns: 259px auto;
+  display: flex;
+  /*display: grid;*/
+  /*grid-template-columns: 259px auto;*/
   height: 100vh;
 
 }
@@ -121,6 +119,7 @@ hr {
 /* CENTER */
 .container-center {
   background-color: #171819;
+  width: 100%;
 }
 
 @media screen and (max-width: 768px) {
@@ -128,13 +127,9 @@ hr {
     width: 100%;
   }
 
-  .hide {
-    display: none;
-  }
-
-  .profile {
-    grid-template-columns: 100%;
-  }
+  /*.profile {*/
+  /*  grid-template-columns: 100%;*/
+  /*}*/
 }
 
 .search-filter {
@@ -228,11 +223,11 @@ hr {
 }
 
 /* RIGHT */
-@media only screen and (max-width: 1440px) {
+/*@media only screen and (max-width: 1440px) {*/
 
-  .profile {
-    display: grid;
-    font-size: 0.875rem;
-  }
-}
+/*  .profile {*/
+/*    display: grid;*/
+/*    font-size: 0.875rem;*/
+/*  }*/
+/*}*/
 </style>
