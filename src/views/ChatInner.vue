@@ -115,7 +115,7 @@ export default {
   border: 1px solid #C8A07D;
   border-radius: 20px;
   margin-right: 0.875rem;
-  width: 7.5rem;
+  width: 8.5rem;
   display: flex;
   justify-content: center;
 }
@@ -187,7 +187,7 @@ export default {
 
 @media screen and (max-width: 640px) {
   .main-div {
-    width: 38rem;
+    width: 56rem;
   }
 
   .user-details {
