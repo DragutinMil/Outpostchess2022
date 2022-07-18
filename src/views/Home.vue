@@ -667,7 +667,7 @@ p{
     width: 100%;
   }
   .check-part {
-    padding-left: 15px;
+    padding-left: 10%;
   }
   #letter-16 {
     font-size: 14px;
@@ -676,9 +676,7 @@ p{
     font-weight: 300;
     font-size: 12px;
   }
-  .start {
-    width: 90%;
-  }
+  
   .mailin {
     width: 75%;
   }
@@ -686,11 +684,8 @@ p{
     width: 85%;
   }
   .start {
-    justify-content: flex-start;
-    width: 90%;
-    margin: auto;
-    color: #707070;
-    padding: 10px;
+    width: 75%;
+    margin-left:auto;
   }
   .reqpass {
     text-align: center;
@@ -701,6 +696,7 @@ p{
   #reqpass3 {
     text-align: center;
   }
+  
 }
 
 
