@@ -99,6 +99,18 @@ export default {
   margin-left: 0.969rem;
 }
 
+@media screen and (max-width: 1440px) {
+  .input {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .input {
+    font-size: 1.167rem;
+  }
+}
+
 @media screen and (max-width: 640px) {
   .send-message {
     height: 7.833rem;
