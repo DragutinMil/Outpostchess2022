@@ -41,7 +41,19 @@
                 
 
         <div id="forgot-text" />
-        <div id="butt1">
+        
+        <div v-if="after_login" class="butt1">
+           <button
+            type="button"
+            class="text-join"
+            style=" border: 1px solid #C8A07D; "
+            @click="go_to_login()"
+          >
+            Login with new pasword
+          </button>  
+
+        </div>
+        <div v-else class="butt1">
           <button
             type="button"
             class="text-join"
@@ -86,7 +98,8 @@ export default {
          newPassword:'',
          newPassword1:'',
          last_segment : '',
-         resetToken2:window.location.href.split('/').pop()
+         resetToken2:window.location.href.split('/').pop(),
+         after_login:false,
       }
       
     },
@@ -96,14 +109,16 @@ export default {
     
   //},
     methods:{
+    go_to_login:function(){
+       this.$router.push('/login');
+    },
   
     reset: function(){
         this.req='';
         this.req1='';
         this.req2='';
         if(this.newPassword !== this.newPassword1){
-          console.log("usao")
-        return this.req="*Password doesn't match";
+        this.req="*Password doesn't match";
         }
         if(this.newPassword==""){
         this.req1="*Enter new Password ";
@@ -111,18 +126,24 @@ export default {
         if(this.newPassword !=="" && this.newPassword.length < 6){
         this.req="*Enter at least 6 character";
         }
-        if(this.newPassword == this.newPassword1 && this.newPassword !=="" && this.newPassword1 !=="" && this.newPassword.length > 6){
+        if(this.newPassword == this.newPassword1 && this.newPassword !=="" && this.newPassword1 !=="" && this.newPassword.length >= 6){
+          console.log("usao4")
         fetch(process.env.VUE_APP_URL+'/public_reset_forgotten_password', {
         method:'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify( { password: this.newPassword,
                                 resetToken:this.resetToken2
+                                
         })
+        
         })
+        .then(console.log("mik"))
         .then(response => {
           if (response.ok) {
           console.log('ok')
-          this.$router.push('/login');
+          this.req="Password changed."
+          this.after_login=true;
+          //this.$router.push('/login'),2000)
           } else {
             throw new Error('Something went wrong')
             
@@ -152,12 +173,6 @@ a{
     
   }
 
-  .flex-center{
-       display: flex;
-       justify-content: center;
-       align-items: center;
-  }
- 
     .letter-44{
           display:flex;
           color:#FFFFFF;
@@ -240,16 +255,12 @@ a{
      font-size:0.875rem;
      color:#FFFFFF;
   }
-  
-
-
-
   #text-or{
     font-size: 0.875rem;
     color:#FFFFFF;
     padding-top:1rem;
   }
-  #butt1{
+  .butt1{
     padding-top:1.25;
   }
 
