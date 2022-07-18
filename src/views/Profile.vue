@@ -591,7 +591,7 @@
               />
             </div>
             <div v-if="clickActive1">
-              <Chesscv
+              <Biography
                 :key="user.user_uuid"
                 :user="user"
               />
@@ -1456,9 +1456,9 @@
 <script>
 import SideBar from '../components/SideBar.vue'
 import Searchpart from '../components/Searchpart.vue'
-import ChessDiary from '../components/ChessDiary.vue'
-import Chesscv from '../components/Chesscv.vue'
-import Calendar from '../components/Calendar.vue'
+import ChessDiary from '../components/left-profile/ChessDiary.vue'
+import Biography from '../components/left-profile/Biography.vue'
+import Calendar from '../components/left-profile/Calendar.vue'
 
 export default {
   name: 'Profile',
@@ -1466,7 +1466,7 @@ export default {
     SideBar,
     Searchpart,
     ChessDiary,
-    Chesscv,
+    Biography,
     Calendar
   },
   data () {
@@ -1587,13 +1587,21 @@ export default {
 
 mounted(){
 /* USER INFO */  
-fetch('https://api.outpostchess.com/api/v2/current_user_info', {
+fetch(process.env.VUE_APP_URL+'/current_user_info', {
   method:'GET',
   headers: {
     'Content-Type': 'application/json',
     "authorization":`Bearer ${localStorage.getItem('token')}`
   }
-  },        fetch('https://api.outpostchess.com/api/v2/countries', {
+  },        
+            
+)
+.then(response => response.json())
+.then(data => this.user=data)
+.then(data => console.log('podaci',data)) 
+
+
+fetch(process.env.VUE_APP_URL+'/countries', {
             method:'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -1603,13 +1611,10 @@ fetch('https://api.outpostchess.com/api/v2/current_user_info', {
             .then(response => response.json())
             .then(data => this.flags=data)
             //.then(data => console.log(data))
-)
-.then(response => response.json())
-.then(data => this.user=data)
-.then(data => console.log('podaci',data)) 
+
 
 /* TITLES */ 
-fetch('https://api.outpostchess.com/api/v2/titule', {
+fetch(process.env.VUE_APP_URL+'/titule', {
   method:'GET',
   headers: {
     'Content-Type': 'application/json',
@@ -1623,7 +1628,7 @@ fetch('https://api.outpostchess.com/api/v2/titule', {
 
      
 /* EVENTS */    
-fetch('https://api.outpostchess.com/api/v2/organiser_events', {
+fetch(process.env.VUE_APP_URL+'/organiser_events', {
         method: 'GET',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1635,7 +1640,7 @@ fetch('https://api.outpostchess.com/api/v2/organiser_events', {
       //  .then(data => console.log('events',data))   
       
 /* INTERESTED IN PLAYER */      
-fetch('https://api.outpostchess.com/api/v2/interested_in_player', {
+fetch(process.env.VUE_APP_URL+'/interested_in_player', {
         method: 'GET',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1647,7 +1652,7 @@ fetch('https://api.outpostchess.com/api/v2/interested_in_player', {
         //.then(data => console.log('my_list',data))
 
 /* INTERESTED IN CLUB */ 
-fetch('https://api.outpostchess.com/api/v2/interested_in_club', {
+fetch(process.env.VUE_APP_URL+'/interested_in_club', {
         method: 'GET',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1708,7 +1713,7 @@ methods:{
 
     lookpla:function(){
             this.user.club_looking_for_new_player=!this.user.club_looking_for_new_player
-       fetch('https://api.outpostchess.com/api/v2/current_user_info', {
+       fetch(process.env.VUE_APP_URL+'/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1726,7 +1731,7 @@ methods:{
    lookpart:function(){
        
             this.user.organizer_looking_for_new_participants=!this.user.organizer_looking_for_new_participants
-       fetch('https://api.outpostchess.com/api/v2/current_user_info', {
+       fetch(process.env.VUE_APP_URL+'/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1746,7 +1751,7 @@ methods:{
        this.students=this.user.trainer_list_of_students ?? [];
        this.students.push(this.new_student)
        console.log(this.students)
-       fetch('https://api.outpostchess.com/api/v2/current_user_info', {
+       fetch(process.env.VUE_APP_URL+'/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1765,7 +1770,7 @@ methods:{
       console.log(this.index)
       if(this.index !== -1){
         this.user.trainer_list_of_students.splice(this.index,1)
-        fetch('https://api.outpostchess.com/api/v2/current_user_info', {
+        fetch(process.env.VUE_APP_URL+'/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1794,7 +1799,7 @@ methods:{
     trainer_looking_students:function(){
             
             this.user.trainer_looking_for_new_player=!this.user.trainer_looking_for_new_player
-       fetch('https://api.outpostchess.com/api/v2/current_user_info', {
+       fetch(process.env.VUE_APP_URL+'/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1812,7 +1817,7 @@ methods:{
     arbiter_engagement:function(){
        
             this.user.arbiter_looking_for_new_eng=!this.user.arbiter_looking_for_new_eng
-       fetch('https://api.outpostchess.com/api/v2/current_user_info', {
+       fetch(process.env.VUE_APP_URL+'/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1827,7 +1832,7 @@ methods:{
           //  console.log(this.organizer_looking_for_new_participants)
     },
       new_arb_event:function(){
-       fetch('https://api.outpostchess.com/api/v2/current_user_info', {
+       fetch(process.env.VUE_APP_URL+'/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1845,7 +1850,7 @@ methods:{
           
             this.user.arbiter_currently_active=!this.user.arbiter_currently_active
             console.log(this.user.arbiter_currently_active)
-           fetch('https://api.outpostchess.com/api/v2/current_user_info', {
+           fetch(process.env.VUE_APP_URL+'/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1867,7 +1872,7 @@ methods:{
           
             this.user.current_playing_bool=!this.user.current_playing_bool 
             console.log(this.user.current_playing_bool )
-           fetch('https://api.outpostchess.com/api/v2/current_user_info', {
+           fetch(process.env.VUE_APP_URL+'/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1884,7 +1889,7 @@ methods:{
       },
       activeClubcur: function(){
             this.user.club_current_playing_bool=!this.user.club_current_playing_bool
-             fetch('https://api.outpostchess.com/api/v2/current_user_info', {
+             fetch(process.env.VUE_APP_URL+'/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1908,7 +1913,7 @@ methods:{
           this.text2=true
         }
         this.entered=true
-       fetch('https://api.outpostchess.com/api/v2/current_user_info', {
+       fetch(process.env.VUE_APP_URL+'/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1924,7 +1929,7 @@ methods:{
          },  
 
       compensation:function(){
-       fetch('https://api.outpostchess.com/api/v2/current_user_info', {
+       fetch(process.env.VUE_APP_URL+'/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1944,7 +1949,7 @@ methods:{
    clubinterested:function(){
        this.engageclub=!this.engageclub;
        this.user.open2new_eng_club=!this.open2new_eng_club;
-         fetch('https://api.outpostchess.com/api/v2/current_user_info', {
+         fetch(process.env.VUE_APP_URL+'/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1960,7 +1965,7 @@ methods:{
    eventinterested:function(){
        this.engageevent=!this.engageevent;
        this.user.open2new_eng_event=!this.open2new_eng_event;
-         fetch('https://api.outpostchess.com/api/v2/current_user_info', {
+         fetch(process.env.VUE_APP_URL+'/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1976,7 +1981,7 @@ methods:{
    tourinterested:function(){
        this.engagetournament=!this.engagetournament;
        this.user.open2new_eng_tournament=!this.open2new_eng_tournament;
-         fetch('https://api.outpostchess.com/api/v2/current_user_info', {
+         fetch(process.env.VUE_APP_URL+'/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1992,10 +1997,9 @@ methods:{
       },
 
    cvdairycal1: function(){
-     
-      this.clickActive1=true; this.clickActive2=false;  this.clickActive3=false;
-      
-      
+      this.clickActive1=true; 
+      this.clickActive2=false;  
+      this.clickActive3=false;
     } ,
      cvdairycal2: function(){
       this.clickActive1=false;  
@@ -2026,43 +2030,7 @@ methods:{
     },
 
 
-   /* rolecol1:function(){
-      
-      this.activePlayer=true;this.activeClub=false;this.activeOrg=false; 
-      this.activeTre=false;  this.activeArb=false;this.activeOth=false;
-      this.rolecolor1=true; this.rolecolor2=false;this.rolecolor3=false;
-      this.rolecolor4=false;this.rolecolor5=false;this.rolecolor6=false;   
-    },
-    rolecol2:function(){
-      this.activeClub=true; this.activePlayer=false;this.activeOrg=false;
-      this.activeTre=false;  this.activeArb=false;this.activeOth=false;
-      this.rolecolor1=false; this.rolecolor2=true; this.rolecolor3=false; 
-      this.rolecolor4=false;   this.rolecolor5=false; this.rolecolor6=false;   
-    },
-    rolecol3:function(){
-      this.rolecolor1=false;  this.rolecolor2=false; this.rolecolor3=true;  
-      this.rolecolor4=false;  this.rolecolor5=false; this.rolecolor6=false;  
-      this.activeOrg=true;   this.activePlayer=false; this.activeClub=false; 
-      this.activeTre=false; this.activeArb=false;this.activeOth=false;
-    },
-    rolecol4:function(){
-      this.activeOrg=false;   this.activePlayer=false; this.activeClub=false;  
-      this.activeTre=false;    this.activeArb=true;
-      this.rolecolor1=false; this.rolecolor2=false; this.rolecolor3=false;   
-      this.rolecolor4=true; this.rolecolor5=false; this.rolecolor6=false;   
-    },
-    rolecol5:function(){
-      this.activeOrg=false;this.activePlayer=false;   this.activeClub=false;  
-      this.activeTre=true;  this.activeArb=false;  this.activeOth=false;
-      this.rolecolor1=false;  this.rolecolor2=false;  this.rolecolor3=false;  
-      this.rolecolor4=false; this.rolecolor5=true;  this.rolecolor6=false;   
-    },
-    rolecol6:function(){
-      this.rolecolor1=false; this.rolecolor2=false;   this.rolecolor3=false;   
-      this.rolecolor4=false;  this.rolecolor5=false;   this.rolecolor6=true;   
-      this.activeOrg=false;   this.activePlayer=false; this.activeClub=false;  
-      this.activeTre=false;    this.activeArb=false; this.activeOth=true;
-    } */
+   
     
  //--------------USER PATCH----------------------// 
 
@@ -2077,7 +2045,7 @@ userpatch : async function()  {
           
           this.clickside=false;
 
-             fetch( 'https://api.outpostchess.com/api/v2/current_user_info', {
+             fetch( process.env.VUE_APP_URL+'/current_user_info', {
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -2134,7 +2102,7 @@ userpatch : async function()  {
      this.formData = new FormData(),
            this.formData.append('file' , this.selectedFile),
             this.formData.append('fileCategory' , 'PROFILE' ),
-    fetch('https://api.outpostchess.com/api/v2/fileupload', {
+    fetch(process.env.VUE_APP_URL+'/fileupload', {
                method: 'POST',
                         headers: {//'Content-Type': 'application/x-www-form-urlencoded',
                         "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -2156,7 +2124,7 @@ addrole:function(){
           console.log(this.selectedrole)   
           console.log(this.user.rola.indexOf(this.selectedrole))   
     if(this.user.rola.indexOf(this.selectedrole)==-1){
-    fetch('https://api.outpostchess.com/api/v2/user_rola_add', {
+    fetch(process.env.VUE_APP_URL+'/user_rola_add', {
         method: 'PATCH',
         headers: {
             "Content-Type": 'application/json',
@@ -2168,7 +2136,7 @@ addrole:function(){
         console.error(error)
       })
       }else {
-      fetch('https://api.outpostchess.com/api/v2/user_rola_remove', {
+      fetch(process.env.VUE_APP_URL+'/user_rola_remove', {
         method: 'PATCH',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -2186,7 +2154,7 @@ addrole:function(){
 
 post_event:function(){
     this.newevent=false;
-    fetch('https://api.outpostchess.com/api/v2/organiser_event', {
+    fetch(process.env.VUE_APP_URL+'/organiser_event', {
         method: 'POST',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -2295,12 +2263,13 @@ hr{
     padding-right:1.875rem;
     
 }
-#profile-pic{
+#profile-pic {
     border-radius: 50%;
     height: 7.875rem;
-    object-fit: contain;
+    width: 7.875rem;
+    object-fit: cover;
 }
-.photo-input{
+.photo-input {
     width:3.4375rem;
     cursor: pointer;
 }
@@ -2526,12 +2495,11 @@ height: 5rem;
  }
  .middle5-right-grid2{
     display:grid; 
-    grid-template-columns: 48% 48%;
+    grid-template-columns: 49% 49%;
     gap:2%;
     min-height:10rem;
     margin-bottom: 2%;
     text-align: left;
-    background-color:#202122 ;
  }
  .mid5-padd{
      padding:0.625rem 0.3rem;
@@ -2560,7 +2528,10 @@ height: 5rem;
  p{
      margin-bottom:0;
  }
-.middle5-right-grid>div{
+.middle5-right-grid >div{
+    background-color: #202122;
+}
+.middle5-right-grid2 >div{
     background-color: #202122;
 }
 .middle5-left{

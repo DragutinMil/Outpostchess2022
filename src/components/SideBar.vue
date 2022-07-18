@@ -86,12 +86,12 @@
             alt=""
         >
       </div>
-      <p class="left-sidetext diffcol">
+    <!--  <p class="left-sidetext diffcol">
         Blog
-      </p>
+      </p>-->
 
-      <!--t <router-link to="../blog" style="color:#C7C9D0" > <p class="left-sidetext" >Blog</p></router-link>
-       o="../blog" style="color:#C7C9D0"-->
+       <router-link to="../blog" style="color:#C7C9D0" > <p class="left-sidetext" >Blog</p></router-link>
+      
     </div>
 
     <div id="side-flexend">

@@ -34,6 +34,7 @@
             }"
             placeholder="Email"
           >
+          <p style="color:#f2358d" v-if="already_exist" >Email address already exist on Outpost </p>
           <p id="reqpass1">
             {{ req2 }}
           </p>
@@ -178,11 +179,11 @@
             </div>
           </div>
         </div>
-        <div style="padding: 15px 0 15px 0">
+        <div id="cookie">
           <p class="home-p">
             By clicking Agree & Join, you agree to the Outpost
           </p>
-          <div id="policy">
+          <div id="policy2">
             <a
               href=""
               class="home-p blue"
@@ -217,9 +218,9 @@
         &nbsp;
         <router-link
           to="/login"
-          class="home-p blue"
+          class="home-p blue" 
         >
-          Sign in
+          <button type="button" class="text-join"  style="border: 1px solid #E8E8E8;width: 70%;"> <p id="joingoogle">Sign in</p> </button>   
         </router-link>
       </div>
     </div>
@@ -256,6 +257,7 @@ export default {
       admin: false,
       other: false,
       trainer: false,
+      already_exist:false
     };
   },
   methods: {
@@ -318,7 +320,7 @@ export default {
         this.pass1 == this.pass1repeat &&
         this.chooserole == true
       ) {
-        fetch("https://api.outpostchess.com/api/v2/signup", {
+        fetch(process.env.VUE_APP_URL+'/signup', {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -334,10 +336,24 @@ export default {
             },
           }),
         })
-          .then((response) => response.json())
-          .then((data) => console.log(data));
-        this.$router.push("/thanks");
+          .then((response) => response.json()) 
+          .then(data => this.response=data)
+        .then(data => console.log('podaci',data)) 
+        //  .then(function(response){
+       //    console.log(...response)})
+           
+         .then(response => {
+          console.log(this.response.results.status)
+         if (this.response.results.status=="alreadyexist") {
+              this.already_exist=true
+           console.log(response);
+          }else{
+            this.$router.push('/Thanks');
+          } 
+          
+        })
       }
+     
     },
   },
 };
@@ -468,9 +484,14 @@ hr {
   padding: 10px 0;
 }
 #policy {
+  width:65%;
+  margin:auto
+}
+#policy2{
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 .mailin {
   width: 85%;
@@ -565,8 +586,43 @@ hr {
   margin: 0;
   padding-left: 15px;
 }
+.signin{
+  width:65%;
+  margin:auto
+}
+@media screen and (min-width:500px) and (max-width:1400px){
+   #logo-pic {
+  padding: 20px;
+}
+ hr {
+  margin: 10px auto 15px auto;
+}
+#letter-16 {
+  color: #ffffff;
+  font-size: 16px;
+  padding: 10px 0;
+}
+.start {
+  padding: 5px;
+}
+p{
+  margin:0;
+}
+#cookie{
+  padding: 0;
+}
+#input-signup {
+  background-color: #1b1c1d;
+  width: 70%;
+  padding:0;
+  margin: 5px auto;
+  border-radius: 11px;
+}
+#pass-in-flex {
+  
+  padding: 0;
+}
 
-@media only screen and (max-width: 1500px) and (min-width: 500px) {
 }
 @media only screen and (min-width: 499px) {
   #inline {
@@ -578,7 +634,7 @@ hr {
 @media only screen and (max-width: 499px) {
   #right-login {
     display: none;
-  }
+  }ß
   .home {
     display: flex;
     height: 100%;

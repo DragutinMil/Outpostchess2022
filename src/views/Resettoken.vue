@@ -13,7 +13,7 @@
           <p
             class="letter-44"
             style="padding-bottom:2.5rem;"
-            @click="trt"
+            
           >
             Enter new password:
           </p> 
@@ -48,7 +48,7 @@
             style=" border: 1px solid #C8A07D; "
             @click="reset()"
           >
-            Reset pasword
+            Reset pasword 
           </button>
         </div>
               
@@ -102,7 +102,8 @@ export default {
         this.req1='';
         this.req2='';
         if(this.newPassword !== this.newPassword1){
-        this.req="*Password doesn't match";
+          console.log("usao")
+        return this.req="*Password doesn't match";
         }
         if(this.newPassword==""){
         this.req1="*Enter new Password ";
@@ -111,7 +112,7 @@ export default {
         this.req="*Enter at least 6 character";
         }
         if(this.newPassword == this.newPassword1 && this.newPassword !=="" && this.newPassword1 !=="" && this.newPassword.length > 6){
-        fetch('https://api.outpostchess.com/api/v2/public_reset_forgotten_password', {
+        fetch(process.env.VUE_APP_URL+'/public_reset_forgotten_password', {
         method:'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify( { password: this.newPassword,
