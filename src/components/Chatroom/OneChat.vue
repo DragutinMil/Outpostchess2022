@@ -151,35 +151,27 @@ a {
   }
 
   .user-name {
-    margin-right: 4.4rem;
+    margin-right: 7rem;
     width: 9rem;
   }
 
   .short-message {
     width: 13.938rem;
-    margin-right: 3.5rem;
+    margin-right: 5.5rem;
   }
 
   .message-time {
-    margin-right: 13rem;
-  }
-
-  .user-name {
-    margin-right: 3rem;
-  }
-
-  .short-message {
-    margin-right: 2.5rem;
+    margin-right: 15rem;
   }
 }
 
-@media only screen and (max-width: 1336px) {
+@media only screen and (max-width: 1366px) {
   .user-name {
-    margin-right: 1.5rem;
+    margin-right: 6rem;
   }
 
   .short-message {
-    margin-right: 1rem;
+    margin-right: 4.5rem;
   }
 
   .user-profile-avatar {
@@ -187,48 +179,47 @@ a {
   }
 
   .message-time {
-    margin-right: 11rem;
+    margin-right: 13rem;
   }
 }
 
 @media only screen and (max-width: 1280px) {
   .user-name {
     width: 7.5rem;
+    margin-right: 5.5rem;
   }
 
   .short-message {
-    margin-right: 0.5rem;
+    margin-right: 3rem;
   }
 
   .message-time {
-    margin-right: 10rem;
+    margin-right: 12rem;
   }
 }
 
 @media only screen and (max-width: 1024px) {
-  .divider {
-    margin-right: 0.75rem;
-    margin-left: 1.18rem;
-  }
-
-  .user-profile-avatar {
-    width: 3rem;
-    margin-right: 1rem;
-  }
-
   .user-name {
-    text-align: start;
-    margin-right: 2rem;
-    width: 5rem;
+    margin-right: 5rem;
   }
-
   .short-message {
-    margin-right: 1rem;
-    width: 10rem;
+    margin-right: 2.5rem;
   }
-
   .message-time {
-    margin-right: 7rem;
+    margin-right: 11.5rem;
+  }
+}
+@media only screen and (max-width: 768px) {
+  /*.user-profile-avatar*/
+  .user-name {
+    margin-right: 0;
+    width: 9rem;
+  }
+  .short-message {
+    margin-right: 2.5rem;
+  }
+  .message-time {
+    margin-right: 11.5rem;
   }
 }
 
