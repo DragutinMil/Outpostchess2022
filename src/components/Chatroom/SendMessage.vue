@@ -75,6 +75,15 @@ export default {
   display: flex;
   align-items: center;
   cursor: pointer;
+  transition: opacity 0.5s ease;
+}
+
+.bottom a:hover {
+  text-decoration: none;
+}
+
+.left:hover {
+  opacity: 0.5;
 }
 
 .left p {
