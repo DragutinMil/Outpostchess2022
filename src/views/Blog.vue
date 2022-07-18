@@ -35,7 +35,7 @@ export default {
   },
   
 mounted(){
-fetch('https://api.outpostchess.com/api/v2/public_blog_list',{
+fetch(process.env.VUE_APP_URL+'/public_blog_list',{
      method:'GET',
             headers: {'Content-Type': 'application/json'},
 })

@@ -245,7 +245,7 @@
               />
             </div>
             <div v-if="clickActive1">
-              <ChesscvPublic
+              <BiographyPublic
                 :key="user.user_uuid"
                 :user="user"
               />
@@ -984,9 +984,9 @@
 <script>
 import SideBar from '../components/SideBar.vue'
 import Searchpart from '../components/Searchpart.vue'
-import ChessDiary from '../components/ChessDiary.vue'
-import ChesscvPublic from '../components/ChesscvPublic.vue'
-import Calendar from '../components/Calendar.vue'
+import ChessDiary from '../components/left-profile/ChessDiary.vue'
+import BiographyPublic from '../components/left-profile/BiographyPublic.vue'
+import Calendar from '../components/left-profile/Calendar.vue'
 //import Notification from '../utils/notification.js'
 
 export default {
@@ -996,7 +996,7 @@ export default {
     SideBar,
     Searchpart,
     ChessDiary,
-    ChesscvPublic,
+    BiographyPublic,
     Calendar
   },
   props:['user_uuid','id'],
@@ -1103,7 +1103,7 @@ export default {
 
 mounted(){
    this.$store.dispatch('getNotification');
-   fetch('https://api.outpostchess.com/api/v2/organiser_events', {
+   fetch(process.env.VUE_APP_URL+'/organiser_events', {
         method: 'GET',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1115,7 +1115,7 @@ mounted(){
         //.then(data => console.log('events',data))       
             
 
-  fetch( `https://api.outpostchess.com/api/v2/public_user_info/${this.idt} `, {
+  fetch( process.env.VUE_APP_URL+`/public_user_info/${this.idt} `, {
   method:'GET',
   headers: {
     'Content-Type': 'application/json'
@@ -1126,7 +1126,7 @@ mounted(){
 .then(data => this.user=data)
 //.then(data => console.log('public',data))  
 
- fetch('https://api.outpostchess.com/api/v2/current_user_info', {
+ fetch(process.env.VUE_APP_URL+'/current_user_info', {
   method:'GET',
   headers: {
     'Content-Type': 'application/json',
@@ -1138,7 +1138,7 @@ mounted(){
 .then(response => response.json())
 .then(data => this.userinitiator=data)
 //.then(data => console.log('initiator',data)) 
-fetch('https://api.outpostchess.com/api/v2/interested_in_player', {
+fetch(process.env.VUE_APP_URL+'/interested_in_player', {
         method: 'GET',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1149,7 +1149,7 @@ fetch('https://api.outpostchess.com/api/v2/interested_in_player', {
         .then(data => this.my_interested_list=data)   
        // .then(data => console.log('my_list',data))
 
-fetch('https://api.outpostchess.com/api/v2/interested_in_arbiter', {
+fetch(process.env.VUE_APP_URL+'/interested_in_arbiter', {
         method: 'GET',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1160,7 +1160,7 @@ fetch('https://api.outpostchess.com/api/v2/interested_in_arbiter', {
         .then(data => this.my_int_arbiter_list=data)  
         .then(data => console.log('my_int_arbiter_list',data))  
 
-fetch('https://api.outpostchess.com/api/v2/interested_in_trainer', {
+fetch(process.env.VUE_APP_URL+'/interested_in_trainer', {
         method: 'GET',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1171,7 +1171,7 @@ fetch('https://api.outpostchess.com/api/v2/interested_in_trainer', {
         .then(data => this.my_int_trainer_list=data)  
         .then(data => console.log('my_int_trainer_list',data))  
 
-fetch('https://api.outpostchess.com/api/v2/interested_in_club', {
+fetch(process.env.VUE_APP_URL+'/interested_in_club', {
         method: 'GET',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1181,7 +1181,7 @@ fetch('https://api.outpostchess.com/api/v2/interested_in_club', {
         .then(response => response.json())
         .then(data => this.my_intclub_list=data)   
      //   .then(data => console.log('my_clublist',data))      
-fetch('https://api.outpostchess.com/api/v2/connection_list',{
+fetch(process.env.VUE_APP_URL+'/connection_list',{
         method: 'GET',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1218,7 +1218,7 @@ methods:{
     interested_club_del(){
         this.clicked_interested4=false;
         this.clicked_interested3=false;
-         fetch(`https://api.outpostchess.com/api/v2/interested_in_club/${this.idt} `, {
+         fetch(process.env.VUE_APP_URL+`/interested_in_club/${this.idt} `, {
                       method: 'DELETE',
                       headers: {
                           'Content-Type': 'application/json',
@@ -1233,7 +1233,7 @@ methods:{
     interested_club(){
         this.clicked_interested4=false;
         this.clicked_interested3=true;
-          fetch(`https://api.outpostchess.com/api/v2/interested_in_club/${this.idt} `, {
+          fetch(process.env.VUE_APP_URL+`/interested_in_club/${this.idt} `, {
                       method: 'POST',
                       headers: {
                           'Content-Type': 'application/json',
@@ -1249,7 +1249,7 @@ methods:{
            this.interested_no=false;
            this.clicked_interested=true;
            this.clicked_interested2=false;
-           fetch(`https://api.outpostchess.com/api/v2/interested_in_player/${this.idt} `, {
+           fetch(process.env.VUE_APP_URL+`/interested_in_player/${this.idt} `, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1264,7 +1264,7 @@ methods:{
            this.interested_no=true;
            this.clicked_interested=false;
            this.clicked_interested2=false;
-           fetch(`https://api.outpostchess.com/api/v2/interested_in_player/${this.idt} `, {
+           fetch(process.env.VUE_APP_URL+`/interested_in_player/${this.idt} `, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1279,7 +1279,7 @@ methods:{
            this.interested_no_arbiter=false;
            this.clicked_interested_arbiter=true;
            this.clicked_interested_arbiter2=false;
-           fetch(`https://api.outpostchess.com/api/v2/interested_in_arbiter/${this.idt} `, {
+           fetch(process.env.VUE_APP_URL+`/interested_in_arbiter/${this.idt} `, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1294,7 +1294,7 @@ methods:{
            this.interested_no_arbiter=true;
            this.clicked_interested_arbiter=false;
            this.clicked_interested_arbiter2=false;
-           fetch(`https://api.outpostchess.com/api/v2/interested_in_arbiter/${this.idt} `, {
+           fetch(process.env.VUE_APP_URL+`/interested_in_arbiter/${this.idt} `, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1309,7 +1309,7 @@ methods:{
            this.interested_no_trainer=false;
            this.clicked_interested_trainer=true;
            this.clicked_interested_trainer2=false;
-           fetch(`https://api.outpostchess.com/api/v2/interested_in_trainer/${this.idt} `, {
+           fetch(process.env.VUE_APP_URL+`/interested_in_trainer/${this.idt} `, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1324,7 +1324,7 @@ methods:{
            this.interested_no_trainer=true;
            this.clicked_interested_trainer=false;
            this.clicked_interested_trainer2=false;
-           fetch(`https://api.outpostchess.com/api/v2/interested_in_trainer/${this.idt} `, {
+           fetch(process.env.VUE_APP_URL+`/interested_in_trainer/${this.idt} `, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1336,7 +1336,7 @@ methods:{
   /* INTERESTED EVENT */
 
     interested_event:function(){
-           fetch(`https://api.outpostchess.com/api/v2/interested_in_event/${this.idt} `, {
+           fetch(process.env.VUE_APP_URL+`/interested_in_event/${this.idt} `, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1346,7 +1346,7 @@ methods:{
     },
    
     interested_event_del:function(){
-           fetch(`https://api.outpostchess.com/api/v2/interested_in_event/${this.idt} `, {
+           fetch(process.env.VUE_APP_URL+`/interested_in_event/${this.idt} `, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1390,7 +1390,7 @@ methods:{
       
       this.connected=true
       console.log(this.connected)
-    fetch( ` https://api.outpostchess.com/api/v2/connection_initiate/${this.idt} `, {
+    fetch( process.env.VUE_APP_URL+`/connection_initiate/${this.idt} `, {
         method: 'POST',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1404,7 +1404,7 @@ methods:{
      },
      disconnection_people:function(){
        this.connected=false
-    fetch( ` https://api.outpostchess.com/api/v2/connection_initiator_delete/${this.idt} `, {
+    fetch( process.env.VUE_APP_URL+`/connection_initiator_delete/${this.idt} `, {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -1487,7 +1487,8 @@ hr{
 #profile-pic{
     border-radius: 50%;
     height: 7.875rem;
-    object-fit: contain;
+    width: 7.875rem;
+    object-fit: cover;
 }
 .photo-input{
     width:3.4375rem;

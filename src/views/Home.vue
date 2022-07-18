@@ -182,7 +182,7 @@
             
           </div>
         </div>
-        <div style="padding: 15px 0 15px 0">
+        <div id="cookie">
           <p class="home-p">
             By clicking Agree & Join, you agree to the Outpost
           </p>
@@ -330,7 +330,7 @@ export default {
         this.pass1 == this.pass1repeat &&
         this.chooserole == true
       ) {
-        fetch("https://api.outpostchess.com/api/v2/signup", {
+        fetch(process.env.VUE_APP_URL+'/signup', {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -596,7 +596,39 @@ hr {
   width:65%;
   margin:auto
 }
-@media only screen and (max-width: 1500px) and (min-width: 500px) {
+@media screen and (min-width:500px) and (max-width:1400px){
+   #logo-pic {
+  padding: 20px;
+}
+ hr {
+  margin: 10px auto 15px auto;
+}
+#letter-16 {
+  color: #ffffff;
+  font-size: 16px;
+  padding: 10px 0;
+}
+.start {
+  padding: 5px;
+}
+p{
+  margin:0;
+}
+#cookie{
+  padding: 0;
+}
+#input-signup {
+  background-color: #1b1c1d;
+  width: 70%;
+  padding:0;
+  margin: 5px auto;
+  border-radius: 11px;
+}
+#pass-in-flex {
+  
+  padding: 0;
+}
+
 }
 @media only screen and (min-width: 499px) {
   #inline {

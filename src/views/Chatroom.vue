@@ -58,7 +58,7 @@ export default {
       }
 },
 mounted(){
-  fetch('https://api.outpostchess.com/api/v2/titule', {
+  fetch(process.env.VUE_APP_URL+'/titule', {
   method:'GET',
   headers: {
     'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ mounted(){
 //.then(data => console.log('titule',data))
   
  
- fetch('https://api.outpostchess.com/api/v2/current_user_info', {
+ fetch(process.env.VUE_APP_URL+'/current_user_info', {
   method:'GET',
   headers: {
     'Content-Type': 'application/json',

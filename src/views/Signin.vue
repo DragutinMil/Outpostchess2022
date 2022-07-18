@@ -36,7 +36,7 @@
           </p>
         </div> 
              
-        <div style="padding:20px 0 20px 0;"> 
+        <div id="password-padd" > 
           <input
             v-model="passSignin"
             type="password"
@@ -143,7 +143,7 @@ export default {
       }
       if(this.emailSignin!=="" && this.passSignin!==""){
         
-        fetch('https://api.outpostchess.com/api/v2/auth', {
+        fetch(process.env.VUE_APP_URL+'/auth', {
         method:'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify( { email: this.emailSignin, password: this.passSignin } )
@@ -348,6 +348,28 @@ a{
      padding-right:50%
    }
  
+
+@media screen and (min-width:500px) and (max-width:1400px){
+    #password-padd{
+      padding:0
+    }
+    #welcom-text{
+       margin:20px 0 0 0;
+    }
+    #text-or{
+      font-size: 14px;
+      color:#FFFFFF;
+      padding-top:0;
+      padding-bottom: 0 !important;
+      
+  }
+  #butt1{
+    padding-top:10px;
+  }
+   p{
+    margin:10px
+   }
+}
 
 @media only screen and (max-width: 499px){
   #right-login{

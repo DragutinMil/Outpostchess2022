@@ -107,7 +107,7 @@ export default {
 
 mounted(){
  
- fetch('https://api.outpostchess.com/api/v2/notifications_all', {
+ fetch(process.env.VUE_APP_URL+'/notifications_all', {
   method:'GET',
   headers: {
     'Content-Type': 'application/json',
