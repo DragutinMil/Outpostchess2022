@@ -82,7 +82,11 @@ export default {
           return this.request='*Enter email adress'
         }
         if(this.emailreset !==""  ){
+<<<<<<< HEAD
         fetch(process.env.VUE_APP_URL+'/public_resend_activation_email', {
+=======
+        fetch('https://app.outpostchess.com/api/v2/public_resend_activation_email', {
+>>>>>>> d9a9638cd2d919444fef78d41740c983e5b33499
         method:'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify( { email: this.emailreset})

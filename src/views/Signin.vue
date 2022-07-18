@@ -83,10 +83,21 @@
                 <button type="button" onclick="alert('Hello world!')"   class="text-join"  style="border: 1px solid #E8E8E8;"> <div id="google-cor1"> <div id="google-cor"> <img src="../assets/Group.svg" id="" alt="google"></div><p id="joingoogle">Join with Google</p> </div></button>         
              -->
         <div id="policy">
-        <p id="text-or">or</p>
-        <button type="button" @click="back"   class="text-join"  style="border: 1px solid #E8E8E8;"> <p id="joingoogle">Sign up</p> </button>   
+          <p id="text-or">
+            or
+          </p>
+          <button
+            type="button"
+            class="text-join"
+            style="border: 1px solid #E8E8E8;"
+            @click="back"
+          >
+            <p id="joingoogle">
+              Sign up
+            </p>
+          </button>   
         &nbsp;
-      <!--  <div id="forgot-text">
+          <!--  <div id="forgot-text">
           <router-link
             to="/"
             class="home-p blue"
@@ -94,7 +105,7 @@
             Sign up
           </router-link>
         </div>-->
-      </div>
+        </div>
       </div>
     </div>
       

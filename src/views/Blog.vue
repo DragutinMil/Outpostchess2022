@@ -1,23 +1,28 @@
 <template>
-
   <div class="profile">
-       <SideBar />
+    <SideBar />
     <div class="right-profile">
-        <div />
-        <div>
-           <Searchpart />
-           <div class="content" v-for="blog in blog_data.slice().reverse() " :key="blog.blog_post_uuid" >
-             <div class="blog_title">{{blog.title}}</div>
-             <div class="blog_content" v-html="blog.content_html"></div>
-             <hr>
-           </div>
+      <div />
+      <div>
+        <Searchpart />
+        <div
+          v-for="blog in blog_data.slice().reverse() "
+          :key="blog.blog_post_uuid"
+          class="content"
+        >
+          <div class="blog_title">
+            {{ blog.title }}
+          </div>
+          <div
+            class="blog_content"
+            v-html="blog.content_html"
+          />
+          <hr>
         </div>
-        <div />
-
+      </div>
+      <div />
     </div>
-    </div>
-
-    
+  </div>
 </template>
 <script>
 import SideBar from "../components/SideBar.vue";
@@ -35,7 +40,11 @@ export default {
   },
   
 mounted(){
+<<<<<<< HEAD
 fetch(process.env.VUE_APP_URL+'/public_blog_list',{
+=======
+fetch('https://app.outpostchess.com/api/v2/public_blog_list',{
+>>>>>>> d9a9638cd2d919444fef78d41740c983e5b33499
      method:'GET',
             headers: {'Content-Type': 'application/json'},
 })
