@@ -10,16 +10,7 @@
 <script>
 
 export default {
-<<<<<<< HEAD
   name: 'App', 
-  mounted(){
-    console.log(process.env.VUE_APP_URL)
-  },
- 
-=======
-  name: 'App',
-
->>>>>>> d9a9638cd2d919444fef78d41740c983e5b33499
   data: () => ({
     //
   }),

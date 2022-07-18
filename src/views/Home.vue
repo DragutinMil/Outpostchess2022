@@ -34,6 +34,7 @@
             }"
             placeholder="Email"
           >
+          <p style="color:#f2358d" v-if="already_exist" >Email address already exist on Outpost </p>
           <p id="reqpass1">
             {{ req2 }}
           </p>
@@ -182,7 +183,7 @@
           <p class="home-p">
             By clicking Agree & Join, you agree to the Outpost
           </p>
-          <div id="policy">
+          <div id="policy2">
             <a
               href=""
               class="home-p blue"
@@ -217,9 +218,9 @@
         &nbsp;
         <router-link
           to="/login"
-          class="home-p blue"
+          class="home-p blue" 
         >
-          Sign in
+          <button type="button" class="text-join"  style="border: 1px solid #E8E8E8;width: 70%;"> <p id="joingoogle">Sign in</p> </button>   
         </router-link>
       </div>
     </div>
@@ -256,6 +257,7 @@ export default {
       admin: false,
       other: false,
       trainer: false,
+      already_exist:false
     };
   },
   methods: {
@@ -334,10 +336,24 @@ export default {
             },
           }),
         })
-          .then((response) => response.json())
-          .then((data) => console.log(data));
-        this.$router.push("/thanks");
+          .then((response) => response.json()) 
+          .then(data => this.response=data)
+        .then(data => console.log('podaci',data)) 
+        //  .then(function(response){
+       //    console.log(...response)})
+           
+         .then(response => {
+          console.log(this.response.results.status)
+         if (this.response.results.status=="alreadyexist") {
+              this.already_exist=true
+           console.log(response);
+          }else{
+            this.$router.push('/Thanks');
+          } 
+          
+        })
       }
+     
     },
   },
 };
@@ -468,9 +484,14 @@ hr {
   padding: 10px 0;
 }
 #policy {
+  width:65%;
+  margin:auto
+}
+#policy2{
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 .mailin {
   width: 85%;

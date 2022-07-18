@@ -100,11 +100,7 @@ export default {
 
    editconfirm:function(){
        this.editable=false;
-<<<<<<< HEAD:src/components/left-profile/Biography.vue
       fetch(process.env.VUE_APP_URL+'/current_user_info', {
-=======
-      fetch('https://app.outpostchess.com/api/v2/current_user_info', {
->>>>>>> d9a9638cd2d919444fef78d41740c983e5b33499:src/components/Chesscv.vue
             method:'PATCH',
             headers: {'Content-Type': 'application/json',
             "Authorization":`Bearer ${localStorage.getItem('token')}`
@@ -130,11 +126,7 @@ export default {
     this.formData.append('file', this.selectedCV)
     this.formData.append('fileCategory', 'CV' )
 	
-<<<<<<< HEAD:src/components/left-profile/Biography.vue
   fetch(process.env.VUE_APP_URL+'/fileupload', {
-=======
-  fetch('https://app.outpostchess.com/api/v2/fileupload', {
->>>>>>> d9a9638cd2d919444fef78d41740c983e5b33499:src/components/Chesscv.vue
     method: 'POST',
 		headers: {//'Content-Type': 'application/x-www-form-urlencoded',
 		"Authorization":`Bearer ${localStorage.getItem('token')}`
