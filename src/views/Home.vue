@@ -220,7 +220,7 @@
           to="/login"
           class="home-p blue" 
         >
-          <button type="button" class="text-join"  style="border: 1px solid #E8E8E8;width: 70%;"> <p id="joingoogle">Sign in</p> </button>   
+          <button type="button" class="text-join" id="signin_back" > <p id="joingoogle">Sign in</p> </button>   
         </router-link>
       </div>
     </div>
@@ -474,7 +474,7 @@ hr {
 #input-signup {
   background-color: #1b1c1d;
   width: 70%;
-  padding: 35px 0 35px 0;
+  padding: 35px 0 0 0;
   margin: 20px auto;
   border-radius: 11px;
 }
@@ -586,17 +586,19 @@ hr {
   margin: 0;
   padding-left: 15px;
 }
-.signin{
-  width:65%;
-  margin:auto
+#signin_back{
+  border: 1px solid #E8E8E8;
+  width: 70%;
 }
-@media screen and (min-width:500px) and (max-width:1400px){
+
+@media screen and (min-width:961px) and (max-width:1400px){
    #logo-pic {
   padding: 20px;
 }
  hr {
   margin: 10px auto 15px auto;
 }
+
 #letter-16 {
   color: #ffffff;
   font-size: 16px;
@@ -624,24 +626,40 @@ p{
 }
 
 }
-@media only screen and (min-width: 499px) {
+@media only screen and (min-width: 500px) {
   #inline {
     display: flex;
     justify-content: center;
     align-items: center;
   }
+  
 }
-@media only screen and (max-width: 499px) {
+@media screen and (min-width:961px) and (max-width:1150px){
+  
+  
+  .passin {
+  width: 10rem;
+}
+}
+
+
+
+@media only screen and (max-width: 960px) {
+#pass-in-flex {
+    width: 75%
+  
+}
+  #signin_back{
+  width: 85%;
+}
   #right-login {
     display: none;
-  }ß
+  }
   .home {
     display: flex;
-    height: 100%;
+    height: 100vh;
   }
-  #pass-in-flex {
-    display: block;
-  }
+  
   .letter-24 {
     font-size: 16px;
   }
@@ -682,6 +700,15 @@ p{
   }
   #reqpass3 {
     text-align: center;
+  }
+}
+
+
+@media only screen and (max-width: 500px) {
+
+#pass-in-flex {
+    display: block;
+    ;
   }
 }
 </style>
