@@ -371,7 +371,7 @@ hr {
 .home {
   display: grid;
   grid-template-columns: 50% 50%;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .let700 {
@@ -434,7 +434,7 @@ hr {
   color: #f2358d;
 }
 .check-part {
-  padding-left: 40px;
+  padding-left: 10%;
 }
 .left-check-text {
   text-align: left;
@@ -589,6 +589,7 @@ hr {
 #signin_back{
   border: 1px solid #E8E8E8;
   width: 70%;
+  margin-bottom: 0.750rem;
 }
 
 @media screen and (min-width:961px) and (max-width:1400px){
@@ -646,8 +647,8 @@ p{
 
 @media only screen and (max-width: 960px) {
 #pass-in-flex {
-    width: 75%
-  
+    width: 75%;
+    padding: 0;
 }
   #signin_back{
   width: 85%;
@@ -657,7 +658,7 @@ p{
   }
   .home {
     display: flex;
-    height: 100vh;
+    height: 100%;
   }
   
   .letter-24 {
@@ -666,8 +667,9 @@ p{
   #left-login {
     width: 100%;
   }
+  
   .check-part {
-    padding-left: 15px;
+    padding-left: 14%;
   }
   #letter-16 {
     font-size: 14px;
@@ -683,14 +685,19 @@ p{
     width: 75%;
   }
   #input-signup {
-    width: 85%;
-  }
+  background-color: #1b1c1d;
+  width: 85%;
+  padding:0;
+  margin: 5px auto;
+  border-radius: 11px;
+}
+  
   .start {
     justify-content: flex-start;
     width: 90%;
     margin: auto;
     color: #707070;
-    padding: 10px;
+    padding: 5px;
   }
   .reqpass {
     text-align: center;
@@ -701,6 +708,13 @@ p{
   #reqpass3 {
     text-align: center;
   }
+  #letter-16 {
+  color: #ffffff;
+  font-size: 16px;
+  padding: 10px 0;
+}
+
+
 }
 
 
