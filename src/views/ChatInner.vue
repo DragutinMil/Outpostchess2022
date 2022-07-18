@@ -112,7 +112,7 @@ export default {
 .pill {
   color: white;
   padding: 0.438rem 0.75rem;
-  border: 2px solid #C8A07D;
+  border: 1px solid #C8A07D;
   border-radius: 20px;
   margin-right: 0.875rem;
 }
@@ -125,7 +125,7 @@ export default {
 
 @media screen and (max-width: 1440px) {
   .main-div {
-    width: 50rem;
+    width: 60rem;
     margin-left: 2rem;
     margin-right: 2rem;
   }
