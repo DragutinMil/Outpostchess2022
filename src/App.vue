@@ -83,8 +83,13 @@ input:focus, textarea:focus, select:focus {
 }
 
 @media screen and (max-width: 1440px) {
-  #app {
-    font-size: 12px;
+  #app, html, body {
+    font-size: 14px !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  #app, html, body {
+    font-size: 12px !important;
   }
 }
 </style>

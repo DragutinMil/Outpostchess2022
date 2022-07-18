@@ -75,6 +75,15 @@ export default {
   display: flex;
   align-items: center;
   cursor: pointer;
+  transition: opacity 0.5s ease;
+}
+
+.bottom a:hover {
+  text-decoration: none;
+}
+
+.left:hover {
+  opacity: 0.5;
 }
 
 .left p {
@@ -97,6 +106,18 @@ export default {
 
 .right button img {
   margin-left: 0.969rem;
+}
+
+@media screen and (max-width: 1440px) {
+  .input {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .input {
+    font-size: 1.167rem;
+  }
 }
 
 @media screen and (max-width: 640px) {

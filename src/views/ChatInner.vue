@@ -112,22 +112,33 @@ export default {
 .pill {
   color: white;
   padding: 0.438rem 0.75rem;
-  border: 2px solid #C8A07D;
+  border: 1px solid #C8A07D;
   border-radius: 20px;
   margin-right: 0.875rem;
+  width: 7.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.pill-long span {
+  color: #c8a07d;
 }
 
 .pill-small {
-  width: 4.25rem;
+  width: 4.25rem !important;
   display: flex;
   justify-content: center;
 }
 
 @media screen and (max-width: 1440px) {
   .main-div {
-    width: 50rem;
+    width: 60rem;
     margin-left: 2rem;
     margin-right: 2rem;
+  }
+
+  .pill {
+    width: 8.571rem;
   }
 
   .chat {
@@ -168,6 +179,10 @@ export default {
   .main-div {
     margin-right: 1rem;
   }
+
+  .pill {
+    width: 10rem;
+  }
 }
 
 @media screen and (max-width: 640px) {
@@ -177,6 +192,7 @@ export default {
 
   .user-details {
     overflow-x: scroll;
+    margin-top: 3.438rem;
   }
 
   .user-details div {
@@ -185,10 +201,6 @@ export default {
 
   .details-title {
     flex: 0 0 5rem;
-  }
-
-  .first-div {
-    margin-right: 5rem;
   }
 
   .chat {
@@ -209,8 +221,8 @@ export default {
   .pill-long {
     display: flex;
     justify-content: center;
-    width: 7rem;
-    flex: 0 0 7rem;
+    width: 9rem;
+    flex: 0 0 9rem;
   }
 }
 
