@@ -41,12 +41,23 @@
                 
 
         <div id="forgot-text" />
-        <div id="butt1">
+         <div v-if="changePass" id="butt1">
           <button
             type="button"
             class="text-join"
             style=" border: 1px solid #C8A07D; "
-            @click="reset()"
+            @click="goLogin"
+          >
+            Password changed! Click here to login
+          </button>
+        </div>
+        <div v-else id="butt1">
+          <button
+            type="button"
+            class="text-join"
+            style=" border: 1px solid #C8A07D; "
+             @click="reset()"
+             
           >
             Reset pasword 
           </button>
@@ -86,7 +97,8 @@ export default {
          newPassword:'',
          newPassword1:'',
          last_segment : '',
-         resetToken2:window.location.href.split('/').pop()
+         resetToken2:window.location.href.split('/').pop(),
+         changePass:false
       }
       
     },
@@ -96,13 +108,14 @@ export default {
     
   //},
     methods:{
-  
+    goLogin:function(){
+       this.$router.push('/login');
+    },
     reset: function(){
         this.req='';
         this.req1='';
         this.req2='';
         if(this.newPassword !== this.newPassword1){
-          console.log("usao")
         return this.req="*Password doesn't match";
         }
         if(this.newPassword==""){
@@ -111,18 +124,19 @@ export default {
         if(this.newPassword !=="" && this.newPassword.length < 6){
         this.req="*Enter at least 6 character";
         }
-        if(this.newPassword == this.newPassword1 && this.newPassword !=="" && this.newPassword1 !=="" && this.newPassword.length > 6){
+        if(this.newPassword == this.newPassword1 && this.newPassword !=="" && this.newPassword1 !=="" && this.newPassword.length >= 6){
         fetch(process.env.VUE_APP_URL+'/public_reset_forgotten_password', {
         method:'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify( { password: this.newPassword,
-                                resetToken:this.resetToken2
+                                resettoken:this.resetToken2
         })
         })
         .then(response => {
           if (response.ok) {
           console.log('ok')
-          this.$router.push('/login');
+          this.changePass=true;
+          //this.$router.push('/login');
           } else {
             throw new Error('Something went wrong')
             
