@@ -1,8 +1,3 @@
 export default {
-    methods:{
-        
-          
-    }    
-}
-    
-
+    methods: {},
+};

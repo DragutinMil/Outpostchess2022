@@ -1,193 +1,192 @@
 <template>
-  <div class="header">
-    <div class="left">
-      <div class="avatar-big"></div>
-      <div class="left-text">
-        <h3 class="user-name">Brodie Richards</h3>
-        <div class="user-row-one">
-          <div class="location">
-            <img
-                src="../../assets/location-icon.svg"
-                alt="location icon">
-            <p>Chicago</p>
-          </div>
-          <div class="user-age">
-            <p>28 Years old</p>
-          </div>
-          <div class="gender">
-            <p>Male</p>
-          </div>
+    <div class="header">
+        <div class="left">
+            <div class="avatar-big"></div>
+            <div class="left-text">
+                <h3 class="user-name">Brodie Richards</h3>
+                <div class="user-row-one">
+                    <div class="location">
+                        <img src="../../assets/location-icon.svg" alt="location icon" />
+                        <p>Chicago</p>
+                    </div>
+                    <div class="user-age">
+                        <p>28 Years old</p>
+                    </div>
+                    <div class="gender">
+                        <p>Male</p>
+                    </div>
+                </div>
+                <div class="user-row-two">
+                    <div class="federation">
+                        <p>Federation:</p>
+                        <img src="../../assets/serbian-flag.svg" alt="Serbian flag" />
+                    </div>
+                    <div class="fide-id">
+                        <p>Fide ID :</p>
+                        <p>942553</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="user-row-two">
-          <div class="federation">
-            <p>Federation: </p>
-            <img
-                src="../../assets/serbian-flag.svg"
-                alt="Serbian flag"/>
-          </div>
-          <div class="fide-id">
-            <p>Fide ID :</p>
-            <p>942553</p>
-          </div>
+        <div class="right">
+            <button>Connect</button>
+            <img src="../../assets/envelope-with-a-plus.svg" alt="new message icon" />
         </div>
-      </div>
     </div>
-    <div class="right">
-      <button>
-        Connect
-      </button>
-      <img src="../../assets/envelope-with-a-plus.svg" alt="new message icon">
-    </div>
-
-  </div>
 </template>
 
 <script>
 export default {
-  name: "ChatInnerHeader"
-}
+    name: "ChatInnerHeader",
+};
 </script>
 
 <style scoped>
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 p {
-  color: #6F7381;
-  font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 1.158rem;
+    color: #6f7381;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.158rem;
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  padding-left: 5.063rem;
-  padding-right: 4.875rem;
-  background-color: #202122;
-  width: 100%;
-  height: 10.75rem;
-  margin-top: 2.875rem;
-  align-items: center;
-  position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5.063rem;
+    padding-right: 4.875rem;
+    background-color: #202122;
+    width: 100%;
+    height: 10.75rem;
+    margin-top: 2.875rem;
+    align-items: center;
+    position: relative;
 }
 
 .left {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 }
 
 .avatar-big {
-  width: 5.625rem;
-  height: 5.625rem;
-  background-color: #6F7381;
-  border-radius: 100%;
-  margin-right: 1.141rem;
+    width: 5.625rem;
+    height: 5.625rem;
+    background-color: #6f7381;
+    border-radius: 100%;
+    margin-right: 1.141rem;
 }
 
 .left-text {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
 }
 
 .user-row-one {
-  display: flex;
-  margin-bottom: 0.625rem;
+    display: flex;
+    margin-bottom: 0.625rem;
 }
 
 .user-name {
-  color: white;
-  font-weight: 700;
-  line-height: 1.984rem;
-  margin-bottom: 0.375rem;
+    color: white;
+    font-weight: 700;
+    line-height: 1.984rem;
+    margin-bottom: 0.375rem;
 }
 
-.location, .user-age, .gender, .federation, .fide-id {
-  margin-right: 1.75rem;
+.location,
+.user-age,
+.gender,
+.federation,
+.fide-id {
+    margin-right: 1.75rem;
 }
 
 .location {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .user-row-two {
-  display: flex;
+    display: flex;
 }
 
-.federation, .fide-id {
-  display: flex;
+.federation,
+.fide-id {
+    display: flex;
 }
 
-.federation p, .fide-id p {
-  margin-right: 0.625rem;
+.federation p,
+.fide-id p {
+    margin-right: 0.625rem;
 }
 
 .fide-id p:last-child {
-  color: #C8A07D;
+    color: #c8a07d;
 }
 
 .right img {
-  position: absolute;
-  top: 1.375rem;
-  right: 1.813rem;
+    position: absolute;
+    top: 1.375rem;
+    right: 1.813rem;
 }
 
 .right button {
-  width: 8.161rem;
-  height: 2.875rem;
-  color: white;
-  line-height: 2.125rem;
-  border: solid #5C5E64 1px;
+    width: 8.161rem;
+    height: 2.875rem;
+    color: white;
+    line-height: 2.125rem;
+    border: solid #5c5e64 1px;
 }
 
 @media screen and (max-width: 1440px) {
-  .header {
-    padding-left: 3.5rem;
-  }
+    .header {
+        padding-left: 3.5rem;
+    }
 }
 
 @media screen and (max-width: 640px) {
-  .header {
-    background-color: unset;
-    justify-content: center;
-  }
+    .header {
+        background-color: unset;
+        justify-content: center;
+    }
 
-  .right {
-    display: none;
-  }
+    .right {
+        display: none;
+    }
 
-  .left {
-    flex-direction: column;
-    align-items: center;
-  }
+    .left {
+        flex-direction: column;
+        align-items: center;
+    }
 
-  .avatar-big {
-    margin-right: 0;
-    margin-bottom: 1.5rem;
-  }
+    .avatar-big {
+        margin-right: 0;
+        margin-bottom: 1.5rem;
+    }
 
-  .left-text {
-    align-items: center;
-  }
+    .left-text {
+        align-items: center;
+    }
 
-  .user-name {
-    margin-bottom: 1.25rem;
-  }
+    .user-name {
+        margin-bottom: 1.25rem;
+    }
 }
 
 @media screen and (max-width: 375px) {
-  .header {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+    .header {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 
-  .fide-id {
-    margin-right: 0;
-  }
+    .fide-id {
+        margin-right: 0;
+    }
 }
 </style>
