@@ -121,6 +121,11 @@ const routes = [
         // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ "../views/ChatInner.vue"),
     },
+    {
+        path: "/wallet",
+        name: "Wallet",
+        component: () => import("../views/Wallet.vue"),
+    },
 ];
 
 const router = new VueRouter({
