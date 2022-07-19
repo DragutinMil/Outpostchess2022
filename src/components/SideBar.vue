@@ -18,13 +18,13 @@
             </router-link>
         </div>
         <div class="side-options">
-            <div style="opacity: 0.3" class="flex-center">
+            <div  class="flex-center">
                 <img src="../assets/mail_outline_24px.png" alt="" />
             </div>
-            <p class="left-sidetext diffcol">Inbox</p>
-           <!--  <router-link to="../chatroom" style="color: #c7c9d0">
+           <!-- <p class="left-sidetext diffcol">Inbox</p>-->
+            <router-link to="../chatroom" style="color: #c7c9d0">
                 <p class="left-sidetext">Inbox</p>
-            </router-link>  -->
+            </router-link>  
         </div>
         <div class="side-options">
             <div class="flex-center">
