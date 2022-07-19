@@ -78,8 +78,8 @@ export default {
 
 .main-div {
   width: 61rem;
-  margin-left: 10.563rem;
-  margin-right: 9.313rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .chat {
@@ -151,6 +151,10 @@ export default {
 }
 
 @media screen and (max-width: 1366px) {
+  .chat {
+    height: 75vh;
+  }
+
   .details-title {
     margin-right: 0.5rem;
   }
@@ -161,6 +165,10 @@ export default {
 }
 
 @media screen and (max-width: 1280px) {
+  .parent {
+    justify-content: space-around;
+  }
+
   .main-div {
     width: 60rem;
     margin-left: 1rem;
@@ -172,6 +180,10 @@ export default {
     width: 65rem;
     margin-left: 1rem;
     margin-right: 1rem;
+  }
+
+  .parent {
+    justify-content: center;
   }
 }
 
