@@ -1,17 +1,14 @@
-import axios from "axios"
+import axios from "axios";
 
-export const getNotification = ({commit}) => {
-     
-      
-        axios.get('https://api.outpostchess.com/api/v2/notifications', {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization':`Bearer ${localStorage.getItem('token')}`
-          }
+export const getNotification = ({ commit }) => {
+    axios
+        .get(process.env.VUE_APP_URL + "/notifications", {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
         })
-          .then((response) => {
-            commit('setNotification',response.data)
-          })
-        
-      
-}
+        .then(response => {
+            commit("setNotification", response.data);
+        });
+};

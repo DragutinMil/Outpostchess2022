@@ -7,9 +7,14 @@
                         <img src="../assets/logo2.png" alt="" />
                     </div>
                     <div>
-                        <p class="thanks-text1">Thank you for joining us.</p>
-                        <p class="thanks-text2">Please check your email and verify your account.</p>
-                        <p class="thanks-text2 col">The Chess world is waiting for you!</p>
+                        <p class="thanks-text1">Thank you for verifying!</p>
+                        <p class="thanks-text2 col">
+                            Thank you for early sign up! Your profile we'll be ready as soon as we reach enough
+                            registered users to make the best of your experience. We are launching our beta version
+                            soon, so hang on there! Your feedback and support means a lot to us.
+                        </p>
+                        <p class="thanks-text2 col">See you in the chess connected world.</p>
+                        <p class="thanks-text2">Outpost team - let's connect</p>
                     </div>
                 </div>
             </div>
@@ -25,11 +30,16 @@
     display: grid;
     grid-template-columns: 50% 50%;
     height: 100vh;
+    margin: auto;
 }
 .thanks-text2 {
-    font-size: 16px;
-    line-height: 21px;
+    font-size: 18px;
+    line-height: 26px;
     color: #c8a07d;
+    width: 70%;
+    margin: auto;
+    word-spacing: 2px;
+    padding: 15px 0 30px 0;
 }
 .col {
     color: #707070;
@@ -50,7 +60,7 @@
 .left-login {
     background-color: #1b1b1c;
     height: 100%;
-    padding: 20% 0;
+    padding: 15% 0;
 }
 
 #logo-pic {
@@ -67,7 +77,7 @@
 @media only screen and (max-width: 499px) {
     .home {
         display: flex;
-        height: 100vh;
+        height: 100%;
     }
     #right-login {
         display: none;
@@ -79,7 +89,7 @@
         opacity: 0.9;
     }
     #logo-pic {
-        padding: 30px 20px 30px 20px;
+        padding: 30px 10px 30px 10px;
         margin: auto;
     }
     .thanks-text1 {
@@ -87,7 +97,8 @@
         padding: 20px 0;
     }
     .thanks-text2 {
-        padding: 10px;
+        width: 100%;
+        line-height: 1.6;
     }
 }
 </style>
