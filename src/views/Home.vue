@@ -592,7 +592,7 @@ hr {
   margin-bottom: 0.750rem;
 }
 
-@media screen and (min-width:961px) and (max-width:1400px){
+@media screen and (min-width:961px) and (max-width:1441px){
    #logo-pic {
   padding: 20px;
 }
@@ -652,6 +652,7 @@ p{
 }
   #signin_back{
   width: 85%;
+  margin-bottom: 15px;
 }
   #right-login {
     display: none;
@@ -708,12 +709,10 @@ p{
   #reqpass3 {
     text-align: center;
   }
-  #letter-16 {
-  color: #ffffff;
-  font-size: 16px;
-  padding: 10px 0;
-}
 
+  .passin {
+  width: 15rem;
+}
 
 }
 
