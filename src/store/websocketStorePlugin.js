@@ -1,7 +1,7 @@
 // websocketStorePlugin.js
-export default function createWebSocketPlugin (socket) {
+export default function createWebSocketPlugin(socket) {
     return store => {
-      store.$socket = socket
-      socket.on('message', payload => store.dispatch('receiveMessage', payload))
-    }
-  }
+        store.$socket = socket;
+        socket.on("message", payload => store.dispatch("receiveMessage", payload));
+    };
+}
