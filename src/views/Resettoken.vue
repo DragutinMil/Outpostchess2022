@@ -137,7 +137,6 @@ export default {
         })
         
         })
-        .then(console.log("mik"))
         .then(response => {
           if (response.ok) {
           console.log('ok')

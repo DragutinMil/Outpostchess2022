@@ -591,7 +591,7 @@ hr {
   width: 70%;
 }
 
-@media screen and (min-width:961px) and (max-width:1400px){
+@media screen and (min-width:961px) and (max-width:1441px){
    #logo-pic {
   padding: 20px;
 }
@@ -651,13 +651,14 @@ p{
 }
   #signin_back{
   width: 85%;
+  margin-bottom: 15px;
 }
   #right-login {
     display: none;
   }
   .home {
     display: flex;
-    height: 100vh;
+    height: 100%;
   }
   
   .letter-24 {
@@ -701,6 +702,9 @@ p{
   #reqpass3 {
     text-align: center;
   }
+  .passin {
+  width: 15rem;
+}
 }
 
 
