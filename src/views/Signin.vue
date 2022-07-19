@@ -360,7 +360,7 @@ a{
    }
  
 
-@media screen and (min-width:500px) and (max-width:1400px){
+@media screen and (min-width:1149px) and (max-width:1400px){
     #password-padd{
       padding:0
     }
@@ -380,9 +380,15 @@ a{
    p{
     margin:10px
    }
+   
 }
 
-@media only screen and (max-width: 499px){
+@media screen and (min-width:951px) and (max-width:1148px){
+.letter-44{
+    font-size:28px;
+    }
+}
+@media only screen and (max-width: 950px){
   #right-login{
     display:none;
   } 
@@ -393,7 +399,7 @@ a{
     
   }
   .letter-44{
-    font-size:20px;
+    font-size:24px;
     }
     #left-login{
     width:100%

@@ -42,6 +42,7 @@
 
         <div id="forgot-text" />
          <div v-if="changePass" id="butt1">
+
           <button
             type="button"
             class="text-join"
@@ -111,6 +112,7 @@ export default {
     goLogin:function(){
        this.$router.push('/login');
     },
+
     reset: function(){
         this.req='';
         this.req1='';
@@ -125,18 +127,23 @@ export default {
         this.req="*Enter at least 6 character";
         }
         if(this.newPassword == this.newPassword1 && this.newPassword !=="" && this.newPassword1 !=="" && this.newPassword.length >= 6){
+
         fetch(process.env.VUE_APP_URL+'/public_reset_forgotten_password', {
         method:'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify( { password: this.newPassword,
                                 resettoken:this.resetToken2
+
         })
+        
         })
         .then(response => {
           if (response.ok) {
           console.log('ok')
+
           this.changePass=true;
           //this.$router.push('/login');
+
           } else {
             throw new Error('Something went wrong')
             
@@ -166,12 +173,6 @@ a{
     
   }
 
-  .flex-center{
-       display: flex;
-       justify-content: center;
-       align-items: center;
-  }
- 
     .letter-44{
           display:flex;
           color:#FFFFFF;
@@ -254,16 +255,12 @@ a{
      font-size:0.875rem;
      color:#FFFFFF;
   }
-  
-
-
-
   #text-or{
     font-size: 0.875rem;
     color:#FFFFFF;
     padding-top:1rem;
   }
-  #butt1{
+  .butt1{
     padding-top:1.25;
   }
 
