@@ -1,7 +1,11 @@
 <template>
   <router-link to="/ChatInner">
     <div>
-      <div class="one-chat message-not-seen">
+      <div class="one-chat"
+           :class="[
+             messageType === 'seen' ? '' : 'message-not-seen',
+           ]"
+      >
         <img
             class="new-message-icon"
             src="../../assets/koverta-new.svg"
@@ -33,31 +37,31 @@
           </p>
         </div>
       </div>
-      <div class="one-chat">
-        <img
-            class="new-message-icon"
-            src="../../assets/koverta-new.svg"
-            alt="new message"
-        >
-        <div class="divider"/>
-        <div class="user-profile-avatar">
-          BR
-        </div>
-        <p class="user-name">
-          Brodie Richards
-        </p>
-        <p class="short-message">
-          Hi there, Brodie
-          My name is Melissa from...
-        </p>
-        <p class="message-time">
-          9 : 30 PM
-        </p>
-        <img class="invitation-icon"
-             src="../../assets/invitation-icon.svg"
-             alt="invitation icon"
-        >
-      </div>
+      <!--      <div class="one-chat">-->
+      <!--        <img-->
+      <!--            class="new-message-icon"-->
+      <!--            src="../../assets/koverta-new.svg"-->
+      <!--            alt="new message"-->
+      <!--        >-->
+      <!--        <div class="divider"/>-->
+      <!--        <div class="user-profile-avatar">-->
+      <!--          BR-->
+      <!--        </div>-->
+      <!--        <p class="user-name">-->
+      <!--          Brodie Richards-->
+      <!--        </p>-->
+      <!--        <p class="short-message">-->
+      <!--          Hi there, Brodie-->
+      <!--          My name is Melissa from...-->
+      <!--        </p>-->
+      <!--        <p class="message-time">-->
+      <!--          9 : 30 PM-->
+      <!--        </p>-->
+      <!--        <img class="invitation-icon"-->
+      <!--             src="../../assets/invitation-icon.svg"-->
+      <!--             alt="invitation icon"-->
+      <!--        >-->
+      <!--      </div>-->
     </div>
   </router-link>
 </template>
@@ -66,7 +70,12 @@
 export default {
   name: "OneChat",
 
-  props: {},
+  props: {
+    messageType: {
+      type: String,
+      required: true
+    }
+  }
 }
 </script>
 
@@ -139,9 +148,28 @@ a {
   display: none;
 }
 
+@media screen and (max-width: 1680px) {
+  .divider {
+    margin-right: 5rem;
+  }
+
+  .user-name {
+    width: 9rem;
+    margin-right: 6rem;
+  }
+
+  .short-message {
+    margin-right: 9rem;
+  }
+
+  .message-time {
+    margin-right: 15.5rem;
+  }
+}
+
 @media only screen and (max-width: 1440px) {
   .divider {
-    margin-right: 2.75rem;
+    margin-right: 3.75rem;
   }
 
   .user-profile-avatar {
@@ -161,7 +189,7 @@ a {
   }
 
   .message-time {
-    margin-right: 15rem;
+    margin-right: 14rem;
   }
 }
 
@@ -184,6 +212,10 @@ a {
 }
 
 @media only screen and (max-width: 1280px) {
+  .divider {
+    margin-right: 2.75rem;
+  }
+
   .user-name {
     width: 7.5rem;
     margin-right: 5.5rem;
@@ -202,22 +234,26 @@ a {
   .user-name {
     margin-right: 5rem;
   }
+
   .short-message {
     margin-right: 2.5rem;
   }
+
   .message-time {
     margin-right: 11.5rem;
   }
 }
+
 @media only screen and (max-width: 768px) {
-  /*.user-profile-avatar*/
   .user-name {
     margin-right: 0;
     width: 9rem;
   }
+
   .short-message {
     margin-right: 2.5rem;
   }
+
   .message-time {
     margin-right: 11.5rem;
   }
@@ -238,7 +274,6 @@ a {
   }
 
   .user-profile-avatar {
-    /*margin-left: 1.922rem;*/
     margin-right: 1.341rem;
   }
 
@@ -258,6 +293,7 @@ a {
 
   .short-message-mobile .short-message {
     display: block;
+    margin-right: 0;
   }
 
   .invitation-icon {
@@ -318,7 +354,7 @@ a {
   }
 
   .short-message-mobile {
-    margin-right: 6rem;
+    margin-right: 4rem;
     margin-top: 1rem;
   }
 

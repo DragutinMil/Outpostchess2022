@@ -151,9 +151,10 @@ export default {
 }
 
 @media screen and (max-width: 1366px) {
-  .chat{
+  .chat {
     height: 75vh;
   }
+
   .details-title {
     margin-right: 0.5rem;
   }
@@ -164,6 +165,10 @@ export default {
 }
 
 @media screen and (max-width: 1280px) {
+  .parent {
+    justify-content: space-around;
+  }
+
   .main-div {
     width: 60rem;
     margin-left: 1rem;
@@ -176,7 +181,8 @@ export default {
     margin-left: 1rem;
     margin-right: 1rem;
   }
-  .parent{
+
+  .parent {
     justify-content: center;
   }
 }

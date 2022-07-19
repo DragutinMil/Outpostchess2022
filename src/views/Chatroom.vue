@@ -34,7 +34,8 @@
               Inbox
             </div>
           </div>
-          <OneChat/>
+          <OneChat message-type="not-seen"/>
+          <OneChat message-type="seen"/>
         </div>
       </div>
       <!-- RIGHT -->
