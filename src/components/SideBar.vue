@@ -18,12 +18,13 @@
             </router-link>
         </div>
         <div class="side-options">
-            <div class="flex-center">
+            <div style="opacity: 0.3" class="flex-center">
                 <img src="../assets/mail_outline_24px.png" alt="" />
             </div>
-            <router-link to="../chatroom" style="color: #c7c9d0">
+            <p class="left-sidetext diffcol">Inbox</p>
+           <!--  <router-link to="../chatroom" style="color: #c7c9d0">
                 <p class="left-sidetext">Inbox</p>
-            </router-link>
+            </router-link>  -->
         </div>
         <div class="side-options">
             <div class="flex-center">
@@ -43,11 +44,9 @@
         <hr />
         <div class="side-options">
             <div class="flex-center">
-                <img src="../assets/book.png" alt="" />
+                <img  src="../assets/book.png" alt="" />
             </div>
-            <!--  <p class="left-sidetext diffcol">
-        Blog
-      </p>-->
+           
 
             <router-link to="../blog" style="color: #c7c9d0"> <p class="left-sidetext">Blog</p></router-link>
         </div>
@@ -56,19 +55,19 @@
             <div id="side-flexend2" />
             <hr />
             <div class="side-options">
-                <div style="opacity: 0.4" class="flex-center">
+                <div style="opacity: 0.3" class="flex-center">
                     <img src="../assets/settings_24px_rounded.svg" alt="" />
                 </div>
                 <p class="left-sidetext diffcol">Settings</p>
             </div>
             <div class="side-options">
-                <div style="opacity: 0.4" class="flex-center">
+                <div style="opacity: 0.3" class="flex-center">
                     <img src="../assets/Vector7.png" alt="" />
                 </div>
                 <p class="left-sidetext diffcol">Help</p>
             </div>
             <div class="side-options" style="margin-bottom: 30px">
-                <div style="opacity: 0.4" class="flex-center">
+                <div style="opacity: 0.3" class="flex-center">
                     <img src="../assets/Vector4.png" alt="" />
                 </div>
                 <p class="left-sidetext diffcol">Contact Us</p>
@@ -130,7 +129,11 @@ export default {
 }
 
 .diffcol {
+    color: rgba(199, 201, 208, 0.2)
+}
+.diffcol:hover {
     color: rgba(199, 201, 208, 0.2);
+    opacity:1 !important
 }
 
 hr {
