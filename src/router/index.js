@@ -56,11 +56,11 @@ const routes = [
   },
   {
     path: '/thanks-verification',
-    name: 'Thanks-verification',
+    name: 'ThanksVerification',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Thanks-verification.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/ThanksVerification.vue')
   },
   {
     path: '/chatroom',
@@ -72,19 +72,19 @@ const routes = [
   },
   {
     path: '/reset-password',
-    name: 'Reset-password',
+    name: 'ResetPassword',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Reset-password.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/ResetPassword.vue')
   },
   {
     path: '/verification-mail',
-    name: 'Verification-mail',
+    name: 'VerificationMail',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Verification-mail.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/VerificationMail.vue')
   },
   {
     path: '/publicprofile/:id',

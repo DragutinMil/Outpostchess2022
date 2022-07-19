@@ -41,24 +41,24 @@
                 
 
         <div id="forgot-text" />
-        
-        <div v-if="after_login" class="butt1">
-           <button
-            type="button"
-            class="text-join"
-            style=" border: 1px solid #C8A07D; "
-            @click="go_to_login()"
-          >
-            Login with new pasword
-          </button>  
+         <div v-if="changePass" id="butt1">
 
-        </div>
-        <div v-else class="butt1">
           <button
             type="button"
             class="text-join"
             style=" border: 1px solid #C8A07D; "
-            @click="reset()"
+            @click="goLogin"
+          >
+            Password changed! Click here to login
+          </button>
+        </div>
+        <div v-else id="butt1">
+          <button
+            type="button"
+            class="text-join"
+            style=" border: 1px solid #C8A07D; "
+             @click="reset()"
+             
           >
             Reset pasword 
           </button>
@@ -99,7 +99,7 @@ export default {
          newPassword1:'',
          last_segment : '',
          resetToken2:window.location.href.split('/').pop(),
-         after_login:false,
+         changePass:false
       }
       
     },
@@ -109,16 +109,16 @@ export default {
     
   //},
     methods:{
-    go_to_login:function(){
+    goLogin:function(){
        this.$router.push('/login');
     },
-  
+
     reset: function(){
         this.req='';
         this.req1='';
         this.req2='';
         if(this.newPassword !== this.newPassword1){
-        this.req="*Password doesn't match";
+        return this.req="*Password doesn't match";
         }
         if(this.newPassword==""){
         this.req1="*Enter new Password ";
@@ -127,22 +127,23 @@ export default {
         this.req="*Enter at least 6 character";
         }
         if(this.newPassword == this.newPassword1 && this.newPassword !=="" && this.newPassword1 !=="" && this.newPassword.length >= 6){
-          console.log("usao4")
+
         fetch(process.env.VUE_APP_URL+'/public_reset_forgotten_password', {
         method:'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify( { password: this.newPassword,
-                                resetToken:this.resetToken2
-                                
+                                resettoken:this.resetToken2
+
         })
         
         })
         .then(response => {
           if (response.ok) {
           console.log('ok')
-          this.req="Password changed."
-          this.after_login=true;
-          //this.$router.push('/login'),2000)
+
+          this.changePass=true;
+          //this.$router.push('/login');
+
           } else {
             throw new Error('Something went wrong')
             

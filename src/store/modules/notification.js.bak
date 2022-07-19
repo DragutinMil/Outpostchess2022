@@ -7,7 +7,7 @@ const getters = {  };
 const actions = {
   getNotification({commit}) {
       
-    fetch('https://app.outpostchess.com/api/v2/notifications', {
+    fetch('https://api.outpostchess.com/api/v2/notifications', {
       method:'GET',
       headers: {
         'Content-Type': 'application/json',
