@@ -122,9 +122,9 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ "../views/ChatInner.vue"),
     },
     {
-        path: "/wallet",
-        name: "Wallet",
-        component: () => import("../views/Wallet.vue"),
+        path: "/wallet-add-payment-method",
+        name: "WalletAddPaymentMethod",
+        component: () => import("../views/WalletAddPaymentMethod.vue"),
     },
 ];
 
