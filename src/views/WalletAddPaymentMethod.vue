@@ -319,7 +319,9 @@ export default {
   .row-two {
     padding-right: 2.333rem;
   }
+}
 
+@media screen and (max-width: 425px) {
   .row-two img {
     width: 9.833rem;
   }
