@@ -12,11 +12,11 @@
         <div class="bottom">
           <div class="row-one">
             <img src="../assets/arrow-back.svg" alt="back icon">
-            <p>Wallet</p>
+            <p>Payments and transaction</p>
           </div>
           <div class="row-two">
             <div>
-              <h2>Payment methods</h2>
+              <h2>Wallet</h2>
               <p>Your payment info, transactions, recurring <br> payments and reservations</p>
             </div>
             <img src="../assets/Wallet-illustration.svg" alt="chess illustration">
@@ -25,7 +25,45 @@
             <h2>Update card</h2>
             <p>Your payment info, transactions, recurring <br> payments and reservations</p>
           </div>
-          <AddCardForm/>
+          <div class="main-row">
+            <div class="left">
+              <h3 class="price">
+                100,000 USD
+              </h3>
+              <p class="price-subtitle">estimated total of all currencies</p>
+              <div>
+                <p class="individual-price">
+                  100,000 USD
+                </p>
+                <p class="individual-price">
+                  50,00 EUR
+                </p>
+              </div>
+              <a href="">Transfer Funds</a>
+            </div>
+            <div class="right">
+              <div class="right-top">
+                <h3 class="name">Katarina Trajkovic</h3>
+                <div class="second-row">
+                  <img class="mastercard" src="../assets/master-card.jpg" alt="mastercard logo">
+                  <div class="right-text">
+                    <p>Mastercard••••8095</p>
+                    <p>Expires 04/23</p>
+                  </div>
+                </div>
+              </div>
+              <div class="right-bottom">
+                <router-link to="/wallet-add-payment-method">
+                  <div class="add-card">
+                    <img src="../assets/add-circle.svg" alt="add a card">
+                    <p>Add credit card</p>
+                  </div>
+                </router-link>
+                <p>Remove</p>
+                <p class="edit">Edit</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <Notifications/>
@@ -35,13 +73,12 @@
 
 <script>
 import SideBar from "@/components/SideBar";
-import AddCardForm from "@/components/Wallet/AddCardForm";
 import Search from "@/components/Search";
 import Notifications from "@/components/Notifications";
 
 export default {
   name: "Wallet",
-  components: {Notifications, Search, AddCardForm, SideBar}
+  components: {Notifications, Search, SideBar}
 }
 </script>
 
@@ -50,6 +87,12 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  text-align: start;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 .parent {
@@ -144,7 +187,9 @@ export default {
 }
 
 .row-two h2, .row-three h2 {
-  color: white;
+  color: #6F7381;
+  font-size: 1.5rem;
+  font-weight: 700;
   margin-bottom: 1.063rem;
 }
 
@@ -167,17 +212,156 @@ export default {
   padding-left: 2.625rem;
   padding-top: 2.188rem;
   padding-bottom: 3.25rem;
-  margin-bottom: 0.938rem;
+  border: 1px solid transparent;
 }
 
+.main-row {
+  display: flex;
+  width: 100%;
+  margin-bottom: 13.875rem;
+}
+
+.left, .right {
+  width: 50%;
+  background-color: #171819;
+  border: 0.5px solid #6F7381;
+  border-top: none;
+}
+
+.left {
+  padding-top: 2.125rem;
+  padding-left: 2.688rem;
+  padding-bottom: 1.5rem;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 2.25rem;
+  color: #11C6D1;
+  margin-bottom: 0.375rem;
+}
+
+.price-subtitle, .individual-price {
+  color: #6F7381;
+}
+
+.price-subtitle {
+  margin-bottom: 0.875rem;
+}
+
+.individual-price {
+  margin-bottom: 0.375rem;
+}
+
+.left div {
+  margin-bottom: 1.188rem;
+}
+
+.left a {
+  color: white;
+  padding-inline: 1.438rem;
+  padding-block: 0.625rem;
+  background-color: rgba(63, 74, 93, 0.5);
+  border-radius: 6px;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.right-top {
+  padding-top: 2.125rem;
+  padding-left: 2.688rem;
+  padding-bottom: 1.5rem;
+}
+
+.second-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.name {
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 2.188rem;
+  /*font-size: 1rem;*/
+}
+
+.right-text {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 100%;
+  font-size: 1rem;
+}
+
+.right-text p:first-child {
+  color: white;
+}
+
+.right-text p:nth-child(2) {
+  color: #5C5E64;
+}
+
+.mastercard {
+  width: 4.375rem;
+  flex: 0 0 6.375rem;
+  margin-right: 1.875rem;
+}
+
+.right-bottom {
+  height: 4.063rem;
+  background-color: #1A1A1B;
+  padding-left: 2.688rem;
+  padding-right: 3.5rem;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+}
+
+.add-card {
+  display: flex;
+}
+
+.add-card img {
+  margin-right: 0.6rem;
+}
+
+.right-bottom p {
+  color: #6F7381;
+  cursor: pointer;
+}
+
+.edit {
+  color: white !important;
+}
+
+@media screen and (max-width: 1024px) {
+
+  .main-row {
+    flex-direction: column;
+  }
+
+  .left, .right {
+    width: 100%;
+  }
+}
 
 @media screen and (max-width: 768px) {
+  .parent {
+    overflow-x: hidden;
+  }
+
   .wrapper {
     width: 100%;
   }
 
   .main-div {
     width: 100%;
+    justify-content: space-between;
+    margin-bottom: 0;
   }
 
   .top {
@@ -187,6 +371,11 @@ export default {
     font-size: 1.167rem;
     font-weight: 500;
     margin-bottom: 4rem;
+    justify-content: center;
+  }
+
+  .top p {
+    text-align: center;
   }
 
   .active {
@@ -201,6 +390,10 @@ export default {
 
   .row-two {
     padding-right: 2.333rem;
+  }
+
+  .main-row {
+    margin-bottom: 0;
   }
 }
 

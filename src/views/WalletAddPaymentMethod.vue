@@ -10,10 +10,12 @@
           <p>ACTIVITY</p>
         </div>
         <div class="bottom">
-          <div class="row-one">
-            <img src="../assets/arrow-back.svg" alt="back icon">
-            <p>Wallet</p>
-          </div>
+          <router-link to="/wallet">
+            <div class="row-one">
+              <img src="../assets/arrow-back.svg" alt="back icon">
+              <p>Wallet</p>
+            </div>
+          </router-link>
           <div class="row-two">
             <div>
               <h2>Payment methods</h2>
@@ -50,6 +52,10 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
 }
 
 .parent {
