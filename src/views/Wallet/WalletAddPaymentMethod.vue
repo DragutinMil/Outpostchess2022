@@ -12,7 +12,7 @@
         <div class="bottom">
           <router-link to="/wallet">
             <div class="row-one">
-              <img src="../assets/arrow-back.svg" alt="back icon">
+              <img src="../../assets/arrow-back.svg" alt="back icon">
               <p>Wallet</p>
             </div>
           </router-link>
@@ -21,7 +21,7 @@
               <h2>Payment methods</h2>
               <p>Your payment info, transactions, recurring <br> payments and reservations</p>
             </div>
-            <img src="../assets/Wallet-illustration.svg" alt="chess illustration">
+            <img src="../../assets/Wallet-illustration.svg" alt="chess illustration">
           </div>
           <div class="row-three">
             <h2>Update card</h2>

@@ -11,7 +11,7 @@
         </div>
         <div class="bottom">
           <div class="row-one">
-            <img src="../assets/arrow-back.svg" alt="back icon">
+            <img src="../../assets/arrow-back.svg" alt="back icon">
             <p>Payments and transaction</p>
           </div>
           <div class="row-two">
@@ -19,7 +19,7 @@
               <h2>Wallet</h2>
               <p>Your payment info, transactions, recurring <br> payments and reservations</p>
             </div>
-            <img src="../assets/Wallet-illustration.svg" alt="chess illustration">
+            <img src="../../assets/Wallet-illustration.svg" alt="chess illustration">
           </div>
           <div class="row-three">
             <h2>Update card</h2>
@@ -45,7 +45,7 @@
               <div class="right-top">
                 <h3 class="name">Katarina Trajkovic</h3>
                 <div class="second-row">
-                  <img class="mastercard" src="../assets/master-card.jpg" alt="mastercard logo">
+                  <img class="mastercard" src="../../assets/master-card.jpg" alt="mastercard logo">
                   <div class="right-text">
                     <p>Mastercard••••8095</p>
                     <p>Expires 04/23</p>
@@ -55,7 +55,7 @@
               <div class="right-bottom">
                 <router-link to="/wallet-add-payment-method">
                   <div class="add-card">
-                    <img src="../assets/add-circle.svg" alt="add a card">
+                    <img src="../../assets/add-circle.svg" alt="add a card">
                     <p>Add credit card</p>
                   </div>
                 </router-link>
