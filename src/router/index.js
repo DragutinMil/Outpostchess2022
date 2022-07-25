@@ -133,6 +133,11 @@ const routes = [
         name: "WalletSend",
         component: () => import("../views/Wallet/WalletSend.vue"),
     },
+    {
+        path: "/wallet-transaction",
+        name: "WalletTransaction",
+        component: () => import("../views/Wallet/WalletTransaction.vue"),
+    },
 ];
 
 const router = new VueRouter({
