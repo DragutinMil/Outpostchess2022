@@ -224,7 +224,7 @@ a {
 .left, .right {
   width: 50%;
   background-color: #171819;
-  border: 0.5px solid #6F7381;
+  border: 1px solid #292A2E;
   border-top: none;
 }
 
