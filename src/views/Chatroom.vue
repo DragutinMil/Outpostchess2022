@@ -19,8 +19,9 @@
                         <div class="header_list">Invitation</div>
                         <div class="header-list-mobile">Inbox</div>
                     </div>
-                    <OneChat message-type="not-seen" />
-                    <OneChat message-type="seen" />
+
+                    <OneChat v-for="contact_list in messages_contact_list" :key="contact_list.conv_uuid" :contact_list="contact_list" message-type="not-seen" />
+            <!--       <OneChat message-type="seen" />    --> 
                 </div>
             </div>
             <!-- RIGHT -->
@@ -41,21 +42,13 @@ export default {
         Searchpart,
     },
     data() {
-        return {};
+        return {
+          messages_contact_list:[]
+        };
     },
     mounted() {
-        fetch("https://api.outpostchess.com/api/v2/titule", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-        })
-            .then(response => response.json())
-            .then(data => (this.titule = data));
-        //.then(data => console.log('titule',data))
 
-        fetch("https://api.outpostchess.com/api/v2/current_user_info", {
+        fetch(process.env.VUE_APP_URL + "/message", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -63,8 +56,8 @@ export default {
             },
         })
             .then(response => response.json())
-            .then(data => (this.user = data));
-        //.then(data => console.log('podaci',data))
+            .then(data => (this.messages_contact_list = data))
+           // .then(data => console.log('poruka',data))
     },
 
     methods: {},

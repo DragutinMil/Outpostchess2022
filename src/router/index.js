@@ -114,14 +114,23 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ "../views/Blog.vue"),
     },
     {
-        path: "/chatInner",
+        path: "/chatInner/:id",
         name: "ChatInner",
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ "../views/ChatInner.vue"),
+       /* children: [{
+            path: 'chat-inner-header',
+            component: () => import(/* webpackChunkName: "about"  "../components/Chatroom/ChatInnerHeader.vue"),
+          }, {
+            path: 'one-message',
+            component: () => import(/* webpackChunkName: "about"  "../components/Chatroom/OneMessage.vue"),
+          }]
+          */
     },
 ];
+  
 
 const router = new VueRouter({
     routes,

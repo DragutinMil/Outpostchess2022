@@ -23,7 +23,7 @@
                         </div>
                         <div class="profile-info1">
                             <div class="profile-info1-1">
-                                <img src="../assets/Vector-1.svg" alt="" />
+                                <img src="../assets/location-icon.svg" alt="location icon" />
                                 <p>{{ user.city }}</p>
                             </div>
                             <p class="padd-text">Age : {{ user.godine }}</p>
@@ -47,8 +47,16 @@
                         </div>
                     </div>
                     <div id="middle2-button-container">
-                        <button class="middle2-buttons" type="button">Message</button>
-
+                        <router-link 
+                        :user_uuid="idt"
+                        :to="{name:'ChatInner',params: { id: idt }  }">
+                            <button 
+                                
+                                class="middle2-buttons" 
+                                type="button"
+                                >Message 
+                            </button>
+                        </router-link>
                         <!--    <div  v-for="list in my_connection_list" :key="list.conn_uuid">
                 <button 
                 v-if="

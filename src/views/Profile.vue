@@ -49,7 +49,7 @@
                                     style="margin-top: 8px"
                                 />
                                 <div v-else class="profile-info1-1">
-                                    <img src="../assets/Vector-1.svg" alt="" />
+                                    <img src="../assets/location-icon.svg" alt="location icon" />
                                     <p>{{ user.city }}</p>
                                 </div>
                             </div>
@@ -1306,7 +1306,7 @@ export default {
         },
         remove_title: function (erase) {
             this.title_remove = erase;
-            fetch(`https://api.outpostchess.com/api/v2/current_user_titule/${this.title_remove}`, {
+            fetch(process.env.VUE_APP_URL + `/current_user_titule/${this.title_remove}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -1316,7 +1316,7 @@ export default {
         },
         delete_event: function (eve) {
             console.log(eve.event_uuid);
-            fetch(`https://api.outpostchess.com/api/v2/organiser_event/${eve.event_uuid}`, {
+            fetch(process.env.VUE_APP_URL + `/organiser_event/${eve.event_uuid}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

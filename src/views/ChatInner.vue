@@ -3,43 +3,60 @@
         <SideBar />
         <div class="main-div">
             <div class="chat">
-                <ChatInnerHeader />
+                <ChatInnerHeader :user_id="storage_id" :dataProp="storage_id" />
                 <div class="user-details">
                     <div class="first-div">
                         <p class="details-title">Title:</p>
-                        <div class="pill pill-small">
-                            <p>GM</p>
+                        <div
+                            v-if="chat_user.titula_player !== null && chat_user.rola.indexOf('PLAYER') !== -1"
+                            class="pill pill-small"
+                        >
+                            {{ chat_user.titula_player_details.titula_short_name }}
                         </div>
-                        <div class="pill pill-small">
-                            <p>IO</p>
+
+                        <div
+                                    v-if="chat_user.titula_organizer !== null && chat_user.rola.indexOf('ORGANIZER') !== -1"
+                                    class="pill pill-small"
+                                >
+                                    IO
                         </div>
-                        <div class="pill pill-small">
-                            <p>FA</p>
+                        <div
+                                    v-if="chat_user.titula_trainer !== null && chat_user.rola.indexOf('TRAINER') !== -1"
+                                    class="pill pill-small"
+                                >
+                                    {{ chat_user.titula_trainer_details.titula_short_name }}
                         </div>
-                        <div class="pill pill-small">
-                            <p>FI</p>
-                        </div>
+                        <div
+                                    v-if="chat_user.titula_arbiter !== null && chat_user.rola.indexOf('ARBITER') !== -1"
+                                    class="pill pill-small"
+                                >
+                                    {{ chat_user.titula_arbiter_details.titula_short_name }}
+                        </div> 
+
                     </div>
                     <div class="second-div">
                         <p class="details-title">Rating :</p>
                         <div class="pill pill-long">
-                            <p><span>Standard:</span> 2100</p>
+                            <p style="min-width: 7rem;"><span>Standard:</span> {{chat_user.rating_standard}}</p>
                         </div>
                         <div class="pill pill-long">
-                            <p><span>Rapid :</span> 2100</p>
+                            <p><span>Rapid :</span> {{chat_user.rating_rapid}}</p>
                         </div>
                         <div class="pill pill-long">
-                            <p><span>Blitz :</span> 2100</p>
+                            <p><span>Blitz :</span> {{chat_user.rating_blitz}}</p>
                         </div>
                     </div>
                 </div>
-                <OneMessage message-type="received" />
+                <div v-for="message in inner_messages" track-by="msg_id" :key="message.msg_id">
+                 <OneMessage   :user="chat_user" :message="message" />
+          <!--       <OneMessage message-type="received" :user="chat_user" />
                 <OneMessage message-type="sent" />
-                <OneMessage message-type="received" />
+                <OneMessage message-type="received" />-->
+                </div>
             </div>
             <SendMessage />
         </div>
-        <ChatInnerContact />
+        <ChatInnerContact :user="chat_user" @update-cart="updateCart" />
     </div>
 </template>
 
@@ -53,6 +70,62 @@ import SendMessage from "@/components/Chatroom/SendMessage";
 export default {
     name: "ChatInner",
     components: { SendMessage, OneMessage, ChatInnerContact, ChatInnerHeader, SideBar },
+    props:['user_uuid'],
+     data() {
+        return {
+            chat_user:{rola:[]},
+            storage_id:'',
+            inner_messages:'',
+            messageType: {
+               type: String,
+               required: true,
+             },
+        };
+    },
+    mounted() {
+        this.storage_id= window.location.href.split("/").pop();
+        fetch(process.env.VUE_APP_URL + `/public_user_info/${this.storage_id} `, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then(response => response.json())
+            .then(data => (this.chat_user = data))
+           // .then(data => console.log('user_data',data));
+
+           fetch(process.env.VUE_APP_URL + `/message/${this.storage_id} `, {
+            method: "GET",
+            headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("token")}` },
+        })
+            .then(response => response.json())
+            .then(data => (this.inner_messages = data))
+            .then(data => console.log('messages',data))
+    },
+     methods: {
+      updateCart(e) {
+        this.storage_id=e
+        fetch(process.env.VUE_APP_URL + `/public_user_info/${this.storage_id} `, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then(response => response.json())
+            .then(data => (this.chat_user = data))
+           // .then(data => console.log('user_data',data));
+        
+        fetch(process.env.VUE_APP_URL + `/message/${this.storage_id} `, {
+            method: "GET",
+            headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("token")}` },
+        })
+            .then(response => response.json())
+            .then(data => (this.inner_messages = data))
+            .then(data => console.log('messages',data))
+        
+      
+      },
+     }
 };
 </script>
 

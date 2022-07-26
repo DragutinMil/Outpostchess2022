@@ -1,29 +1,37 @@
 <template>
     <div class="header">
         <div class="left">
-            <div class="avatar-big"></div>
+            <div class="upload-pic">
+                <img
+                    v-if="user.profile.file_url == null"
+                    id="profile-pic"
+                    src="https://outpostchess.fra1.digitaloceanspaces.com/2bf139b2-7074-4fd4-8377-58efead41bf0.png"
+                    alt=""
+                />
+                <img v-else id="profile-pic" :src="user.profile.file_url" alt="" />
+            </div>
             <div class="left-text">
-                <h3 class="user-name">Brodie Richards</h3>
+                <h3 class="user-name">{{user.name_first}} {{user.name_last}}</h3>
                 <div class="user-row-one">
                     <div class="location">
                         <img src="../../assets/location-icon.svg" alt="location icon" />
-                        <p>Chicago</p>
+                        <p>{{user.city}}</p>
                     </div>
                     <div class="user-age">
-                        <p>28 Years old</p>
+                        <p>{{user.godine}} Years old</p>
                     </div>
                     <div class="gender">
-                        <p>Male</p>
+                        <p>{{user.sex}}</p>
                     </div>
                 </div>
                 <div class="user-row-two">
                     <div class="federation">
-                        <p>Federation:</p>
-                        <img src="../../assets/serbian-flag.svg" alt="Serbian flag" />
+                        <p>Federation: {{user.federation}}</p>
+                 <!--     <img :src=user.federation_details.flag alt="flag" /> --> 
                     </div>
                     <div class="fide-id">
                         <p>Fide ID :</p>
-                        <p>942553</p>
+                        <p>{{user.fide_id}}</p>
                     </div>
                 </div>
             </div>
@@ -36,8 +44,50 @@
 </template>
 
 <script>
+
 export default {
     name: "ChatInnerHeader",
+    props:["dataProp","user_id"],
+    data() {
+        return {
+            user:{profile: {file_url:''},
+            storage_id:''
+            }
+        }
+    },
+    mounted() {
+        this.storage_id= window.location.href.split("/").pop(),
+         fetch(process.env.VUE_APP_URL + `/public_user_info/${this.storage_id} `, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then(response => response.json())
+            .then(data => (this.user = data))
+         // .then(data => console.log('user_dataHeader',data));
+
+    },
+      watch: {
+    dataProp() {
+      this.changeData()
+    },
+  },
+
+    methods: {
+      changeData() {
+        fetch(process.env.VUE_APP_URL + `/public_user_info/${this.user_id} `, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then(response => response.json())
+            .then(data => (this.user = data))
+           // .then(data => console.log('user_data',data));
+        
+      },
+     }
 };
 </script>
 
@@ -79,6 +129,15 @@ p {
     background-color: #6f7381;
     border-radius: 100%;
     margin-right: 1.141rem;
+}
+.upload-pic {
+    padding-right: 1.875rem;
+}
+#profile-pic {
+    border-radius: 50%;
+    height: 7.875rem;
+    width: 7.875rem;
+    object-fit: cover;
 }
 
 .left-text {
