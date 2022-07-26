@@ -107,7 +107,7 @@ a {
   align-items: center;
   border-bottom: 1px solid #6F7381;
   width: fit-content;
-  margin-bottom: 10.938rem;
+  margin-bottom: 5.125rem;
 }
 
 .top p {
@@ -251,7 +251,6 @@ a {
     grid-template-columns: repeat(3, 1fr);
     font-size: 1.167rem;
     font-weight: 500;
-    margin-bottom: 4rem;
   }
 
 
