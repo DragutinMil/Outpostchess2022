@@ -128,7 +128,7 @@ a {
   align-items: center;
   border-bottom: 1px solid #6f7381;
   width: fit-content;
-  margin-bottom: 10.938rem;
+  margin-bottom: 5.125rem;
 }
 
 .top p {
