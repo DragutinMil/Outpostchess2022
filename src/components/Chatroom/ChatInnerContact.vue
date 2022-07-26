@@ -5,61 +5,23 @@
         <div class="search">
             <input type="search" name="" class="search-profile" placeholder="Go to search..." />
         </div>
-        <div class="divider"></div>
-        <div class="one-contact">
-            <div class="user-profile-avatar">BR</div>
-            <div class="user-name">
-                <p>Brodie Richards</p>
+
+        <div v-for="message_contact in chat_inner_contact_list" :key="message_contact.conv_uuid">
+            <div @click="changeChat(message_contact.user_uuid)">
+                <div class="divider"></div>
+                <div class="one-contact">
+                    <div class="user-profile-avatar">{{ message_contact.from_obj.initials }}</div>
+                    <div class="user-name">
+                        <p>{{ message_contact.from_obj.name_first }} {{ message_contact.from_obj.name_last }}</p>
+                    </div>
+                    <div class="user-country">
+                        <!--<p>{{user.federation}}</p>  -->
+                    </div>
+                    <img src="../../assets/unopened-message-icon.svg" alt="unopened message icon" />
+                </div>
             </div>
-            <div class="user-country">
-                <p>Serbia</p>
-            </div>
-            <img src="../../assets/unopened-message-icon.svg" alt="unopened message icon" />
         </div>
-        <div class="divider"></div>
-        <div class="one-contact">
-            <div class="user-profile-avatar">BR</div>
-            <div class="user-name">
-                <p>Brodie Richards</p>
-            </div>
-            <div class="user-country">
-                <p>Serbia</p>
-            </div>
-            <img src="../../assets/unopened-message-icon.svg" alt="unopened message icon" />
-        </div>
-        <div class="divider"></div>
-        <div class="one-contact">
-            <div class="user-profile-avatar">BR</div>
-            <div class="user-name">
-                <p>Brodie Richards</p>
-            </div>
-            <div class="user-country">
-                <p>Serbia</p>
-            </div>
-            <img src="../../assets/unopened-message-icon.svg" alt="unopened message icon" />
-        </div>
-        <div class="divider"></div>
-        <div class="one-contact">
-            <div class="user-profile-avatar">BR</div>
-            <div class="user-name">
-                <p>Brodie Richards</p>
-            </div>
-            <div class="user-country">
-                <p>Serbia</p>
-            </div>
-            <img src="../../assets/unopened-message-icon.svg" alt="unopened message icon" />
-        </div>
-        <div class="divider"></div>
-        <div class="one-contact">
-            <div class="user-profile-avatar">BR</div>
-            <div class="user-name">
-                <p>Brodie Richards</p>
-            </div>
-            <div class="user-country">
-                <p>Serbia</p>
-            </div>
-            <img src="../../assets/unopened-message-icon.svg" alt="unopened message icon" />
-        </div>
+
         <div class="divider"></div>
     </div>
 </template>
@@ -67,6 +29,32 @@
 <script>
 export default {
     name: "ChatInnerContact",
+    props: ["user"],
+    data() {
+        return {
+            chat_inner_contact_list: [],
+        };
+    },
+    mounted() {
+        //    this.storage_id= window.location.href.split("/").pop();
+        fetch(process.env.VUE_APP_URL + "/message", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        })
+            .then(response => response.json())
+            .then(data => (this.chat_inner_contact_list = data));
+    },
+    methods: {
+        changeChat: function (e) {
+            if (e !== window.location.href.split("/").pop()) {
+                this.$router.push(`/chatinner/${e}`);
+            }
+            this.$emit("update-cart", e);
+        },
+    },
 };
 </script>
 
@@ -144,6 +132,7 @@ p {
     align-items: center;
     justify-content: space-evenly;
     margin-block: 1.75rem;
+    cursor: pointer;
 }
 
 .one-contact p {

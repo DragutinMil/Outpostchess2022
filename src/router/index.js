@@ -114,9 +114,17 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ "../views/Blog.vue"),
     },
     {
-        path: "/chatInner",
+        path: "/chatInner/:id",
         name: "ChatInner",
         component: () => import(/* webpackChunkName: "about" */ "../views/ChatInner.vue"),
+        /* children: [{
+            path: 'chat-inner-header',
+            component: () => import(/* webpackChunkName: "about"  "../components/Chatroom/ChatInnerHeader.vue"),
+          }, {
+            path: 'one-message',
+            component: () => import(/* webpackChunkName: "about"  "../components/Chatroom/OneMessage.vue"),
+          }]
+          */
     },
     {
         path: "/wallet-add-payment-method",

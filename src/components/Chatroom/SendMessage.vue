@@ -1,7 +1,12 @@
 <template>
     <div class="send-message">
         <form>
-            <textarea placeholder="Write a message..." class="input" />
+            <textarea
+                v-model="message_to_send"
+                placeholder="Write a message..."
+                class="input"
+                @keyup.enter="send_message"
+            />
             <img class="arrow-up" src="../../assets/arrow-up.svg" alt="expand icon" />
         </form>
         <div>
@@ -13,7 +18,7 @@
                     </div>
                 </router-link>
                 <div class="right">
-                    <button>
+                    <button @click="send_message">
                         <p>Send</p>
                         <img src="../../assets/send.svg" alt="send message" />
                     </button>
@@ -26,6 +31,30 @@
 <script>
 export default {
     name: "SendMessage",
+    data() {
+        return {
+            message_to_send: "",
+            storage_id: "",
+        };
+    },
+    methods: {
+        send_message: function () {
+            console.log(this.message_to_send);
+
+            this.storage_id = window.location.href.split("/").pop();
+            fetch(process.env.VUE_APP_URL + `/message/${this.storage_id} `, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+                body: JSON.stringify({
+                    message: this.message_to_send,
+                }),
+            });
+            this.message_to_send = "";
+        },
+    },
 };
 </script>
 

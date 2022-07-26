@@ -135,7 +135,7 @@ a {
 }
 .profile {
     display: grid;
-    grid-template-columns: 17% 83%;
+    grid-template-columns: 15% auto;
 }
 /* CENTER */
 .container-center {

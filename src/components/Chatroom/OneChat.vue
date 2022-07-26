@@ -1,16 +1,24 @@
 <template>
-    <router-link to="/ChatInner">
+    <router-link :to="{ name: 'ChatInner', params: { id: contact_list.user_uuid } }">
         <div>
             <div class="one-chat" :class="[messageType === 'seen' ? '' : 'message-not-seen']">
                 <img class="new-message-icon" src="../../assets/koverta-new.svg" alt="new message" />
                 <div class="divider" />
-                <div class="user-profile-avatar">BR</div>
-                <p class="user-name">Brodie Richards</p>
-                <p class="short-message">Hi there, Brodie My name is Melissa from...</p>
-                <p class="message-time">9 : 30 PM</p>
+                <div class="user-profile-avatar">{{ contact_list.from_obj.initials }}</div>
+                <p class="user-name">{{ contact_list.from_obj.name_first }} {{ contact_list.from_obj.name_last }}</p>
+                <p class="short-message">{{ message_result }}</p>
+                <div class="message-time">
+                    <!--          {{ contact_list.last_message_date.slice(8, 10) }}.{{ contact_list.last_message_date.slice(5, 7) }}.{{
+                                        contact_list.last_message_date.slice(0, 4)
+                                    }}. -->
+                    {{ this.hour }}:{{ this.minute }}
+                    <p class="day_part" v-if="am_pm_hours">PM</p>
+                    <p class="day_part" v-else>AM</p>
+                </div>
+
                 <img class="invitation-icon" src="../../assets/invitation-icon.svg" alt="invitation icon" />
                 <div class="short-message-mobile">
-                    <p class="short-message">Hi there, Brodie My name is Melissa from...</p>
+                    <p class="short-message">{{ contact_list.last_message }}</p>
                 </div>
             </div>
             <!--      <div class="one-chat">-->
@@ -45,12 +53,33 @@
 <script>
 export default {
     name: "OneChat",
-
-    props: {
-        messageType: {
-            type: String,
-            required: true,
-        },
+    props: ["contact_list", "messageType"],
+    // props: {
+    //     messageType: {
+    //         type: String,
+    //         required: true,
+    //     },
+    //},
+    data() {
+        return {
+            hour: "",
+            minute: "",
+            am_pm_hours: false,
+            message_result: "",
+        };
+    },
+    mounted() {
+        this.hour = Number(this.contact_list.last_message_date.slice(11, 13)) + 2;
+        this.minute = Number(this.contact_list.last_message_date.slice(14, 16));
+        if (this.hour > 12) {
+            this.hour = this.hour - 12;
+            this.am_pm_hours = true;
+        }
+        if (this.contact_list.last_message.length > 39) {
+            this.message_result = this.contact_list.last_message.substring(0, 39) + "...";
+        } else {
+            this.message_result = this.contact_list.last_message;
+        }
     },
 };
 </script>
@@ -102,6 +131,9 @@ a {
 .user-name,
 .short-message,
 .message-time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 0;
     font-family: "Red Hat Display", sans-serif;
     font-weight: bold;
@@ -124,6 +156,10 @@ a {
 
 .short-message-mobile {
     display: none;
+}
+.day_part {
+    margin: auto;
+    padding-left: 0.75rem;
 }
 
 @media screen and (max-width: 1680px) {
