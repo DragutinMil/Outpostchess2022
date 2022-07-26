@@ -156,7 +156,7 @@ a {
   align-items: center;
   padding-top: 3.813rem;
   flex-direction: column;
-  border: 1px solid #6F7381;
+  border: 1px solid #292A2E;
   border-top: none;
 }
 

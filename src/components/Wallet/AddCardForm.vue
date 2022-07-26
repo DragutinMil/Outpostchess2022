@@ -44,7 +44,7 @@ export default {
 .main-row {
   /*height: 47.5rem;*/
   width: 100%;
-  border: 1px solid #545454;
+  border: 1px solid #292A2E;
 }
 
 .main-top {
