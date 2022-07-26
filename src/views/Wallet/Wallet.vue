@@ -39,7 +39,9 @@
                   50,00 EUR
                 </p>
               </div>
-              <a href="">Transfer Funds</a>
+              <router-link to="/wallet-send">
+                <p class="transfer">Transfer Funds</p>
+              </router-link>
             </div>
             <div class="right">
               <div class="right-top">
@@ -257,12 +259,13 @@ a {
   margin-bottom: 1.188rem;
 }
 
-.left a {
+.transfer {
   color: white;
   padding-inline: 1.438rem;
   padding-block: 0.625rem;
   background-color: rgba(63, 74, 93, 0.5);
   border-radius: 6px;
+  width: fit-content;
 }
 
 .right {
