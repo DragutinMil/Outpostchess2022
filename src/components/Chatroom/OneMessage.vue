@@ -1,59 +1,65 @@
 <template>
-    <div style="display:flex;flex-direction: column-reverse;">
-    <div  class="message" >   <!--:class="[messageType === 'sent' && 'sent'] "-->
-        <div >
-            <div class="top" >
-                <div class="left">
-                    <div class="user-avatar"  > {{message.from_obj.name_first.charAt(0)}} {{message.from_obj.name_last.charAt(0)}}</div> <!--:class="[messageType === 'sent' && 'my-avatar']"-->
-                    <p class="receiver-name">{{message.from_obj.name_first}} {{message.from_obj.name_last}}</p>  
+    <div style="display: flex; flex-direction: column-reverse">
+        <div class="message">
+            <!--:class="[messageType === 'sent' && 'sent'] "-->
+            <div>
+                <div class="top">
+                    <div class="left">
+                        <div class="user-avatar">
+                            {{ message.from_obj.name_first.charAt(0) }} {{ message.from_obj.name_last.charAt(0) }}
+                        </div>
+                        <!--:class="[messageType === 'sent' && 'my-avatar']"-->
+                        <p class="receiver-name">{{ message.from_obj.name_first }} {{ message.from_obj.name_last }}</p>
+                    </div>
+                    <div class="message-time">
+                        <!--:class="[messageType === 'sent' ? 'time-sent' : 'time-received']"-->
+
+                        <p class="day_part" v-if="Number(message.created_date.slice(11, 13)) + 2 > 12">
+                            {{ Number(message.created_date.slice(11, 13)) + 2 }}:
+                            {{ Number(message.created_date.slice(14, 16)) }} PM
+                        </p>
+                        <p class="day_part" v-else>
+                            {{ Number(message.created_date.slice(11, 13)) + 2 }}:
+                            {{ Number(message.created_date.slice(14, 16)) }} AM
+                        </p>
+                    </div>
                 </div>
-                <div class="message-time"  >  <!--:class="[messageType === 'sent' ? 'time-sent' : 'time-received']"-->
-                
-                <p class="day_part"  v-if="Number(message.created_date.slice(11, 13))+2>12" > {{ Number(message.created_date.slice(11, 13))+2}}:
-                    {{ Number(message.created_date.slice(14, 16))}}  PM</p>
-                    <p class="day_part" v-else>{{ Number(message.created_date.slice(11, 13))+2}}:    
-                    {{ Number(message.created_date.slice(14, 16))}}  AM</p>  
+                <div class="bottom">
+                    <p>{{ message.msg_text }}</p>
                 </div>
-            </div>
-            <div class="bottom">
-                <p>{{message.msg_text}}</p>
             </div>
         </div>
-    </div>
     </div>
 </template>
 
 <script>
 export default {
     name: "OneMessage",
-    props:['user','message_type','dataProp','message'],
- //   props:{
-  //     messageType: {
-  //         type: String,
-  //          required: true,
-  //     },
-  //  },
+    props: ["user", "message_type", "dataProp", "message"],
+    //   props:{
+    //     messageType: {
+    //         type: String,
+    //          required: true,
+    //     },
+    //  },
     data() {
         return {
-          storage_id:'',
-          first_initial:'',
-          second_initisal:'',
-          am_pm_hours:false,
-          
+            storage_id: "",
+            first_initial: "",
+            second_initisal: "",
+            am_pm_hours: false,
         };
     },
     mounted() {
-        
-        this.storage_id= window.location.href.split("/").pop();
-       fetch(process.env.VUE_APP_URL + `/message/${this.storage_id} `, {
+        this.storage_id = window.location.href.split("/").pop();
+        fetch(process.env.VUE_APP_URL + `/message/${this.storage_id} `, {
             method: "GET",
             headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("token")}` },
         })
             .then(response => response.json())
-            .then(data => (this.inner_messages = data))
-           // .then(data => console.log('messages',data))
-    },  
-    
+            .then(data => (this.inner_messages = data));
+        // .then(data => console.log('messages',data))
+    },
 };
 </script>
 

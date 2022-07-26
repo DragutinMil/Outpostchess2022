@@ -20,8 +20,13 @@
                         <div class="header-list-mobile">Inbox</div>
                     </div>
 
-                    <OneChat v-for="contact_list in messages_contact_list" :key="contact_list.conv_uuid" :contact_list="contact_list" message-type="not-seen" />
-            <!--       <OneChat message-type="seen" />    --> 
+                    <OneChat
+                        v-for="contact_list in messages_contact_list"
+                        :key="contact_list.conv_uuid"
+                        :contact_list="contact_list"
+                        message-type="not-seen"
+                    />
+                    <!--       <OneChat message-type="seen" />    -->
                 </div>
             </div>
             <!-- RIGHT -->
@@ -43,11 +48,10 @@ export default {
     },
     data() {
         return {
-          messages_contact_list:[]
+            messages_contact_list: [],
         };
     },
     mounted() {
-
         fetch(process.env.VUE_APP_URL + "/message", {
             method: "GET",
             headers: {
@@ -56,8 +60,8 @@ export default {
             },
         })
             .then(response => response.json())
-            .then(data => (this.messages_contact_list = data))
-           // .then(data => console.log('poruka',data))
+            .then(data => (this.messages_contact_list = data));
+        // .then(data => console.log('poruka',data))
     },
 
     methods: {},

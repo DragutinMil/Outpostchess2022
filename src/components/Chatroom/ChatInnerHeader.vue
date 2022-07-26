@@ -11,27 +11,27 @@
                 <img v-else id="profile-pic" :src="user.profile.file_url" alt="" />
             </div>
             <div class="left-text">
-                <h3 class="user-name">{{user.name_first}} {{user.name_last}}</h3>
+                <h3 class="user-name">{{ user.name_first }} {{ user.name_last }}</h3>
                 <div class="user-row-one">
                     <div class="location">
                         <img src="../../assets/location-icon.svg" alt="location icon" />
-                        <p>{{user.city}}</p>
+                        <p>{{ user.city }}</p>
                     </div>
                     <div class="user-age">
-                        <p>{{user.godine}} Years old</p>
+                        <p>{{ user.godine }} Years old</p>
                     </div>
                     <div class="gender">
-                        <p>{{user.sex}}</p>
+                        <p>{{ user.sex }}</p>
                     </div>
                 </div>
                 <div class="user-row-two">
                     <div class="federation">
-                        <p>Federation: {{user.federation}}</p>
-                 <!--     <img :src=user.federation_details.flag alt="flag" /> --> 
+                        <p>Federation: {{ user.federation }}</p>
+                        <!--     <img :src=user.federation_details.flag alt="flag" /> -->
                     </div>
                     <div class="fide-id">
                         <p>Fide ID :</p>
-                        <p>{{user.fide_id}}</p>
+                        <p>{{ user.fide_id }}</p>
                     </div>
                 </div>
             </div>
@@ -44,50 +44,45 @@
 </template>
 
 <script>
-
 export default {
     name: "ChatInnerHeader",
-    props:["dataProp","user_id"],
+    props: ["dataProp", "user_id"],
     data() {
         return {
-            user:{profile: {file_url:''},
-            storage_id:''
-            }
-        }
+            user: { profile: { file_url: "" }, storage_id: "" },
+        };
     },
     mounted() {
-        this.storage_id= window.location.href.split("/").pop(),
-         fetch(process.env.VUE_APP_URL + `/public_user_info/${this.storage_id} `, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-            .then(response => response.json())
-            .then(data => (this.user = data))
-         // .then(data => console.log('user_dataHeader',data));
-
+        (this.storage_id = window.location.href.split("/").pop()),
+            fetch(process.env.VUE_APP_URL + `/public_user_info/${this.storage_id} `, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+                .then(response => response.json())
+                .then(data => (this.user = data));
+        // .then(data => console.log('user_dataHeader',data));
     },
-      watch: {
-    dataProp() {
-      this.changeData()
+    watch: {
+        dataProp() {
+            this.changeData();
+        },
     },
-  },
 
     methods: {
-      changeData() {
-        fetch(process.env.VUE_APP_URL + `/public_user_info/${this.user_id} `, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-            .then(response => response.json())
-            .then(data => (this.user = data))
-           // .then(data => console.log('user_data',data));
-        
-      },
-     }
+        changeData() {
+            fetch(process.env.VUE_APP_URL + `/public_user_info/${this.user_id} `, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+                .then(response => response.json())
+                .then(data => (this.user = data));
+            // .then(data => console.log('user_data',data));
+        },
+    },
 };
 </script>
 

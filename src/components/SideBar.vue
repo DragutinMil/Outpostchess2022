@@ -18,13 +18,13 @@
             </router-link>
         </div>
         <div class="side-options">
-            <div  class="flex-center">
+            <div class="flex-center">
                 <img src="../assets/mail_outline_24px.png" alt="" />
             </div>
-           <!-- <p class="left-sidetext diffcol">Inbox</p>-->
+            <!-- <p class="left-sidetext diffcol">Inbox</p>-->
             <router-link to="../chatroom" style="color: #c7c9d0">
                 <p class="left-sidetext">Inbox</p>
-            </router-link>  
+            </router-link>
         </div>
         <div class="side-options">
             <div class="flex-center">
@@ -44,9 +44,8 @@
         <hr />
         <div class="side-options">
             <div class="flex-center">
-                <img  src="../assets/book.png" alt="" />
+                <img src="../assets/book.png" alt="" />
             </div>
-           
 
             <router-link to="../blog" style="color: #c7c9d0"> <p class="left-sidetext">Blog</p></router-link>
         </div>
@@ -129,11 +128,11 @@ export default {
 }
 
 .diffcol {
-    color: rgba(199, 201, 208, 0.2)
+    color: rgba(199, 201, 208, 0.2);
 }
 .diffcol:hover {
     color: rgba(199, 201, 208, 0.2);
-    opacity:1 !important
+    opacity: 1 !important;
 }
 
 hr {

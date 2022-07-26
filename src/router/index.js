@@ -120,7 +120,7 @@ const routes = [
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ "../views/ChatInner.vue"),
-       /* children: [{
+        /* children: [{
             path: 'chat-inner-header',
             component: () => import(/* webpackChunkName: "about"  "../components/Chatroom/ChatInnerHeader.vue"),
           }, {
@@ -130,7 +130,6 @@ const routes = [
           */
     },
 ];
-  
 
 const router = new VueRouter({
     routes,

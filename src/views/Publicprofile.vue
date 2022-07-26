@@ -47,15 +47,8 @@
                         </div>
                     </div>
                     <div id="middle2-button-container">
-                        <router-link 
-                        :user_uuid="idt"
-                        :to="{name:'ChatInner',params: { id: idt }  }">
-                            <button 
-                                
-                                class="middle2-buttons" 
-                                type="button"
-                                >Message 
-                            </button>
+                        <router-link :user_uuid="idt" :to="{ name: 'ChatInner', params: { id: idt } }">
+                            <button class="middle2-buttons" type="button">Message</button>
                         </router-link>
                         <!--    <div  v-for="list in my_connection_list" :key="list.conn_uuid">
                 <button 
