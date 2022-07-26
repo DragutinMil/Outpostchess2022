@@ -116,9 +116,6 @@ const routes = [
     {
         path: "/chatInner/:id",
         name: "ChatInner",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ "../views/ChatInner.vue"),
         /* children: [{
             path: 'chat-inner-header',
@@ -128,6 +125,26 @@ const routes = [
             component: () => import(/* webpackChunkName: "about"  "../components/Chatroom/OneMessage.vue"),
           }]
           */
+    },
+    {
+        path: "/wallet-add-payment-method",
+        name: "WalletAddPaymentMethod",
+        component: () => import("../views/Wallet/WalletAddPaymentMethod.vue"),
+    },
+    {
+        path: "/wallet",
+        name: "Wallet",
+        component: () => import("../views/Wallet/Wallet.vue"),
+    },
+    {
+        path: "/wallet-send",
+        name: "WalletSend",
+        component: () => import("../views/Wallet/WalletSend.vue"),
+    },
+    {
+        path: "/wallet-transaction",
+        name: "WalletTransaction",
+        component: () => import("../views/Wallet/WalletTransaction.vue"),
     },
 ];
 
