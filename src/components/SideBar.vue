@@ -108,6 +108,7 @@ export default {
 }
 
 .side-bar {
+  text-align: center;
   background-color: #202122;
   position: sticky;
   top: 0;
