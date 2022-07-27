@@ -156,6 +156,11 @@ const routes = [
         name: "WalletWithdraw",
         component: () => import("../views/Wallet/WalletWithdraw.vue"),
     },
+    {
+        path: "/wallet-withdraw-transaction",
+        name: "WalletWithdrawTransaction",
+        component: () => import("../views/Wallet/WalletWithdrawTransaction.vue"),
+    },
 ];
 
 const router = new VueRouter({

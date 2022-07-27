@@ -171,6 +171,7 @@ a {
 .input-div input {
   width: 11rem;
   cursor: pointer;
+  color: white;
 }
 
 .input-div img {
@@ -251,9 +252,10 @@ a {
     height: 26.884rem;
   }
 }
+
 @media screen and (max-width: 375px) {
- .input-div{
-   width: 80%;
- }
+  .input-div {
+    width: 80%;
+  }
 }
 </style>
