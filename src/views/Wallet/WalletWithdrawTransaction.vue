@@ -60,44 +60,48 @@
             <hr>
             <p class="estimate">Estimated arrival: 1-3 business days</p>
           </div>
-          <div class="row-three">
-            <h2>2.19 EUR fee will be dedcuted</h2>
+          <!-- second main row and tow three -->
+          <div class="row-three row-three-second">
+            <h2>Transfer</h2>
             <p>Nullam eu at adipiscing eu mi id elementum urna. In non euismod iaculis pellentesque tellus amet platea.
               Sed at amet faucibus tellus semper sed diam condimentum suspendisse.</p>
           </div>
-          <div class="main-row">
+          <div class="main-row main-row-second">
             <div class="block-1 block">
               <div>
-                <h2>Milena Dragišić</h2>
-                <p>$300.00</p>
+                <p>Transfer amount</p>
+                <h2>218,65 EUR</h2>
               </div>
-              <img src="../../assets/user-image.png" alt="user image">
             </div>
             <hr>
             <div class="block-2 block">
-              <p class="from">Transfer from:</p>
-              <div>
-                <img src="../../assets/OC-logo.jpg" alt="my user avatar">
-                <div class="from-text-bottom">
-                  <p>Out post balance</p>
-                  <p><span>239,0 USD</span> available</p>
-                </div>
-              </div>
+              <p>Converted from :</p>
+              <p>234,04 USD</p>
             </div>
             <hr>
-            <div class="transfer-to">
-              <p>Transfer to:</p>
-            </div>
-            <div class="block-3">
-              <img src="../../assets/check_circle_blue.svg" alt="verified icon">
-              <img src="../../assets/master-card.jpg" alt="mastercard logo">
-              <div class="text">
-                <p>Mastercard••••8095</p>
-                <p>Expires 04/23</p>
-              </div>
+            <div class="block-3 block-3-second">
+              <p>Conversion rate:</p>
+              <p>1,00 USD = 0,91478596 EUR</p>
             </div>
             <hr>
-            <p class="estimate">Estimated arrival: 1-3 business days</p>
+            <div class="block-3 block-3-second">
+              <p>Fee:</p>
+              <p>2,19 EUR</p>
+            </div>
+          </div>
+          <div class="total">
+            <p>You’ll get</p>
+            <h2>216,46 EUR</h2>
+          </div>
+          <div class="confirm">
+            <p class="disclaimer">
+              * Some disclaimer about money transfers via Outpost Chess, and how we’re protecting our
+              customers from fraudulent behavior on the platform.
+            </p>
+            <div class="btns">
+              <p class="cancel">Cancel</p>
+              <p class="continue">Continue</p>
+            </div>
           </div>
         </div>
       </div>
@@ -159,9 +163,6 @@ hr {
   }
 }
 
-.main-row {
-  flex-direction: column;
-}
 
 .main-row p {
   color: #6F7381;
@@ -282,7 +283,8 @@ hr {
   border: 1px solid #292A2E;
   padding-left: 3.25rem;
   padding-top: 1.688rem;
-  /*padding-bottom: 3.75rem;*/
+  flex-direction: column;
+
 }
 
 
@@ -392,32 +394,104 @@ hr {
   font-weight: 700;
 }
 
-.block-4 {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-right: 2.813rem;
+/*second part*/
+.row-three-second h2 {
+  font-size: 1.5rem;
 }
 
-.block-4 .text {
-  width: 23.116rem;
+.main-row-second {
+  margin-bottom: 0;
+}
+
+.main-row-second p {
+  font-weight: 500;
   font-size: 0.875rem;
 }
 
-.block-4 .btn {
-  width: 8.75rem;
-  height: 2.25rem;
+.main-row-second p:first-child {
+  margin-bottom: 0.453rem;
+}
+
+.main-row-second p:nth-child(2) {
+  color: #11C6D1;
+}
+
+.main-row-second .block-1 p {
+  font-weight: 500;
+  color: #6F7381;
+}
+
+.block-3-second {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  background-color: #202122;
+  padding-left: 3.25rem;
+  height: 5.394rem;
   align-items: center;
-  border: 1px solid #43464D;
+  padding-right: 3.885rem;
+  border-right: 1px solid #292A2E;
+  border-left: 1px solid #292A2E;
+}
+
+.total p {
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.total h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #11C6D1;
+}
+
+.confirm {
+  margin-bottom: 4.125rem;
+  display: flex;
+  align-items: center;
+  color: #6f7381;
+  justify-content: space-between;
+  height: 8rem;
+  border: 1px solid #292A2E;
+  border-top: none;
+  padding-right: 3.885rem;
+}
+
+.confirm .disclaimer {
+  font-size: 0.625rem;
+  width: 17.346rem;
+  color: #6f7381;
+  padding-left: 2.625rem;
+}
+
+.confirm .btns {
+  display: flex;
+  width: 49%;
+  justify-content: space-between;
+  padding-left: 2rem;
+  align-items: center;
+}
+
+.cancel {
   cursor: pointer;
 }
 
-.mastercard {
-  width: 4.375rem;
-  flex: 0 0 6.375rem;
-  margin-right: 1.875rem;
+.continue {
+  color: white;
+  border: 1px solid #c8a07d;
+  width: 11.25rem;
+  height: 2.518rem;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 
@@ -427,17 +501,24 @@ hr {
     flex-direction: column;
   }
 
-  .block-4 {
-    align-items: unset;
-    flex-direction: column;
+  .confirm {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    padding-inline: 2.625rem;
+    padding-block: 2rem;
+    height: auto;
   }
 
-  .block-4 .text {
-    margin-bottom: 1.625rem;
+  .confirm .btns {
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 0;
+    margin-bottom: 2rem;
   }
 
-  .block-4 .btn {
-    margin-left: auto;
+  .confirm .disclaimer {
+    width: 100%;
+    padding-left: 0;
   }
 }
 
@@ -468,6 +549,10 @@ hr {
 
   .top p {
     text-align: center;
+  }
+
+  .row-one {
+    padding-left: 2.333rem;
   }
 
   .row-two {
