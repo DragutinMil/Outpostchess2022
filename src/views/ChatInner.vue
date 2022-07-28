@@ -18,7 +18,7 @@
                             v-if="chat_user.titula_organizer !== null && chat_user.rola.indexOf('ORGANIZER') !== -1"
                             class="pill pill-small"
                         >
-                            IO
+                            IO 
                         </div>
                         <div
                             v-if="chat_user.titula_trainer !== null && chat_user.rola.indexOf('TRAINER') !== -1"
@@ -46,12 +46,35 @@
                         </div>
                     </div>
                 </div>
-                <div v-for="message in inner_messages" track-by="msg_id" :key="message.msg_id">
-                    <OneMessage :user="chat_user" :message="message" />
-                    <!--       <OneMessage message-type="received" :user="chat_user" />
-                <OneMessage message-type="sent" />
-                <OneMessage message-type="received" />-->
+
+                <div  class="chat-overflow" ref="messagesContainer">
+                   
+                        <div   v-for="message in inner_messages"  :key="message.msg_id">
+                            <OneMessage
+                                v-if="message.from_obj.user_uuid == storage_id"
+                                :user="chat_user"
+                                :message="message"
+                            />
+                            <OneMessage v-else message-type="sent" :user="chat_user" :message="message"  />
+                            <!--  
+                          <OneMessage :message-type="received" />-->
+                        </div>
+                    
+                    
+                      
                 </div>
+            <!--      <div v-else class="chat-overflow" ref="messagesContainer">
+                    <div v-for="message in inner_messages2"  :key="message.msg_id">
+                        <OneMessage
+                            v-if="message.from_obj.user_uuid == storage_id"
+                            :user="chat_user"
+                            :message="message"
+                        />
+                        <OneMessage v-else message-type="sent" :user="chat_user" :message="message"  />
+                        
+               <OneMessage :message-type="received" />
+                    </div>
+                </div>-->
             </div>
             <SendMessage />
         </div>
@@ -78,10 +101,22 @@ export default {
             messageType: {
                 type: String,
                 required: true,
+
             },
         };
     },
-    mounted() {
+    watch: {
+       inner_messages2(){
+        this.inner_messages=[ ...this.inner_messages,this.$store.state.message]
+        console.log("opasno",this.inner_messages)
+       }
+       
+         
+       
+    },
+    created() {
+        //console.log("store",this.$store.state.message_arr.length)
+       // console.log("store",this.$store.state.message_arr)
         this.storage_id = window.location.href.split("/").pop();
         fetch(process.env.VUE_APP_URL + `/public_user_info/${this.storage_id} `, {
             method: "GET",
@@ -99,9 +134,31 @@ export default {
         })
             .then(response => response.json())
             .then(data => (this.inner_messages = data))
-            .then(data => console.log("messages", data));
+            .then(data => console.log("messages", data))
     },
-    methods: {
+    mounted() {
+        this.scrollToEnd();
+        
+        this.storage_id=window.location.href.split("/").pop();
+        this.$store.dispatch("getMessage",this.storage_id);
+     
+    },
+    updated() {
+        this.scrollToEnd();
+    },
+
+    
+
+    methods: { 
+        receiveMessage(payload) {
+            this.$store.commit("receiveMessage", payload);
+        },
+        scrollToEnd() {
+            var content = this.$refs.messagesContainer;
+            content.scrollTop = content.scrollHeight;
+           // console.log("konzola",this.$store.state.message_arr)
+        },
+        
         updateCart(e) {
             this.storage_id = e;
             fetch(process.env.VUE_APP_URL + `/public_user_info/${this.storage_id} `, {
@@ -123,8 +180,10 @@ export default {
             })
                 .then(response => response.json())
                 .then(data => (this.inner_messages = data))
-                .then(data => console.log("messages", data));
-        },
+                .then(data => console.log("messages", data))
+                
+        }, 
+        
     },
 };
 </script>
@@ -152,7 +211,6 @@ export default {
 
 .chat {
     height: 80vh;
-    overflow-y: auto;
 }
 
 .user-details {
@@ -196,6 +254,10 @@ export default {
     width: 4.25rem !important;
     display: flex;
     justify-content: center;
+}
+.chat-overflow {
+    overflow-y: scroll;
+    height: 47vh;
 }
 
 @media screen and (max-width: 1440px) {

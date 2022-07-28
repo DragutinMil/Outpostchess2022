@@ -46,7 +46,7 @@
 
                 <!--SEARCH RESULTS -->
                 <div v-if="searchresults">
-                    <div v-for="(usersrc, index) in usersearchreact" :key="usersrc.user_uuid" class="search">
+                    <div v-for="(usersrc, index) in usersearch" :key="usersrc.user_uuid" class="search">
                         <div class="search-res">
                             {{ index + 1 }}
                         </div>
@@ -397,7 +397,6 @@ export default {
             flags: [],
             alluser: "",
             usersearch: "",
-            usersearchreact: "",
             clickage: "",
             clickcountry: "",
             clickrating: "",
@@ -438,7 +437,7 @@ export default {
             titule: [],
         };
     },
-    mounted() {
+    created() {
         fetch(process.env.VUE_APP_URL + "/titule", {
             method: "GET",
             headers: {
@@ -481,9 +480,8 @@ export default {
             }),
         })
             .then(response => response.json())
-            .then(data => (this.usersearch = data));
-
-        //.then(data => console.log(data)),
+            .then(data => (this.usersearch = data))
+            .then(data => console.log("mount post data", data));
 
         fetch(process.env.VUE_APP_URL + "/current_user_info", {
             method: "GET",
@@ -493,9 +491,10 @@ export default {
             },
         })
             .then(response => response.json())
-            .then(data => (this.user = data));
-        //.then(data => console.log('podaci',data))
+            .then(data => (this.user = data))
+            .then(data => console.log("first data", data));
     },
+    mounted() {},
 
     methods: {
         confirmSearch: function () {
@@ -527,9 +526,8 @@ export default {
                 }),
             })
                 .then(response => response.json())
-                .then(data => (this.usersearchreact = data));
-            //.then((data) => console.log(data));
-            console.log(this.titule);
+                .then(data => (this.usersearch = data))
+                .then(data => console.log("search data", data));
         },
 
         clickside: function () {

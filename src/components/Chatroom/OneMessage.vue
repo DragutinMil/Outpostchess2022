@@ -1,26 +1,26 @@
 <template>
-    <div style="display: flex; flex-direction: column-reverse">
-        <div class="message">
+    <div>
+        <div class="message" :class="[messageType === 'sent' && 'sent']">
             <!--:class="[messageType === 'sent' && 'sent'] "-->
             <div>
                 <div class="top">
                     <div class="left">
-                        <div class="user-avatar">
+                        <div class="user-avatar" :class="[messageType === 'sent' && 'my-avatar']">
                             {{ message.from_obj.name_first.charAt(0) }} {{ message.from_obj.name_last.charAt(0) }}
                         </div>
                         <!--:class="[messageType === 'sent' && 'my-avatar']"-->
-                        <p class="receiver-name">{{ message.from_obj.name_first }} {{ message.from_obj.name_last }}</p>
+                        <p class="receiver-name">{{message.from_obj.name_first}} {{ message.from_obj.name_last }}</p>
                     </div>
-                    <div class="message-time">
+                    <div class="message-time" :class="[messageType === 'sent' ? 'time-sent' : 'time-received']">
                         <!--:class="[messageType === 'sent' ? 'time-sent' : 'time-received']"-->
 
                         <p class="day_part" v-if="Number(message.created_date.slice(11, 13)) + 2 > 12">
-                            {{ Number(message.created_date.slice(11, 13)) + 2 }}:
-                            {{ Number(message.created_date.slice(14, 16)) }} PM
+                            {{ Number(message.created_date.slice(11, 13)) + 2 }}
+                            {{ message.created_date.slice(14, 16) }} PM  
                         </p>
                         <p class="day_part" v-else>
                             {{ Number(message.created_date.slice(11, 13)) + 2 }}:
-                            {{ Number(message.created_date.slice(14, 16)) }} AM
+                            {{ message.created_date.slice(14, 16) }} AM 
                         </p>
                     </div>
                 </div>
@@ -35,13 +35,14 @@
 <script>
 export default {
     name: "OneMessage",
-    props: ["user", "message_type", "dataProp", "message"],
-    //   props:{
-    //     messageType: {
-    //         type: String,
-    //          required: true,
-    //     },
-    //  },
+    props: {
+        user: [],
+        messageType: {
+            type: String,
+            // required: true,
+        },
+        message: [],
+    },
     data() {
         return {
             storage_id: "",
@@ -50,16 +51,11 @@ export default {
             am_pm_hours: false,
         };
     },
-    mounted() {
-        this.storage_id = window.location.href.split("/").pop();
-        fetch(process.env.VUE_APP_URL + `/message/${this.storage_id} `, {
-            method: "GET",
-            headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("token")}` },
-        })
-            .then(response => response.json())
-            .then(data => (this.inner_messages = data));
-        // .then(data => console.log('messages',data))
-    },
+     created() {
+        this.$socket.on("tb_notification", this.receiveMessage);
+     }
+     
+     
 };
 </script>
 
@@ -77,7 +73,7 @@ export default {
 }
 
 .sent {
-    background-color: #c8a07d;
+    background-color: #202122;
     width: 41.813rem;
     margin-left: auto;
 }

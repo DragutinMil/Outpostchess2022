@@ -4,7 +4,7 @@
             <div class="one-chat" :class="[messageType === 'seen' ? '' : 'message-not-seen']">
                 <img class="new-message-icon" src="../../assets/koverta-new.svg" alt="new message" />
                 <div class="divider" />
-                <div class="user-profile-avatar">{{ contact_list.from_obj.initials }}</div>
+                <div class="user-profile-avatar">{{ contact_list.from_obj.initials }} </div>
                 <p class="user-name">{{ contact_list.from_obj.name_first }} {{ contact_list.from_obj.name_last }}</p>
                 <p class="short-message">{{ message_result }}</p>
                 <div class="message-time">
@@ -12,7 +12,7 @@
                                         contact_list.last_message_date.slice(0, 4)
                                     }}. -->
                     {{ this.hour }}:{{ this.minute }}
-                    <p class="day_part" v-if="am_pm_hours">PM</p>
+                    <p class="day_part" v-if="am_pm_hours">PM </p>
                     <p class="day_part" v-else>AM</p>
                 </div>
 
@@ -69,18 +69,24 @@ export default {
         };
     },
     mounted() {
-        this.hour = Number(this.contact_list.last_message_date.slice(11, 13)) + 2;
-        this.minute = Number(this.contact_list.last_message_date.slice(14, 16));
-        if (this.hour > 12) {
+        // this.hour = Number(this.contact_list.last_message_date.slice(11, 13)) + 2;
+        this.hour = this.contact_list.last_message_date.slice(11, 13);
+        this.minute = this.contact_list.last_message_date.slice(14, 16);
+        if (this.hour > 12 && this.hour > 21) {
             this.hour = this.hour - 12;
             this.am_pm_hours = true;
+        } else if (this.hour > 12 && this.hour < 22) {
+            this.hour = 0 + (this.hour - 12).toString();
+            this.am_pm_hours = true;
         }
+
         if (this.contact_list.last_message.length > 39) {
             this.message_result = this.contact_list.last_message.substring(0, 39) + "...";
         } else {
             this.message_result = this.contact_list.last_message;
         }
     },
+       
 };
 </script>
 
@@ -113,7 +119,7 @@ a {
     width: 1px;
     background-color: white;
     margin-left: 2.188rem;
-    margin-right: 6.75rem;
+    margin-right: 2.75rem;
 }
 
 .user-profile-avatar {
@@ -128,8 +134,13 @@ a {
     margin-right: 3.75rem;
 }
 
-.user-name,
-.short-message,
+.user-name {
+    font-weight: 600;
+    margin: auto 0;
+    text-align: left;
+    width: 20rem;
+}
+
 .message-time {
     display: flex;
     justify-content: center;
@@ -138,16 +149,16 @@ a {
     font-family: "Red Hat Display", sans-serif;
     font-weight: bold;
     color: white;
-}
-
-.user-name {
-    margin-right: 11rem;
+    width: 4rem;
 }
 
 .short-message {
+    text-align: left !important;
+    margin: 0;
+    padding: 0;
     width: 10.938rem;
-    text-align: start;
-    margin-right: 12rem;
+    margin-right: 14rem;
+    font-weight: 600;
 }
 
 .message-time {
@@ -160,6 +171,7 @@ a {
 .day_part {
     margin: auto;
     padding-left: 0.75rem;
+    width: 1.5rem;
 }
 
 @media screen and (max-width: 1680px) {

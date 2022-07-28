@@ -41,13 +41,14 @@ export default {
         };
     },
     computed: {
-        notif_arr() {
-            return this.$store.state.notif_arr;
-        },
+       notif_arr() {
+           return this.$store.state.notif_arr;
+       },
     },
 
     mounted() {
         this.$store.dispatch("getNotification");
+        console.log('provera',this.$store.state.notif_arr);
     },
     created() {
         this.$socket.on("tb_notification", this.receiveNotif);
@@ -61,7 +62,7 @@ export default {
             //console.log('received a notif', payload)
             //this.notif_arr=[payload,...this.notif_arr]
             //console.log(this.notif_arr)
-            console.log(payload);
+            console.log("prvi",payload);
             this.$store.commit("receiveNotif", payload);
         },
         go_to_search: function () {
@@ -73,7 +74,7 @@ export default {
                 this.lastId = this.$store.state.notif_arr[0].n_id;
                 this.$store.commit("seen_notification");
                 console.log(this.$store.state.notif_arr);
-                fetch(`https://app.outpostchess.com/api/v2/notification_last_read_set/${this.lastId} `, {
+                fetch(`https://api.outpostchess.com/api/v2/notification_last_read_set/${this.lastId} `, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
