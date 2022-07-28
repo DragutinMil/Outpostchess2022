@@ -67,10 +67,19 @@
                   </div>
                 </div>
                 <div class="right-bottom">
+                  <router-link to="/wallet-add-payment-method">
+                    <div class="add-card">
+                      <img src="../../assets/add-circle.svg" alt="add a card">
+                      <p>Add credit card</p>
+                    </div>
+                  </router-link>
                   <p>Remove</p>
-                  <p class="edit">Edit</p>
+                  <router-link to="/wallet-add-payment-method">
+                    <p class="edit">Edit</p>
+                  </router-link>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -260,10 +269,17 @@ a {
   margin-right: 0.6rem;
 }
 
+.right-bottom p {
+  color: #6F7381;
+  cursor: pointer;
+}
+
 .right {
   display: flex;
+  width: 22.533rem;
   flex-direction: column;
   justify-content: space-between;
+  background-color: #202122;
 }
 
 .right-top {
