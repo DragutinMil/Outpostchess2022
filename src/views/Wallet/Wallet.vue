@@ -62,7 +62,9 @@
                   </div>
                 </router-link>
                 <p>Remove</p>
-                <p class="edit">Edit</p>
+                <router-link to="/wallet-add-payment-method">
+                  <p class="edit">Edit</p>
+                </router-link>
               </div>
             </div>
           </div>

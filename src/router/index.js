@@ -132,6 +132,11 @@ const routes = [
         component: () => import("../views/Wallet/WalletAddPaymentMethod.vue"),
     },
     {
+        path: "/wallet-adding-payment-method",
+        name: "WalletAddingPaymentMethod",
+        component: () => import("../views/Wallet/WalletAddingPaymentMethod.vue"),
+    },
+    {
         path: "/wallet",
         name: "Wallet",
         component: () => import("../views/Wallet/Wallet.vue"),
