@@ -51,7 +51,7 @@
                     </div>
                   </router-link>
                   <p>Remove</p>
-                  <router-link to="/wallet-add-payment-method">
+                  <router-link to="/wallet-adding-payment-method">
                     <p class="edit">Edit</p>
                   </router-link>
                 </div>
@@ -67,7 +67,7 @@
                   </div>
                 </div>
                 <div class="right-bottom">
-                  <router-link to="/wallet-add-payment-method">
+                  <router-link to="/wallet-adding-payment-method">
                     <div class="add-card">
                       <img src="../../assets/add-circle.svg" alt="add a card">
                       <p>Add credit card</p>
