@@ -44,8 +44,16 @@
                   </div>
                 </div>
                 <div class="right-bottom">
+                  <router-link to="/wallet-add-payment-method">
+                    <div class="add-card">
+                      <img src="../../assets/add-circle.svg" alt="add a card">
+                      <p>Add credit card</p>
+                    </div>
+                  </router-link>
                   <p>Remove</p>
-                  <p class="edit">Edit</p>
+                  <router-link to="/wallet-add-payment-method">
+                    <p class="edit">Edit</p>
+                  </router-link>
                 </div>
               </div>
               <div class="right">
@@ -241,13 +249,42 @@ a {
 .main-row-bottom {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  justify-content: space-between;
+}
+
+.add-card {
+  display: flex;
+}
+
+.add-card img {
+  margin-right: 0.6rem;
 }
 
 .right {
-  width: 23rem;
-  background-color: #171819;
-  border: 1px solid #292A2E;
-  border-top: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.right-top {
+  padding-top: 2.125rem;
+  padding-left: 2.688rem;
+  padding-bottom: 1.5rem;
+}
+
+.right-text {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 100%;
+  font-size: 1rem;
+}
+
+.right-text p:first-child {
+  color: white;
+}
+
+.right-text p:nth-child(2) {
+  color: #5C5E64;
 }
 
 
@@ -300,7 +337,7 @@ a {
   background-color: #1A1A1B;
   padding-left: 2.688rem;
   padding-right: 3.5rem;
-  justify-content: flex-end;
+  justify-content: space-between;
   display: flex;
   align-items: center;
 }
