@@ -2,7 +2,7 @@
     <div class="home">
         <div id="left-login">
             <div id="logo-pic">
-                <img src="../assets/logo2.png" alt="" />
+                <img src="../../../assets/logo2.png" alt="" />
             </div>
 
             <div>
@@ -208,7 +208,7 @@ a {
 }
 
 #right-login {
-    background-image: url("../assets/loginphoto.jpg");
+    background-image: url("../../../assets/loginphoto.jpg");
     width: 100%;
     background-size: cover;
     background-position: center;

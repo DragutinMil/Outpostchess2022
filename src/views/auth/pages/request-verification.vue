@@ -2,19 +2,19 @@
     <div class="home">
         <div id="left-login">
             <div id="logo-pic">
-                <img src="../assets/logo2.png" alt="" />
+                <img src="../../../assets/logo2.png" alt="" />
             </div>
-            <div style="padding-top: 1.5625rem">
-                <div id="welcom-text">
-                    <p class="letter-44" style="padding-bottom: 2.5rem">Forgotten your password?</p>
-                    <p class="letter-44">No need to despair - just enter your email</p>
-                    <p class="letter-44" style="padding-bottom: 1.25rem">address below to request a password reset.</p>
+            <div style="padding-top: 25px">
+                <div class="welcom-text">
+                    <p class="letter-44" style="padding-bottom: 2.5rem" />
+                    <p class="letter-44">Enter email address below,</p>
+                    <p class="letter-44" style="padding-bottom: 10px">and request to resend verification mail</p>
                 </div>
             </div>
             <div id="input-signup">
                 <div>
                     <input
-                        v-model="emailReset"
+                        v-model="emailreset"
                         type="email"
                         name=""
                         :class="{ mailin: isActive }"
@@ -24,12 +24,16 @@
                 </div>
                 <div id="forgot-text" />
                 <div id="butt1">
-                    <button type="button" class="text-join" style="border: 1px solid #c8a07d" @click="passReset()">
-                        Request password reset
+                    <button type="button" class="text-join" style="border: 1px solid #c8a07d" @click="verReset()">
+                        Resend verification mail
                     </button>
                 </div>
+
+                <!--   <p id="text-or">or</p>
+                <button type="button" onclick="alert('Hello world!')"   class="text-join"  style="border: 1px solid #E8E8E8;"> <div id="google-cor1"> <div id="google-cor"> <img src="../assets/Group.svg" id="" alt="google"></div><p id="joingoogle">Join with Google</p> </div></button>         
+             -->
             </div>
-            <div id="welcom-text">
+            <div class="welcom-text">
                 <p class="letter-34">
                     {{ request }}
                 </p>
@@ -45,21 +49,21 @@ export default {
     name: "Signin",
     data() {
         return {
-            emailReset: "",
+            emailreset: "",
             request: "",
             isActive: true,
         };
     },
     methods: {
-        passReset: function () {
-            if (this.emailReset == "") {
+        verReset: function () {
+            if (this.emailreset == "") {
                 return (this.request = "*Enter email adress");
             }
-            if (this.emailReset !== "") {
-                fetch(process.env.VUE_APP_URL + "/public_forgot_password", {
+            if (this.emailreset !== "") {
+                fetch(process.env.VUE_APP_URL + "/public_resend_activation_email", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ email: this.emailReset }),
+                    body: JSON.stringify({ email: this.emailreset }),
                 }).then(response => {
                     if (response.ok) {
                         console.log("ok");
@@ -67,7 +71,7 @@ export default {
                         throw new Error("Something went wrong");
                     }
                 });
-                this.request = "*Please check your email and reset password";
+                this.request = "*Please check your email";
             }
         },
     },
@@ -87,18 +91,11 @@ a {
     height: 100vh;
 }
 
-.flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .letter-44 {
     display: flex;
     color: #ffffff;
     font-size: 1rem;
 }
-
 .letter-34 {
     font-size: 0.875rem;
     color: #ffffff;
@@ -107,7 +104,7 @@ a {
     font-size: 0.875rem;
     color: #ffffff;
     background-color: #1b1c1d;
-    border-radius: 0.75rem;
+    border-radius: 0.6875rem;
     width: 65%;
     box-sizing: border-box;
     border-radius: 6px;
@@ -118,7 +115,7 @@ a {
 }
 
 #right-login {
-    background-image: url("../assets/loginphoto.jpg");
+    background-image: url("../../../assets/loginphoto.jpg");
     width: 100%;
     background-size: cover;
     background-position: center;
@@ -130,11 +127,11 @@ a {
     padding-top: 5px;
     display: flex;
 }
-#welcom-text > p {
+.welcom-text > p {
     margin: 0;
     padding-left: 29%;
 }
-#welcom-text {
+.welcom-text {
     margin: 1.875rem;
     text-align: left;
 }
@@ -153,7 +150,7 @@ a {
     width: 65%;
     padding: 2.1875rem 0 2.1875rem 0;
     margin: auto;
-    border-radius: 0.75rem;
+    border-radius: 0.6875rem;
 }
 #letter-16 {
     color: #ffffff;
@@ -167,17 +164,37 @@ a {
     border-radius: 4px;
     background-color: #1b1c1d;
     height: 2.5rem;
-    padding-left: 1rem;
+    padding-left: 0.9375rem;
     font-size: 0.875rem;
     color: #ffffff;
 }
-
 #text-or {
     font-size: 0.875rem;
     color: #ffffff;
-    padding-top: 1rem;
+    padding-top: 0.9375rem;
 }
 #butt1 {
-    padding-top: 1.25rem;
+    padding-top: 1.25em;
 }
+/*
+  #google-cor1{
+     display:flex;
+      justify-content: center;
+       align-items: center;
+  }
+   #google-cor{
+     width:1.25em;
+     margin:auto 0 auto 0;
+     padding-right:0.4375em;
+   }
+   #reqpass{
+     color:#F2358D;
+     text-align: left;
+     padding-left:17.5%;
+     font-size: 0.75rem;
+   }
+   #joingoogle{
+      margin:0;
+   padding-left:0.9375rem;
+   }*/
 </style>

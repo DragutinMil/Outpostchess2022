@@ -2,36 +2,32 @@
     <div class="home">
         <div id="left-login">
             <div id="logo-pic">
-                <img src="../assets/logo2.png" alt="" />
+                <img src="../../../assets/logo2.png" alt="" />
             </div>
-            <div style="padding-top: 25px">
+            <div style="padding-top: 1.5625rem">
                 <div id="welcom-text">
-                    <p class="letter-44" style="padding-bottom: 40px" />
-                    <p class="letter-44">Enter email address below,</p>
-                    <p class="letter-44" style="padding-bottom: 10px">and request to resend verification mail</p>
+                    <p class="letter-44" style="padding-bottom: 2.5rem">Forgotten your password?</p>
+                    <p class="letter-44">No need to despair - just enter your email</p>
+                    <p class="letter-44" style="padding-bottom: 1.25rem">address below to request a password reset.</p>
                 </div>
             </div>
             <div id="input-signup">
                 <div>
                     <input
+                        v-model="emailReset"
                         type="email"
-                        v-model="emailreset"
                         name=""
                         :class="{ mailin: isActive }"
                         placeholder="Email"
-                        @keyup.enter="passreset()"
+                        @keyup.enter="passReset()"
                     />
                 </div>
                 <div id="forgot-text" />
                 <div id="butt1">
-                    <button type="button" class="text-join" style="border: 1px solid #c8a07d" @click="verreset()">
-                        Resend verification mail
+                    <button type="button" class="text-join" style="border: 1px solid #c8a07d" @click="passReset()">
+                        Request password reset
                     </button>
                 </div>
-
-                <!--   <p id="text-or">or</p>
-                <button type="button" onclick="alert('Hello world!')"   class="text-join"  style="border: 1px solid #E8E8E8;"> <div id="google-cor1"> <div id="google-cor"> <img src="../assets/Group.svg" id="" alt="google"></div><p id="joingoogle">Join with Google</p> </div></button>         
-             -->
             </div>
             <div id="welcom-text">
                 <p class="letter-34">
@@ -49,21 +45,21 @@ export default {
     name: "Signin",
     data() {
         return {
-            emailreset: "",
+            emailReset: "",
             request: "",
             isActive: true,
         };
     },
     methods: {
-        verreset: function () {
-            if (this.emailreset == "") {
+        passReset: function () {
+            if (this.emailReset == "") {
                 return (this.request = "*Enter email adress");
             }
-            if (this.emailreset !== "") {
-                fetch("https://app.outpostchess.com/api/v2/public_resend_activation_email", {
+            if (this.emailReset !== "") {
+                fetch(process.env.VUE_APP_URL + "/public_forgot_password", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ email: this.emailreset }),
+                    body: JSON.stringify({ email: this.emailReset }),
                 }).then(response => {
                     if (response.ok) {
                         console.log("ok");
@@ -71,7 +67,7 @@ export default {
                         throw new Error("Something went wrong");
                     }
                 });
-                this.request = "*Please check your email";
+                this.request = "*Please check your email and reset password";
             }
         },
     },
@@ -100,48 +96,29 @@ a {
 .letter-44 {
     display: flex;
     color: #ffffff;
-    font-size: 16px;
-}
-
-.home-p {
-    color: #707070;
-
-    font-size: 12px;
-    line-height: 12px;
-}
-.blue {
-    color: #11c6d1;
-}
-.pass-in {
-    border: 1px solid rgba(196, 196, 196, 0.5);
-    box-sizing: border-box;
-    border-radius: 4px;
-    background-color: #1b1c1d;
-    height: 40px;
-    padding-left: 15px;
-    color: #ffffff;
+    font-size: 1rem;
 }
 
 .letter-34 {
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #ffffff;
 }
 .text-join {
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #ffffff;
     background-color: #1b1c1d;
-    border-radius: 11px;
+    border-radius: 0.75rem;
     width: 65%;
     box-sizing: border-box;
     border-radius: 6px;
-    height: 44px;
+    height: 2.75rem;
 }
 .text-join:hover {
     opacity: 0.7;
 }
 
 #right-login {
-    background-image: url("../assets/loginphoto.jpg");
+    background-image: url("../../../assets/loginphoto.jpg");
     width: 100%;
     background-size: cover;
     background-position: center;
@@ -158,14 +135,14 @@ a {
     padding-left: 29%;
 }
 #welcom-text {
-    margin: 30px;
+    margin: 1.875rem;
     text-align: left;
 }
 #left-login {
     background-color: #1b1b1c;
 }
 #logo-pic {
-    padding: 50px 35px 0px 35px;
+    padding: 3.125rem 2.1875rem 0px 2.1875rem;
     display: flex;
     width: 65%;
     margin-left: 24%;
@@ -174,13 +151,13 @@ a {
 #input-signup {
     background-color: #1b1c1d;
     width: 65%;
-    padding: 35px 0 35px 0;
+    padding: 2.1875rem 0 2.1875rem 0;
     margin: auto;
-    border-radius: 11px;
+    border-radius: 0.75rem;
 }
 #letter-16 {
     color: #ffffff;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 .mailin {
@@ -189,52 +166,18 @@ a {
     box-sizing: border-box;
     border-radius: 4px;
     background-color: #1b1c1d;
-    height: 40px;
-    padding-left: 15px;
-    font-size: 14px;
+    height: 2.5rem;
+    padding-left: 1rem;
+    font-size: 0.875rem;
     color: #ffffff;
-}
-
-.text-danger {
-    width: 65%;
-    box-sizing: border-box;
-    border-radius: 4px;
-    background-color: #1b1c1d;
-    height: 40px;
-    padding-left: 15px;
-    font-size: 14px;
-    border: 1px solid #f2358d;
-    color: #ffffff;
-    color: #f2358d;
 }
 
 #text-or {
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #ffffff;
-    padding-top: 15px;
+    padding-top: 1rem;
 }
 #butt1 {
-    padding-top: 20px;
-}
-
-#google-cor1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#google-cor {
-    width: 20px;
-    margin: auto 0 auto 0;
-    padding-right: 7px;
-}
-#reqpass {
-    color: #f2358d;
-    text-align: left;
-    padding-left: 17.5%;
-    font-size: 12px;
-}
-#joingoogle {
-    margin: 0;
-    padding-left: 15px;
+    padding-top: 1.25rem;
 }
 </style>

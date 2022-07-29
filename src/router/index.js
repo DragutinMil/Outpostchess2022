@@ -1,9 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-
-//import Player from '../views/profile/Player.vue'
-//import Club from '../views/profile/Club.vue'
+import authRoutes from "@/views/auth/auth-routes";
 
 Vue.use(VueRouter);
 
@@ -13,13 +11,14 @@ const routes = [
         name: "Home",
         component: Home,
     },
+    ...authRoutes,
     {
         path: "/login",
         name: "Signin",
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ "../views/Signin.vue"),
+        component: () => import(/* webpackChunkName: "about" */ "../views/auth/pages/sign-in.vue"),
     },
     {
         path: "/thanks",
@@ -27,7 +26,7 @@ const routes = [
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ "../views/Thanks.vue"),
+        component: () => import(/* webpackChunkName: "about" */ "../views/auth/pages/verification-sent.vue"),
     },
     {
         path: "/profile",
@@ -59,7 +58,7 @@ const routes = [
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ "../views/ThanksVerification.vue"),
+        component: () => import(/* webpackChunkName: "about" */ "../views/auth/pages/thanks.vue"),
     },
     {
         path: "/chatroom",
@@ -75,7 +74,7 @@ const routes = [
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ "../views/ResetPassword.vue"),
+        component: () => import(/* webpackChunkName: "about" */ "../views/auth/pages/request-password-reset.vue"),
     },
     {
         path: "/verification-mail",
@@ -83,7 +82,7 @@ const routes = [
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ "../views/VerificationMail.vue"),
+        component: () => import(/* webpackChunkName: "about" */ "../views/auth/pages/request-verification.vue"),
     },
     {
         path: "/publicprofile/:id",
@@ -101,7 +100,7 @@ const routes = [
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ "../views/Resettoken.vue"),
+        component: () => import(/* webpackChunkName: "about" */ "../views/auth/pages/reset-password.vue"),
 
         params: true,
     },

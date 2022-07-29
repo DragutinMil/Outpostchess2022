@@ -4,17 +4,12 @@
             <div class="left-login thanks-text1">
                 <div id="input-signup">
                     <div id="logo-pic">
-                        <img src="../assets/logo2.png" alt="" />
+                        <img src="../../../assets/logo2.png" alt="" />
                     </div>
                     <div>
-                        <p class="thanks-text1">Thank you for verifying!</p>
-                        <p class="thanks-text2 col">
-                            Thank you for early sign up! Your profile we'll be ready as soon as we reach enough
-                            registered users to make the best of your experience. We are launching our beta version
-                            soon, so hang on there! Your feedback and support means a lot to us.
-                        </p>
-                        <p class="thanks-text2 col">See you in the chess connected world.</p>
-                        <p class="thanks-text2">Outpost team - let's connect</p>
+                        <p class="thanks-text1">Thank you for joining us.</p>
+                        <p class="thanks-text2">Please check your email and verify your account.</p>
+                        <p class="thanks-text2 col">The Chess world is waiting for you!</p>
                     </div>
                 </div>
             </div>
@@ -30,16 +25,11 @@
     display: grid;
     grid-template-columns: 50% 50%;
     height: 100vh;
-    margin: auto;
 }
 .thanks-text2 {
-    font-size: 18px;
-    line-height: 26px;
+    font-size: 16px;
+    line-height: 21px;
     color: #c8a07d;
-    width: 70%;
-    margin: auto;
-    word-spacing: 2px;
-    padding: 15px 0 30px 0;
 }
 .col {
     color: #707070;
@@ -60,14 +50,14 @@
 .left-login {
     background-color: #1b1b1c;
     height: 100%;
-    padding: 15% 0;
+    padding: 20% 0;
 }
 
 #logo-pic {
     padding: 35px;
 }
 #right-login {
-    background-image: url("../assets/bg1.jpg");
+    background-image: url("../../../assets/bg1.jpg");
     width: 100%;
     background-size: cover;
     background-position: center;
@@ -77,19 +67,19 @@
 @media only screen and (max-width: 499px) {
     .home {
         display: flex;
-        height: 100%;
+        height: 100vh;
     }
     #right-login {
         display: none;
     }
     #left-background {
-        background-image: url("../assets/bg1.jpg");
+        background-image: url("../../../assets/bg1.jpg");
     }
     .left-login {
         opacity: 0.9;
     }
     #logo-pic {
-        padding: 30px 10px 30px 10px;
+        padding: 30px 20px 30px 20px;
         margin: auto;
     }
     .thanks-text1 {
@@ -97,8 +87,7 @@
         padding: 20px 0;
     }
     .thanks-text2 {
-        width: 100%;
-        line-height: 1.6;
+        padding: 10px;
     }
 }
 </style>
