@@ -14,12 +14,7 @@
 </template>
 
 <style scoped>
-.home {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    height: 100vh;
-    margin: auto;
-}
+
 .thanks-text2 {
     font-size: 18px;
     line-height: 26px;
@@ -45,41 +40,8 @@
     margin: auto;
     border-radius: 11px;
 }
-.left-login {
-    background-color: #1b1b1c;
-    height: 100%;
-    padding: 15% 0;
-}
-
-#logo-pic {
-    padding: 35px;
-}
-#right-login {
-    background-image: url("../../../assets/bg1.jpg");
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    color: #707070;
-}
 
 @media only screen and (max-width: 499px) {
-    .home {
-        display: flex;
-        height: 100%;
-    }
-    #right-login {
-        display: none;
-    }
-    #left-background {
-        background-image: url("../../../assets/bg1.jpg");
-    }
-    .left-login {
-        opacity: 0.9;
-    }
-    #logo-pic {
-        padding: 30px 10px 30px 10px;
-        margin: auto;
-    }
     .thanks-text1 {
         font-size: 38px;
         padding: 20px 0;

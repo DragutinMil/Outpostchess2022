@@ -127,13 +127,6 @@ p {
 a {
     text-decoration: none;
 }
-
-.home {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    height: 100vh;
-}
-
 .letter-44 {
     display: flex;
     color: #ffffff;
@@ -158,13 +151,6 @@ a {
     opacity: 0.7;
 }
 
-#right-login {
-    background-image: url("../../../assets/loginphoto.jpg");
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    color: #707070;
-}
 #forgot-text {
     width: 65%;
     padding-left: 18%;
@@ -179,15 +165,6 @@ a {
     margin: 1.875rem;
     text-align: left;
 }
-#left-login {
-    background-color: #1b1b1c;
-}
-#logo-pic {
-    padding: 3.125rem 2.1875rem 0px 2.1875rem;
-    display: flex;
-    width: 65%;
-    margin-left: 24%;
-}
 
 #input-signup {
     background-color: #1b1c1d;
@@ -195,10 +172,6 @@ a {
     padding: 2.1875rem 0 2.1875rem 0;
     margin: auto;
     border-radius: 0.6875rem;
-}
-#letter-16 {
-    color: #ffffff;
-    font-size: 1rem;
 }
 
 .mailin {
@@ -211,13 +184,5 @@ a {
     padding-left: 1rem;
     font-size: 0.875rem;
     color: #ffffff;
-}
-#text-or {
-    font-size: 0.875rem;
-    color: #ffffff;
-    padding-top: 1rem;
-}
-.butt1 {
-    padding-top: 1.25;
 }
 </style>

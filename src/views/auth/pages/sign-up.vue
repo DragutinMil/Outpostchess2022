@@ -288,16 +288,7 @@ hr {
     width: 70%;
     margin: 15px auto 30px auto;
 }
-.home {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    min-height: 100vh;
-}
 
-.let700 {
-    color: #ffffff;
-    font-weight: 700;
-}
 .checkbox1 {
     border: 5px solid green;
     box-sizing: border-box;
@@ -376,21 +367,6 @@ hr {
     opacity: 0.7;
 }
 
-#right-login {
-    background-image: url("../../../assets/loginphoto.jpg");
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    color: #707070;
-}
-
-#left-login {
-    background-color: #1b1b1c;
-}
-#logo-pic {
-    padding: 35px;
-}
-
 #input-signup {
     background-color: #1b1c1d;
     width: 70%;
@@ -462,25 +438,11 @@ hr {
     padding: 15px 0 10px 0;
 }
 
-#text-or {
-    font-size: 14px;
-    color: #ffffff;
-    padding-top: 15px;
-}
 #butt1 {
     padding-top: 20px;
 }
 
-#google-cor1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#google-cor {
-    width: 20px;
-    margin: auto 0 auto 0;
-    padding-right: 7px;
-}
+
 .reqpass {
     color: #f2358d;
     text-align: left;
@@ -512,9 +474,6 @@ hr {
 }
 
 @media screen and (min-width: 961px) and (max-width: 1441px) {
-    #logo-pic {
-        padding: 20px;
-    }
     hr {
         margin: 10px auto 15px auto;
     }
@@ -566,19 +525,9 @@ hr {
         width: 85%;
         margin-bottom: 15px;
     }
-    #right-login {
-        display: none;
-    }
-    .home {
-        display: flex;
-        height: 100%;
-    }
 
     .letter-24 {
         font-size: 16px;
-    }
-    #left-login {
-        width: 100%;
     }
 
     .check-part {

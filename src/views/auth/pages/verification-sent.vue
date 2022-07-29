@@ -35,41 +35,8 @@
     margin: auto;
     border-radius: 11px;
 }
-.left-login {
-    background-color: #1b1b1c;
-    height: 100%;
-    padding: 20% 0;
-}
-
-#logo-pic {
-    padding: 35px;
-}
-#right-login {
-    background-image: url("../../../assets/bg1.jpg");
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    color: #707070;
-}
 
 @media only screen and (max-width: 499px) {
-    .home {
-        display: flex;
-        height: 100vh;
-    }
-    #right-login {
-        display: none;
-    }
-    #left-background {
-        background-image: url("../../../assets/bg1.jpg");
-    }
-    .left-login {
-        opacity: 0.9;
-    }
-    #logo-pic {
-        padding: 30px 20px 30px 20px;
-        margin: auto;
-    }
     .thanks-text1 {
         font-size: 38px;
         padding: 20px 0;

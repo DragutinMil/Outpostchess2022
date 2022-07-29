@@ -148,18 +148,6 @@ a {
     text-decoration: none;
 }
 
-.home {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    height: 100vh;
-}
-
-.flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .letter-44 {
     display: flex;
     color: #ffffff;
@@ -174,15 +162,6 @@ a {
 }
 .blue {
     color: #11c6d1;
-}
-.pass-in {
-    border: 1px solid rgba(196, 196, 196, 0.5);
-    box-sizing: border-box;
-    border-radius: 4px;
-    background-color: #1b1c1d;
-    height: 40px;
-    padding-left: 15px;
-    color: #ffffff;
 }
 
 .text-join {
@@ -199,13 +178,6 @@ a {
     opacity: 0.7;
 }
 
-#right-login {
-    background-image: url("../../../assets/loginphoto.jpg");
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    color: #707070;
-}
 #forgot-text {
     width: 80%;
     padding-left: 18%;
@@ -220,15 +192,6 @@ a {
 #welcom-text {
     margin: 30px 0 30px 0;
 }
-#left-login {
-    background-color: #1b1b1c;
-}
-#logo-pic {
-    padding: 50px 35px 0px 35px;
-    display: flex;
-    width: 65%;
-    margin-left: 24%;
-}
 
 #input-signup {
     background-color: #1b1c1d;
@@ -237,10 +200,7 @@ a {
     margin: auto;
     border-radius: 11px;
 }
-#letter-16 {
-    color: #ffffff;
-    font-size: 16px;
-}
+
 
 .mailin {
     width: 65%;
@@ -276,16 +236,7 @@ a {
     padding-top: 20px;
 }
 
-#google-cor1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#google-cor {
-    width: 20px;
-    margin: auto 0 auto 0;
-    padding-right: 7px;
-}
+
 .reqpass {
     color: #f2358d;
     text-align: left;
@@ -296,11 +247,7 @@ a {
     margin: 0;
     padding-left: 15px;
 }
-#signup {
-    text-align: left;
 
-    padding-right: 50%;
-}
 
 @media screen and (min-width: 1149px) and (max-width: 1400px) {
     #password-padd {
@@ -329,26 +276,10 @@ a {
     }
 }
 @media only screen and (max-width: 950px) {
-    #right-login {
-        display: none;
-    }
-    .home {
-        display: flex;
-        width: 100vw;
-        height: 100vh;
-    }
+
     .letter-44 {
         font-size: 24px;
     }
-    #left-login {
-        width: 100%;
-    }
 
-    #logo-pic {
-        padding: 50px 35px 0px 35px;
-        display: flex;
-        width: 55%;
-        margin-left: 10%;
-    }
 }
 </style>
