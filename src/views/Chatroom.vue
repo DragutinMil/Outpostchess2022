@@ -13,7 +13,7 @@
                 <!-- CENTER/LIST -->
                 <div id="center_list">
                     <div class="center_list_header">
-                        <div class="header_list">Name & Surname</div>
+                        <div class="header_list header_list_first">Name & Surname</div>
                         <div class="header_list">Messages</div>
                         <div class="header_list">Times</div>
                         <div class="header_list">Invitation</div>
@@ -51,7 +51,7 @@ export default {
             messages_contact_list: [],
         };
     },
-    mounted() {
+    created() {
         fetch(process.env.VUE_APP_URL + "/message", {
             method: "GET",
             headers: {
@@ -158,6 +158,7 @@ hr {
     grid-template-columns: 29% 25% 21% 25%;
     height: 4.25rem;
     margin: auto;
+    padding-left: 3rem;
 }
 
 .header_list {
