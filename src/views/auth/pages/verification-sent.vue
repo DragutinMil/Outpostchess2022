@@ -1,23 +1,11 @@
 <template>
-    <div class="home">
-        <div id="left-background">
-            <div class="left-login thanks-text1">
-                <div id="input-signup">
-                    <div id="logo-pic">
-                        <img src="../../../assets/logo2.png" alt="" />
-                    </div>
-                    <div>
-                        <p class="thanks-text1">Thank you for joining us.</p>
-                        <p class="thanks-text2">Please check your email and verify your account.</p>
-                        <p class="thanks-text2 col">The Chess world is waiting for you!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="right-login" />
-
-        <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+  <div id="input-signup">
+    <div>
+      <p class="thanks-text1">Thank you for joining us.</p>
+      <p class="thanks-text2">Please check your email and verify your account.</p>
+      <p class="thanks-text2 col">The Chess world is waiting for you!</p>
     </div>
+  </div>
 </template>
 
 <style scoped>

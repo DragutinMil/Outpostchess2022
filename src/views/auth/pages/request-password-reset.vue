@@ -1,43 +1,36 @@
 <template>
-    <div class="home">
-        <div id="left-login">
-            <div id="logo-pic">
-                <img src="../../../assets/logo2.png" alt="" />
-            </div>
-            <div style="padding-top: 1.5625rem">
-                <div id="welcom-text">
-                    <p class="letter-44" style="padding-bottom: 2.5rem">Forgotten your password?</p>
-                    <p class="letter-44">No need to despair - just enter your email</p>
-                    <p class="letter-44" style="padding-bottom: 1.25rem">address below to request a password reset.</p>
-                </div>
-            </div>
-            <div id="input-signup">
-                <div>
-                    <input
-                        v-model="emailReset"
-                        type="email"
-                        name=""
-                        :class="{ mailin: isActive }"
-                        placeholder="Email"
-                        @keyup.enter="passReset()"
-                    />
-                </div>
-                <div id="forgot-text" />
-                <div id="butt1">
-                    <button type="button" class="text-join" style="border: 1px solid #c8a07d" @click="passReset()">
-                        Request password reset
-                    </button>
-                </div>
-            </div>
-            <div id="welcom-text">
-                <p class="letter-34">
-                    {{ request }}
-                </p>
-            </div>
-        </div>
-
-        <div id="right-login" />
+  <div>
+    <div style="padding-top: 1.5625rem">
+      <div id="welcom-text">
+        <p class="letter-44" style="padding-bottom: 2.5rem">Forgotten your password?</p>
+        <p class="letter-44">No need to despair - just enter your email</p>
+        <p class="letter-44" style="padding-bottom: 1.25rem">address below to request a password reset.</p>
+      </div>
     </div>
+    <div id="input-signup">
+      <div>
+        <input
+            v-model="emailReset"
+            type="email"
+            name=""
+            :class="{ mailin: isActive }"
+            placeholder="Email"
+            @keyup.enter="passReset()"
+        />
+      </div>
+      <div id="forgot-text" />
+      <div id="butt1">
+        <button type="button" class="text-join" style="border: 1px solid #c8a07d" @click="passReset()">
+          Request password reset
+        </button>
+      </div>
+    </div>
+    <div id="welcom-text">
+      <p class="letter-34">
+        {{ request }}
+      </p>
+    </div>
+  </div>
 </template>
 
 <script>
