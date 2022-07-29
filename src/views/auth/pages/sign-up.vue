@@ -1,153 +1,153 @@
 <template>
-  <div class="">
-    <hr />
-    <div>
-      <div id="inline">
-        <p class="letter-24">Make the most of your &nbsp;</p>
-        <p class="letter-24">
-          <b> professional Chess Life. </b>
-        </p>
-      </div>
-      <p id="letter-16">Connect and communicate.</p>
-    </div>
-    <div id="input-signup">
-      <div>
-        <input
-            v-model="emailogin"
-            type="email"
-            name=""
-            :class="{
-                            mailin: isActive,
-                            'text-ok': itsgood,
-                            'text-danger': hasError,
+    <div class="">
+        <hr />
+        <div>
+            <div id="inline">
+                <p class="letter-24">Make the most of your &nbsp;</p>
+                <p class="letter-24">
+                    <b> professional Chess Life. </b>
+                </p>
+            </div>
+            <p id="letter-16">Connect and communicate.</p>
+        </div>
+        <div id="input-signup">
+            <div>
+                <input
+                    v-model="emailogin"
+                    type="email"
+                    name=""
+                    :class="{
+                        mailin: isActive,
+                        'text-ok': itsgood,
+                        'text-danger': hasError,
+                    }"
+                    placeholder="Email"
+                />
+                <p style="color: #f2358d" v-if="already_exist">Email address already exist on Outpost</p>
+                <p id="reqpass1">
+                    {{ req2 }}
+                </p>
+            </div>
+            <div id="pass-in-flex">
+                <div>
+                    <input
+                        v-model="pass1"
+                        type="password"
+                        name=""
+                        :class="{
+                            passin: isActive,
+                            'passin-danger': hasError2,
+                            'text-ok2': itsgood2,
                         }"
-            placeholder="Email"
-        />
-        <p style="color: #f2358d" v-if="already_exist">Email address already exist on Outpost</p>
-        <p id="reqpass1">
-          {{ req2 }}
-        </p>
-      </div>
-      <div id="pass-in-flex">
-        <div>
-          <input
-              v-model="pass1"
-              type="password"
-              name=""
-              :class="{
-                                passin: isActive,
-                                'passin-danger': hasError2,
-                                'text-ok2': itsgood2,
-                            }"
-              placeholder="Password"
-          />
-          <p class="reqpass">
-            {{ req }}
-          </p>
-        </div>
-        <div>
-          <input
-              v-model="pass1repeat"
-              type="password"
-              name=""
-              :class="{
-                                passin: isActive,
-                                'passin-danger': hasError1,
-                                'text-ok2': itsgood2,
-                            }"
-              placeholder="Repeat password"
-          />
-          <p class="reqpass">
-            {{ req1 }}
-          </p>
-          <p id="reqpass3">
-            {{ req3 }}
-          </p>
-        </div>
-      </div>
-      <hr style="width: 85%" />
-      <div class="check-part">
-        <div class="start grid-check2">
-          <div class="grid-check">
-            <div class="flex-center">
-              <input id="" v-model="player" type="checkbox" name="" />
+                        placeholder="Password"
+                    />
+                    <p class="reqpass">
+                        {{ req }}
+                    </p>
+                </div>
+                <div>
+                    <input
+                        v-model="pass1repeat"
+                        type="password"
+                        name=""
+                        :class="{
+                            passin: isActive,
+                            'passin-danger': hasError1,
+                            'text-ok2': itsgood2,
+                        }"
+                        placeholder="Repeat password"
+                    />
+                    <p class="reqpass">
+                        {{ req1 }}
+                    </p>
+                    <p id="reqpass3">
+                        {{ req3 }}
+                    </p>
+                </div>
             </div>
-            <div>
-              <p class="left-check-text">Player</p>
+            <hr style="width: 85%" />
+            <div class="check-part">
+                <div class="start grid-check2">
+                    <div class="grid-check">
+                        <div class="flex-center">
+                            <input id="" v-model="player" type="checkbox" name="" />
+                        </div>
+                        <div>
+                            <p class="left-check-text">Player</p>
+                        </div>
+                    </div>
+                    <div class="grid-check">
+                        <div class="flex-center">
+                            <input id="" v-model="organizer" type="checkbox" name="" />
+                        </div>
+                        <div>
+                            <p class="left-check-text">Organizer</p>
+                        </div>
+                    </div>
+                    <div class="grid-check">
+                        <div class="flex-center">
+                            <input id="" v-model="admin" type="checkbox" name="" />
+                        </div>
+                        <div>
+                            <p class="left-check-text">Club</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="start grid-check2">
+                    <div class="grid-check">
+                        <div class="flex-center">
+                            <input id="" v-model="arbiter" type="checkbox" name="" />
+                        </div>
+                        <div>
+                            <p class="left-check-text">Arbiter</p>
+                        </div>
+                    </div>
+                    <div class="grid-check">
+                        <div class="flex-center">
+                            <input v-model="trainer" class="checkbox1" type="checkbox" name="" />
+                        </div>
+                        <div>
+                            <p class="left-check-text">Trainer</p>
+                        </div>
+                    </div>
+                    <div class="grid-check">
+                        <div class="flex-center">
+                            <input id="" v-model="other" type="checkbox" name="" />
+                        </div>
+                        <div>
+                            <p class="left-check-text">Other</p>
+                        </div>
+                    </div>
+                    <div id="reqpass1" style="width: 150px">
+                        {{ req4 }}
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="grid-check">
-            <div class="flex-center">
-              <input id="" v-model="organizer" type="checkbox" name="" />
+            <div id="cookie">
+                <p class="home-p">By clicking Agree & Join, you agree to the Outpost</p>
+                <div id="policy2">
+                    <a href="" class="home-p blue">User Agreement, Privacy Policy,</a>
+                    &nbsp;
+                    <p class="home-p">and</p>
+                    &nbsp;<a href="" class="home-p blue"> Cookie Policy.</a>
+                </div>
             </div>
-            <div>
-              <p class="left-check-text">Organizer</p>
+            <div id="butt1">
+                <button type="button" class="text-join" style="border: 1px solid #c8a07d" @click="agreelogin">
+                    Agree & Join
+                </button>
             </div>
-          </div>
-          <div class="grid-check">
-            <div class="flex-center">
-              <input id="" v-model="admin" type="checkbox" name="" />
-            </div>
-            <div>
-              <p class="left-check-text">Club</p>
-            </div>
-          </div>
-        </div>
-        <div class="start grid-check2">
-          <div class="grid-check">
-            <div class="flex-center">
-              <input id="" v-model="arbiter" type="checkbox" name="" />
-            </div>
-            <div>
-              <p class="left-check-text">Arbiter</p>
-            </div>
-          </div>
-          <div class="grid-check">
-            <div class="flex-center">
-              <input v-model="trainer" class="checkbox1" type="checkbox" name="" />
-            </div>
-            <div>
-              <p class="left-check-text">Trainer</p>
-            </div>
-          </div>
-          <div class="grid-check">
-            <div class="flex-center">
-              <input id="" v-model="other" type="checkbox" name="" />
-            </div>
-            <div>
-              <p class="left-check-text">Other</p>
-            </div>
-          </div>
-          <div id="reqpass1" style="width: 150px">
-            {{ req4 }}
-          </div>
-        </div>
-      </div>
-      <div id="cookie">
-        <p class="home-p">By clicking Agree & Join, you agree to the Outpost</p>
-        <div id="policy2">
-          <a href="" class="home-p blue">User Agreement, Privacy Policy,</a>
-          &nbsp;
-          <p class="home-p">and</p>
-          &nbsp;<a href="" class="home-p blue"> Cookie Policy.</a>
-        </div>
-      </div>
-      <div id="butt1">
-        <button type="button" class="text-join" style="border: 1px solid #c8a07d" @click="agreelogin">
-          Agree & Join
-        </button>
-      </div>
-      <!--  <p id="text-or">or</p>
+            <!--  <p id="text-or">or</p>
     <button type="button" onclick="alert('Kasnije!')"   class="text-join "  style="border: 1px solid #E8E8E8;"> <div id="google-cor1"> <div id="google-cor"> <img src="../assets/Group.svg" id="" alt="google"></div ><p id="joingoogle">Join with Google</p> </div></button> -->
+        </div>
+        <div id="policy">
+            <p class="home-p">Already on Outpost?</p>
+            &nbsp;
+            <router-link to="/login" class="home-p blue">
+                <button type="button" class="text-join" id="signin_back"><p id="joingoogle">Sign in</p></button>
+            </router-link>
+        </div>
     </div>
-    <div id="policy">
-      <p class="home-p">Already on Outpost?</p>
-      &nbsp;
-      <router-link to="/login" class="home-p blue">
-        <button type="button" class="text-join" id="signin_back"><p id="joingoogle">Sign in</p></button>
-      </router-link>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -441,7 +441,6 @@ hr {
 #butt1 {
     padding-top: 20px;
 }
-
 
 .reqpass {
     color: #f2358d;

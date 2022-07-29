@@ -1,40 +1,40 @@
 <template>
-  <div class="">
-    <div style="padding-top: 25px">
-      <div class="welcom-text">
-        <p class="letter-44" style="padding-bottom: 2.5rem" />
-        <p class="letter-44">Enter email address below,</p>
-        <p class="letter-44" style="padding-bottom: 10px">and request to resend verification mail</p>
-      </div>
-    </div>
-    <div id="input-signup">
-      <div>
-        <input
-            v-model="emailreset"
-            type="email"
-            name=""
-            :class="{ mailin: isActive }"
-            placeholder="Email"
-            @keyup.enter="passReset()"
-        />
-      </div>
-      <div id="forgot-text" />
-      <div id="butt1">
-        <button type="button" class="text-join" style="border: 1px solid #c8a07d" @click="verReset()">
-          Resend verification mail
-        </button>
-      </div>
+    <div class="">
+        <div style="padding-top: 25px">
+            <div class="welcom-text">
+                <p class="letter-44" style="padding-bottom: 2.5rem" />
+                <p class="letter-44">Enter email address below,</p>
+                <p class="letter-44" style="padding-bottom: 10px">and request to resend verification mail</p>
+            </div>
+        </div>
+        <div id="input-signup">
+            <div>
+                <input
+                    v-model="emailreset"
+                    type="email"
+                    name=""
+                    :class="{ mailin: isActive }"
+                    placeholder="Email"
+                    @keyup.enter="passReset()"
+                />
+            </div>
+            <div id="forgot-text" />
+            <div id="butt1">
+                <button type="button" class="text-join" style="border: 1px solid #c8a07d" @click="verReset()">
+                    Resend verification mail
+                </button>
+            </div>
 
-      <!--   <p id="text-or">or</p>
+            <!--   <p id="text-or">or</p>
       <button type="button" onclick="alert('Hello world!')"   class="text-join"  style="border: 1px solid #E8E8E8;"> <div id="google-cor1"> <div id="google-cor"> <img src="../assets/Group.svg" id="" alt="google"></div><p id="joingoogle">Join with Google</p> </div></button>
    -->
+        </div>
+        <div class="welcom-text">
+            <p class="letter-34">
+                {{ request }}
+            </p>
+        </div>
     </div>
-    <div class="welcom-text">
-      <p class="letter-34">
-        {{ request }}
-      </p>
-    </div>
-  </div>
 </template>
 
 <script>

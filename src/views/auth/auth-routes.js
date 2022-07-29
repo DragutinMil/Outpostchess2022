@@ -2,8 +2,8 @@ function createRoute(name) {
     return {
         path: `${name}`,
         name: `${name}`,
-        component: () => import(`./pages/${name}.vue`)
-    }
+        component: () => import(`./pages/${name}.vue`),
+    };
 }
 
 const routes = [
@@ -21,9 +21,9 @@ const routes = [
             createRoute("request-password-reset"),
             {
                 path: `*`,
-                redirect: {"name": "sign-up"}
-            }
-        ]
+                redirect: { name: "sign-up" },
+            },
+        ],
     },
 ];
 export default routes;

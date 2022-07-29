@@ -1,20 +1,19 @@
 <template>
-  <div id="input-signup">
-    <div>
-      <p class="thanks-text1">Thank you for verifying!</p>
-      <p class="thanks-text2 col">
-        Thank you for early sign up! Your profile we'll be ready as soon as we reach enough
-        registered users to make the best of your experience. We are launching our beta version
-        soon, so hang on there! Your feedback and support means a lot to us.
-      </p>
-      <p class="thanks-text2 col">See you in the chess connected world.</p>
-      <p class="thanks-text2">Outpost team - let's connect</p>
+    <div id="input-signup">
+        <div>
+            <p class="thanks-text1">Thank you for verifying!</p>
+            <p class="thanks-text2 col">
+                Thank you for early sign up! Your profile we'll be ready as soon as we reach enough registered users to
+                make the best of your experience. We are launching our beta version soon, so hang on there! Your
+                feedback and support means a lot to us.
+            </p>
+            <p class="thanks-text2 col">See you in the chess connected world.</p>
+            <p class="thanks-text2">Outpost team - let's connect</p>
+        </div>
     </div>
-  </div>
 </template>
 
 <style scoped>
-
 .thanks-text2 {
     font-size: 18px;
     line-height: 26px;

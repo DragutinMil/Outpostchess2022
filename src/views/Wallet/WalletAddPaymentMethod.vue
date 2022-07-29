@@ -1,92 +1,105 @@
 <template>
-  <div class="parent">
-    <SideBar/>
-    <div class="wrapper">
-      <Search/>
-      <div class="main-div">
-        <div class="top">
-          <p class="active">SEND</p>
-          <p>WITHDRAW</p>
-          <p>ACTIVITY</p>
-        </div>
-        <div class="bottom">
-          <div class="row-one">
-            <img src="../../assets/arrow-back.svg" alt="back icon">
-            <p>Payments and transaction</p>
-          </div>
-          <div class="row-two">
-            <div>
-              <h2>Wallet</h2>
-              <p>Your payment info, transactions, recurring <br> payments and reservations</p>
+    <div class="parent">
+        <SideBar />
+        <div class="wrapper">
+            <Search />
+            <div class="main-div">
+                <div class="top">
+                    <p class="active">SEND</p>
+                    <p>WITHDRAW</p>
+                    <p>ACTIVITY</p>
+                </div>
+                <div class="bottom">
+                    <div class="row-one">
+                        <img src="../../assets/arrow-back.svg" alt="back icon" />
+                        <p>Payments and transaction</p>
+                    </div>
+                    <div class="row-two">
+                        <div>
+                            <h2>Wallet</h2>
+                            <p>
+                                Your payment info, transactions, recurring <br />
+                                payments and reservations
+                            </p>
+                        </div>
+                        <img src="../../assets/Wallet-illustration.svg" alt="chess illustration" />
+                    </div>
+                    <div class="row-three">
+                        <h2>Update card</h2>
+                        <p>
+                            Your payment info, transactions, recurring <br />
+                            payments and reservations
+                        </p>
+                    </div>
+                    <div class="main-row">
+                        <router-link to="/wallet-adding-payment-method">
+                            <div class="main-row-top">
+                                <img src="../../assets/add-circle.svg" alt="add a card icon" />
+                                <p>Add credit card</p>
+                            </div>
+                        </router-link>
+                        <div class="main-row-bottom">
+                            <div class="right">
+                                <div class="right-top">
+                                    <div class="second-row">
+                                        <img
+                                            class="mastercard"
+                                            src="../../assets/master-card.jpg"
+                                            alt="mastercard logo"
+                                        />
+                                        <div class="right-text">
+                                            <p>Mastercard••••8095</p>
+                                            <p>Expires 04/23</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right-bottom">
+                                    <router-link to="/wallet-add-payment-method">
+                                        <div class="add-card">
+                                            <img src="../../assets/add-circle.svg" alt="add a card" />
+                                            <p>Add credit card</p>
+                                        </div>
+                                    </router-link>
+                                    <p>Remove</p>
+                                    <router-link to="/wallet-adding-payment-method">
+                                        <p class="edit">Edit</p>
+                                    </router-link>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div class="right-top">
+                                    <div class="second-row">
+                                        <img
+                                            class="mastercard"
+                                            src="../../assets/master-card.jpg"
+                                            alt="mastercard logo"
+                                        />
+                                        <div class="right-text">
+                                            <p>Mastercard••••8095</p>
+                                            <p>Expires 04/23</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right-bottom">
+                                    <router-link to="/wallet-adding-payment-method">
+                                        <div class="add-card">
+                                            <img src="../../assets/add-circle.svg" alt="add a card" />
+                                            <p>Add credit card</p>
+                                        </div>
+                                    </router-link>
+                                    <p>Remove</p>
+                                    <router-link to="/wallet-add-payment-method">
+                                        <p class="edit">Edit</p>
+                                    </router-link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <img src="../../assets/Wallet-illustration.svg" alt="chess illustration">
-          </div>
-          <div class="row-three">
-            <h2>Update card</h2>
-            <p>Your payment info, transactions, recurring <br> payments and reservations</p>
-          </div>
-          <div class="main-row">
-            <router-link to="/wallet-adding-payment-method">
-              <div class="main-row-top">
-                <img src="../../assets/add-circle.svg" alt="add a card icon">
-                <p>Add credit card</p>
-              </div>
-            </router-link>
-            <div class="main-row-bottom">
-              <div class="right">
-                <div class="right-top">
-                  <div class="second-row">
-                    <img class="mastercard" src="../../assets/master-card.jpg" alt="mastercard logo">
-                    <div class="right-text">
-                      <p>Mastercard••••8095</p>
-                      <p>Expires 04/23</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="right-bottom">
-                  <router-link to="/wallet-add-payment-method">
-                    <div class="add-card">
-                      <img src="../../assets/add-circle.svg" alt="add a card">
-                      <p>Add credit card</p>
-                    </div>
-                  </router-link>
-                  <p>Remove</p>
-                  <router-link to="/wallet-adding-payment-method">
-                    <p class="edit">Edit</p>
-                  </router-link>
-                </div>
-              </div>
-              <div class="right">
-                <div class="right-top">
-                  <div class="second-row">
-                    <img class="mastercard" src="../../assets/master-card.jpg" alt="mastercard logo">
-                    <div class="right-text">
-                      <p>Mastercard••••8095</p>
-                      <p>Expires 04/23</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="right-bottom">
-                  <router-link to="/wallet-adding-payment-method">
-                    <div class="add-card">
-                      <img src="../../assets/add-circle.svg" alt="add a card">
-                      <p>Add credit card</p>
-                    </div>
-                  </router-link>
-                  <p>Remove</p>
-                  <router-link to="/wallet-add-payment-method">
-                    <p class="edit">Edit</p>
-                  </router-link>
-                </div>
-              </div>
-
-            </div>
-          </div>
+            <Notifications />
         </div>
-      </div>
-      <Notifications/>
     </div>
-  </div>
 </template>
 
 <script>

@@ -1,58 +1,58 @@
 <template>
-  <div class="">
-    <div>
-      <div id="welcom-text">
-        <p class="letter-44" style="padding-bottom: 2.5rem">Enter new password:</p>
-      </div>
-    </div>
-    <div id="input-signup">
-      <div style="padding-bottom: 1rem">
-        <input
-            v-model="newPassword"
-            type="password"
-            name=""
-            :class="{ mailin: isActive }"
-            placeholder="New password"
-        />
-      </div>
-      <div style="padding-bottom: 1.25rem">
-        <input
-            v-model="newPassword1"
-            type="password"
-            name=""
-            :class="{ mailin: isActive }"
-            placeholder="Repeat password"
-        />
-      </div>
+    <div class="">
+        <div>
+            <div id="welcom-text">
+                <p class="letter-44" style="padding-bottom: 2.5rem">Enter new password:</p>
+            </div>
+        </div>
+        <div id="input-signup">
+            <div style="padding-bottom: 1rem">
+                <input
+                    v-model="newPassword"
+                    type="password"
+                    name=""
+                    :class="{ mailin: isActive }"
+                    placeholder="New password"
+                />
+            </div>
+            <div style="padding-bottom: 1.25rem">
+                <input
+                    v-model="newPassword1"
+                    type="password"
+                    name=""
+                    :class="{ mailin: isActive }"
+                    placeholder="Repeat password"
+                />
+            </div>
 
-      <div id="forgot-text" />
-      <div v-if="changePass" id="butt1">
-        <button type="button" class="text-join" style="border: 1px solid #c8a07d" @click="goLogin">
-          Password changed! Click here to login
-        </button>
-      </div>
-      <div v-else id="butt1">
-        <button type="button" class="text-join" style="border: 1px solid #c8a07d" @click="reset()">
-          Reset pasword
-        </button>
-      </div>
+            <div id="forgot-text" />
+            <div v-if="changePass" id="butt1">
+                <button type="button" class="text-join" style="border: 1px solid #c8a07d" @click="goLogin">
+                    Password changed! Click here to login
+                </button>
+            </div>
+            <div v-else id="butt1">
+                <button type="button" class="text-join" style="border: 1px solid #c8a07d" @click="reset()">
+                    Reset pasword
+                </button>
+            </div>
 
-      <!--   <p id="text-or">or</p>
+            <!--   <p id="text-or">or</p>
       <button type="button" onclick="alert('Hello world!')"   class="text-join"  style="border: 1px solid #E8E8E8;"> <div id="google-cor1"> <div id="google-cor"> <img src="../assets/Group.svg" id="" alt="google"></div><p id="joingoogle">Join with Google</p> </div></button>
    -->
+        </div>
+        <div id="welcom-text">
+            <p class="letter-34">
+                {{ req }}
+            </p>
+            <p class="letter-34">
+                {{ req1 }}
+            </p>
+            <p class="letter-34">
+                {{ req2 }}
+            </p>
+        </div>
     </div>
-    <div id="welcom-text">
-      <p class="letter-34">
-        {{ req }}
-      </p>
-      <p class="letter-34">
-        {{ req1 }}
-      </p>
-      <p class="letter-34">
-        {{ req2 }}
-      </p>
-    </div>
-  </div>
 </template>
 
 <script>

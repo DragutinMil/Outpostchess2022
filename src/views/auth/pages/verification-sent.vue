@@ -1,11 +1,11 @@
 <template>
-  <div id="input-signup">
-    <div>
-      <p class="thanks-text1">Thank you for joining us.</p>
-      <p class="thanks-text2">Please check your email and verify your account.</p>
-      <p class="thanks-text2 col">The Chess world is waiting for you!</p>
+    <div id="input-signup">
+        <div>
+            <p class="thanks-text1">Thank you for joining us.</p>
+            <p class="thanks-text2">Please check your email and verify your account.</p>
+            <p class="thanks-text2 col">The Chess world is waiting for you!</p>
+        </div>
     </div>
-  </div>
 </template>
 
 <style scoped>
