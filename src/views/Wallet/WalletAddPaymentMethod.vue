@@ -10,15 +10,13 @@
                     <p>ACTIVITY</p>
                 </div>
                 <div class="bottom">
-                    <router-link to="/wallet">
-                        <div class="row-one">
-                            <img src="../../assets/arrow-back.svg" alt="back icon" />
-                            <p>Wallet</p>
-                        </div>
-                    </router-link>
+                    <div class="row-one">
+                        <img src="../../assets/arrow-back.svg" alt="back icon" />
+                        <p>Payments and transaction</p>
+                    </div>
                     <div class="row-two">
                         <div>
-                            <h2>Payment methods</h2>
+                            <h2>Wallet</h2>
                             <p>
                                 Your payment info, transactions, recurring <br />
                                 payments and reservations
@@ -33,23 +31,84 @@
                             payments and reservations
                         </p>
                     </div>
-                    <AddCardForm />
+                    <div class="main-row">
+                        <router-link to="/wallet-adding-payment-method">
+                            <div class="main-row-top">
+                                <img src="../../assets/add-circle.svg" alt="add a card icon" />
+                                <p>Add credit card</p>
+                            </div>
+                        </router-link>
+                        <div class="main-row-bottom">
+                            <div class="right">
+                                <div class="right-top">
+                                    <div class="second-row">
+                                        <img
+                                            class="mastercard"
+                                            src="../../assets/master-card.jpg"
+                                            alt="mastercard logo"
+                                        />
+                                        <div class="right-text">
+                                            <p>Mastercard••••8095</p>
+                                            <p>Expires 04/23</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right-bottom">
+                                    <router-link to="/wallet-add-payment-method">
+                                        <div class="add-card">
+                                            <img src="../../assets/add-circle.svg" alt="add a card" />
+                                            <p>Add credit card</p>
+                                        </div>
+                                    </router-link>
+                                    <p>Remove</p>
+                                    <router-link to="/wallet-adding-payment-method">
+                                        <p class="edit">Edit</p>
+                                    </router-link>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div class="right-top">
+                                    <div class="second-row">
+                                        <img
+                                            class="mastercard"
+                                            src="../../assets/master-card.jpg"
+                                            alt="mastercard logo"
+                                        />
+                                        <div class="right-text">
+                                            <p>Mastercard••••8095</p>
+                                            <p>Expires 04/23</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right-bottom">
+                                    <router-link to="/wallet-adding-payment-method">
+                                        <div class="add-card">
+                                            <img src="../../assets/add-circle.svg" alt="add a card" />
+                                            <p>Add credit card</p>
+                                        </div>
+                                    </router-link>
+                                    <p>Remove</p>
+                                    <router-link to="/wallet-add-payment-method">
+                                        <p class="edit">Edit</p>
+                                    </router-link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <Notifications />
         </div>
     </div>
 </template>
 
 <script>
-import SideBar from "@/components/SideBar";
-import AddCardForm from "@/components/Wallet/AddCardForm";
-import Search from "@/components/Search";
 import Notifications from "@/components/Notifications";
+import Search from "@/components/Search";
+import SideBar from "@/components/SideBar";
 
 export default {
     name: "WalletAddPaymentMethod",
-    components: { Notifications, Search, AddCardForm, SideBar },
+    components: { Notifications, Search, SideBar },
 };
 </script>
 
@@ -58,9 +117,11 @@ export default {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-align: start;
 }
 
 a {
+    color: inherit;
     text-decoration: none;
 }
 
@@ -101,7 +162,7 @@ a {
     align-items: center;
     border-bottom: 1px solid #6f7381;
     width: fit-content;
-    margin-bottom: 10.938rem;
+    margin-bottom: 5.125rem;
 }
 
 .top p {
@@ -114,7 +175,9 @@ a {
 }
 
 .active {
-    border-bottom: 2px solid #6f7381;
+    border-bottom: 2px solid #11c6d1;
+    color: #11c6d1 !important;
+    font-weight: 700 !important;
 }
 
 .bottom {
@@ -157,7 +220,9 @@ a {
 
 .row-two h2,
 .row-three h2 {
-    color: white;
+    color: #6f7381;
+    font-size: 1.5rem;
+    font-weight: 700;
     margin-bottom: 1.063rem;
 }
 
@@ -181,16 +246,167 @@ a {
     padding-left: 2.625rem;
     padding-top: 2.188rem;
     padding-bottom: 3.25rem;
-    margin-bottom: 0.938rem;
+    border: 1px solid transparent;
+}
+
+.main-row {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    margin-bottom: 13.875rem;
+}
+
+.main-row-top {
+    height: 14.826rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed #c8a07d;
+    margin-block: 0.633rem;
+    color: #6f7381;
+    cursor: pointer;
+}
+
+.main-row-bottom {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-between;
+}
+
+.add-card {
+    display: flex;
+}
+
+.add-card img {
+    margin-right: 0.6rem;
+}
+
+.right-bottom p {
+    color: #6f7381;
+    cursor: pointer;
+}
+
+.right {
+    display: flex;
+    width: 22.533rem;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #202122;
+}
+
+.right-top {
+    padding-top: 2.125rem;
+    padding-left: 2.688rem;
+    padding-bottom: 1.5rem;
+}
+
+.right-text {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 100%;
+    font-size: 1rem;
+}
+
+.right-text p:first-child {
+    color: white;
+}
+
+.right-text p:nth-child(2) {
+    color: #5c5e64;
+}
+
+.left div {
+    margin-bottom: 1.188rem;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.right-top {
+    padding-top: 2.125rem;
+    padding-left: 2.688rem;
+    padding-bottom: 1.5rem;
+}
+
+.second-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.right-text {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 100%;
+    font-size: 1rem;
+}
+
+.right-text p:first-child {
+    color: white;
+}
+
+.right-text p:nth-child(2) {
+    color: #5c5e64;
+}
+
+.mastercard {
+    width: 4.375rem;
+    flex: 0 0 6.375rem;
+    margin-right: 1.875rem;
+}
+
+.right-bottom {
+    height: 4.063rem;
+    background-color: #1a1a1b;
+    padding-left: 2.688rem;
+    padding-right: 3.5rem;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+}
+
+.right-bottom p {
+    color: #6f7381;
+    cursor: pointer;
+}
+
+.edit {
+    color: white !important;
+    margin-left: 1.563rem;
+}
+
+@media screen and (max-width: 1024px) {
+    .main-row {
+        flex-direction: column;
+    }
+
+    .right {
+        width: 100%;
+    }
+
+    .main-row-bottom {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media screen and (max-width: 768px) {
+    .parent {
+        overflow-x: hidden;
+    }
+
     .wrapper {
         width: 100%;
     }
 
     .main-div {
         width: 100%;
+        justify-content: space-between;
+        margin-bottom: 0;
     }
 
     .top {
@@ -200,12 +416,11 @@ a {
         font-size: 1.167rem;
         font-weight: 500;
         margin-bottom: 4rem;
+        justify-content: center;
     }
 
-    .active {
-        color: #11c6d1 !important;
-        font-weight: 700 !important;
-        border-color: #11c6d1;
+    .top p {
+        text-align: center;
     }
 
     .row-one {
@@ -214,6 +429,10 @@ a {
 
     .row-two {
         padding-right: 2.333rem;
+    }
+
+    .main-row {
+        margin-bottom: 0;
     }
 }
 

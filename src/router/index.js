@@ -132,6 +132,11 @@ const routes = [
         component: () => import("../views/Wallet/WalletAddPaymentMethod.vue"),
     },
     {
+        path: "/wallet-adding-payment-method",
+        name: "WalletAddingPaymentMethod",
+        component: () => import("../views/Wallet/WalletAddingPaymentMethod.vue"),
+    },
+    {
         path: "/wallet",
         name: "Wallet",
         component: () => import("../views/Wallet/Wallet.vue"),
@@ -145,6 +150,26 @@ const routes = [
         path: "/wallet-transaction",
         name: "WalletTransaction",
         component: () => import("../views/Wallet/WalletTransaction.vue"),
+    },
+    {
+        path: "/wallet-transaction-success",
+        name: "WalletTransactionSuccess",
+        component: () => import("../views/Wallet/WalletTransactionSuccess.vue"),
+    },
+    {
+        path: "/wallet-withdraw",
+        name: "WalletWithdraw",
+        component: () => import("../views/Wallet/WalletWithdraw.vue"),
+    },
+    {
+        path: "/wallet-withdraw-transaction",
+        name: "WalletWithdrawTransaction",
+        component: () => import("../views/Wallet/WalletWithdrawTransaction.vue"),
+    },
+    {
+        path: "/wallet-withdraw-transaction-success",
+        name: "WalletWithdrawTransactionSuccess",
+        component: () => import("../views/Wallet/WalletWithdrawTransactionSuccess.vue"),
     },
 ];
 

@@ -49,9 +49,15 @@ export default {
 
 <style scoped>
 .main-row {
+<<<<<<< HEAD
     /*height: 47.5rem;*/
     width: 100%;
     border: 1px solid #545454;
+=======
+  /*height: 47.5rem;*/
+  width: 100%;
+  border: 1px solid #292A2E;
+>>>>>>> f549c7b5214810b38dcc89329f45cf6cc30d8b1d
 }
 
 .main-top {

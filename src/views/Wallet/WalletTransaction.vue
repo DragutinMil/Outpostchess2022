@@ -128,7 +128,7 @@ a {
     align-items: center;
     border-bottom: 1px solid #6f7381;
     width: fit-content;
-    margin-bottom: 10.938rem;
+    margin-bottom: 5.125rem;
 }
 
 .top p {
@@ -233,7 +233,7 @@ a {
     padding-top: 2.5rem;
     padding-left: 3.25rem;
     padding-bottom: 2.625rem;
-    border: 1px solid #6f7381;
+    border: 1px solid #292a2e;
     border-top: none;
     margin-bottom: 1.25rem;
 }
@@ -279,7 +279,7 @@ a {
 }
 
 .main-row .row-three {
-    border: 1px solid #6f7381;
+    border: 1px solid #292a2e;
     height: 12.054rem;
     background-color: #171819;
     padding-bottom: 1rem;

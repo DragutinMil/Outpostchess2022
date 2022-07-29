@@ -39,7 +39,9 @@
                                 <p class="individual-price">100,000 USD</p>
                                 <p class="individual-price">50,00 EUR</p>
                             </div>
-                            <a href="">Transfer Funds</a>
+                            <router-link to="/wallet-send">
+                                <p class="transfer">Transfer Funds</p>
+                            </router-link>
                         </div>
                         <div class="right">
                             <div class="right-top">
@@ -60,13 +62,15 @@
                                     </div>
                                 </router-link>
                                 <p>Remove</p>
-                                <p class="edit">Edit</p>
+                                <router-link to="/wallet-add-payment-method">
+                                    <p class="edit">Edit</p>
+                                </router-link>
                             </div>
                         </div>
+                        <Notifications />
                     </div>
                 </div>
             </div>
-            <Notifications />
         </div>
     </div>
 </template>
@@ -132,7 +136,7 @@ a {
     align-items: center;
     border-bottom: 1px solid #6f7381;
     width: fit-content;
-    margin-bottom: 10.938rem;
+    margin-bottom: 5.125rem;
 }
 
 .top p {
@@ -227,7 +231,7 @@ a {
 .right {
     width: 50%;
     background-color: #171819;
-    border: 0.5px solid #6f7381;
+    border: 1px solid #292a2e;
     border-top: none;
 }
 
@@ -261,12 +265,13 @@ a {
     margin-bottom: 1.188rem;
 }
 
-.left a {
+.transfer {
     color: white;
     padding-inline: 1.438rem;
     padding-block: 0.625rem;
     background-color: rgba(63, 74, 93, 0.5);
     border-radius: 6px;
+    width: fit-content;
 }
 
 .right {

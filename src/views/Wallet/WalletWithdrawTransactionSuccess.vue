@@ -5,17 +5,15 @@
             <Search />
             <div class="main-div">
                 <div class="top">
-                    <p class="active">SEND</p>
-                    <p>WITHDRAW</p>
+                    <p>SEND</p>
+                    <p class="active">WITHDRAW</p>
                     <p>ACTIVITY</p>
                 </div>
                 <div class="bottom">
-                    <!--          <router-link to="/wallet">-->
-                    <!--            <div class="row-one">-->
-                    <!--              &lt;!&ndash;              <img src="../../assets/arrow-back.svg" alt="back icon">&ndash;&gt;-->
-                    <!--              <p>Wallet</p>-->
-                    <!--            </div>-->
-                    <!--          </router-link>-->
+                    <div class="row-one">
+                        <img src="../../assets/arrow-back.svg" alt="back icon" />
+                        <p>Payments and transaction</p>
+                    </div>
                     <div class="row-two">
                         <div>
                             <h2>Wallet</h2>
@@ -26,21 +24,9 @@
                         </div>
                         <img src="../../assets/Wallet-illustration.svg" alt="chess illustration" />
                     </div>
-                    <div class="row-three">
-                        <h2>Send payment</h2>
-                        <p>
-                            Your payment info, transactions, recurring <br />
-                            payments and reservations
-                        </p>
-                    </div>
+
                     <div class="main-row">
-                        <div class="input-div">
-                            <img src="../../assets/search-turquoise.svg" alt="search icon" />
-                            <input type="text" placeholder="Name, @username, email" />
-                        </div>
-                        <div class="btn">
-                            <p>Next</p>
-                        </div>
+                        <p>You have successfully transferred $300 to your bank.</p>
                     </div>
                 </div>
             </div>
@@ -50,12 +36,12 @@
 </template>
 
 <script>
-import SideBar from "@/components/SideBar";
-import Search from "@/components/Search";
 import Notifications from "@/components/Notifications";
+import Search from "@/components/Search";
+import SideBar from "@/components/SideBar";
 
 export default {
-    name: "WalletSend",
+    name: "WalletWithdrawTransactionSuccess",
     components: { Notifications, Search, SideBar },
 };
 </script>
@@ -65,15 +51,18 @@ export default {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-align: start;
 }
 
 a {
+    color: inherit;
     text-decoration: none;
 }
 
 .parent {
     display: flex;
     background-color: #171819;
+    height: 100%;
 }
 
 .wrapper {
@@ -82,12 +71,6 @@ a {
     width: 70%;
     margin-left: 3.188rem;
     margin-top: 2.188rem;
-}
-
-.active {
-    color: #11c6d1 !important;
-    font-weight: 700 !important;
-    border-color: #11c6d1 !important;
 }
 
 @media screen and (max-width: 768px) {
@@ -127,13 +110,33 @@ a {
 }
 
 .active {
-    border-bottom: 2px solid #6f7381;
+    border-bottom: 2px solid #11c6d1;
+    color: #11c6d1 !important;
+    font-weight: 700 !important;
 }
 
 .bottom {
     width: 100%;
     display: flex;
     flex-direction: column;
+}
+
+.row-one {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 2.813rem;
+}
+
+.row-one img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.row-one p {
+    color: #6f7381;
+    font-size: 1.5rem;
+    font-weight: 700;
 }
 
 .row-two {
@@ -155,43 +158,7 @@ a {
     color: #6f7381;
     font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: 0.688rem;
-}
-
-.main-row {
-    display: flex;
-    align-items: center;
-    padding-top: 3.813rem;
-    flex-direction: column;
-    border: 1px solid #292a2e;
-    border-top: none;
-}
-
-.input-div {
-    width: 30rem;
-    border: 1px solid rgba(111, 115, 129, 0.5);
-    border-radius: 6px;
-    padding-block: 0.688rem;
-    margin-bottom: 2.188rem;
-}
-
-.input-div input {
-    width: 11rem;
-    cursor: pointer;
-    color: white;
-}
-
-.input-div img {
-    margin-right: 1.25rem;
-}
-
-.main-row .btn {
-    width: 7.5rem;
-    color: white;
-    border: 1px solid #5c5e64;
-    padding-block: 0.531rem;
-    cursor: pointer;
-    margin-bottom: 4.063rem;
+    margin-bottom: 1.063rem;
 }
 
 @media screen and (max-width: 425px) {
@@ -206,23 +173,43 @@ a {
     color: #6f7381;
 }
 
-.row-three {
+.main-row {
     display: flex;
-    flex-direction: column;
-    align-items: start;
-    background-color: #202122;
-    padding-left: 2.625rem;
-    padding-top: 2.188rem;
-    padding-bottom: 3.25rem;
+    width: 100%;
+    margin-bottom: 13.875rem;
+    height: 25.389rem;
+    font-size: 0.875rem;
+    color: #11c6d1;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #292a2e;
+}
+
+@media screen and (max-width: 1440px) {
+    .main-row {
+        height: 21.389rem;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .main-row {
+        flex-direction: column;
+    }
 }
 
 @media screen and (max-width: 768px) {
+    .parent {
+        overflow-x: hidden;
+    }
+
     .wrapper {
         width: 100%;
     }
 
     .main-div {
         width: 100%;
+        justify-content: space-between;
+        margin-bottom: 0;
     }
 
     .top {
@@ -232,6 +219,11 @@ a {
         font-size: 1.167rem;
         font-weight: 500;
         margin-bottom: 4rem;
+        justify-content: center;
+    }
+
+    .top p {
+        text-align: center;
     }
 
     .row-one {
@@ -241,26 +233,11 @@ a {
     .row-two {
         padding-right: 2.333rem;
     }
-
-    .main-row {
-        height: 22.884rem;
-        justify-content: center;
-    }
 }
 
 @media screen and (max-width: 425px) {
     .row-two img {
         width: 9.833rem;
-    }
-
-    .main-row {
-        height: 26.884rem;
-    }
-}
-
-@media screen and (max-width: 375px) {
-    .input-div {
-        width: 80%;
     }
 }
 </style>

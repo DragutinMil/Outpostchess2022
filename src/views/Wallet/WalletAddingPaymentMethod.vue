@@ -10,15 +10,15 @@
                     <p>ACTIVITY</p>
                 </div>
                 <div class="bottom">
-                    <!--          <router-link to="/wallet">-->
-                    <!--            <div class="row-one">-->
-                    <!--              &lt;!&ndash;              <img src="../../assets/arrow-back.svg" alt="back icon">&ndash;&gt;-->
-                    <!--              <p>Wallet</p>-->
-                    <!--            </div>-->
-                    <!--          </router-link>-->
+                    <router-link to="/wallet">
+                        <div class="row-one">
+                            <img src="../../assets/arrow-back.svg" alt="back icon" />
+                            <p>Wallet</p>
+                        </div>
+                    </router-link>
                     <div class="row-two">
                         <div>
-                            <h2>Wallet</h2>
+                            <h2>Payment methods</h2>
                             <p>
                                 Your payment info, transactions, recurring <br />
                                 payments and reservations
@@ -27,21 +27,13 @@
                         <img src="../../assets/Wallet-illustration.svg" alt="chess illustration" />
                     </div>
                     <div class="row-three">
-                        <h2>Send payment</h2>
+                        <h2>Update card</h2>
                         <p>
                             Your payment info, transactions, recurring <br />
                             payments and reservations
                         </p>
                     </div>
-                    <div class="main-row">
-                        <div class="input-div">
-                            <img src="../../assets/search-turquoise.svg" alt="search icon" />
-                            <input type="text" placeholder="Name, @username, email" />
-                        </div>
-                        <div class="btn">
-                            <p>Next</p>
-                        </div>
-                    </div>
+                    <AddCardForm />
                 </div>
             </div>
             <Notifications />
@@ -51,12 +43,13 @@
 
 <script>
 import SideBar from "@/components/SideBar";
+import AddCardForm from "@/components/Wallet/AddCardForm";
 import Search from "@/components/Search";
 import Notifications from "@/components/Notifications";
 
 export default {
-    name: "WalletSend",
-    components: { Notifications, Search, SideBar },
+    name: "WalletAddPaymentMethod",
+    components: { Notifications, Search, AddCardForm, SideBar },
 };
 </script>
 
@@ -82,12 +75,6 @@ a {
     width: 70%;
     margin-left: 3.188rem;
     margin-top: 2.188rem;
-}
-
-.active {
-    color: #11c6d1 !important;
-    font-weight: 700 !important;
-    border-color: #11c6d1 !important;
 }
 
 @media screen and (max-width: 768px) {
@@ -136,6 +123,24 @@ a {
     flex-direction: column;
 }
 
+.row-one {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 2.813rem;
+}
+
+.row-one img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.row-one p {
+    color: #6f7381;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
 .row-two {
     display: flex;
     align-items: start;
@@ -152,46 +157,8 @@ a {
 
 .row-two h2,
 .row-three h2 {
-    color: #6f7381;
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 0.688rem;
-}
-
-.main-row {
-    display: flex;
-    align-items: center;
-    padding-top: 3.813rem;
-    flex-direction: column;
-    border: 1px solid #292a2e;
-    border-top: none;
-}
-
-.input-div {
-    width: 30rem;
-    border: 1px solid rgba(111, 115, 129, 0.5);
-    border-radius: 6px;
-    padding-block: 0.688rem;
-    margin-bottom: 2.188rem;
-}
-
-.input-div input {
-    width: 11rem;
-    cursor: pointer;
     color: white;
-}
-
-.input-div img {
-    margin-right: 1.25rem;
-}
-
-.main-row .btn {
-    width: 7.5rem;
-    color: white;
-    border: 1px solid #5c5e64;
-    padding-block: 0.531rem;
-    cursor: pointer;
-    margin-bottom: 4.063rem;
+    margin-bottom: 1.063rem;
 }
 
 @media screen and (max-width: 425px) {
@@ -214,6 +181,7 @@ a {
     padding-left: 2.625rem;
     padding-top: 2.188rem;
     padding-bottom: 3.25rem;
+    margin-bottom: 0.938rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -234,6 +202,12 @@ a {
         margin-bottom: 4rem;
     }
 
+    .active {
+        color: #11c6d1 !important;
+        font-weight: 700 !important;
+        border-color: #11c6d1;
+    }
+
     .row-one {
         padding-left: 2.333rem;
     }
@@ -241,26 +215,11 @@ a {
     .row-two {
         padding-right: 2.333rem;
     }
-
-    .main-row {
-        height: 22.884rem;
-        justify-content: center;
-    }
 }
 
 @media screen and (max-width: 425px) {
     .row-two img {
         width: 9.833rem;
-    }
-
-    .main-row {
-        height: 26.884rem;
-    }
-}
-
-@media screen and (max-width: 375px) {
-    .input-div {
-        width: 80%;
     }
 }
 </style>

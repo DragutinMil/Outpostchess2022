@@ -10,12 +10,13 @@
                     <p>ACTIVITY</p>
                 </div>
                 <div class="bottom">
-                    <!--          <router-link to="/wallet">-->
-                    <!--            <div class="row-one">-->
-                    <!--              &lt;!&ndash;              <img src="../../assets/arrow-back.svg" alt="back icon">&ndash;&gt;-->
-                    <!--              <p>Wallet</p>-->
-                    <!--            </div>-->
-                    <!--          </router-link>-->
+                    <router-link to="/wallet">
+                        <div class="row-one">
+                            <img src="../../assets/arrow-back.svg" alt="back icon" />
+                            <p>Payments and transaction</p>
+                        </div>
+                    </router-link>
+
                     <div class="row-two">
                         <div>
                             <h2>Wallet</h2>
@@ -27,20 +28,19 @@
                         <img src="../../assets/Wallet-illustration.svg" alt="chess illustration" />
                     </div>
                     <div class="row-three">
-                        <h2>Send payment</h2>
-                        <p>
-                            Your payment info, transactions, recurring <br />
-                            payments and reservations
-                        </p>
+                        <p class="top-par">Your transfer is done and send to:</p>
+                        <h2>Milena Dragišić</h2>
+                        <p class="price">$300.00</p>
                     </div>
                     <div class="main-row">
-                        <div class="input-div">
-                            <img src="../../assets/search-turquoise.svg" alt="search icon" />
-                            <input type="text" placeholder="Name, @username, email" />
-                        </div>
-                        <div class="btn">
-                            <p>Next</p>
-                        </div>
+                        <p class="success-message">
+                            You have successfully sent $300. Make sure you check with Milena Dragisic if they received
+                            funds you sent.
+                        </p>
+                        <p class="disclaimer">
+                            * Some disclaimer about money transfers via Outpost Chess, and how we’re protecting our
+                            customers from fraudulent behavior on the platform.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -50,12 +50,12 @@
 </template>
 
 <script>
-import SideBar from "@/components/SideBar";
-import Search from "@/components/Search";
 import Notifications from "@/components/Notifications";
+import Search from "@/components/Search";
+import SideBar from "@/components/SideBar";
 
 export default {
-    name: "WalletSend",
+    name: "WalletTransactionSuccess",
     components: { Notifications, Search, SideBar },
 };
 </script>
@@ -136,6 +136,26 @@ a {
     flex-direction: column;
 }
 
+.row-one {
+    padding-left: 2.333rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 2.813rem;
+}
+
+.row-one img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.row-one p {
+    color: #6f7381;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-left: 1rem;
+}
+
 .row-two {
     display: flex;
     align-items: start;
@@ -161,37 +181,26 @@ a {
 .main-row {
     display: flex;
     align-items: center;
-    padding-top: 3.813rem;
+    padding-top: 3.688rem;
     flex-direction: column;
     border: 1px solid #292a2e;
     border-top: none;
+    margin-bottom: 14.375rem;
 }
 
-.input-div {
-    width: 30rem;
-    border: 1px solid rgba(111, 115, 129, 0.5);
-    border-radius: 6px;
-    padding-block: 0.688rem;
-    margin-bottom: 2.188rem;
+.success-message {
+    color: #11c6d1;
+    font-weight: 700;
+    font-size: 0.875rem;
+    width: 23.51rem;
+    margin-bottom: 2.75rem;
 }
 
-.input-div input {
-    width: 11rem;
-    cursor: pointer;
-    color: white;
-}
-
-.input-div img {
-    margin-right: 1.25rem;
-}
-
-.main-row .btn {
-    width: 7.5rem;
-    color: white;
-    border: 1px solid #5c5e64;
-    padding-block: 0.531rem;
-    cursor: pointer;
-    margin-bottom: 4.063rem;
+.disclaimer {
+    color: #6f7381;
+    padding-bottom: 3.563rem;
+    width: 18.313rem;
+    font-size: 0.625rem;
 }
 
 @media screen and (max-width: 425px) {
@@ -200,8 +209,7 @@ a {
     }
 }
 
-.row-two p,
-.row-three p {
+.row-two p {
     text-align: start;
     color: #6f7381;
 }
@@ -209,11 +217,30 @@ a {
 .row-three {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    text-align: center;
     background-color: #202122;
-    padding-left: 2.625rem;
     padding-top: 2.188rem;
     padding-bottom: 3.25rem;
+}
+
+.top-par {
+    color: #6f7381;
+    font-weight: 500;
+    font-size: 0.875rem;
+    margin-bottom: 0.625rem;
+}
+
+.row-three h2 {
+    color: #11c6d1;
+    font-size: 1.5rem;
+    line-height: 1.984rem;
+}
+
+.price {
+    font-size: 1.5rem;
+    line-height: 1.984rem;
+    font-weight: 500;
+    color: white;
 }
 
 @media screen and (max-width: 768px) {
@@ -231,11 +258,6 @@ a {
         grid-template-columns: repeat(3, 1fr);
         font-size: 1.167rem;
         font-weight: 500;
-        margin-bottom: 4rem;
-    }
-
-    .row-one {
-        padding-left: 2.333rem;
     }
 
     .row-two {
@@ -245,6 +267,8 @@ a {
     .main-row {
         height: 22.884rem;
         justify-content: center;
+        border: none;
+        padding-top: 0;
     }
 }
 
@@ -255,12 +279,6 @@ a {
 
     .main-row {
         height: 26.884rem;
-    }
-}
-
-@media screen and (max-width: 375px) {
-    .input-div {
-        width: 80%;
     }
 }
 </style>
