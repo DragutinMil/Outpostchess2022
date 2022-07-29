@@ -18,7 +18,7 @@
                             v-if="chat_user.titula_organizer !== null && chat_user.rola.indexOf('ORGANIZER') !== -1"
                             class="pill pill-small"
                         >
-                            IO 
+                            IO
                         </div>
                         <div
                             v-if="chat_user.titula_trainer !== null && chat_user.rola.indexOf('TRAINER') !== -1"
@@ -47,23 +47,33 @@
                     </div>
                 </div>
 
-                <div  class="chat-overflow" ref="messagesContainer">
-                   
-                        <div   v-for="message in inner_messages"  :key="message.msg_id">
+                <div class="chat-overflow" ref="messagesContainer">
+                    <div v-if="chatAvailable">
+                        <div v-for="message in inner_messages2" :key="message.msg_id">
                             <OneMessage
                                 v-if="message.from_obj.user_uuid == storage_id"
                                 :user="chat_user"
                                 :message="message"
                             />
-                            <OneMessage v-else message-type="sent" :user="chat_user" :message="message"  />
+                            <OneMessage v-else message-type="sent" :user="chat_user" :message="message" />
                             <!--  
                           <OneMessage :message-type="received" />-->
                         </div>
-                    
-                    
-                      
+                    </div>
+                    <div v-else>
+                        <div v-for="message in inner_messages" :key="message.msg_id">
+                            <OneMessage
+                                v-if="message.from_obj.user_uuid == storage_id"
+                                :user="chat_user"
+                                :message="message"
+                            />
+                            <OneMessage v-else message-type="sent" :user="chat_user" :message="message" />
+                            <!--  
+                          <OneMessage :message-type="received" />-->
+                        </div>
+                    </div>
                 </div>
-            <!--      <div v-else class="chat-overflow" ref="messagesContainer">
+                <!--      <div v-else class="chat-overflow" ref="messagesContainer">
                     <div v-for="message in inner_messages2"  :key="message.msg_id">
                         <OneMessage
                             v-if="message.from_obj.user_uuid == storage_id"
@@ -98,25 +108,20 @@ export default {
             chat_user: { rola: [] },
             storage_id: "",
             inner_messages: "",
+            chatAvailable: false,
             messageType: {
                 type: String,
                 required: true,
-
             },
         };
     },
-    watch: {
-       inner_messages2(){
-        this.inner_messages=[ ...this.inner_messages,this.$store.state.message]
-        console.log("opasno",this.inner_messages)
-       }
-       
-         
-       
+    computed: {
+        inner_messages2() {
+            return this.$store.state.message_arr;
+        },
     },
     created() {
-        //console.log("store",this.$store.state.message_arr.length)
-       // console.log("store",this.$store.state.message_arr)
+        this.$socket.on("tb_notification", this.receiveMessage);
         this.storage_id = window.location.href.split("/").pop();
         fetch(process.env.VUE_APP_URL + `/public_user_info/${this.storage_id} `, {
             method: "GET",
@@ -133,32 +138,33 @@ export default {
             headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("token")}` },
         })
             .then(response => response.json())
-            .then(data => (this.inner_messages = data))
-            .then(data => console.log("messages", data))
+            .then(data => (this.inner_messages = data));
+        //   .then(data => console.log("messages", data))
     },
     mounted() {
         this.scrollToEnd();
-        
-        this.storage_id=window.location.href.split("/").pop();
-        this.$store.dispatch("getMessage",this.storage_id);
-     
+
+        this.storage_id = window.location.href.split("/").pop();
+        this.$store.dispatch("getMessage", this.storage_id);
     },
     updated() {
         this.scrollToEnd();
     },
 
-    
-
-    methods: { 
+    methods: {
         receiveMessage(payload) {
             this.$store.commit("receiveMessage", payload);
+            console.log("cigiriki", payload);
+            this.chatAvailable = true;
+            console.log(this.chatAvailable);
+            console.log("iner2", this.inner_messages2);
         },
         scrollToEnd() {
             var content = this.$refs.messagesContainer;
             content.scrollTop = content.scrollHeight;
-           // console.log("konzola",this.$store.state.message_arr)
+            // console.log("konzola",this.$store.state.message_arr)
         },
-        
+
         updateCart(e) {
             this.storage_id = e;
             fetch(process.env.VUE_APP_URL + `/public_user_info/${this.storage_id} `, {
@@ -180,10 +186,8 @@ export default {
             })
                 .then(response => response.json())
                 .then(data => (this.inner_messages = data))
-                .then(data => console.log("messages", data))
-                
-        }, 
-        
+                .then(data => console.log("messages", data));
+        },
     },
 };
 </script>
@@ -274,7 +278,9 @@ export default {
     .chat {
         height: 78vh;
     }
-
+    .chat-overflow {
+        height: 45vh;
+    }
     .details-title {
         margin-right: 0.5rem;
     }
@@ -284,7 +290,9 @@ export default {
     .chat {
         height: 75vh;
     }
-
+    .chat-overflow {
+        height: 42vh;
+    }
     .details-title {
         margin-right: 0.5rem;
     }

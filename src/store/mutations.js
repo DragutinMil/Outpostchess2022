@@ -15,14 +15,13 @@ export const seen_notification = state => {
     state.counterNot = "";
 };
 
-
 export const receiveMessage = (state, payload) => {
-    state.message_arr=[ ...state.message_arr,payload]
-    state.message=payload
+    if (state.message_arr[state.message_arr.length - 1].msg_id != payload.msg_id) {
+        state.message_arr = [...state.message_arr, payload];
+        console.log("mutacija", payload);
+    }
 };
 
 export const setMessage = (state, message_arr) => {
-    state.message_arr = message_arr
-    console.log("nemoguce",state.message_arr)
-    
-    }
+    state.message_arr = message_arr;
+};

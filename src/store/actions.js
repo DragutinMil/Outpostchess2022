@@ -13,7 +13,7 @@ export const getNotification = ({ commit }) => {
         });
 };
 
-export const getMessage  = ({ commit },id) => {
+export const getMessage = ({ commit }, id) => {
     axios
         .get(process.env.VUE_APP_URL + `/message/${id}`, {
             headers: {

@@ -41,14 +41,14 @@ export default {
         };
     },
     computed: {
-       notif_arr() {
-           return this.$store.state.notif_arr;
-       },
+        notif_arr() {
+            return this.$store.state.notif_arr;
+        },
     },
 
     mounted() {
         this.$store.dispatch("getNotification");
-        console.log('provera',this.$store.state.notif_arr);
+        console.log("provera", this.$store.state.notif_arr);
     },
     created() {
         this.$socket.on("tb_notification", this.receiveNotif);
@@ -62,7 +62,7 @@ export default {
             //console.log('received a notif', payload)
             //this.notif_arr=[payload,...this.notif_arr]
             //console.log(this.notif_arr)
-            console.log("prvi",payload);
+            console.log("prvi", payload);
             this.$store.commit("receiveNotif", payload);
         },
         go_to_search: function () {

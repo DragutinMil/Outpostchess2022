@@ -35,12 +35,11 @@ export default {
         return {
             message_to_send: "",
             storage_id: "",
-            inner_messages:''
+            inner_messages: "",
         };
     },
     methods: {
         send_message: function () {
-            
             this.storage_id = window.location.href.split("/").pop();
             fetch(process.env.VUE_APP_URL + `/message/${this.storage_id} `, {
                 method: "POST",
@@ -53,7 +52,6 @@ export default {
                 }),
             });
             this.message_to_send = "";
-            
         },
     },
 };

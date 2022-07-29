@@ -9,18 +9,18 @@
                             {{ message.from_obj.name_first.charAt(0) }} {{ message.from_obj.name_last.charAt(0) }}
                         </div>
                         <!--:class="[messageType === 'sent' && 'my-avatar']"-->
-                        <p class="receiver-name">{{message.from_obj.name_first}} {{ message.from_obj.name_last }}</p>
+                        <p class="receiver-name">{{ message.from_obj.name_first }} {{ message.from_obj.name_last }}</p>
                     </div>
                     <div class="message-time" :class="[messageType === 'sent' ? 'time-sent' : 'time-received']">
                         <!--:class="[messageType === 'sent' ? 'time-sent' : 'time-received']"-->
 
                         <p class="day_part" v-if="Number(message.created_date.slice(11, 13)) + 2 > 12">
                             {{ Number(message.created_date.slice(11, 13)) + 2 }}
-                            {{ message.created_date.slice(14, 16) }} PM  
+                            {{ message.created_date.slice(14, 16) }} PM
                         </p>
                         <p class="day_part" v-else>
                             {{ Number(message.created_date.slice(11, 13)) + 2 }}:
-                            {{ message.created_date.slice(14, 16) }} AM 
+                            {{ message.created_date.slice(14, 16) }} AM
                         </p>
                     </div>
                 </div>
@@ -51,11 +51,9 @@ export default {
             am_pm_hours: false,
         };
     },
-     created() {
-        this.$socket.on("tb_notification", this.receiveMessage);
-     }
-     
-     
+    created() {},
+
+    methods: {},
 };
 </script>
 

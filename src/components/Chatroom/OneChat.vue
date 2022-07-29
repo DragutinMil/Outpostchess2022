@@ -4,7 +4,7 @@
             <div class="one-chat" :class="[messageType === 'seen' ? '' : 'message-not-seen']">
                 <img class="new-message-icon" src="../../assets/koverta-new.svg" alt="new message" />
                 <div class="divider" />
-                <div class="user-profile-avatar">{{ contact_list.from_obj.initials }} </div>
+                <div class="user-profile-avatar">{{ contact_list.from_obj.initials }}</div>
                 <p class="user-name">{{ contact_list.from_obj.name_first }} {{ contact_list.from_obj.name_last }}</p>
                 <p class="short-message">{{ message_result }}</p>
                 <div class="message-time">
@@ -12,7 +12,7 @@
                                         contact_list.last_message_date.slice(0, 4)
                                     }}. -->
                     {{ this.hour }}:{{ this.minute }}
-                    <p class="day_part" v-if="am_pm_hours">PM </p>
+                    <p class="day_part" v-if="am_pm_hours">PM</p>
                     <p class="day_part" v-else>AM</p>
                 </div>
 
@@ -86,7 +86,6 @@ export default {
             this.message_result = this.contact_list.last_message;
         }
     },
-       
 };
 </script>
 
@@ -123,8 +122,8 @@ a {
 }
 
 .user-profile-avatar {
-    width: 2.75rem;
-    height: 2.75rem;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
     color: rgba(255, 255, 255, 0.7);
     background-color: #513c2a;
     border-radius: 100%;
