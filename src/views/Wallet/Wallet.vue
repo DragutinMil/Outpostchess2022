@@ -1,78 +1,78 @@
 <template>
-    <div class="parent">
-        <SideBar />
-        <div class="wrapper">
-            <Search />
-            <div class="main-div">
-                <div class="top">
-                    <p class="active">SEND</p>
-                    <p>WITHDRAW</p>
-                    <p>ACTIVITY</p>
-                </div>
-                <div class="bottom">
-                    <div class="row-one">
-                        <img src="../../assets/arrow-back.svg" alt="back icon" />
-                        <p>Payments and transaction</p>
-                    </div>
-                    <div class="row-two">
-                        <div>
-                            <h2>Wallet</h2>
-                            <p>
-                                Your payment info, transactions, recurring <br />
-                                payments and reservations
-                            </p>
-                        </div>
-                        <img src="../../assets/Wallet-illustration.svg" alt="chess illustration" />
-                    </div>
-                    <div class="row-three">
-                        <h2>Update card</h2>
-                        <p>
-                            Your payment info, transactions, recurring <br />
-                            payments and reservations
-                        </p>
-                    </div>
-                    <div class="main-row">
-                        <div class="left">
-                            <h3 class="price">100,000 USD</h3>
-                            <p class="price-subtitle">estimated total of all currencies</p>
-                            <div>
-                                <p class="individual-price">100,000 USD</p>
-                                <p class="individual-price">50,00 EUR</p>
-                            </div>
-                            <router-link to="/wallet-send">
-                                <p class="transfer">Transfer Funds</p>
-                            </router-link>
-                        </div>
-                        <div class="right">
-                            <div class="right-top">
-                                <h3 class="name">Katarina Trajkovic</h3>
-                                <div class="second-row">
-                                    <img class="mastercard" src="../../assets/master-card.jpg" alt="mastercard logo" />
-                                    <div class="right-text">
-                                        <p>Mastercard••••8095</p>
-                                        <p>Expires 04/23</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="right-bottom">
-                                <router-link to="/wallet-add-payment-method">
-                                    <div class="add-card">
-                                        <img src="../../assets/add-circle.svg" alt="add a card" />
-                                        <p>Add credit card</p>
-                                    </div>
-                                </router-link>
-                                <p>Remove</p>
-                                <router-link to="/wallet-add-payment-method">
-                                    <p class="edit">Edit</p>
-                                </router-link>
-                            </div>
-                        </div>
-                        <Notifications />
-                    </div>
-                </div>
-            </div>
+  <div class="parent">
+    <SideBar/>
+    <div class="wrapper">
+      <Search/>
+      <div class="main-div">
+        <div class="top">
+          <p class="active">SEND</p>
+          <p>WITHDRAW</p>
+          <p>ACTIVITY</p>
         </div>
+        <div class="bottom">
+          <div class="row-one">
+            <img src="../../assets/arrow-back.svg" alt="back icon">
+            <p>Payments and transaction</p>
+          </div>
+          <div class="row-two">
+            <div>
+              <h2>Wallet</h2>
+              <p>Your payment info, transactions, recurring <br> payments and reservations</p>
+            </div>
+            <img src="../../assets/Wallet-illustration.svg" alt="chess illustration">
+          </div>
+          <div class="row-three">
+            <h2>Update card</h2>
+            <p>Your payment info, transactions, recurring <br> payments and reservations</p>
+          </div>
+          <div class="main-row">
+            <div class="left">
+              <h3 class="price">
+                100,000 USD
+              </h3>
+              <p class="price-subtitle">estimated total of all currencies</p>
+              <div>
+                <p class="individual-price">
+                  100,000 USD
+                </p>
+                <p class="individual-price">
+                  50,00 EUR
+                </p>
+              </div>
+              <router-link to="/wallet-send">
+                <p class="transfer">Transfer Funds</p>
+              </router-link>
+            </div>
+            <div class="right">
+              <div class="right-top">
+                <h3 class="name">Katarina Trajkovic</h3>
+                <div class="second-row">
+                  <img class="mastercard" src="../../assets/master-card.jpg" alt="mastercard logo">
+                  <div class="right-text">
+                    <p>Mastercard••••8095</p>
+                    <p>Expires 04/23</p>
+                  </div>
+                </div>
+              </div>
+              <div class="right-bottom">
+                <router-link to="/wallet-add-payment-method">
+                  <div class="add-card">
+                    <img src="../../assets/add-circle.svg" alt="add a card">
+                    <p>Add credit card</p>
+                  </div>
+                </router-link>
+                <p>Remove</p>
+                <router-link to="/wallet-add-payment-method">
+                  <p class="edit">Edit</p>
+                </router-link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Notifications/>
     </div>
+  </div>
 </template>
 
 <script>
