@@ -25,7 +25,7 @@
                                 user.profile.file_url ||
                                 'https://outpostchess.fra1.digitaloceanspaces.com/2bf139b2-7074-4fd4-8377-58efead41bf0.png'
                             "
-                            alt=""
+                            alt="profile-pic"
                         />
                     </div>
                     <div id="middle2-1">

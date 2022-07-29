@@ -1,4 +1,4 @@
-const state = {};
+/*const state = {};
 
 const getters = {};
 
@@ -18,3 +18,4 @@ export default {
     actions,
     mutations,
 };
+*/

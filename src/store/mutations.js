@@ -7,10 +7,21 @@ export const setNotification = (state, notif_arr) => {
 
 export const receiveNotif = (state, payload) => {
     state.notif_arr = [payload, ...state.notif_arr];
-    state.counterNot = state.notif_arr.length;
+    state.counterNot++;
 };
 
 export const seen_notification = state => {
     //state.notif_arr=[]
     state.counterNot = "";
+};
+
+export const receiveMessage = (state, payload) => {
+    if (state.message_arr[state.message_arr.length - 1].msg_id != payload.msg_id) {
+        state.message_arr = [...state.message_arr, payload];
+        console.log("mutacija", payload);
+    }
+};
+
+export const setMessage = (state, message_arr) => {
+    state.message_arr = message_arr;
 };
