@@ -55,7 +55,8 @@
             </div>
           </div>
           <div class="cards">
-            <OneActivityCard/>
+            <OneActivityCard transaction-type="mutual"/>
+            <OneActivityCard transaction-type="to"/>
           </div>
         </div>
       </div>
@@ -89,7 +90,8 @@ a {
 }
 
 hr {
-  background-color: #6F7381;
+  background-color: #292A2E;
+  width: 100%;
 }
 
 p {

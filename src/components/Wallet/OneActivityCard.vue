@@ -1,22 +1,28 @@
 <template>
-  <div id="card" class="card">
-    <div class="top">
-      <div class="left">
-        <img src="../../assets/change-circle.png" alt="exchange circle">
-        <div>
-          <p>Mastercard</p>
-          <p><span>23 jun</span> Transfer using Card</p>
+  <div class="card">
+    <div id="card" class="card-wrapper">
+      <div id="top" class="top">
+        <div class="left">
+          <div class="transfer-icon">
+            <img v-if="transactionType=== 'mutual' " src="../../assets/change-circle.svg" alt="exchange circle">
+            <img v-else src="../../assets/transfer-currency.svg" alt="exchange dollar icon">
+
+          </div>
+          <div>
+            <p>Mastercard</p>
+            <p><span>23 jun</span> Transfer using Card</p>
+          </div>
+        </div>
+        <div class="middle">
+          <img v-if="!isOpen" src="../../assets/transfer-two-arrows.svg" alt="">
+        </div>
+        <div class="right">
+          <p>218,65 USD</p>
+          <img id="arrowDown" class="arrow" @click="toggleOpen" src="../../assets/arrow-drop-down.svg" alt="">
         </div>
       </div>
-      <div class="middle">
-        <img src="../../assets/swap-horizontal_circle.png" alt="">
-      </div>
-      <div class="right">
-        <p>218,65 USD</p>
-        <img @click="logMeSomething" src="../../assets/arrow-drop-down.svg" alt="">
-      </div>
     </div>
-    <div class="bottom">
+    <div id="bottom" class="bottom">
       <p class="transfer-to">Transfer to:</p>
       <div class="main-part">
         <img src="../../assets/check_circle_blue.svg" alt="verified icon">
@@ -33,11 +39,27 @@
 <script>
 export default {
   name: "OneActivityCard",
+  props: {
+    // eslint-disable-next-line vue/require-default-prop
+    transactionType: String,
+  },
+  data() {
+    return {
+      isOpen: false
+    }
+  },
   methods: {
-    logMeSomething: () => {
-
+    toggleOpen() {
+      this.isOpen = !this.isOpen
+      const bottom = document.getElementById('bottom')
+      const top = document.getElementById('top')
       const card = document.getElementById('card')
-      console.log(card)
+      const arrowDown = document.getElementById('arrowDown')
+      bottom.classList.toggle('open-bottom')
+      top.classList.toggle('open-top')
+      card.classList.toggle('open-card')
+      arrowDown.classList.toggle('open-arrow')
+
     }
   }
 }
@@ -60,7 +82,10 @@ p {
   background-color: transparent;
   display: flex;
   flex-direction: column;
-  padding-inline: 3.125rem;
+}
+
+.arrow {
+  transition: 1s ease;
 }
 
 .top {
@@ -69,9 +94,15 @@ p {
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
+  padding-inline: 3.125rem;
 
   .left {
     display: flex;
+
+    .transfer-icon {
+      width: 3.015rem;
+      height: 3.015rem;
+    }
 
     p {
       margin-bottom: 0;
@@ -112,8 +143,13 @@ p {
 
 
 .bottom {
+  height: 0;
+  display: none;
+  padding-inline: 3.125rem;
+
   .transfer-to {
     color: #6F7381;
+    margin-top: 1.25rem;
     margin-bottom: 1.406rem;
   }
 
@@ -142,6 +178,29 @@ p {
         color: #5C5E64;
       }
     }
+  }
+}
+
+.open {
+  &-bottom {
+    height: 5.78rem;
+    display: block;
+  }
+
+  &-top {
+    .left p, .left p span, .right p {
+      color: white !important;
+    }
+  }
+
+  &-card {
+    background-color: #C8A07D;
+  }
+
+  &-arrow {
+    //transition: 1s ease;
+    transform: rotate(180deg);
+
   }
 }
 </style>
