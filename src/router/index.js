@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import authRoutes from "@/views/auth/auth-routes";
+import authRoutes from "@/router/auth-routes";
 
 Vue.use(VueRouter);
 
@@ -125,6 +125,10 @@ const routes = [
         name: "WalletActivity",
         component: () => import("../views/Wallet/WalletActivity.vue"),
     },
+    {
+        path: "*",
+        redirect: {name: "sign-up"}
+    }
 ];
 
 const router = new VueRouter({

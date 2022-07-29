@@ -2,7 +2,7 @@ function createRoute(name) {
     return {
         path: `${name}`,
         name: `${name}`,
-        component: () => import(`./pages/${name}.vue`),
+        component: () => import(`../views/auth/pages/${name}.vue`),
     };
 }
 
@@ -10,7 +10,7 @@ const routes = [
     {
         path: "/auth",
         name: "Auth",
-        component: () => import("./auth.vue"),
+        component: () => import("../views/auth/auth.vue"),
         children: [
             createRoute("thanks"),
             createRoute("sign-up"),
@@ -20,7 +20,7 @@ const routes = [
             createRoute("request-verification"),
             createRoute("request-password-reset"),
             {
-                path: `*`,
+                path: ``,
                 redirect: { name: "sign-up" },
             },
         ],
