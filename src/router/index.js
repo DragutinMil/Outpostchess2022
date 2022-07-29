@@ -13,22 +13,6 @@ const routes = [
     },
     ...authRoutes,
     {
-        path: "/login",
-        name: "Signin",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ "../views/auth/pages/sign-in.vue"),
-    },
-    {
-        path: "/thanks",
-        name: "Thanks",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ "../views/auth/pages/verification-sent.vue"),
-    },
-    {
         path: "/profile",
         name: "Profile",
         // route level code-splitting
@@ -53,14 +37,6 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ "../views/Notifications.vue"),
     },
     {
-        path: "/thanks-verification",
-        name: "ThanksVerification",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ "../views/auth/pages/thanks.vue"),
-    },
-    {
         path: "/chatroom",
         name: "Chatroom",
         // route level code-splitting
@@ -69,38 +45,12 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ "../views/Chatroom.vue"),
     },
     {
-        path: "/reset-password",
-        name: "ResetPassword",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ "../views/auth/pages/request-password-reset.vue"),
-    },
-    {
-        path: "/verification-mail",
-        name: "VerificationMail",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ "../views/auth/pages/request-verification.vue"),
-    },
-    {
         path: "/publicprofile/:id",
         name: "Publicprofile",
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ "../views/Publicprofile.vue"),
-
-        params: true,
-    },
-    {
-        path: "/auth/password-reset-complete/:id",
-        name: "resettoken",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ "../views/auth/pages/reset-password.vue"),
 
         params: true,
     },
