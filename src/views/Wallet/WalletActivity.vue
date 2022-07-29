@@ -28,21 +28,17 @@
                 <p>Lorem ipsum</p>
               </div>
               <div class="filters">
-                <p class="filter">
-                  <img src="../../assets/check_small.svg" alt="check icon">
-                  Last week
-                </p>
-                <p class="filter">
-                  <img src="../../assets/check_small.svg" alt="check icon">
-                  Last week
+                <p class="filter filter-active">
+                  From
+                  <img src="../../assets/arrow-down-white.svg" alt="check icon">
                 </p>
                 <p class="filter filter-active">
-                  <img src="../../assets/check_small.svg" alt="check icon">
-                  Last week
+                  To
+                  <img src="../../assets/arrow-down-white.svg" alt="check icon">
                 </p>
                 <p class="filter filter-active">
-                  <img src="../../assets/check_small.svg" alt="check icon">
-                  Last week
+                  Transaction type
+                  <img src="../../assets/arrow-down-white.svg" alt="check icon">
                 </p>
               </div>
             </div>
@@ -57,6 +53,7 @@
           <div class="cards">
             <OneActivityCard transaction-type="mutual"/>
             <OneActivityCard transaction-type="to"/>
+            <OneActivityCard transaction-type="from"/>
           </div>
         </div>
       </div>
@@ -238,21 +235,45 @@ p {
   border-radius: 20px;
   margin-right: 1.375rem;
   cursor: pointer;
+  font-weight: 700;
+
 }
 
 .filter img {
   display: none;
-  margin-right: 0.5rem;
+  margin-left: 1rem;
 }
 
 .filter-active {
   background-color: #C8A07D;
-  color: #FFDEC0;
+  color: white;
   border: none;
 }
 
 .filter-active img {
   display: inline;
+}
+
+.cards div:first-child {
+  margin-top: 1rem;
+  background-color: #211F1E;
+  border: 1px solid #FFC695;
+}
+
+.cards div:nth-child(2) {
+  margin-top: 1rem;
+  background-color: #211F1E;
+  border: 1px solid #FFC695;
+}
+
+@media screen and (max-width: 1024px) {
+  .main-row, .row-three, .row-two {
+    padding-left: 1.25rem;
+  }
+
+  .filter {
+    padding-inline: 0.688rem;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -284,7 +305,6 @@ p {
   }
 
   .main-row {
-    height: 22.884rem;
     justify-content: center;
   }
 }
@@ -296,10 +316,6 @@ p {
 
   .row-two {
     text-align: start;
-  }
-
-  .main-row {
-    height: 26.884rem;
   }
 }
 

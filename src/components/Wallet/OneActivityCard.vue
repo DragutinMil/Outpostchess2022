@@ -1,28 +1,50 @@
 <template>
   <div class="card">
-    <div id="card" class="card-wrapper">
-      <div id="top" class="top">
+    <div
+        :class="{'open-card': isOpen && transactionType ==='mutual', 'open-card-pink':transactionType === 'to' && isOpen, 'open-card-tirquoise':transactionType === 'from' && isOpen}"
+        class="card-wrapper">
+      <div :class="{'open-top': isOpen}" class="top">
         <div class="left">
           <div class="transfer-icon">
-            <img v-if="transactionType=== 'mutual' " src="../../assets/change-circle.svg" alt="exchange circle">
-            <img v-else src="../../assets/transfer-currency.svg" alt="exchange dollar icon">
-
+            <div v-if="transactionType === 'mutual'">
+              <img v-if="!isOpen " src="../../assets/change-circle.png" alt="exchange circle">
+              <img v-else src="../../assets/change-circle-white.png" alt="exchange circle">
+            </div>
+            <div v-else>
+              <img v-if="!isOpen " src="../../assets/currency-exchange.png" alt="exchange circle">
+              <img v-else src="../../assets/currency-exchange-white.png" alt="exchange circle">
+            </div>
           </div>
           <div>
             <p>Mastercard</p>
-            <p><span>23 jun</span> Transfer using Card</p>
+            <p class="mastercard-subtitle"><span>23 jun</span> Transfer using Card</p>
+            <p class="mastercard-span">23 jun</p>
           </div>
         </div>
         <div class="middle">
-          <img v-if="!isOpen" src="../../assets/transfer-two-arrows.svg" alt="">
+          <div class="transfer-icon">
+            <div v-if="transactionType === 'mutual'">
+              <img v-if="!isOpen " src="../../assets/transfer-two-arrows.png" alt="exchange circle">
+              <img v-else src="../../assets/swap-horizontal-circle-white.png" alt="exchange circle">
+            </div>
+            <div v-else-if="transactionType === 'to'">
+              <img v-if="!isOpen " src="../../assets/arrow-right.png" alt="exchange circle">
+              <img v-else src="../../assets/transfer-arrow-right-white.png" alt="exchange circle">
+            </div>
+            <div v-else>
+              <img v-if="!isOpen " src="../../assets/arrow-left.png" alt="exchange circle">
+              <img v-else src="../../assets/arrow-left-white.png" alt="exchange circle">
+            </div>
+          </div>
         </div>
         <div class="right">
           <p>218,65 USD</p>
-          <img id="arrowDown" class="arrow" @click="toggleOpen" src="../../assets/arrow-drop-down.svg" alt="">
+          <img :class="{'open-arrow': isOpen}" class="arrow" @click="toggleOpen" src="../../assets/arrow-drop-down.svg"
+               alt="">
         </div>
       </div>
     </div>
-    <div id="bottom" class="bottom">
+    <div :class="{'open-bottom': isOpen}" class="bottom">
       <p class="transfer-to">Transfer to:</p>
       <div class="main-part">
         <img src="../../assets/check_circle_blue.svg" alt="verified icon">
@@ -82,6 +104,11 @@ p {
   background-color: transparent;
   display: flex;
   flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.mastercard-span {
+  display: none;
 }
 
 .arrow {
@@ -98,18 +125,16 @@ p {
 
   .left {
     display: flex;
+    align-items: center;
 
     .transfer-icon {
       width: 3.015rem;
       height: 3.015rem;
+      margin-right: 0.75rem;
     }
 
     p {
       margin-bottom: 0;
-    }
-
-    img {
-      margin-right: 0.75rem;
     }
 
     div {
@@ -147,14 +172,16 @@ p {
   display: none;
   padding-inline: 3.125rem;
 
+
   .transfer-to {
     color: #6F7381;
-    margin-top: 1.25rem;
-    margin-bottom: 1.406rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
   }
 
   .main-part {
     display: flex;
+
 
     img:first-child {
       margin-right: 0.938rem;
@@ -183,7 +210,7 @@ p {
 
 .open {
   &-bottom {
-    height: 5.78rem;
+    height: 7.78rem;
     display: block;
   }
 
@@ -191,10 +218,23 @@ p {
     .left p, .left p span, .right p {
       color: white !important;
     }
+
+    .left .transfer-icon img svg {
+      stroke: white;
+    }
   }
 
   &-card {
     background-color: #C8A07D;
+    border: none !important;
+
+    &-pink {
+      background-color: #F2358D;
+    }
+
+    &-tirquoise {
+      background-color: #11C6D1;
+    }
   }
 
   &-arrow {
@@ -203,4 +243,37 @@ p {
 
   }
 }
+
+@media screen and (max-width: 1024px) {
+  .top {
+    padding-inline: 1.125rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .top {
+    padding-inline: 3.125rem;
+
+    .left {
+      .transfer-icon {
+        width: auto;
+        height: auto;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .top {
+    padding-inline: 1.125rem;
+  }
+  .mastercard-subtitle {
+    display: none;
+  }
+  .mastercard-span {
+    display: block;
+    color: #11C6D1 !important;
+  }
+}
+
 </style>
